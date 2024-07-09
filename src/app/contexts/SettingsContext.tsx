@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 import merge from "lodash/merge";
 // CUSTOM COMPONENT
-import { MatxLayoutSettings } from "../components/MatxLayout/settings.js";
+import { MatxLayoutSettings } from "../components/MatxLayout/settings";
 export const SettingsContext = createContext({
   settings: MatxLayoutSettings,
   updateSettings: () => {}
