@@ -1,17 +1,24 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import { Hidden, Switch, Box, styled, useTheme } from "@mui/material";
 
-import useSettings from "../../../hooks/useSettings";
-
+import useSettings, { SettingsContextType } from "../../../hooks/useSettings";
 import Brand from "../../Brand";
 import Sidenav from "../../Sidenav";
 import { themeShadows } from "../../MatxTheme/themeColors";
-
 import { convertHexToRGB } from "../../../utils/utils";
 import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
 
-// STYLED COMPONENTS
-const SidebarNavRoot = styled(Box)(({ theme, width, bg, image }) => ({
+// Define the type for the styled components props
+interface SidebarNavRootProps {
+  theme: any;
+  width: string;
+  bg: string;
+  image: string;
+}
+
+interface Layout1SidenavProps {}
+
+const SidebarNavRoot = styled(Box)<SidebarNavRootProps>(({ theme, width, bg, image }) => ({
   position: "fixed",
   top: 0,
   left: 0,
@@ -25,7 +32,7 @@ const SidebarNavRoot = styled(Box)(({ theme, width, bg, image }) => ({
   overflow: "hidden",
   color: theme.palette.text.primary,
   transition: "all 250ms ease-in-out",
-  backgroundImage: `linear-gradient(to bottom, rgba(${bg}, 0.96), rgba(${bg}, 0.96)), url(${image})`,
+  backgroundImage: `linear-gradient(to bottom, #24665d,#24665d ), url(${image})`,
   "&:hover": {
     width: sideNavWidth,
     "& .sidenavHoverShow": { display: "block" },
@@ -44,13 +51,13 @@ const NavListBox = styled(Box)({
   flexDirection: "column"
 });
 
-const Layout1Sidenav = () => {
+const Layout1Sidenav: React.FC<Layout1SidenavProps> = () => {
   const theme = useTheme();
-  const { settings, updateSettings } = useSettings();
+  const { settings, updateSettings } = useSettings() as SettingsContextType;
   const leftSidebar = settings.layout1Settings.leftSidebar;
   const { mode, bgImgURL } = leftSidebar;
 
-  const getSidenavWidth = () => {
+  const getSidenavWidth = (): string => {
     switch (mode) {
       case "compact":
         return sidenavCompactWidth;
@@ -62,7 +69,7 @@ const Layout1Sidenav = () => {
 
   const primaryRGB = convertHexToRGB(theme.palette.primary.main);
 
-  const updateSidebarMode = (sidebarSettings) => {
+  const updateSidebarMode = (sidebarSettings: Partial<typeof leftSidebar>) => {
     updateSettings({ layout1Settings: { leftSidebar: { ...sidebarSettings } } });
   };
 

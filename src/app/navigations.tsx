@@ -1,6 +1,10 @@
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
+import ApprovalIcon from '@mui/icons-material/Approval';
+import StorageIcon from '@mui/icons-material/Storage';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
   // { label: "PAGES", type: "label" },
@@ -19,15 +23,15 @@ export const navigations = [
    
       { name: "Staff Management", path: "/users/staffmanagement", icon: <PeopleIcon/> },
       { name: "Attendence", path: "/users/attendence", icon: <BookmarkIcon/> },
-      { name: "Shift Planner", path: "/users/shiftplanner", icon: "filter_tilt_shift" },
+      { name: "Shift Planner", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
     
       { label: "My Approvals", type: "label" },
 
-      { name: "Approvals", path: "/myapproval/Approvals", icon: "settings_applications" },
+      { name: "Approvals", path: "/myapproval/Approvals", icon: <ApprovalIcon/> },
 
       { label: "Settings", type: "label" },
 
-      { name: "Stores", path: "/Settings/stores", icon: "store" },
+      { name: "Stores", path: "/Settings/stores", icon: <StorageIcon/> },
 
   
   // { label: "Components", type: "label" },
@@ -59,7 +63,7 @@ export const navigations = [
   // },
   {
     name: "Documentation",
-    icon: "launch",
+    icon: <DocumentScannerIcon/>,
     type: "extLink",
     path: "http://demos.ui-lib.com/matx-react-doc/"
   }

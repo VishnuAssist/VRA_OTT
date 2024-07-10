@@ -1,1 +1,1 @@
-export { default as MatxSidenav } from "./MatxSidenav";
+export { default as MatxSidenav } from "";

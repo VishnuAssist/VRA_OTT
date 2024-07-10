@@ -1,7 +1,20 @@
+import React, { ReactNode } from "react";
 import { Box, styled, useMediaQuery, useTheme } from "@mui/material";
 
+// Define prop types for the component
+interface MatxSidenavProps {
+  sx?: object;
+  open: boolean;
+  children: ReactNode;
+  toggleSidenav: () => void;
+  width?: string;
+}
+
 // STYLED COMPONENTS
-const SideNav = styled("div")(({ theme, width }) => ({
+const SideNav = styled("div")<{
+  theme: any;
+  width: string;
+}>(({ theme, width }) => ({
   zIndex: 91,
   width: width,
   overflow: "hidden",
@@ -12,8 +25,8 @@ const SideNav = styled("div")(({ theme, width }) => ({
     top: 0,
     left: 0,
     bottom: 0,
-    position: "absolute"
-  }
+    position: "absolute",
+  },
 }));
 
 const SideNavOverlay = styled("div")(() => ({
@@ -21,20 +34,28 @@ const SideNavOverlay = styled("div")(() => ({
   width: "100%",
   height: "100%",
   position: "absolute",
-  background: "rgba(0, 0, 0, 0.74)"
+  background: "rgba(0, 0, 0, 0.74)",
 }));
 
-export default function MatxSidenav({ sx, open, children, toggleSidenav, width = "220px" }) {
+const MatxSidenav: React.FC<MatxSidenavProps> = ({
+  sx,
+  open,
+  children,
+  toggleSidenav,
+  width = "220px",
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Box height="100%" display="flex">
-      <SideNav sx={sx} width={open || !isMobile ? width : "0px"}>
+      <SideNav sx={sx} theme={theme} width={open || !isMobile ? width : "0px"}>
         {children}
       </SideNav>
 
       {open && isMobile && <SideNavOverlay onClick={toggleSidenav} />}
     </Box>
   );
-}
+};
+
+export default MatxSidenav;
