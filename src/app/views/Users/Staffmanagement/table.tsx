@@ -14,7 +14,7 @@ import {
   TextField,
   Fab,
   Card,
-  IconButton
+  IconButton,Divider
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -22,6 +22,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Icon } from '@mui/material';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import Create from './form';
+import Edit from './editview';
 
 const Viewtable: React.FC = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -34,9 +35,19 @@ const Viewtable: React.FC = () => {
     setDialogOpen(false);
   };
 
+  const [editdialogOpen,seteditDialogOpen]=useState(false);
+   
+  const edithandleAddClick=()=>{
+    seteditDialogOpen(true);
+  };
+  const edithandleDialogClose=()=>{
+    seteditDialogOpen(false);
+  };
+
+
   return (
     <>
-      <Card sx={{ p: 4, height: "100%", border: '1px solid black' }}>
+      <Card sx={{ p: 4, height: "100%", border: '1px solid #24665D' }}>
         <Box display={'flex'} justifyContent={"space-between"} flexWrap={"wrap"} p={2}>
           <TextField label="Search" />
 
@@ -45,7 +56,7 @@ const Viewtable: React.FC = () => {
           </Fab>
 
         </Box>
-
+<Divider/>
 
         <TableContainer component={Paper}>
           <Table>
@@ -78,7 +89,7 @@ const Viewtable: React.FC = () => {
                   <IconButton size="small" color="primary" aria-label="VisibilityIcon">
                     <VisibilityIcon />
                   </IconButton>
-                  <IconButton size="small" color="primary" aria-label="edit">
+                  <IconButton onClick={edithandleAddClick} size="small" color="primary" aria-label="edit">
                     <EditIcon />
                   </IconButton>
                 </TableCell>
@@ -107,6 +118,7 @@ const Viewtable: React.FC = () => {
         </TableContainer>
       </Card>
       <Create dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
+      <Edit editdialogOpen={editdialogOpen} edithandleDialogClose={edithandleDialogClose}/>
     </>
   );
 };
