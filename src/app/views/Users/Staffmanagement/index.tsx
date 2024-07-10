@@ -1,14 +1,21 @@
-import { Box, Container } from '@mui/material'
-import React from 'react'
+import { Container, Grid } from '@mui/material';
+import React from 'react';
+import Form from './Heading';
+import Viewtable from './table';
 
-function Index() {
+const Index: React.FC = () => {
   return (
-    <Container>
-   
-    <Box>Staff Management</Box>
-    
+    <Container maxWidth="lg">
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Form />
+        </Grid>
+        <Grid item xs={12}>
+          <Viewtable />
+        </Grid>
+      </Grid>
     </Container>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
