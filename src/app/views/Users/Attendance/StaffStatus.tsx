@@ -18,13 +18,25 @@ const StaffStatus = () => {
       date: "10-7-2024",
       checkin: "6:30AM",
       checkout: "5:30PM",
-      status: "pending",
+      status: "Present",
     },
     {
       date: "19-12-2024",
       checkin: "2:30AM",
       checkout: "9:30PM",
-      status: "waiting",
+      status: "Leave",
+    },
+    {
+      date: "06-10-2024",
+      checkin: "1:30AM",
+      checkout: "10:30PM",
+      status: "Off Day",
+    },
+    {
+      date: "29-06-2023",
+      checkin: "9:30AM",
+      checkout: "9:30PM",
+      status: "Present",
     },
   ];
   return (

@@ -1,13 +1,14 @@
 import { Box, Container } from '@mui/material'
-import React from 'react'
+import Store from './Store'
+
 
 function Index() {
   return (
-    <Container>
+ 
    
-    <Box>Stores</Box>
+    <Store/>
     
-    </Container>
+   
   )
 }
 

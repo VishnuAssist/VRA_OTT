@@ -14,7 +14,7 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { FC, useState } from "react";
 import { Staff } from "../../../Models/StaffMangement";
-import Create from "./form";
+
 interface CreateProps {
   editdialogOpen: boolean;
   edithandleDialogClose: () => void;
@@ -25,15 +25,8 @@ const Edit: FC<CreateProps> = ({
   edithandleDialogClose,
   edituserData,
 }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const edit = () => {
-    setDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setDialogOpen(false);
-  };
-  console.log(edituserData)
+  
+ 
   return (
     <>
       <Dialog
@@ -64,15 +57,15 @@ const Edit: FC<CreateProps> = ({
               
                 }}
               >
-                MR
+                
               </Avatar>
               <Typography
                 variant="h5"
                 sx={{ textAlign: "center", fontWeight: "bold" }}
               >
-                Mohamed Riyas
+                {edituserData?.username}
               </Typography>
-              <Typography sx={{ textAlign: "center" }}>Employee</Typography>
+              <Typography sx={{ textAlign: "center" }}>{edituserData?.role}</Typography>
             </Grid>
             <Grid item xs={12} lg={6} container spacing={2}>
               <Grid
@@ -95,7 +88,7 @@ const Edit: FC<CreateProps> = ({
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Store
                 </Typography>
-                <Typography sx={{ fontSize: 13 }}>BBW</Typography>
+                <Typography sx={{ fontSize: 13 }}>{edituserData?.store}</Typography>
               </Grid>
               <Grid
                 item
@@ -106,7 +99,7 @@ const Edit: FC<CreateProps> = ({
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Joining Date
                 </Typography>
-                <Typography sx={{ fontSize: 13 }}>12 December 2015</Typography>
+                <Typography sx={{ fontSize: 13 }}>{edituserData?.joinDate}</Typography>
               </Grid>
               <Grid
                 item
@@ -155,21 +148,17 @@ const Edit: FC<CreateProps> = ({
             </Grid>
           </Grid>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" color="error">
+            <Button variant="contained" color="error" onClick={edithandleDialogClose}>
               Close
             </Button>
-            <Button type="submit" variant="contained" color="success" onClick={edit}>
+            {/* <Button type="submit" variant="contained" color="success" onClick={edit}>
               EDIT
-            </Button>
+            </Button> */}
           </Box>
         </DialogContent>
       </Dialog>
 
-      <Create
-        dialogOpen={dialogOpen}
-        handleDialogClose={handleDialogClose}
-        initialUserData={edituserData}
-      />
+      
     </>
   );
 };

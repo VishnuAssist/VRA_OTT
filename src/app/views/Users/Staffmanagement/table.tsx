@@ -8,7 +8,6 @@ import {
   TableRow,
   Checkbox,
   FormGroup,
-  
   Paper,
   Box,
   TextField,
@@ -20,33 +19,53 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
+import DeleteIcon from "@mui/icons-material/Delete";
 import Create from "./form";
 import Edit from "./editview";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
+import { removeStaff } from "../../Slices/StaffManagementSlice";
 
 const Viewtable: React.FC = () => {
-  const [dialogOpen, setDialogOpen] = useState(false);
   const { userList } = useSelector((state: any) => state.staff);
-  const [selectdata,setSelectdata]=useState<Staff | null>(null)
+  const dispatch = useDispatch();
+  const [selectdata, setSelectdata] = useState<Staff | null>(null);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [addnewuser, setAddnewuser] = useState(false);
 
   const handleAddClick = () => {
-    setDialogOpen(true);
+    setAddnewuser(true);
   };
 
   const handleDialogClose = () => {
-    setDialogOpen(false);
+    setAddnewuser(false);
   };
 
-  const [editdialogOpen, seteditDialogOpen] = useState(false);
+  const [previewdialogOpen, setPreviewDialogOpen] = useState(false);
 
-  const edithandleAddClick = (data:Staff) => {
-    setSelectdata(data)
-    seteditDialogOpen(true);
+  const edithandleAddClick = (data: Staff) => {
+    setSelectdata(data);
+    setDialogOpen(true);
   };
+  const closeEdit=()=>{
+    setDialogOpen(false)
+  }
+
   const edithandleDialogClose = () => {
-    seteditDialogOpen(false);
+    setPreviewDialogOpen(false);
+  };
+
+  const [previewdata, setPreviewData] = useState<Staff | null>(null);
+  const previewClick = (data: Staff) => {
+    setPreviewData(data);
+    setPreviewDialogOpen(true);
+  };
+
+  
+
+  const deleteUser = (data: Staff) => {
+    dispatch(removeStaff({ id: data.id }));
   };
 
   return (
@@ -88,46 +107,59 @@ const Viewtable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-            {userList && userList.map((user: Staff) => (
-              <TableRow key={user.id}>
-                <TableCell>
-                  <FormGroup>
-                    <Checkbox defaultChecked />
-                  </FormGroup>
-                </TableCell>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.employeeID}</TableCell>
-                <TableCell>{user.joinDate}</TableCell>
-                <TableCell>{user.status}</TableCell>
-                <TableCell>
-                  <IconButton
-                    size="small"
-                    color="primary"
-                    aria-label="VisibilityIcon"
-                  >
-                    <VisibilityIcon />
-                  </IconButton>
-                  <IconButton
-                    onClick={()=>edithandleAddClick(user)}
-                    size="small"
-                    color="primary"
-                    aria-label="edit"
-                  >
-                    <EditIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            
-               ))}
+              {userList &&
+                userList.map((user: Staff) => (
+                  <TableRow key={user.id}>
+                    <TableCell>
+                      <FormGroup>
+                        <Checkbox defaultChecked />
+                      </FormGroup>
+                    </TableCell>
+                    <TableCell>{user.username}</TableCell>
+                    <TableCell>{user.employeeID}</TableCell>
+                    <TableCell>{user.joinDate}</TableCell>
+                    <TableCell>{user.status}</TableCell>
+                    <TableCell>
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        aria-label="VisibilityIcon"
+                        onClick={() => previewClick(user)}
+                      >
+                        <VisibilityIcon />
+                      </IconButton>
+                      <IconButton
+                        size="small"
+                        color="primary"
+                        aria-label="edit"
+                        onClick={() => edithandleAddClick(user)}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        color="error"
+                        aria-label="delete"
+                        onClick={() => deleteUser(user)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>
       </Card>
-      <Create dialogOpen={dialogOpen} handleDialogClose={handleDialogClose} />
+      <Create
+        dialogOpen={dialogOpen}
+        handleDialogClose={closeEdit}
+        initialUserData={selectdata}
+      />
+      <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} />
       <Edit
-        editdialogOpen={editdialogOpen}
+        editdialogOpen={previewdialogOpen}
         edithandleDialogClose={edithandleDialogClose}
-        edituserData={selectdata}
+        edituserData={previewdata}
       />
     </>
   );
