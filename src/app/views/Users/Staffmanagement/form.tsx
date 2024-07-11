@@ -1,22 +1,46 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, Grid, TextField, Box, Avatar, Tooltip, Radio, Select, MenuItem } from '@mui/material';
+import { useForm } from 'react-hook-form';
+import { addStaff } from '../../Slices/StaffManagementSlice';
+import { useDispatch } from 'react-redux';
+import { Staff } from '../../../Models/StaffMangement';
 
 
 interface CreateProps {
   dialogOpen: boolean;
   handleDialogClose: () => void;
-  initialUserData?: any | null; // Replace 'User' with your actual type for user data
+  initialUserData?: Staff | null; // Replace 'User' with your actual type for user data
 }
 
 const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserData }) => {
-
-
+  const data:Staff={
+    username: "",
+    phone: "",
+    employeeID: "",
+    email: "",
+    role: "",
+    store: "",
+    joinDate: "",
+    position: "",
+    status: "",
+    id: 0
+  }
+  const dispatch=useDispatch()
+  const {register,handleSubmit,reset}=useForm<Staff>()
+  useEffect(()=>{
+    reset(initialUserData || data)
+  },[initialUserData])
+  const submitData=(data:Staff)=>{
+    reset()
+    console.log(data)
+    dispatch(addStaff(data))
+  }
   return (
     <>
       <Dialog open={dialogOpen} onClose={handleDialogClose} maxWidth="sm" fullWidth>
         <DialogTitle>{initialUserData ? "Update User" : " New User"}</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
-          <form>
+          <form onSubmit={handleSubmit(submitData)}>
             <Grid container spacing={1}>
               <Grid item xs={4}>
                 <Tooltip
@@ -58,6 +82,7 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="text"
                     id="empolyeid"
                     label="Employee ID"
+                    {...register('employeeID')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "row", mb: 2 }}>
@@ -65,6 +90,7 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="text"
                     id="username"
                     label="UserName"
+                    {...register('username')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
@@ -72,6 +98,7 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="number"
                     id="phonenumber"
                     label="Phone Number"
+                    {...register('phone')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
@@ -79,6 +106,7 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="email"
                     id="email"
                     label="Email"
+                    {...register('email')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
@@ -86,13 +114,15 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="position"
                     id="position"
                     label="position"
+                    {...register('position')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
                   <TextField
-                    type="number"
+                    type="date"
                     id="joining date"
-                    label="joining date"
+                    label=""
+                    {...register('joinDate')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
@@ -100,10 +130,11 @@ const Create: FC<CreateProps> = ({ dialogOpen, handleDialogClose, initialUserDat
                     type="store"
                     id="store"
                     label="store"
+                    {...register('store')}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ display: "flex", flexDirection: "column", mb: 2 }}>
-                  <Select label="Role">
+                  <Select label="Role" {...register('role')}>
                     <MenuItem value="admin">Admin</MenuItem>
                     <MenuItem value="Employee">Employee</MenuItem>
                     <MenuItem value="Manager">Manager</MenuItem>

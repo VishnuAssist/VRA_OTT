@@ -6,6 +6,10 @@ import App from "./app/App";
 
 // third party style
 import "perfect-scrollbar/css/perfect-scrollbar.css";
+import {Provider} from 'react-redux'
+import {store} from "./app/views/Store/store"
+
+
 
 const rootElement = document.getElementById("root");
 
@@ -14,7 +18,9 @@ if (rootElement) {
 
   root.render(
     <BrowserRouter>
+    <Provider store={store}>
       <App />
+      </Provider>
     </BrowserRouter>
   );
 }

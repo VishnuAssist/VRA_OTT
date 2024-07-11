@@ -1,12 +1,13 @@
-import React from 'react'
-import Calendar from './Clander'
 
-function index() {
+import Calender from './Calender'
+
+const ShiftIndex = () => {
   return (
-   
-    <div><Calendar/></div>
+    <>
+    <Calender/>
 
+    </>
   )
 }
 
-export default index
+export default ShiftIndex

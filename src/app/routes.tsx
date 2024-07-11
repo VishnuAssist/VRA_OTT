@@ -20,7 +20,7 @@ const AppEchart = Loadable(lazy(() => import("./views/charts/echarts/AppEchart")
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 const  StaffManagement= Loadable(lazy(() => import("./views/Users/Staffmanagement")));
-const  Attendence= Loadable(lazy(() => import("./views/Users/Attendence/index")));
+const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShifftPlaner= Loadable(lazy(() => import("./views/Users/ShiftPlanner")));
 const  Stores= Loadable(lazy(() => import("./views/Settings/Stores")));
 const  Approvals= Loadable(lazy(() => import("./views/MyApprovals/Approvals")));
