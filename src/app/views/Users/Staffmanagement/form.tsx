@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import  { FC, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -14,10 +14,9 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  SelectChangeEvent,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { addStaff ,updateStaff} from "../../Slices/StaffManagementSlice";
+import { addStaff, updateStaff } from "../../Slices/StaffManagementSlice";
 import { useDispatch } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
 
@@ -44,11 +43,13 @@ const Create: FC<CreateProps> = ({
     status: "",
     id: 0,
   };
+
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset,setValue } = useForm<Staff>();
+  const { register, handleSubmit, reset, setValue } = useForm<Staff>();
+
   useEffect(() => {
     reset(initialUserData || data);
-  }, [initialUserData]);
+  }, [initialUserData, reset]);
 
   useEffect(() => {
     if (initialUserData) {
@@ -60,28 +61,21 @@ const Create: FC<CreateProps> = ({
       setValue("joinDate", initialUserData.joinDate);
       setValue("store", initialUserData.store);
       setValue("role", initialUserData.role);
-      
-      // setIsActive(initialUserData.isActive ?? true);
-      // setProfilePic(initialUserData.profilePicture || null);
+      setValue("id", initialUserData.id);
     }
   }, [initialUserData, setValue]);
+
   const submitData = (data: Staff) => {
     if (initialUserData && initialUserData.id) {
-       dispatch(updateStaff(data));
+      dispatch(updateStaff(data));
     } else {
-       dispatch(addStaff(data));
+      dispatch(addStaff(data));
     }
     reset();
+    handleDialogClose();
     console.log(data);
-    dispatch(addStaff(data));
   };
-  
 
-  const [role, setRole] = React.useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setRole(event.target.value as string);
-  };
   return (
     <>
       <Dialog
@@ -128,118 +122,90 @@ const Create: FC<CreateProps> = ({
               </Grid>
 
               <Grid item xs={8} container spacing={1}>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "row", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
                     type="text"
-                    id="empolyeid"
+                    id="employeeID"
                     label="Employee ID"
                     {...register("employeeID")}
+                    fullWidth
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "row", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
                     type="text"
                     id="username"
-                    label="UserName"
+                    label="Username"
                     {...register("username")}
+                    fullWidth
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
                     type="number"
-                    id="phonenumber"
+                    id="phone"
                     label="Phone Number"
                     {...register("phone")}
+                    fullWidth
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
                     type="email"
                     id="email"
                     label="Email"
                     {...register("email")}
+                    fullWidth
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
-                    type="position"
+                    type="text"
                     id="position"
-                    label="position"
+                    label="Position"
                     {...register("position")}
+                    fullWidth
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <TextField
                     type="date"
-                    id="joining date"
-                    label=""
+                    id="joinDate"
                     {...register("joinDate")}
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label" {...register("store")}>Store</InputLabel>
+                    <InputLabel id="store-select-label">Store</InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={role}
-                      label="store"
-                      onChange={handleChange}
-                      
+                      labelId="store-select-label"
+                      id="store-select"
+                      defaultValue={initialUserData ? initialUserData.store : ""}
+                      {...register("store")}
+                      label="Store"
                     >
-                      <MenuItem value={10}>TWG001</MenuItem>
-                      <MenuItem value={20}>TWG002</MenuItem>
-                      <MenuItem value={30}>TWG003</MenuItem>
-                      <MenuItem value={40}>TWG004</MenuItem>
+                      <MenuItem value="twg001">TWG001</MenuItem>
+                      <MenuItem value="twg002">TWG002</MenuItem>
+                      <MenuItem value="twg003">TWG003</MenuItem>
+                      <MenuItem value="twg004">TWG004</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid
-                  item
-                  xs={6}
-                  sx={{ display: "flex", flexDirection: "column", mb: 2 }}
-                >
+                <Grid item xs={6} sx={{ mb: 2 }}>
                   <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label" {...register("role")}>Role</InputLabel>
+                    <InputLabel id="role-select-label">Role</InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={role}
-                      label="Age"
-                      onChange={handleChange}
-                      
+                      labelId="role-select-label"
+                      id="role-select"
+                      defaultValue={initialUserData ? initialUserData.role : ""}
+                      {...register("role")}
+                      label="Role"
                     >
-                      <MenuItem value={10}>Admin</MenuItem>
-                      <MenuItem value={20}>Mobile</MenuItem>
-                      <MenuItem value={30}>SuperUser</MenuItem>
+                      <MenuItem value="admin">Admin</MenuItem>
+                      <MenuItem value="mobile">Mobile</MenuItem>
+                      <MenuItem value="superuser">SuperUser</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>

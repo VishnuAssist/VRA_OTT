@@ -12,7 +12,7 @@ import {
 import { blue} from "@mui/material/colors";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Staff } from "../../../Models/StaffMangement";
 
 interface CreateProps {
@@ -35,7 +35,12 @@ const Edit: FC<CreateProps> = ({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>{edituserData ? "Update User" : ""}</DialogTitle>
+        <DialogTitle>
+        <Box sx={{display:'flex',justifyContent:'space-between'}}>
+          <Typography variant="h6">{edituserData ? "Update User" : ""}</Typography>
+        <Button variant="contained">Attendance Status</Button></Box>
+        </DialogTitle>
+
         <DialogContent >
           <Grid container spacing={2}>
             <Grid

@@ -15,10 +15,10 @@ const initialState: UserState = {
       phone: "9856742321",
       email: "abc@gmail.com",
       position: "admin",
-      store: "UPPW",
+      store: "twg001",
       status: "pending",
       joinDate: "12-6-2023",
-      role: "Manager"
+      role: "admin"
     },
   ],
   selectedUser: null,
