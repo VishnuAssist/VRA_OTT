@@ -1,4 +1,4 @@
-import  { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Button,
   Dialog,
@@ -46,6 +46,8 @@ const Create: FC<CreateProps> = ({
 
   const dispatch = useDispatch();
   const { register, handleSubmit, reset, setValue } = useForm<Staff>();
+  const [isActive, setIsActive] = useState(true);
+  const [profilePic, setProfilePic] = useState<string | null>(null);
 
   useEffect(() => {
     reset(initialUserData || data);
@@ -62,18 +64,45 @@ const Create: FC<CreateProps> = ({
       setValue("store", initialUserData.store);
       setValue("role", initialUserData.role);
       setValue("id", initialUserData.id);
+      setIsActive(initialUserData.isActive ?? true);
+      setProfilePic(initialUserData.profilePicture || null);
     }
   }, [initialUserData, setValue]);
 
   const submitData = (data: Staff) => {
+    data.isActive = isActive;
+    if (profilePic) {
+      data.profilePicture = profilePic;
+    } else if (initialUserData?.profilePicture) {
+      data.profilePicture = initialUserData.profilePicture;
+    }
+
     if (initialUserData && initialUserData.id) {
       dispatch(updateStaff(data));
     } else {
       dispatch(addStaff(data));
     }
     reset();
+    setProfilePic(null);
     handleDialogClose();
     console.log(data);
+  };
+
+  const handleRadioChange = () => {
+    setIsActive((prevIsActive) => !prevIsActive);
+  };
+
+  const handleProfilePicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          setProfilePic(reader.result);
+        }
+      };
+    }
   };
 
   return (
@@ -91,12 +120,17 @@ const Create: FC<CreateProps> = ({
           <form onSubmit={handleSubmit(submitData)}>
             <Grid container spacing={1}>
               <Grid item xs={4}>
-                <Tooltip title={"Click to Deactivate"} arrow>
+                <Tooltip
+                  title={isActive ? "Click to Deactivate" : "Click to Activate"}
+                  arrow
+                >
                   <Radio
+                    checked={isActive}
+                    onClick={handleRadioChange}
                     sx={{
-                      color: "#4caf50",
+                      color: isActive ? "#4caf50" : "#f44336",
                       "&.Mui-checked": {
-                        color: "#4caf50",
+                        color: isActive ? "#4caf50" : "#f44336",
                       },
                       "&::after": {
                         content: '""',
@@ -104,7 +138,7 @@ const Create: FC<CreateProps> = ({
                         width: "11px",
                         height: "11px",
                         borderRadius: "50%",
-                        backgroundColor: "#4caf50",
+                        backgroundColor: isActive ? "#4caf50" : "#f44336",
                         position: "absolute",
                         top: "50%",
                         left: "50%",
@@ -116,9 +150,23 @@ const Create: FC<CreateProps> = ({
                 <label htmlFor="profilePicInput">
                   <Avatar
                     alt="Profile Picture"
+                    src={
+                      profilePic
+                        ? profilePic
+                        : initialUserData?.profilePicture
+                        ? initialUserData.profilePicture
+                        : "/static/images/avatar/1.jpg"
+                    }
                     sx={{ width: 150, height: 150, cursor: "pointer" }}
                   />
                 </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePicChange}
+                  style={{ display: "none" }}
+                  id="profilePicInput"
+                />
               </Grid>
 
               <Grid item xs={8} container spacing={1}>
@@ -182,7 +230,7 @@ const Create: FC<CreateProps> = ({
                     <Select
                       labelId="store-select-label"
                       id="store-select"
-                      defaultValue={initialUserData ? initialUserData.store : ""}
+                      value={initialUserData ? initialUserData.store : ""}
                       {...register("store")}
                       label="Store"
                     >
@@ -199,7 +247,7 @@ const Create: FC<CreateProps> = ({
                     <Select
                       labelId="role-select-label"
                       id="role-select"
-                      defaultValue={initialUserData ? initialUserData.role : ""}
+                      value={initialUserData ? initialUserData.role : ""}
                       {...register("role")}
                       label="Role"
                     >

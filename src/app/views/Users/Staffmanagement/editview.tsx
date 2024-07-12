@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { blue} from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { FC } from "react";
@@ -25,8 +25,6 @@ const Edit: FC<CreateProps> = ({
   edithandleDialogClose,
   edituserData,
 }) => {
-  
- 
   return (
     <>
       <Dialog
@@ -36,12 +34,15 @@ const Edit: FC<CreateProps> = ({
         fullWidth
       >
         <DialogTitle>
-        <Box sx={{display:'flex',justifyContent:'space-between'}}>
-          <Typography variant="h6">{edituserData ? "Update User" : ""}</Typography>
-        <Button variant="contained">Attendance Status</Button></Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h6">
+              {edituserData ? "Update User" : ""}
+            </Typography>
+            <Button variant="contained">Attendance Status</Button>
+          </Box>
         </DialogTitle>
 
-        <DialogContent >
+        <DialogContent>
           <Grid container spacing={2}>
             <Grid
               item
@@ -49,7 +50,7 @@ const Edit: FC<CreateProps> = ({
               lg={6}
               sx={{
                 display: "flex",
-                alignItems:'center',
+                alignItems: "center",
                 flexDirection: "column",
               }}
             >
@@ -59,18 +60,20 @@ const Edit: FC<CreateProps> = ({
                   height: 160,
                   cursor: "pointer",
                   bgcolor: blue,
-              
                 }}
-              >
-                
-              </Avatar>
+                alt={edituserData?.username}
+                src={edituserData?.profilePicture ?? ""}
+              />
+
               <Typography
                 variant="h5"
                 sx={{ textAlign: "center", fontWeight: "bold" }}
               >
                 {edituserData?.username}
               </Typography>
-              <Typography sx={{ textAlign: "center" }}>{edituserData?.role}</Typography>
+              <Typography sx={{ textAlign: "center" }}>
+                {edituserData?.role}
+              </Typography>
             </Grid>
             <Grid item xs={12} lg={6} container spacing={2}>
               <Grid
@@ -82,7 +85,9 @@ const Edit: FC<CreateProps> = ({
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Employee ID
                 </Typography>
-                <Typography sx={{ fontSize: 13 }}>{edituserData?.employeeID}</Typography>
+                <Typography sx={{ fontSize: 13 }}>
+                  {edituserData?.employeeID}
+                </Typography>
               </Grid>
               <Grid
                 item
@@ -93,7 +98,9 @@ const Edit: FC<CreateProps> = ({
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Store
                 </Typography>
-                <Typography sx={{ fontSize: 13 }}>{edituserData?.store}</Typography>
+                <Typography sx={{ fontSize: 13 }}>
+                  {edituserData?.store}
+                </Typography>
               </Grid>
               <Grid
                 item
@@ -104,7 +111,9 @@ const Edit: FC<CreateProps> = ({
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Joining Date
                 </Typography>
-                <Typography sx={{ fontSize: 13 }}>{edituserData?.joinDate}</Typography>
+                <Typography sx={{ fontSize: 13 }}>
+                  {edituserData?.joinDate}
+                </Typography>
               </Grid>
               <Grid
                 item
@@ -153,7 +162,11 @@ const Edit: FC<CreateProps> = ({
             </Grid>
           </Grid>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" color="error" onClick={edithandleDialogClose}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={edithandleDialogClose}
+            >
               Close
             </Button>
             {/* <Button type="submit" variant="contained" color="success" onClick={edit}>
@@ -162,8 +175,6 @@ const Edit: FC<CreateProps> = ({
           </Box>
         </DialogContent>
       </Dialog>
-
-      
     </>
   );
 };

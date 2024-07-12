@@ -15,6 +15,8 @@ import {
   Card,
   IconButton,
   Divider,
+  Badge,
+  Avatar,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -99,6 +101,7 @@ const Viewtable: React.FC = () => {
                     <Checkbox defaultChecked />
                   </FormGroup>
                 </TableCell>
+                <TableCell>Picture</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Position</TableCell>
                 <TableCell>Store</TableCell>
@@ -110,11 +113,16 @@ const Viewtable: React.FC = () => {
               {userList &&
                 userList.map((user: Staff) => (
                   <TableRow key={user.id}>
-                    <TableCell>
+                      <TableCell>
                       <FormGroup>
                         <Checkbox defaultChecked />
                       </FormGroup>
                     </TableCell>
+                   <TableCell>
+                    <Badge color={user.isActive ? 'success' : 'error'}  variant="dot">
+                      <Avatar alt={user.username} src={user?.profilePicture ?? ""} />
+                    </Badge>
+                  </TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.employeeID}</TableCell>
                     <TableCell>{user.joinDate}</TableCell>
