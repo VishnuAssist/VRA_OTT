@@ -1,11 +1,13 @@
 import { Box, Container } from '@mui/material'
 import React from 'react'
+import Pageheading from './pageheading'
+
 
 function Index() {
   return (
     <Container>
    
-    <Box>Approvals</Box>
+   <Pageheading/>
     
     </Container>
   )

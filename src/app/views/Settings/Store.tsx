@@ -2,6 +2,7 @@ import {
   Button,
   Card,
   Container,
+  Grid,
   IconButton,
   Table,
   TableBody,
@@ -42,15 +43,16 @@ const Store = () => {
   return (
     <>
       <Container>
-        <Card sx={{ p: 2,mt:2 }}>
+        <Card sx={{ p: 2,mt:1 }}>
+          
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sx={{fontSize:'20px'}}>Code</TableCell>
-                <TableCell sx={{fontSize:'20px'}}>Name</TableCell>
-                <TableCell sx={{fontSize:'20px'}}>Country</TableCell>
-                <TableCell sx={{fontSize:'20px'}}>Status</TableCell>
-                <TableCell sx={{fontSize:'20px'}}>Action</TableCell>
+                <TableCell sx={{fontSize:'18px'}}>Code</TableCell>
+                <TableCell sx={{fontSize:'18px'}}>Name</TableCell>
+                <TableCell sx={{fontSize:'18px'}}>Country</TableCell>
+                <TableCell sx={{fontSize:'18px'}}>Status</TableCell>
+                <TableCell sx={{fontSize:'18px'}}>Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -83,6 +85,7 @@ const Store = () => {
                 ))}
             </TableBody>
           </Table>
+          
         </Card>
       </Container>
     </>
