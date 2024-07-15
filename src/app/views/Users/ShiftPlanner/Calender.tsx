@@ -13,16 +13,152 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import LayersIcon from "@mui/icons-material/Layers";
-import React, { FC, useState } from "react";
-
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import AssignOption from "./AssignOption";
+import React, { FC, useState } from "react";
+import { Calendar, dateFnsLocalizer, Event, Views } from "react-big-calendar";
+import withDragAndDrop, {
+  withDragAndDropProps,
+} from "react-big-calendar/lib/addons/dragAndDrop";
+import {
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  addHours,
+  startOfHour,
+} from "date-fns";
+import enUS from "date-fns/locale/en-US";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import { useSelector } from "react-redux";
 
+const locales = {
+  "en-US": enUS,
+};
 
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
-const Calendar: FC = () => {
- 
+const endOfHour = (date: Date): Date => addHours(startOfHour(date), 1);
+const now = new Date();
+const start = endOfHour(now);
+const end = addHours(start, 2);
+const DnDCalendar = withDragAndDrop(Calendar);
+
+interface User {
+  id: string;
+  name: string;
+}
+
+const CalendarTable: FC = () => {
+  const { userList } = useSelector((state: any) => state.staff);
+
+  const users: User[] = userList.map((user: any) => ({
+    id: user.id,
+    name: user.username,
+  }));
+
+  const [events, setEvents] = useState<Event[]>([
+    {
+      title: "Learn cool stuff",
+      start,
+      end,
+      resource: users[0]?.id || "",
+    },
+  ]);
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const onEventResize: withDragAndDropProps["onEventResize"] = (data) => {
+    const { start, end } = data;
+
+    setEvents((currentEvents) =>
+      currentEvents.map((event) =>
+        event.start === data.event.start && event.end === data.event.end
+          ? { ...event, start: new Date(start), end: new Date(end) }
+          : event
+      )
+    );
+  };
+
+  const onEventDrop: withDragAndDropProps["onEventDrop"] = (data) => {
+    const { start, end, event } = data;
+
+    setEvents((currentEvents) =>
+      currentEvents.map((evt) =>
+        evt === event
+          ? { ...evt, start: new Date(start), end: new Date(end) }
+          : evt
+      )
+    );
+  };
+
+  const onSelectSlot = (slotInfo: any) => {
+    if (selectedUser) {
+      const title = window.prompt("New Event name");
+      if (title) {
+        setEvents((currentEvents) => [
+          ...currentEvents,
+          {
+            title,
+            start: slotInfo.start,
+            end: slotInfo.end,
+            resourceId: selectedUser.id,
+          },
+        ]);
+      }
+    } else {
+      
+      alert("Please select a user first");
+    }
+  };
+
+  const onSelectEvent = (event: Event) => {
+    const action = window.prompt("Edit or Delete? (e/d)");
+    if (action === "e") {
+      const newTitle = window.prompt("New Event name", event.resource);
+      if (newTitle) {
+        setEvents((currentEvents) =>
+          currentEvents.map((evt) =>
+            evt === event ? { ...evt, title: newTitle } : evt
+          )
+        );
+      }
+    } else if (action === "d") {
+      setEvents((currentEvents) =>
+        currentEvents.filter((evt) => evt !== event)
+      );
+    }
+  };
+
+  const eventStyleGetter = (
+    event: Event,
+    _start: Date,
+    _end: Date,
+    _isSelected: boolean
+  ) => {
+    const backgroundColor =
+      event.resource === selectedUser?.id ? "#ADD8E6" : "#3174ad";
+    const style = {
+      backgroundColor,
+      borderRadius: "5px",
+      opacity: 0.8,
+      color: "black",
+      border: "0px",
+      display: "block",
+    };
+    return {
+      style,
+    };
+  };
+
+  // this is normal content
   const [schedule, setSchedule] = useState(false);
   const openSchedule = () => {
     setSchedule(true);
@@ -68,6 +204,7 @@ const Calendar: FC = () => {
   const closeAssign = () => {
     setAssign(false);
   };
+
   return (
     <>
       <Card sx={{ p: 2 }}>
@@ -100,11 +237,53 @@ const Calendar: FC = () => {
             </Button>
           </Grid>
           <Grid item md={2}>
-            <Button variant="contained" onClick={openAssign}>calendar option</Button>
+            <Button variant="contained" onClick={openAssign}>
+              calendar option
+            </Button>
           </Grid>
         </Grid>
+        <Card sx={{ mt: 1,p:1 }}>
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "200px", marginRight: "20px" }}>
+              <h3>Users</h3>
+              <ul style={{ listStyle: "none" }}>
+                {users.map((user) => (
+                  <Card sx={{ my: 1}}>
+                    <li
+                      key={user.id}
+                      style={{
+                        cursor: "pointer",
+                        backgroundColor:
+                          selectedUser?.id === user.id ? "lightblue" : "white",
+                        padding: "5px",
 
-        
+                        borderRadius: "5px",
+                      }}
+                      onClick={() => setSelectedUser(user)}
+                    >
+                      {user.name}
+                    </li>
+                  </Card>
+                ))}
+              </ul>
+            </div>
+            <div style={{ flex: 1 }}>
+              <DnDCalendar
+                selectable
+                defaultView={Views.WEEK}
+                events={events}
+                localizer={localizer}
+                onEventDrop={onEventDrop}
+                onEventResize={onEventResize}
+                onSelectSlot={openAssign}
+                onSelectEvent={onSelectEvent}
+                eventPropGetter={eventStyleGetter}
+                resizable
+                style={{ height: "100vh" }}
+              />
+            </div>
+          </div>
+        </Card>
       </Card>
 
       <Dialog open={schedule} onClose={closeSchedule} maxWidth="xs" fullWidth>
@@ -119,7 +298,6 @@ const Calendar: FC = () => {
                   value={store}
                   label="store"
                   onChange={handleChange}
-                  // {...register("store")}
                 >
                   <MenuItem value={1}>TWG001</MenuItem>
                   <MenuItem value={2}>TWG002</MenuItem>
@@ -137,8 +315,6 @@ const Calendar: FC = () => {
                   value={task}
                   label="store"
                   onChange={handleChange}
-                  name=""
-                  // {...register("store")}
                 >
                   <MenuItem value={11}>Cashier</MenuItem>
                   <MenuItem value={12}>Store keeper</MenuItem>
@@ -249,9 +425,9 @@ const Calendar: FC = () => {
         </DialogActions>
       </Dialog>
 
-      <AssignOption assign={assign} closeAssign={closeAssign}/>
+      <AssignOption assign={assign} closeAssign={closeAssign} />
     </>
   );
 };
 
-export default Calendar;
+export default CalendarTable;

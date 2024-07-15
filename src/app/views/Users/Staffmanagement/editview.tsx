@@ -64,7 +64,6 @@ const Edit: FC<CreateProps> = ({
                 alt={edituserData?.username}
                 src={edituserData?.profilePicture ?? ""}
               />
-
               <Typography
                 variant="h5"
                 sx={{ textAlign: "center", fontWeight: "bold" }}

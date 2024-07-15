@@ -169,8 +169,8 @@ const Create: FC<CreateProps> = ({
                 />
               </Grid>
 
-              <Grid item xs={8} container spacing={1}>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+              <Grid item xs={8} container spacing={2} sx={{my:1}}>
+                <Grid item xs={6} >
                   <TextField
                     type="text"
                     id="employeeID"
@@ -179,7 +179,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <TextField
                     type="text"
                     id="username"
@@ -188,7 +188,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <TextField
                     type="number"
                     id="phone"
@@ -197,7 +197,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <TextField
                     type="email"
                     id="email"
@@ -206,7 +206,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6}>
                   <TextField
                     type="text"
                     id="position"
@@ -215,7 +215,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <TextField
                     type="date"
                     id="joinDate"
@@ -224,7 +224,7 @@ const Create: FC<CreateProps> = ({
                     InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <FormControl fullWidth>
                     <InputLabel id="store-select-label">Store</InputLabel>
                     <Select
@@ -241,7 +241,7 @@ const Create: FC<CreateProps> = ({
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+                <Grid item xs={6} >
                   <FormControl fullWidth>
                     <InputLabel id="role-select-label">Role</InputLabel>
                     <Select
