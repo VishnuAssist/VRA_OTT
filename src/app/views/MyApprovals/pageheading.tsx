@@ -35,7 +35,7 @@ const Pageheading=()=>{
         {dummy.map((d=>(<>{
 Type=="Leave Request"&&d.type=="Leave Request"&&(
     
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} sm={6} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
             <Box sx={{bgcolor:"#115293",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography variant="h6" >
@@ -46,10 +46,10 @@ Type=="Leave Request"&&d.type=="Leave Request"&&(
             <CardContent>
             <Divider orientation="vertical"  variant="middle" flexItem />
             <Grid item xs={12} md={12} container spacing={2}>
-            <Grid item  xs={3}>
+            <Grid item  xs={3} >
                 <Typography sx={{ fontSize: 20,fontWeight:"bold" }}>Name:</Typography>
                 </Grid>
-                <Grid item  xs={9}>
+                <Grid item  xs={9} >
                 <Typography sx={{ fontSize: 20 , marginLeft:"20px"}}> {d.Name}</Typography>
                 </Grid>
                 <Grid item  xs={3}>
@@ -91,7 +91,7 @@ Type=="Leave Request"&&d.type=="Leave Request"&&(
     
     
 Type=="MC"&&d.type=="MC"&&(
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} sm={4} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
             <Box sx={{bgcolor:"#754CB9",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography>
@@ -149,7 +149,7 @@ Type=="MC"&&d.type=="MC"&&(
 }
 {
 Type=="Commision"&&d.type=="Commision"&&(
-    <Grid item xs={12} lg={4}>
+    <Grid item xs={12} sm={4} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
             <Box sx={{bgcolor:"#94810A",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography>

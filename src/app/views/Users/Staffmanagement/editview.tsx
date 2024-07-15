@@ -56,8 +56,8 @@ const Edit: FC<CreateProps> = ({
             >
               <Avatar
                 sx={{
-                  width: 160,
-                  height: 160,
+                  width: 140,
+                  height: 140,
                   cursor: "pointer",
                   bgcolor: blue,
                 }}
@@ -75,7 +75,7 @@ const Edit: FC<CreateProps> = ({
                 {edituserData?.role}
               </Typography>
             </Grid>
-            <Grid item xs={12} lg={6} container spacing={2}>
+            <Grid item xs={6} lg={6} container spacing={2}>
               <Grid
                 item
                 xs={12}
@@ -130,6 +130,8 @@ const Edit: FC<CreateProps> = ({
                 item
                 xs={12}
                 lg={8}
+                md={8}
+                sm={7}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
                 <Box
@@ -137,8 +139,8 @@ const Edit: FC<CreateProps> = ({
                     p: 1,
                     border: "1px solid #24665D",
                     display: "flex",
-                    gap: 6,
-                    borderRadius: 2,
+                    gap: 4,
+                    borderRadius: 1,
                     alignItems: "center",
                     m: 1,
                   }}

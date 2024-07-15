@@ -4,22 +4,28 @@ import { Box, Card, Grid, Typography } from '@mui/material';
 const Form: React.FC = () => {
   return (
     <>
-      <Card sx={{p:1,border: '1px solid #24665D',display: "flex", justifyContent: "center", alignItems: "center",m:1}}>
+      
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+          <Card sx={{p:1,maxWidth:"100%",border: '1px solid #24665D',display: "flex", justifyContent: "center", alignItems: "center",m:1}}>
         <Typography variant="h5" gutterBottom>
           Staff Management
         </Typography>
         </Card>
-        <Grid container spacing={2}>
+          </Grid>
           <Grid item xs={12} md={3}>
-            <Card sx={{ py: 1, height: "100%", maxWidth:"300px",border: '1px solid #24665D', display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-              <Box sx={{mb:1,}}>
+            <Card sx={{ py: 1, height: "100%", maxWidth:"100%",border: '1px solid #24665D', display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+              
+                <Grid item xs={6}>
               <Typography sx={{ fontSize: 18 }}>Total Staff's</Typography>
               <Typography sx={{ fontSize: 22, fontWeight: "bold" }}>200</Typography>
-              </Box>
-              <Box>
+              </Grid>
+              
+             
               <Typography sx={{ fontSize: 18  }}>Total stores</Typography>
               <Typography sx={{ fontSize: 22, fontWeight: "bold" }}>30</Typography>
-              </Box>
+              
+              
             </Card>
           </Grid>
           <Grid item xs={12} md={9}>
