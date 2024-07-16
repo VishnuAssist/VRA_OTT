@@ -181,14 +181,8 @@ const Viewtable: React.FC = () => {
         handleDialogClose={closeEdit}
         initialUserData={selectdata}            //edit
       />
-<<<<<<< HEAD
-    
-      
-      
-=======
       
     
->>>>>>> 8b837baf002aa2c2c75d49dc787a878b1b301edf
     </>
   );
 };
