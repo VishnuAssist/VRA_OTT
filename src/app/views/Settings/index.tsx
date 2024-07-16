@@ -1,5 +1,5 @@
 import { Box, Container } from '@mui/material'
-import Store from './Store'
+import Store from './TableStore'
 
 
 function Index() {

@@ -36,8 +36,9 @@ const Viewtable: React.FC = () => {
   const [selectdata, setSelectdata] = useState<Staff | null>(null);
 
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [addnewuser, setAddnewuser] = useState(false);
 
+
+  const [addnewuser, setAddnewuser] = useState(false);      //add new user
   const handleAddClick = () => {
     setAddnewuser(true);
   };
@@ -46,8 +47,8 @@ const Viewtable: React.FC = () => {
     setAddnewuser(false);
   };
 
-  const [previewdialogOpen, setPreviewDialogOpen] = useState(false);
-
+  const [previewdialogOpen, setPreviewDialogOpen] = useState(false);      //edit
+  // const [selectdata, setSelectdata] = useState<Staff | null>(null);
   const edithandleAddClick = (data: Staff) => {
     setSelectdata(data);
     setDialogOpen(true);
@@ -63,8 +64,8 @@ const Viewtable: React.FC = () => {
 
   const [previewdata, setPreviewData] = useState<Staff | null>(null);
   
-  const previewClick = (data: Staff) => {
-    setPreviewData(data);
+  const previewClick = (data: Staff) => {        
+    setPreviewData(data);                             //preview
     setPreviewDialogOpen(true);
   };
 
@@ -168,8 +169,8 @@ const Viewtable: React.FC = () => {
         
       </Card>
 
-      <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} /> //addnewuser
-
+      <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} //addnewuser
+ /> 
       <Edit
         editdialogOpen={previewdialogOpen}
         edithandleDialogClose={edithandleDialogClose}   //preview
@@ -181,14 +182,7 @@ const Viewtable: React.FC = () => {
         handleDialogClose={closeEdit}
         initialUserData={selectdata}            //edit
       />
-<<<<<<< HEAD
-    
-      
-      
-=======
-      
-    
->>>>>>> 8b837baf002aa2c2c75d49dc787a878b1b301edf
+
     </>
   );
 };
