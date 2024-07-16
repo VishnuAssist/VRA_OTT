@@ -50,6 +50,7 @@ const Viewtable: React.FC = () => {
     setSelectdata(data);
     setDialogOpen(true);
   };
+  
   const closeEdit=()=>{
     setDialogOpen(false)
   }
@@ -59,6 +60,7 @@ const Viewtable: React.FC = () => {
   };
 
   const [previewdata, setPreviewData] = useState<Staff | null>(null);
+  
   const previewClick = (data: Staff) => {
     setPreviewData(data);
     setPreviewDialogOpen(true);
@@ -158,17 +160,22 @@ const Viewtable: React.FC = () => {
           </Table>
         </TableContainer>
       </Card>
+
+      <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} /> //addnewuser
+
+      <Edit
+        editdialogOpen={previewdialogOpen}
+        edithandleDialogClose={edithandleDialogClose}   //preview
+        edituserData={previewdata}
+      />
+
       <Create
         dialogOpen={dialogOpen}
         handleDialogClose={closeEdit}
-        initialUserData={selectdata}
+        initialUserData={selectdata}            //edit
       />
-      <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} />
-      <Edit
-        editdialogOpen={previewdialogOpen}
-        edithandleDialogClose={edithandleDialogClose}
-        edituserData={previewdata}
-      />
+    
+      
       
     </>
   );

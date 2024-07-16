@@ -1,10 +1,12 @@
 import {
+  Box,
   Button,
   Card,
   Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
+  DialogTitle,
   FormControl,
   Grid,
   InputLabel,
@@ -32,7 +34,13 @@ import {
 import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+
+
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { CalendarSlot, removeSlot, selectSlot } from "../../Slices/CalendarSlotManagement";
 
 const locales = {
   "en-US": enUS,
@@ -55,21 +63,30 @@ const DnDCalendar = withDragAndDrop(Calendar);
 interface User {
   id: string;
   name: string;
+  title:()=>void;
 }
 
 const CalendarTable: FC = () => {
-  const { userList } = useSelector((state: any) => state.staff);
+  const { userList} = useSelector((state: any) => state.staff);
 
   const users: User[] = userList.map((user: any) => ({
     id: user.id,
     name: user.username,
   }));
+const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
+  const edithandleAddClick = (data: any) => {
+    setEditSelectslot(data);
+    setAssign(true);
+  };
 
+  const { slots } = useSelector((state: any) => state.slot);
+ 
   const [events, setEvents] = useState<Event[]>([
     {
       title: "Learn cool stuff",
       start,
       end,
+    
       resource: users[0]?.id || "",
     },
   ]);
@@ -98,28 +115,65 @@ const CalendarTable: FC = () => {
       )
     );
   };
-
+  const [assign, setAssign] = useState(false);
+  
   const onSelectSlot = (slotInfo: any) => {
     if (selectedUser) {
-      const title = window.prompt("New Event name");
+      
+      const title = setAssign(true);
       if (title) {
         setEvents((currentEvents) => [
-          ...currentEvents,
+          ...currentEvents,                                                                        
           {
             title,
             start: slotInfo.start,
             end: slotInfo.end,
+            
+
+            
             resourceId: selectedUser.id,
           },
         ]);
       }
     } else {
-      
-      alert("Please select a user first");
+      toast.error("Please select a user first", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
     }
   };
 
+
+  const [preview,setPreview]=useState(false)
+  const [previewdata, setPreviewData] = useState<CalendarSlot | null>(null);
+
+  const openPreview=(data: CalendarSlot)=>{
+    setPreview(true)
+    setPreviewData(data);
+  }
+  const closePreview=()=>{
+    setPreview(false)
+  }
+  
+  
+  const dispatch = useDispatch();
+  const deleteUser = (data: CalendarSlot) => {
+    dispatch(removeSlot({ id: data.resource }));
+  };
+    
+    
+  
+
   const onSelectEvent = (event: Event) => {
+    console.log("heeee",event);
+    
     const action = window.prompt("Edit or Delete? (e/d)");
     if (action === "e") {
       const newTitle = window.prompt("New Event name", event.resource);
@@ -136,6 +190,7 @@ const CalendarTable: FC = () => {
       );
     }
   };
+  
 
   const eventStyleGetter = (
     event: Event,
@@ -197,7 +252,7 @@ const CalendarTable: FC = () => {
     settask(event.target.value as string);
   };
 
-  const [assign, setAssign] = useState(false);
+  
   const openAssign = () => {
     setAssign(true);
   };
@@ -205,28 +260,12 @@ const CalendarTable: FC = () => {
     setAssign(false);
   };
 
+  
   return (
     <>
       <Card sx={{ p: 2 }}>
         <Grid container spacing={2}>
-          <Grid item md={6}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Employee</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={employee}
-                label="employee"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Rizwan</MenuItem>
-                <MenuItem value={20}>Hari</MenuItem>
-                <MenuItem value={30}>Sheik</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
+          <Grid item md={12} sx={{ display: "flex", alignItems: "center" ,flexDirection:'row-reverse'}}>
             <Button
               variant="contained"
               startIcon={<LayersIcon fontSize="small" />}
@@ -236,11 +275,12 @@ const CalendarTable: FC = () => {
               Schedule
             </Button>
           </Grid>
-          <Grid item md={2}>
+          {/* <Grid item md={2}>
             <Button variant="contained" onClick={openAssign}>
               calendar option
             </Button>
-          </Grid>
+          </Grid> */}
+          
         </Grid>
         <Card sx={{ mt: 1,p:1 }}>
           <div style={{ display: "flex" }}>
@@ -271,12 +311,12 @@ const CalendarTable: FC = () => {
               <DnDCalendar
                 selectable
                 defaultView={Views.WEEK}
-                events={events}
+                events={slots}
                 localizer={localizer}
                 onEventDrop={onEventDrop}
                 onEventResize={onEventResize}
-                onSelectSlot={openAssign}
-                onSelectEvent={onSelectEvent}
+                onSelectSlot={onSelectSlot}
+                onSelectEvent={openPreview}
                 eventPropGetter={eventStyleGetter}
                 resizable
                 style={{ height: "100vh" }}
@@ -425,7 +465,52 @@ const CalendarTable: FC = () => {
         </DialogActions>
       </Dialog>
 
+      <Dialog open={preview} onClose={closePreview}>
+        <DialogTitle sx={{color:'darkblue'}}>Preview Slot Details</DialogTitle>
+          <DialogContent>
+            <Box sx={{p:2}}>
+              <Grid container spacing={1}>
+                <Grid item md={6} xs={6}>
+                <Typography>Title :</Typography>
+                </Grid>
+                <Grid item md={6}  xs={6}>
+                <Typography> {previewdata?.option}   </Typography>
+                </Grid>
+                <Grid item md={6}  xs={6}>
+                <Typography>Shift :</Typography>
+                </Grid>
+                <Grid item md={6}  xs={6}>
+                <Typography>  {previewdata?.shift}  </Typography>
+                </Grid>
+                <Grid item md={6} xs={6}>
+                <Typography>From :</Typography>
+                </Grid>
+                <Grid item md={6} xs={6}>
+                <Typography> {previewdata?.start?.toLocaleString()}  </Typography>
+                </Grid>
+                <Grid item md={6} xs={6}>
+                <Typography>To :</Typography>
+                </Grid>
+                <Grid item md={6} xs={6}>
+                <Typography> {previewdata?.end?.toLocaleString()}  </Typography>
+                </Grid>
+
+                <Grid item md={6} xs={6}>
+                <Button variant="outlined" onClick={edithandleAddClick} color="success">Edit</Button>
+                </Grid>
+                <Grid item md={6} xs={6}>
+                <Button variant="outlined" onClick={ deleteUser}  color="error">Delete</Button>
+                </Grid>
+                
+                
+              </Grid>
+              
+            </Box>
+          </DialogContent>
+      </Dialog>
       <AssignOption assign={assign} closeAssign={closeAssign} />
+      <AssignOption assign={assign} closeAssign={closeAssign} initialUserData={editselectslot}  />
+      <ToastContainer/>
     </>
   );
 };

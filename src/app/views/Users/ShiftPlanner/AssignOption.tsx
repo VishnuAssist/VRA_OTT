@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Dialog,
   DialogActions,
@@ -15,14 +14,28 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addSlot, CalendarSlot } from "../../Slices/CalendarSlotManagement";
 
 interface Props {
   assign: boolean;
   closeAssign: () => void;
+  initialUserData?: CalendarSlot | null;
 }
 
-const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
+const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
+  const data: CalendarSlot = {
+    resoruce: "",
+    title: "",
+    shift: "",
+    start: "",
+    end: "",
+    id: 0,
+  };
+  const { register, handleSubmit, setValue,reset } = useForm();
+  const dispatch = useDispatch();
   const dateTime = new Date(
     new Date().getTime() - new Date().getTimezoneOffset() * 60_000
   )
@@ -33,31 +46,46 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
+    setValue("option", event.target.value as string);
+
     console.log(age);
   };
-  const [fromTime, setFromTime] = useState("");
-  const [toTime, setToTime] = useState("");
+  
 
-  const handleFromTimeChange = (event: any) => {
-    setFromTime(event.target.value);
+  const addSubmit = (data: any) => {
+    const newUpdatedData={...data,start:new Date(data?.start),end:new Date(data?.end)}
+    console.log(newUpdatedData);
+    dispatch(addSlot(newUpdatedData));
+   
+
+    reset()
   };
 
-  const handleToTimeChange = (event: any) => {
-    setToTime(event.target.value);
-  };
+  // useEffect(() => {
+  //   reset(initialUserData || data);
+  // }, [initialUserData, reset]);
 
+  // useEffect(() => {
+  //   if (initialUserData) {
+  //     setValue("resoruce", initialUserData.resource);
+  //     setValue("title", initialUserData.title);
+  //     setValue("shift", initialUserData.shift);
+  //     setValue("start", initialUserData.start);
+  //     setValue("end", initialUserData.end);
+  //     setValue("id", initialUserData.id);
+     
+  //   }
+  // }, [initialUserData, setValue]);
+
+ 
   return (
     <>
       <Dialog open={assign} onClose={closeAssign} maxWidth={"sm"} fullWidth>
-        <form>
+        <form onSubmit={handleSubmit(addSubmit)}>
           <DialogContent>
             <Grid container spacing={2}>
-              {age !== "offDay" && (
-                <Grid item md={12}>
-                  <TextField type="datetime-local" defaultValue={dateTime} />
-                </Grid>
-              )}
-              <Grid item md={12}>
+              
+              <Grid item md={12} xs={12}>
                 <FormControl fullWidth>
                   <InputLabel id="demo-simple-select-label">Shift</InputLabel>
                   <Select
@@ -65,6 +93,7 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
                     id="demo-simple-select"
                     value={age}
                     label="Age"
+                    {...register("title")}
                     onChange={handleChange}
                   >
                     <MenuItem value="shift">Shift</MenuItem>
@@ -73,18 +102,20 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
                   </Select>
                 </FormControl>
               </Grid>
+             
               {age !== "offDay" && (
                 <>
                   <Grid item md={12}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
                       defaultValue="morning"
-                      name="radio-buttons-group"
+                      {...register("shift")}
                     >
                       <Grid container>
                         <Grid
                           item
                           md={6}
+                          xs={12}
                           sx={{ display: "flex", alignItems: "center" }}
                         >
                           <FormControlLabel
@@ -96,6 +127,7 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
                         <Grid
                           item
                           md={6}
+                          xs={12}
                           sx={{ display: "flex", alignItems: "center" }}
                         >
                           <FormControlLabel
@@ -107,35 +139,18 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
                       </Grid>
                     </RadioGroup>
                   </Grid>
-
-                  <Grid item md={6} sx={{ mb: 1 }}>
+                  <Grid item md={6} xs={12}>
                     <TextField
-                      fullWidth
-                      label="From Time"
-                      type="time"
-                      value={fromTime}
-                      onChange={handleFromTimeChange}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      inputProps={{
-                        step: 300, // 5 minutes
-                      }}
+                      type="datetime-local"
+                      defaultValue={dateTime}
+                      {...register("start")}
                     />
                   </Grid>
-                  <Grid item md={6}>
+                  <Grid item md={6} xs={12}>
                     <TextField
-                      fullWidth
-                      label="To Time"
-                      type="time"
-                      value={toTime}
-                      onChange={handleToTimeChange}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      inputProps={{
-                        step: 300, // 5 minutes
-                      }}
+                      type="datetime-local"
+                      defaultValue={dateTime}
+                      {...register("end")}
                     />
                   </Grid>
                 </>
@@ -158,5 +173,5 @@ const AssignOption: FC<Props> = ({ assign, closeAssign }) => {
     </>
   );
 };
-
+// actual
 export default AssignOption;
