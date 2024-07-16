@@ -17,6 +17,8 @@ import {
   Divider,
   Badge,
   Avatar,
+  Grid,
+  Container,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
@@ -74,6 +76,8 @@ const Viewtable: React.FC = () => {
 
   return (
     <>
+    
+    
       <Card sx={{ p: 4, height: "100%", border: "1px solid #24665D" }}>
         <Box
           display={"flex"}
@@ -93,8 +97,8 @@ const Viewtable: React.FC = () => {
           </Fab>
         </Box>
         <Divider />
-
-        <TableContainer component={Paper}>
+        
+        <TableContainer sx={{overflow:"auto"}} component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
@@ -103,12 +107,14 @@ const Viewtable: React.FC = () => {
                     <Checkbox defaultChecked />
                   </FormGroup>
                 </TableCell>
-                <TableCell>Picture</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Position</TableCell>
-                <TableCell>Store</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Action</TableCell>
+              
+                <TableCell sx={{fontSize:'12px'}}>Picture</TableCell>
+                <TableCell sx={{fontSize:'12px'}}>Name</TableCell>
+                <TableCell sx={{fontSize:'12px'}}>Position</TableCell>
+                <TableCell sx={{fontSize:'12px'}}>Store</TableCell>
+                <TableCell sx={{fontSize:'12px'}}>Status</TableCell>
+                <TableCell sx={{fontSize:'12px'}}>Action</TableCell>
+                
               </TableRow>
             </TableHead>
             <TableBody>
@@ -159,6 +165,7 @@ const Viewtable: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        
       </Card>
 
       <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} /> //addnewuser
@@ -174,9 +181,14 @@ const Viewtable: React.FC = () => {
         handleDialogClose={closeEdit}
         initialUserData={selectdata}            //edit
       />
+<<<<<<< HEAD
     
       
       
+=======
+      
+    
+>>>>>>> 8b837baf002aa2c2c75d49dc787a878b1b301edf
     </>
   );
 };

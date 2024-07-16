@@ -42,14 +42,13 @@ const Store = () => {
   ];
   return (
     <>
-      <Container>
-        <Card sx={{ p: 2,mt:1 }}>
+      <Container maxWidth='lg'>
+       
           
           <Table>
             <TableHead>
               <TableRow>
                 <TableCell sx={{fontSize:'18px'}}>Code</TableCell>
-                <TableCell sx={{fontSize:'18px'}}>Name</TableCell>
                 <TableCell sx={{fontSize:'18px'}}>Country</TableCell>
                 <TableCell sx={{fontSize:'18px'}}>Status</TableCell>
                 <TableCell sx={{fontSize:'18px'}}>Action</TableCell>
@@ -60,7 +59,6 @@ const Store = () => {
                 data.map((store) => (
                   <TableRow>
                     <TableCell>{store.code}</TableCell>
-                    <TableCell>{store.name}</TableCell>
                     <TableCell>{store.country}</TableCell>
                     <TableCell>
                       <Button variant="contained">{store.status}</Button>
@@ -86,7 +84,7 @@ const Store = () => {
             </TableBody>
           </Table>
           
-        </Card>
+        
       </Container>
     </>
   );

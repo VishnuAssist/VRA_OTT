@@ -42,103 +42,107 @@ const StaffStatus = () => {
   return (
     <>
       <Card sx={{ p: 1, mt: 1 }}>
-        <Card sx={{ p: 1 }}>
+        
           <Grid container spacing={2}>
             <Grid
               item
-              xs={12}
+              xs={6}
               md={2.5}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent:"center"
               }}
             >
               <Timelapse></Timelapse>
               <Typography>08:00</Typography>
               <Typography>Average Work Hours</Typography>
             </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
+            
             <Grid
               item
-              xs={12}
+              xs={6}
               md={2.4}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent:"center"
               }}
             >
               <Timelapse></Timelapse>
               <Typography>08:00</Typography>
               <Typography>Average Work Hours</Typography>
             </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
+            
             <Grid
               item
-              xs={12}
+              xs={6}
               md={2}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent:"center"
               }}
             >
               <Timelapse></Timelapse>
               <Typography>08:00</Typography>
               <Typography>Average Work Hours</Typography>
             </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
+           
             <Grid
               item
-              xs={12}
+              xs={6}
               md={2}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                justifyContent:"center"
               }}
             >
               <Timelapse></Timelapse>
               <Typography>08:00</Typography>
               <Typography>Average Work Hours</Typography>
             </Grid>
-            <Divider orientation="vertical" variant="middle" flexItem />
-            <Grid item xs={12} md={3} container spacing={0.1}>
-              <Grid item md={8}>
+            
+            <Grid item xs={12} md={3} container spacing={0.1} sx={{p:2}}>
+              <Grid item xs={6} md={8}>
                 Annual Leave
               </Grid>
-              <Grid item md={4}>
+              <Grid item xs={6} md={4}>
                 12
               </Grid>
-              <Grid item md={8}>
+              <Grid item xs={6} md={8}>
                 Brithday Leave
               </Grid>
-              <Grid item md={4}>
+              <Grid item xs={6} md={4}>
                 12
               </Grid>
-              <Grid item md={8}>
+              <Grid item xs={6} md={8}>
                 Family care
               </Grid>
-              <Grid item md={4}>
+              <Grid item  xs={6} md={4}>
                 12
               </Grid>
-              <Grid item md={8}>
+              <Grid item xs={6} md={8}>
                 MC
               </Grid>
-              <Grid item md={4}>
+              <Grid item xs={6} md={4}>
                 12
               </Grid>
-              <Grid item md={8}>
+              <Grid item xs={6} md={8}>
                 Emergency Leave
               </Grid>
-              <Grid item md={4}>
+              <Grid item xs={6} md={4}>
                 12
               </Grid>
             </Grid>
           </Grid>
         </Card>
-        <Card sx={{ mt: 1, p: 1 }}>
+        <Card sx={{ mt: 2, p: 1 }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -160,7 +164,6 @@ const StaffStatus = () => {
             </TableBody>
           </Table>
         </Card>
-      </Card>
     </>
   );
 };

@@ -118,8 +118,8 @@ const Create: FC<CreateProps> = ({
         </DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
           <form onSubmit={handleSubmit(submitData)}>
-            <Grid container spacing={1}>
-              <Grid item xs={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} lg={4}>
                 <Tooltip
                   title={isActive ? "Click to Deactivate" : "Click to Activate"}
                   arrow
@@ -169,8 +169,13 @@ const Create: FC<CreateProps> = ({
                 />
               </Grid>
 
+<<<<<<< HEAD
               <Grid item xs={8} container spacing={2} sx={{my:1}}>
                 <Grid item xs={6} >
+=======
+              <Grid item xs={12} lg={8} container spacing={1}>
+                <Grid item xs={6} sx={{ mb: 2 }}>
+>>>>>>> 8b837baf002aa2c2c75d49dc787a878b1b301edf
                   <TextField
                     type="text"
                     id="employeeID"
