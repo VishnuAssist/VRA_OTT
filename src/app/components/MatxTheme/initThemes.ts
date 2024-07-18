@@ -1,13 +1,22 @@
-import { createTheme } from '@mui/material';
+import { createTheme, ThemeOptions, Theme } from '@mui/material';
 import { forEach, merge } from 'lodash';
 import { themeColors } from './themeColors';
 import themeOptions from './themeOptions';
 
-function createMatxThemes() {
-  let themes = {};
+// Define the type for theme colors
+interface ThemeColors {
+  [key: string]: Partial<ThemeOptions>;
+}
 
-  forEach(themeColors, (value, key) => {
-    themes[key] = createTheme(merge({}, themeOptions, value));
+// Ensure themeColors is properly typed
+const typedThemeColors: ThemeColors = themeColors;
+
+function createMatxThemes(): { [key: string]: Theme } {
+  let themes: { [key: string]: Theme } = {};
+
+  forEach(typedThemeColors, (value, key) => {
+    const mergedOptions: ThemeOptions = merge({}, themeOptions, value);
+    themes[key] = createTheme(mergedOptions);
   });
 
   return themes;

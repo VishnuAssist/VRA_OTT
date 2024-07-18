@@ -37,7 +37,7 @@ const ToolbarContainer = styled("div")({
   flexWrap: "wrap"
 });
 
-const ToolbarContent = styled("div")(({ color }) => ({
+const ToolbarContent = styled("div")(({ color  }  ) => ({
   width: 40,
   height: 40,
   margin: "8px",
@@ -47,7 +47,7 @@ const ToolbarContent = styled("div")(({ color }) => ({
   alignItems: "center",
   justifyContent: "center",
   boxShadow: themeShadows[3],
-  background: themeColors[color].palette.primary.main
+  background: color && themeColors?.[color]?.palette.primary.main
 }));
 
 const IMG = styled("img")({
@@ -56,7 +56,7 @@ const IMG = styled("img")({
   display: "block"
 });
 
-export default function Layout1Customizer({ settings, handleChange, handleControlChange }) {
+export default function Layout1Customizer({ settings, handleChange, handleControlChange }:any) {
   return (
     <Fragment>
       <Box mb="16px" mx="12px">
@@ -65,7 +65,7 @@ export default function Layout1Customizer({ settings, handleChange, handleContro
           {mainSidebarThemes.map((color, i) => (
             <Tooltip key={i} title={color} placement="top">
               <ToolbarContent
-                color={color}
+                color={color|| "whiteBlue"}
                 onClick={() => handleChange("layout1Settings.leftSidebar.theme", color)}>
                 {settings.layout1Settings.leftSidebar.theme === color && <Icon>done</Icon>}
                 <div className={settings.themes[color].palette.type}></div>
@@ -81,7 +81,7 @@ export default function Layout1Customizer({ settings, handleChange, handleContro
           {topbarThemes.map((color, i) => (
             <Tooltip key={i} title={color} placement="top">
               <ToolbarContent
-                color={color}
+                color={color|| "whiteBlue"}
                 onClick={() => handleChange("layout1Settings.topbar.theme", color)}>
                 {settings.layout1Settings.topbar.theme === color && <Icon>done</Icon>}
                 <div className={settings.themes[color].palette.type}></div>

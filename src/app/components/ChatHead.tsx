@@ -30,7 +30,7 @@ const Popup = styled("div")(({ theme }) => ({
   }
 }));
 
-export default function ChatHead({ icon, children }) {
+export default function ChatHead({ icon, children }:any) {
   const [open, setOpen] = useState(false);
 
   const togglePopup = () => setOpen((open) => !open);

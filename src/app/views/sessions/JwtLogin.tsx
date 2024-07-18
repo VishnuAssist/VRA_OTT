@@ -67,7 +67,7 @@ export default function JwtLogin() {
 
   const { login } = useAuth();
 
-  const handleFormSubmit = async (values:any) => {
+  const handleFormSubmit = async (_values:any) => {
     setLoading(true);
     try {
       await login();

@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { Hidden, Switch, Box, styled, useTheme } from "@mui/material";
-
-import useSettings, { SettingsContextType } from "../../../hooks/useSettings";
+import useSettings from "../../../hooks/useSettings";
+// import { SettingsContextType } from "../../../hooks/useSettings";
 import Brand from "../../Brand";
 import Sidenav from "../../Sidenav";
 import { themeShadows } from "../../MatxTheme/themeColors";
@@ -10,15 +10,15 @@ import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
 
 // Define the type for the styled components props
 interface SidebarNavRootProps {
-  theme: any;
-  width: string;
-  bg: string;
-  image: string;
+  theme?: any;
+  width?: string;
+  bg?: string;
+  image?: string;
 }
 
 interface Layout1SidenavProps {}
 
-const SidebarNavRoot = styled(Box)<SidebarNavRootProps>(({ theme, width, bg, image }) => ({
+const SidebarNavRoot = styled(Box)<SidebarNavRootProps>(({ theme, width, image }) => ({
   position: "fixed",
   top: 0,
   left: 0,
@@ -34,7 +34,7 @@ const SidebarNavRoot = styled(Box)<SidebarNavRootProps>(({ theme, width, bg, ima
   transition: "all 250ms ease-in-out",
   backgroundImage: `linear-gradient(to bottom, #24665d,#24665d ), url(${image})`,
   "&:hover": {
-    width: sideNavWidth,
+    width: sideNavWidth + "px", // Ensure width is a string with units
     "& .sidenavHoverShow": { display: "block" },
     "& .compactNavItem": {
       width: "100%",
@@ -53,17 +53,17 @@ const NavListBox = styled(Box)({
 
 const Layout1Sidenav: React.FC<Layout1SidenavProps> = () => {
   const theme = useTheme();
-  const { settings, updateSettings } = useSettings() as SettingsContextType;
+  const { settings, updateSettings } = useSettings() as any;
   const leftSidebar = settings.layout1Settings.leftSidebar;
   const { mode, bgImgURL } = leftSidebar;
 
   const getSidenavWidth = (): string => {
     switch (mode) {
       case "compact":
-        return sidenavCompactWidth;
+        return `${sidenavCompactWidth}px`;
 
       default:
-        return sideNavWidth;
+        return `${sideNavWidth}px`;
     }
   };
 
@@ -90,7 +90,7 @@ const Layout1Sidenav: React.FC<Layout1SidenavProps> = () => {
             />
           </Hidden>
         </Brand>
-        <Sidenav />
+        <Sidenav children={undefined} />
       </NavListBox>
     </SidebarNavRoot>
   );

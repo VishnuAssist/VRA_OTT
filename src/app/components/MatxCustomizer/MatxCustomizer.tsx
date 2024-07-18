@@ -96,7 +96,7 @@ export default function MatxCustomizer() {
 
   const tooglePanel = () => setOpen(!open);
 
-  const handleTabChange = (index) => setTabIndex(index);
+  const handleTabChange = (index:any) => setTabIndex(index);
 
   let activeTheme = { ...settings.themes[settings.activeTheme] };
 
@@ -161,7 +161,7 @@ export default function MatxCustomizer() {
                         <Card
                           elevation={4}
                           sx={{ position: "relative" }}
-                          onClick={() => updateSettings(layout.options)}>
+                          onClick={() => updateSettings()}>
                           <Box overflow="hidden" className="layout-name">
                             <Button variant="contained" color="secondary">
                               {layout.name}

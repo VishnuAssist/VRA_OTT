@@ -1,6 +1,6 @@
 import * as echarts from "echarts";
 
-export const EchartTheme = (MuiTheme) => ({
+export const EchartTheme :any = (MuiTheme : any) => ({
   backgroundColor: MuiTheme.palette.background.paper,
   // Global palette:
   color: [

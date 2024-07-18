@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { Small } from "../../../components/Typography";
 import { MatxProgressBar, SimpleCard } from "../../../components";
 
-export default function Campaigns() {
+ function Campaigns() {
   return (
     <Box>
       <SimpleCard title="Campaigns">
@@ -28,3 +28,4 @@ export default function Campaigns() {
     </Box>
   );
 }
+export default Campaigns

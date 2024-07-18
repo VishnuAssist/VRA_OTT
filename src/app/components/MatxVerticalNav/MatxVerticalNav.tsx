@@ -92,7 +92,7 @@ interface NavItem {
 }
 
 interface MatxVerticalNavProps {
-  items: NavItem[];
+  items: NavItem[] | any [];
 }
 
 const MatxVerticalNav: React.FC<MatxVerticalNavProps> = ({ items }) => {

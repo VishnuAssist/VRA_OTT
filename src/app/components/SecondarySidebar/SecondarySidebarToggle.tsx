@@ -2,7 +2,7 @@ import { Fab, IconButton, styled } from "@mui/material";
 import { Close, Settings } from "@mui/icons-material";
 import clsx from "clsx";
 
-import useSettings, { SettingsContextType } from "../../hooks/useSettings";
+import useSettings from "../../hooks/useSettings";
 
 // STYLED COMPONENT
 const Toggle = styled("div")(() => ({
@@ -19,7 +19,7 @@ interface SecondarySidebarToggleProps {
 }
 
 const SecondarySidebarToggle: React.FC<SecondarySidebarToggleProps> = () => {
-  const { settings, updateSettings } = useSettings() as SettingsContextType;
+  const { settings, updateSettings } = useSettings() as any;
 
   const toggle = () => {
     updateSettings({ secondarySidebar: { open: !settings.secondarySidebar.open } });

@@ -34,13 +34,13 @@ import {
 import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CalendarSlot, removeSlot, selectSlot } from "../../Slices/CalendarSlotManagement";
+import { CalendarSlot } from "../../Slices/CalendarSlotManagement";
 
 const locales = {
   "en-US": enUS,
@@ -81,7 +81,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
 
   const { slots } = useSelector((state: any) => state.slot);
  
-  const [events, setEvents] = useState<Event[]>([
+  const [_events, setEvents] = useState<Event[]>([
     {
       title: "Learn cool stuff",
       start,
@@ -119,18 +119,15 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
   
   const onSelectSlot = (slotInfo: any) => {
     if (selectedUser) {
-      
-      const title = setAssign(true);
+      const title = handleSetAssign(true); 
+  
       if (title) {
         setEvents((currentEvents) => [
-          ...currentEvents,                                                                        
+          ...currentEvents,
           {
             title,
             start: slotInfo.start,
             end: slotInfo.end,
-            
-
-            
             resourceId: selectedUser.id,
           },
         ]);
@@ -146,9 +143,18 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
         progress: undefined,
         theme: "light",
         transition: Bounce,
-        });
+      });
     }
   };
+  
+  const handleSetAssign = (value: boolean): string | null => {
+    if (value) {
+      // Example logic to get title
+      return "Some Title"; // Replace this with actual logic
+    }
+    return null;
+  };
+  
 
 
   const [preview,setPreview]=useState(false)
@@ -163,33 +169,33 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
   }
   
   
-  const dispatch = useDispatch();
-  const deleteUser = (data: CalendarSlot) => {
-    dispatch(removeSlot({ id: data.resource }));
-  };
+  // const dispatch = useDispatch();
+  // const _deleteUser = (data: CalendarSlot) => {
+  //   dispatch(removeSlot({ id: data.resource }));
+  // };
     
     
   
 
-  const onSelectEvent = (event: Event) => {
-    console.log("heeee",event);
+  // const onSelectEvent = (event: Event) => {
+  //   console.log("heeee",event);
     
-    const action = window.prompt("Edit or Delete? (e/d)");
-    if (action === "e") {
-      const newTitle = window.prompt("New Event name", event.resource);
-      if (newTitle) {
-        setEvents((currentEvents) =>
-          currentEvents.map((evt) =>
-            evt === event ? { ...evt, title: newTitle } : evt
-          )
-        );
-      }
-    } else if (action === "d") {
-      setEvents((currentEvents) =>
-        currentEvents.filter((evt) => evt !== event)
-      );
-    }
-  };
+  //   const action = window.prompt("Edit or Delete? (e/d)");
+  //   if (action === "e") {
+  //     const newTitle = window.prompt("New Event name", event.resource);
+  //     if (newTitle) {
+  //       setEvents((currentEvents) =>
+  //         currentEvents.map((evt) =>
+  //           evt === event ? { ...evt, title: newTitle } : evt
+  //         )
+  //       );
+  //     }
+  //   } else if (action === "d") {
+  //     setEvents((currentEvents) =>
+  //       currentEvents.filter((evt) => evt !== event)
+  //     );
+  //   }
+  // };
   
 
   const eventStyleGetter = (
@@ -242,7 +248,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     sat: true,
     sun: true,
   });
-  const [employee, setEmployee] = React.useState("");
+  const [_employee, setEmployee] = React.useState("");
   const [store, setStore] = React.useState("");
   const [task, settask] = React.useState("");
 
@@ -253,9 +259,9 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
   };
 
   
-  const openAssign = () => {
-    setAssign(true);
-  };
+  // const openAssign = () => {
+  //   setAssign(true);
+  // };
   const closeAssign = () => {
     setAssign(false);
   };
@@ -316,7 +322,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
                 onEventDrop={onEventDrop}
                 onEventResize={onEventResize}
                 onSelectSlot={onSelectSlot}
-                onSelectEvent={openPreview}
+                onSelectEvent={() => openPreview}
                 eventPropGetter={eventStyleGetter}
                 resizable
                 style={{ height: "100vh" }}
@@ -499,7 +505,10 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
                 <Button variant="outlined" onClick={edithandleAddClick} color="success">Edit</Button>
                 </Grid>
                 <Grid item md={6} xs={6}>
-                <Button variant="outlined" onClick={ deleteUser}  color="error">Delete</Button>
+                <Button variant="outlined"  color="error">
+                {/* <Button variant="outlined" onClick={() => deleteUser(previewdata)} color="error"> */}
+  Delete
+</Button>
                 </Grid>
                 
                 

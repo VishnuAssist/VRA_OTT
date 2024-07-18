@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, Grid, Icon, styled, Typography } from '@mui/material';
+import { Box, Card, Grid,  styled, Typography } from '@mui/material';
 import GroupsIcon from '@mui/icons-material/Groups';
 import AccessAlarmsIcon from '@mui/icons-material/AccessAlarms';
 import AssistWalkerIcon from '@mui/icons-material/AssistWalker';

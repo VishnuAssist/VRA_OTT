@@ -1,19 +1,27 @@
 import { Grid, LinearProgress, Typography, styled, useTheme } from "@mui/material";
 import { Small } from "./Typography";
 
+interface MatxProgressBarProps {
+  text?: string;
+  value?: number;
+  spacing?: number;
+  color?: "primary" | "secondary" | "error" | "info" | "success" | "warning";
+  coloredText?: boolean;
+}
+
 // STYLED COMPONENT
 const CustomLinearProgress = styled(LinearProgress)({
   borderRadius: 2,
   background: "rgba(0, 0, 0, 0.1)"
 });
 
-export default function MatxProgressBar({
+const MatxProgressBar: React.FC<MatxProgressBarProps> = ({
   text = "",
   value = 75,
   spacing = 2,
   color = "primary",
   coloredText = false
-}) {
+}) => {
   const theme = useTheme();
   const secondary = theme.palette.text.secondary;
 
@@ -23,8 +31,8 @@ export default function MatxProgressBar({
         <CustomLinearProgress color={color} value={value} variant="determinate" />
       </Grid>
 
-      {text !== "" && (
-        <Grid item xs={text ? 4 : false}>
+      {text && (
+        <Grid item xs={4}>
           <Typography color={color}>
             <Small sx={{ color: coloredText ? "" : secondary }}>{text}</Small>
           </Typography>
@@ -32,4 +40,6 @@ export default function MatxProgressBar({
       )}
     </Grid>
   );
-}
+};
+
+export default MatxProgressBar;

@@ -80,7 +80,7 @@ const data = [
   }
 ];
 
-export default function ShoppingCart({ container }) {
+export default function ShoppingCart({ container }:any) {
   const { settings } = useSettings();
   const [panelOpen, setPanelOpen] = useState(false);
   const [cartList, setCartList] = useState([...data]);
@@ -89,13 +89,13 @@ export default function ShoppingCart({ container }) {
 
   const handleCheckoutClick = () => setPanelOpen(false);
 
-  const handleAddQty = (id) => {
+  const handleAddQty = (id:any) => {
     setCartList((state) =>
       state.map((item) => (item.id === id ? { ...item, qty: item.qty + 1 } : item))
     );
   };
 
-  const handleRemoveQty = (id) => {
+  const handleRemoveQty = (id:any) => {
     setCartList((state) =>
       state.map((item) => (item.id === id ? { ...item, qty: item.qty - 1 } : item))
     );

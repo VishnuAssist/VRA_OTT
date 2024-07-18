@@ -2,7 +2,7 @@ import { Fragment, ReactNode } from "react";
 import { styled } from "@mui/material/styles";
 import Scrollbar from "react-perfect-scrollbar";
 import { MatxVerticalNav } from "./MatxVerticalNav";
-import useSettings, { SettingsContextType } from "../hooks/useSettings";
+import useSettings from "../hooks/useSettings";
 import { navigations } from "../navigations";
 
 // STYLED COMPONENTS
@@ -29,7 +29,7 @@ interface SidenavProps {
 }
 
 export default function Sidenav({ children }: SidenavProps) {
-  const { settings, updateSettings } = useSettings() as SettingsContextType;
+  const { settings, updateSettings } = useSettings() as any;
 
   const updateSidebarMode = (sidebarSettings: any) => {
     let activeLayoutSettingsName = settings.activeLayout + "Settings";

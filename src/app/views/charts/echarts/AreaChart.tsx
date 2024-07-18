@@ -7,6 +7,6 @@ const option = {
   series: [{ data: [25, 18, 20, 30, 40, 43], type: "line", smooth: true }]
 };
 
-export default function AreaChart({ height, color }) {
+export default function AreaChart({ height, color }:any) {
   return <ReactEcharts style={{ height: height }} option={{ ...option, color: [...color] }} />;
 }

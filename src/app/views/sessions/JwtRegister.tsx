@@ -59,7 +59,7 @@ export default function JwtRegister() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (values:any) => {
+  const handleFormSubmit = (_values:any) => {
     setLoading(true);
 
     try {

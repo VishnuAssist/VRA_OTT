@@ -7,10 +7,10 @@ import ShoppingCart from "../ShoppingCart";
 import MatxCustomizer from "../MatxCustomizer/MatxCustomizer";
 
 // STYLED COMPONENTS
-const SidebarRoot = styled("div")(({ theme, width }) => ({
+const SidebarRoot = styled("div")(({ theme, width }:{width:string,theme : any}) => ({
   position: "fixed",
   height: "100vh",
-  width: width,
+  width: width as string,
   right: 0,
   bottom: 0,
   display: "flex",
@@ -25,15 +25,15 @@ const SidebarRoot = styled("div")(({ theme, width }) => ({
   "@global": {
     "@media screen and (min-width: 767px)": {
       ".content-wrap, .layout2.layout-contained, .layout2.layout-full": {
-        marginRight: (props) => props.width
+        marginRight: (props:any) => props.width
       },
       ".matx-customizer": {
-        right: (props) => props.width
+        right: (props:any) => props.width
       }
     },
     "@media screen and (max-width: 959px)": {
       ".toolbar-menu-wrap .menu-area": {
-        width: (props) => `calc(100% - ${props.width})`
+        width: (props:any) => `calc(100% - ${props.width})`
       }
     }
   }
@@ -41,10 +41,10 @@ const SidebarRoot = styled("div")(({ theme, width }) => ({
 
 export default function SecondarySidebarContent() {
   return (
-    <SidebarRoot width={"50px"} className="secondary-sidebar">
+    <SidebarRoot width={"50px"} className="secondary-sidebar" theme={undefined}>
       <Span m="auto" />
       <MatxCustomizer />
-      <ShoppingCart />
+      <ShoppingCart container={undefined} />
 
       <ChatHead
         icon={
@@ -52,7 +52,7 @@ export default function SecondarySidebarContent() {
             <Comment />
           </IconButton>
         }>
-        <Chatbox />
+        <Chatbox togglePopup={undefined} />
       </ChatHead>
 
       <Span m="auto" />

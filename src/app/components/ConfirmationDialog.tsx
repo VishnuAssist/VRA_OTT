@@ -53,7 +53,7 @@ export default function ConfirmationDialog({
   onYesClick,
   onConfirmDialogClose,
   title = "confirm"
-}) {
+}:any) {
   return (
     <Dialog maxWidth="xs" open={open} onClose={onConfirmDialogClose}>
       <DialogBox>

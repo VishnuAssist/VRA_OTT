@@ -88,13 +88,13 @@ const IconBox = styled("div")(({ theme }) => ({
   [theme.breakpoints.down("md")]: { display: "none !important" }
 }));
 
-const Layout1Topbar = () => {
+const Layout1Topbar = (_Fixed:any) => {
   const theme = useTheme();
   const { settings, updateSettings } = useSettings();
   const { logout } = useAuth();
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const updateSidebarMode = (sidebarSettings) => {
+  const updateSidebarMode = (sidebarSettings:any) => {
     updateSettings({ layout1Settings: { leftSidebar: { ...sidebarSettings } } });
   };
 
@@ -139,7 +139,7 @@ const Layout1Topbar = () => {
             <NotificationBar />
           </NotificationProvider>
 
-          <ShoppingCart />
+          <ShoppingCart container={undefined} />
 
           <MatxMenu
             menuButton={

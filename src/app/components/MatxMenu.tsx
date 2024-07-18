@@ -10,7 +10,7 @@ const MenuButton = styled("div")(({ theme }) => ({
   "& div:hover": { backgroundColor: theme.palette.action.hover }
 }));
 
-export default function MatxMenu(props) {
+export default function MatxMenu(props:any) {
   const { settings } = useSettings();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -18,7 +18,7 @@ export default function MatxMenu(props) {
   let { shouldCloseOnItemClick = true, horizontalPosition = "left" } = props;
 
   const handleClose = () => setAnchorEl(null);
-  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  const handleClick = (event:any) => setAnchorEl(event.currentTarget);
 
   return (
     <Fragment>
@@ -29,7 +29,7 @@ export default function MatxMenu(props) {
           open={!!anchorEl}
           anchorEl={anchorEl}
           onClose={handleClose}
-          getContentAnchorEl={null}
+          // getContentAnchorEl={null}
           anchorOrigin={{ vertical: "bottom", horizontal: horizontalPosition }}
           transformOrigin={{ vertical: "top", horizontal: horizontalPosition }}>
           {children.map((child, index) => (

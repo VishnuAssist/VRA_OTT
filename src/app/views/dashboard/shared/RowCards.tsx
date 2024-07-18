@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Box, Fab, Card, Grid, styled, Avatar, Checkbox, IconButton } from "@mui/material";
 import { DateRange, MoreVert, StarOutline } from "@mui/icons-material";
-import format from "date-fns/format";
 import { Span } from "../../../components/Typography";
+import { format } from "date-fns";
 
 // STYLED COMPONENTS
 const ProjectName = styled(Span)(({ theme }) => ({

@@ -1,6 +1,6 @@
 import { SvgIcon } from "@mui/material";
 
-export default function FacebookIcon(props) {
+export default function FacebookIcon(props:any) {
   return (
     <SvgIcon {...props} viewBox="0 0 10.041 19">
       <path

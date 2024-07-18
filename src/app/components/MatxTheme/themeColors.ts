@@ -22,7 +22,7 @@ const errorColor = {
   main: '#FF3D57',
 };
 
-export const themeColors = {
+export const themeColors : any = {
   whitePurple: {
     palette: {
       type: 'light',

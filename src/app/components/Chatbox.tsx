@@ -3,19 +3,30 @@ import { Avatar, Box, Divider, IconButton, styled, TextField, useTheme } from "@
 import { Attachment, Clear, TagFaces } from "@mui/icons-material";
 import ScrollBar from "react-perfect-scrollbar";
 import { H5, H6, Span } from "./Typography";
-import { ChatAvatar } from "../components";
+import ChatAvatar from "./ChatAvatar";
 import { convertHexToRGB } from "../utils/utils";
+
+interface Message {
+  text: string;
+  contactId: string;
+  time?: string;
+  id?: string;
+  name?: string;
+  avatar?: string;
+  status?: string;
+  mood?: string;
+}
 
 // STYLED COMPONENTS
 const ChatContainer = styled("div")({
   height: "100%",
   display: "flex",
   flexDirection: "column",
-  background: "#fff"
+  background: "#fff",
 });
 
 const StyledScrollBar = styled(ScrollBar)({
-  flexGrow: 1
+  flexGrow: 1,
 });
 
 const ProfileBox = styled("div")(({ theme }) => ({
@@ -24,7 +35,7 @@ const ProfileBox = styled("div")(({ theme }) => ({
   justifyContent: "space-between",
   padding: "12px 12px 12px 20px",
   color: theme.palette.primary.main,
-  background: "#fafafa"
+  background: "#fafafa",
 }));
 
 const ChatStatus = styled("div")(({ theme }) => ({
@@ -33,9 +44,9 @@ const ChatStatus = styled("div")(({ theme }) => ({
   "& h5": {
     marginTop: 0,
     fontSize: "14px",
-    marginBottom: "3px"
+    marginBottom: "3px",
   },
-  "& span": { fontWeight: "500" }
+  "& span": { fontWeight: "500" },
 }));
 
 const ChatMessage = styled("div")(({ theme }) => ({
@@ -47,19 +58,19 @@ const ChatMessage = styled("div")(({ theme }) => ({
   whiteSpace: "pre-wrap",
   wordBreak: "break-word",
   color: theme.palette.primary.main,
-  background: "#fafafa"
+  background: "#fafafa",
 }));
 
 const MessageTime = styled("span")(({ theme }) => ({
   fontSize: "13px",
   fontWeight: "500",
-  color: theme.palette.primary.main
+  color: theme.palette.primary.main,
 }));
 
 const ChatImgContainer = styled("div")({
   padding: "20px",
   display: "flex",
-  justifyContent: "flex-end"
+  justifyContent: "flex-end",
 });
 
 const ChatImgBox = styled("div")(({ theme }) => ({
@@ -71,29 +82,33 @@ const ChatImgBox = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   color: theme.palette.primary.main,
-  background: "#fafafa"
+  background: "#fafafa",
 }));
 
 const ChatImg = styled("img")(() => ({ width: "40px" }));
 
 // for previewing bot message
-const globalMessageList = [];
+const globalMessageList: Message[] = [];
 
-export default function Chatbox({ togglePopup }) {
+interface ChatboxProps {
+  togglePopup?: () => void;
+}
+
+export default function Chatbox({ togglePopup }: ChatboxProps) {
   const [isAlive, setIsAlive] = useState(true);
   const [message, setMessage] = useState("");
-  const [messageList, setMessageList] = useState([]);
+  const [messageList, setMessageList] = useState<Message[]>([]);
   const currentUserId = "7863a6802ez0e277a0f98534";
   const chatBottomRef = document.querySelector("#chat-scroll");
 
-  const sendMessageOnEnter = (event) => {
+  const sendMessageOnEnter = (event: React.KeyboardEvent<HTMLTextAreaElement> | any) => {
     if (event.key === "Enter" && !event.shiftKey) {
       let tempMessage = message.trim();
       if (tempMessage !== "") {
         let tempList = [...messageList];
         let messageObject = {
           text: tempMessage,
-          contactId: currentUserId
+          contactId: currentUserId,
         };
         tempList.push(messageObject);
         globalMessageList.push(messageObject);
@@ -107,11 +122,11 @@ export default function Chatbox({ togglePopup }) {
   const dummyReply = async () => {
     setTimeout(() => {
       let tempList = [...messageList];
-      let messageObject = {
+      let messageObject: Message = {
         text: "Good to hear from you. enjoy!!!",
         contactId: "opponents contact id",
         avatar: "/assets/images/faces/13.jpg",
-        name: "Frank Powell"
+        name: "Frank Powell",
       };
 
       tempList.push(messageObject);
@@ -124,7 +139,7 @@ export default function Chatbox({ togglePopup }) {
     if (chatBottomRef) {
       chatBottomRef.scrollTo({
         top: chatBottomRef.scrollHeight,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }, [chatBottomRef]);
@@ -140,7 +155,7 @@ export default function Chatbox({ togglePopup }) {
           name: "Frank Powell",
           avatar: "/assets/images/faces/13.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "7863a6802ez0e277a0f98534",
@@ -150,7 +165,7 @@ export default function Chatbox({ togglePopup }) {
           name: "John Doe",
           avatar: "/assets/images/face-1.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "323sa680b3249760ea21rt47",
@@ -160,7 +175,7 @@ export default function Chatbox({ togglePopup }) {
           name: "Frank Powell",
           avatar: "/assets/images/faces/13.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "7863a6802ez0e277a0f98534",
@@ -170,7 +185,7 @@ export default function Chatbox({ togglePopup }) {
           name: "John Doe",
           avatar: "/assets/images/face-1.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "323sa680b3249760ea21rt47",
@@ -180,7 +195,7 @@ export default function Chatbox({ togglePopup }) {
           name: "Frank Powell",
           avatar: "/assets/images/faces/13.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "7863a6802ez0e277a0f98534",
@@ -190,7 +205,7 @@ export default function Chatbox({ togglePopup }) {
           name: "John Doe",
           avatar: "/assets/images/face-1.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "323sa680b3249760ea21rt47",
@@ -200,7 +215,7 @@ export default function Chatbox({ togglePopup }) {
           name: "Frank Powell",
           avatar: "/assets/images/faces/13.jpg",
           status: "online",
-          mood: ""
+          mood: "",
         },
         {
           contactId: "7863a6802ez0e277a0f98534",
@@ -210,8 +225,8 @@ export default function Chatbox({ togglePopup }) {
           name: "John Doe",
           avatar: "/assets/images/face-1.jpg",
           status: "online",
-          mood: ""
-        }
+          mood: "",
+        },
       ]);
     }
   }, [isAlive]);
@@ -245,7 +260,8 @@ export default function Chatbox({ togglePopup }) {
             key={ind}
             p="20px"
             display="flex"
-            sx={{ justifyContent: currentUserId === item.contactId && "flex-end" }}>
+            sx={{ justifyContent: currentUserId === item?.contactId ? "flex-end" : ""}}
+          >
             {currentUserId !== item.contactId && <Avatar src={item.avatar} />}
             <Box ml="12px">
               {currentUserId !== item.contactId && (
@@ -283,7 +299,7 @@ export default function Chatbox({ togglePopup }) {
         <TextField
           multiline
           fullWidth
-          rowsMax={4}
+          // rowsMax={4}
           value={message}
           placeholder="Type here ..."
           onKeyUp={sendMessageOnEnter}
@@ -301,7 +317,7 @@ export default function Chatbox({ togglePopup }) {
                 </IconButton>
               </Box>
             ),
-            classes: { root: "pl-5 pr-3 py-3 text-body" }
+            classes: { root: "pl-5 pr-3 py-3 text-body" },
           }}
         />
       </div>

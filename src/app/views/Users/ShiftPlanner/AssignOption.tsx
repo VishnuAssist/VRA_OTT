@@ -14,7 +14,7 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addSlot, CalendarSlot } from "../../Slices/CalendarSlotManagement";
@@ -26,14 +26,15 @@ interface Props {
 }
 
 const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
-  const data: CalendarSlot = {
-    resoruce: "",
-    title: "",
-    shift: "",
-    start: "",
-    end: "",
-    id: 0,
-  };
+  // const data: CalendarSlot = {
+  //   resource: "",
+  //   title: "",
+  //   shift: "",
+  //   start: "",
+  //   end: "",
+  //   id: 0,
+  // };
+  console.log(initialUserData)
   const { register, handleSubmit, setValue,reset } = useForm();
   const dispatch = useDispatch();
   const dateTime = new Date(

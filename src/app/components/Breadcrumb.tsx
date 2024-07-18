@@ -21,7 +21,7 @@ const SubName = styled("span")(({ theme }) => ({
   color: theme.palette.text.secondary
 }));
 
-const Separator = styled("h4")(({ theme }) => ({
+const Separator = styled("h4")(({ theme }:any) => ({
   margin: 0,
   marginLeft: 8,
   paddingBottom: "3px",
@@ -34,8 +34,8 @@ const StyledIcon = styled(Icon)({
   verticalAlign: "middle"
 });
 
-export default function Breadcrumb({ routeSegments }) {
-  const theme = useTheme();
+export default function Breadcrumb({ routeSegments }:any) {
+  const theme:any = useTheme();
   const hint = theme.palette.text.hint;
 
   return (
@@ -55,7 +55,7 @@ export default function Breadcrumb({ routeSegments }) {
         </NavLink>
 
         {routeSegments
-          ? routeSegments.map((route, index) => {
+          ? routeSegments.map((route:any, index:any) => {
               return index !== routeSegments.length - 1 ? (
                 <NavLink key={index} to={route.path}>
                   <SubName>{route.name}</SubName>

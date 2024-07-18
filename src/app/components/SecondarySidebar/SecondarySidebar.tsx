@@ -1,6 +1,7 @@
 import useSettings from "../../hooks/useSettings";
 import SecondarySidebarToggle from "./SecondarySidebarToggle";
 import SecondarySidebarContent from "./SecondarySidebarContent";
+// import { SecondarySidenavTheme } from "../MatxTheme/SecondarySidenavTheme";
 import { SecondarySidenavTheme } from "../MatxTheme/SecondarySidenavTheme";
 
 export default function SecondarySidebar() {

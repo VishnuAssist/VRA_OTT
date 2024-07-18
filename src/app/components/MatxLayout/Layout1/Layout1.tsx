@@ -1,5 +1,5 @@
 import { useEffect, useRef, memo } from "react";
-import { ThemeProvider, useMediaQuery, Box, styled, useTheme } from "@mui/material";
+import { ThemeProvider, useMediaQuery, Box, styled, useTheme, BoxProps } from "@mui/material";
 import Scrollbar from "react-perfect-scrollbar";
 import { Outlet } from "react-router-dom";
 
@@ -18,7 +18,7 @@ import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
 // STYLED COMPONENTS
 const Layout1Root = styled(Box)(({ theme }) => ({
   display: "flex",
-  background: theme.palette.background.default
+  background: theme.palette.background.default,
 }));
 
 const ContentBox = styled(Box)(() => ({
@@ -27,7 +27,7 @@ const ContentBox = styled(Box)(() => ({
   overflowY: "auto",
   overflowX: "hidden",
   flexDirection: "column",
-  justifyContent: "space-between"
+  justifyContent: "space-between",
 }));
 
 const StyledScrollBar = styled(Scrollbar)(() => ({
@@ -35,10 +35,15 @@ const StyledScrollBar = styled(Scrollbar)(() => ({
   position: "relative",
   display: "flex",
   flexGrow: "1",
-  flexDirection: "column"
+  flexDirection: "column",
 }));
 
-const LayoutContainer = styled(Box)(({ width, open }) => ({
+interface LayoutContainerProps extends BoxProps {
+  width: string | number;
+  open: boolean;
+}
+
+const LayoutContainer = styled(Box)<LayoutContainerProps>(({ width, open }) => ({
   height: "100vh",
   display: "flex",
   flexGrow: "1",
@@ -48,7 +53,7 @@ const LayoutContainer = styled(Box)(({ width, open }) => ({
   position: "relative",
   overflow: "hidden",
   transition: "all 0.3s ease",
-  marginRight: open ? 50 : 0
+  marginRight: open ? 50 : 0,
 }));
 
 const Layout1 = () => {
@@ -56,7 +61,7 @@ const Layout1 = () => {
   const { layout1Settings, secondarySidebar } = settings;
   const topbarTheme = settings.themes[layout1Settings.topbar.theme];
   const {
-    leftSidebar: { mode: sidenavMode, show: showSidenav }
+    leftSidebar: { mode: sidenavMode, show: showSidenav },
   } = layout1Settings;
 
   const getSidenavWidth = () => {
@@ -77,7 +82,7 @@ const Layout1 = () => {
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const ref = useRef({ isMdScreen, settings });
-  const layoutClasses = `theme-${theme.palette.type}`;
+  const layoutClasses = `theme-${theme.palette.mode}`;
 
   useEffect(() => {
     let { settings } = ref.current;
@@ -104,7 +109,7 @@ const Layout1 = () => {
           </ThemeProvider>
         )}
 
-        {settings.perfectScrollbar && (
+        {settings.perfectScrollbar ? (
           <StyledScrollBar>
             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
               <ThemeProvider theme={topbarTheme}>
@@ -119,9 +124,7 @@ const Layout1 = () => {
 
             {settings.footer.show && !settings.footer.fixed && <Footer />}
           </StyledScrollBar>
-        )}
-
-        {!settings.perfectScrollbar && (
+        ) : (
           <ContentBox>
             {layout1Settings.topbar.show && !layout1Settings.topbar.fixed && (
               <ThemeProvider theme={topbarTheme}>

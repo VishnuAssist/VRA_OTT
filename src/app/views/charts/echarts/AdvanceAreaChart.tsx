@@ -45,6 +45,6 @@ const defaultOption = {
   ]
 };
 
-export default function AdvanceAreaChart({ height, option }) {
+export default function AdvanceAreaChart({ height, option }:any) {
   return <ReactEcharts style={{ height: height }} option={merge({}, defaultOption, option)} />;
 }

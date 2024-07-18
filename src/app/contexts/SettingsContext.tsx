@@ -4,7 +4,7 @@ import merge from "lodash/merge";
 import { MatxLayoutSettings } from "../components/MatxLayout/settings";
 export const SettingsContext = createContext({
   settings: MatxLayoutSettings,
-  updateSettings: () => {}
+  updateSettings: (_p0?: { layout1Settings: { leftSidebar: { mode: string; }; }; }) => {}
 });
 
 export default function SettingsProvider({ settings, children }:any) {

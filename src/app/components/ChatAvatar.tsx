@@ -1,4 +1,11 @@
 import { Avatar, Box, styled } from "@mui/material";
+import { Theme } from '@mui/material/styles';
+
+// Define the props for the StatusCircle
+interface StatusCircleProps {
+  theme?: Theme;
+  status: 'online' | 'offline'; // adjust the possible status values as needed
+}
 
 // STYLED COMPONENTS
 const StyledAvatar = styled(Avatar)({
@@ -6,7 +13,7 @@ const StyledAvatar = styled(Avatar)({
   width: 40
 });
 
-const StatusCircle = styled("div")(({ theme, status }) => ({
+const StatusCircle = styled('div')<StatusCircleProps>(({ theme, status }) => ({
   height: 14,
   width: 14,
   bottom: 0,
@@ -14,15 +21,20 @@ const StatusCircle = styled("div")(({ theme, status }) => ({
   borderRadius: "7px",
   position: "absolute",
   border: "2px solid white",
-  color: status !== "online" && "white !important",
+  color: status !== "online" ? "white !important" : undefined,
   background: status === "online" ? theme.palette.primary.main : theme.palette.error.main
 }));
 
-export default function ChatAvatar({ src, status }) {
+interface ChatAvatarProps {
+  src: string;
+  status: 'online' | 'offline'; // adjust the possible status values as needed
+}
+
+export default function ChatAvatar({ src, status }: ChatAvatarProps) {
   return (
     <Box position="relative">
       <StyledAvatar src={src} />
-      <StatusCircle status={status} />
+      <StatusCircle status={status}  />
     </Box>
   );
 }

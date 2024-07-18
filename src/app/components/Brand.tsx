@@ -12,13 +12,13 @@ const BrandRoot = styled(Box)(() => ({
   padding: "20px 18px 20px 29px"
 }));
 
-const StyledSpan = styled(Span)(({ mode }) => ({
+const StyledSpan = styled(Span)(({ mode  }:{mode:string}) => ({
   fontSize: 18,
   marginLeft: ".5rem",
   display: mode === "compact" ? "none" : "block"
 }));
 
-export default function Brand({ children }) {
+export default function Brand({ children }:any) {
   const { settings } = useSettings();
   const leftSidebar = settings.layout1Settings.leftSidebar;
   const { mode } = leftSidebar;
@@ -27,7 +27,7 @@ export default function Brand({ children }) {
     <BrandRoot>
       <Box display="flex" alignItems="center">
         <MatxLogo />
-        <StyledSpan mode={mode} className="sidenavHoverShow">
+        <StyledSpan mode={mode} >
           Matx
         </StyledSpan>
       </Box>

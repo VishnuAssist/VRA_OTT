@@ -82,7 +82,7 @@ const Heading = styled("span")(({ theme }) => ({
 export default function NotificationBar({ container } :any) {
   const { settings } = useSettings();
   const [panelOpen, setPanelOpen] = useState(false);
-  const { deleteNotification, clearNotifications, notifications } = useNotification();
+  const { clearNotifications, notifications } = useNotification();
 
   const handleDrawerToggle = () => setPanelOpen(!panelOpen);
 
