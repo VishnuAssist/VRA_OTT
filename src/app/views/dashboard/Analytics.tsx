@@ -2,12 +2,11 @@ import { Fragment } from "react";
 import { Card, Grid, styled, useTheme } from "@mui/material";
 import RowCards from "./shared/RowCards";
 import StatCards from "./shared/StatCards";
-// import Campaigns from "./shared/Campaigns";
 import StatCards2 from "./shared/StatCards2";
 import DoughnutChart from "./shared/Doughnut";
 import UpgradeCard from "./shared/UpgradeCard";
 import TopSellingTable from "./shared/TopSellingTable";
-import Campaigns from "./shared/Campaigns";
+// import Campaigns from "./shared/Campaigns";
 
 // STYLED COMPONENTS
 const ContentBox = styled("div")(({ theme }) => ({
@@ -63,7 +62,7 @@ const H4 = styled("h4")(({ theme }) => ({
             </Card>
 
             <UpgradeCard />
-            <Campaigns/>
+            {/* <Campaigns/> */}
           </Grid>
         </Grid>
       </ContentBox>

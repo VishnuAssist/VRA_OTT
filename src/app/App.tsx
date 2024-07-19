@@ -9,9 +9,11 @@ import SettingsProvider from "./contexts/SettingsContext";
 // import routes from "./routes";
 // FAKE SERVER
 import "../fake-db";
-import MatxTheme from "./components/MatxTheme/MatxTheme";
+// import MatxTheme from "./components/MatxTheme/MatxTheme";
 import { AuthProvider } from "./contexts/JWTAuthContext";
 import routes from "./routes";
+import ThemeProvider from './theme/ThemeProvider';
+
 
 export default function App() {
   const content = useRoutes(routes);
@@ -19,10 +21,10 @@ export default function App() {
   return (
     <SettingsProvider>
       <AuthProvider>
-        <MatxTheme>
+        <ThemeProvider>
           <CssBaseline />
           {content}
-          </MatxTheme>      
+          </ThemeProvider>      
           </AuthProvider>
     </SettingsProvider>
   );
