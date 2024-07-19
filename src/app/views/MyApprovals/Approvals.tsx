@@ -1,14 +1,20 @@
 import { Container } from '@mui/material'
 import Pageheading from './pageheading'
+import PageHeader from './pageHeader'
+import PageTitleWrapper from '../../components/PageTitleWrapper'
 
 
 function Index() {
   return (
-    <Container>
-   
+    <>
+
+      <PageTitleWrapper>
+   <PageHeader/>
+   </PageTitleWrapper>    <Container>
    <Pageheading/>
     
     </Container>
+    </>
   )
 }
 

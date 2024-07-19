@@ -1,34 +1,34 @@
-import { AppBar, Button, ThemeProvider, Toolbar, styled, useTheme } from "@mui/material";
+import { AppBar,  ThemeProvider, useTheme } from "@mui/material";
 
-import { Paragraph, Span } from "./Typography";
+// import { Paragraph, Span } from "./Typography";
 import useSettings from "../hooks/useSettings";
-import { topBarHeight } from "../utils/constant";
+// import { topBarHeight } from "../utils/constant";
 
 // STYLED COMPONENTS
-const AppFooter = styled(Toolbar)(() => ({
-  display: "flex",
-  alignItems: "center",
-  minHeight: topBarHeight,
-  "@media (max-width: 499px)": {
-    display: "table",
-    width: "100%",
-    minHeight: "auto",
-    padding: "1rem 0",
-    "& .container": {
-      flexDirection: "column !important",
-      "& a": { margin: "0 0 16px !important" }
-    }
-  }
-}));
+// const AppFooter = styled(Toolbar)(() => ({
+//   display: "flex",
+//   alignItems: "center",
+//   minHeight: topBarHeight,
+//   "@media (max-width: 499px)": {
+//     display: "table",
+//     width: "100%",
+//     minHeight: "auto",
+//     padding: "1rem 0",
+//     "& .container": {
+//       flexDirection: "column !important",
+//       "& a": { margin: "0 0 16px !important" }
+//     }
+//   }
+// }));
 
-const FooterContent = styled("div")(() => ({
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-  padding: "0px 1rem",
-  maxWidth: "1170px",
-  margin: "0 auto"
-}));
+// const FooterContent = styled("div")(() => ({
+//   width: "100%",
+//   display: "flex",
+//   alignItems: "center",
+//   padding: "0px 1rem",
+//   maxWidth: "1170px",
+//   margin: "0 auto"
+// }));
 
 export default function Footer() {
   const theme = useTheme();
@@ -39,7 +39,7 @@ export default function Footer() {
   return (
     <ThemeProvider theme={footerTheme}>
       <AppBar color="primary" position="static" sx={{ zIndex: 96 }}>
-        <AppFooter>
+        {/* <AppFooter>
           <FooterContent>
             <a href="https://ui-lib.com/downloads/matx-pro-react-admin/">
               <Button variant="contained" color="secondary">
@@ -53,7 +53,7 @@ export default function Footer() {
               Design and Developed by <a href="http://ui-lib.com">UI Lib</a>
             </Paragraph>
           </FooterContent>
-        </AppFooter>
+        </AppFooter> */}
       </AppBar>
     </ThemeProvider>
   );
