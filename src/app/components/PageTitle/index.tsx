@@ -7,12 +7,14 @@ interface PageTitleProps {
   heading?: string;
   subHeading?: string;
   docs?: string;
+  button?:string;
 }
 
 const PageTitle: FC<PageTitleProps> = ({
   heading = '',
   subHeading = '',
   docs = '',
+  button = "",
   ...rest
 }) => {
   return (
@@ -21,6 +23,7 @@ const PageTitle: FC<PageTitleProps> = ({
       justifyContent="space-between"
       alignItems="center"
       {...rest}
+    
     >
       <Grid item>
         <Typography variant="h3" component="h3" gutterBottom>
@@ -37,7 +40,7 @@ const PageTitle: FC<PageTitleProps> = ({
           variant="contained"
           startIcon={<AddTwoToneIcon fontSize="small" />}
         >
-          {heading} Documentation
+          {button} 
         </Button>
       </Grid>
     </Grid>

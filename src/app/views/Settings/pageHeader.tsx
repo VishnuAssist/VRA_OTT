@@ -1,7 +1,11 @@
+import { Box, Button, Typography } from "@mui/material"
 
 function PageHeader() {
   return (
-    <div>pageHeader</div>
+    <Box display="flex" justifyContent="space-between" flexWrap="wrap" >
+    <Typography variant='h1'>button</Typography>
+    <Button variant="contained">Add</Button>
+    </Box>
   )
 }
 
