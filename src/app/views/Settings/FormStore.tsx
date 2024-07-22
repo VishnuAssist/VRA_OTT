@@ -20,12 +20,12 @@ import { addStore, updateStore } from "../Slices/StoreManagement";
 import { Store } from "../../Models/StoreManagement";
 
 interface Props {
-  form: boolean;
-  closeForm: () => void;
-  initialStore: Store | null;
+  openmodel: boolean;
+  closestoremodel: () => void;
+  initialStore?: Store | null;
 }
 
-const FormStore: FC<Props> = ({ form, closeForm, initialStore }) => {
+const FormStore: FC<Props> = ({ openmodel, closestoremodel, initialStore }) => {
   const data: Store = {
     storecode: "",
     country: "",
@@ -47,7 +47,7 @@ const FormStore: FC<Props> = ({ form, closeForm, initialStore }) => {
       dispatch(addStore(data));
     }
     reset();
-    closeForm();
+    closestoremodel();
   };
 
   useEffect(() => {
@@ -71,7 +71,7 @@ const FormStore: FC<Props> = ({ form, closeForm, initialStore }) => {
 
   return (
     <>
-      <Dialog open={form} onClose={closeForm} maxWidth="sm" fullWidth>
+      <Dialog open={openmodel} onClose={closestoremodel} maxWidth="sm" fullWidth>
         <DialogTitle sx={{ color: "darkblue" }}>
           {initialStore ? "Update Store" : "New Store"}
         </DialogTitle>

@@ -42,7 +42,7 @@ const routes = [
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
       { path: "/users/shiftplanner", element: <ShifftPlaner />, auth: authRoles.admin },
       { path: "/myapproval/Approvals", element: <Approvals />, auth: authRoles.admin },
-      { path: "/Settings/stores", element: <Stores />, auth: authRoles.admin }
+      { path: "/Settings/dictionary", element: <Stores />, auth: authRoles.admin }
     ]
   },
 

@@ -31,7 +31,7 @@ export const navigations = [
 
       { label: "Settings", type: "label" },
 
-      { name: "Stores", path: "/Settings/stores", icon: <StorageIcon/> },
+      { name: "Dictionary", path: "/Settings/dictionary", icon: <StorageIcon/> },
 
   
   // { label: "Components", type: "label" },

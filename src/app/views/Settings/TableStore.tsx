@@ -3,7 +3,6 @@ import {
   Chip,
   Container,
   Divider,
-  Fab,
   IconButton,
   Table,
   TableBody,
@@ -16,7 +15,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import FormStore from "./FormStore";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,13 +28,11 @@ const AddStore = () => {
   const { storeList } = useSelector((state: any) => state.store);
 
   const theme = useTheme();
-  const [form, setForm] = useState(false);
-  const openForm = () => {
-    setForm(true);
-  };
-  const closeForm = () => {
-    setForm(false);
-  };
+  // const [form, setForm] = useState(false);
+  // const openForm = () => {
+  //   setForm(true);
+  // };
+ 
 
   const [update, setUpdate] = useState(false);
   const [datatoedit, setDataToEdit] = useState<Store | null>(null);
@@ -71,14 +68,14 @@ const AddStore = () => {
           p={2}
         >
           <TextField label="Search" variant="outlined" />
-          <Fab
+          {/* <Fab
             onClick={openForm}
             size="small"
             color="primary"
             aria-label="add"
           >
             <AddIcon />
-          </Fab>
+          </Fab> */}
         </Box>
         <Divider />
 
@@ -140,9 +137,8 @@ const AddStore = () => {
         </Table>
       </Container>
 
-      <FormStore form={form} closeForm={closeForm} initialStore={null} />
       <PreviewStore preview={preview} closePreview={closePreview} PreviewDetails={previewdata} />
-      <FormStore form={update} closeForm={closeUpdate} initialStore={datatoedit} />
+      <FormStore openmodel={update} closestoremodel={closeUpdate} initialStore={datatoedit} />
     </>
   );
 };

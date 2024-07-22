@@ -6,6 +6,7 @@ const PageTitle = styled(Box)(
   ({ theme }) => `
         padding: ${theme.spacing(4)};
        background :  ${theme.colors.primary.lighter};
+       margin-bottom:${theme.spacing(4)};
       //  box-shadow: 0px 0px 5px ;
 `
 );
