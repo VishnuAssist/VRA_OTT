@@ -19,9 +19,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import FormStore from "./FormStore";
 import { useDispatch, useSelector } from "react-redux";
-import { Store } from "../../Models/StoreManagement";
+import { Store } from "../../../Models/StoreManagement";
 import PreviewStore from "./PreviewStore";
-import { removeStore } from "../Slices/StoreManagement";
+import { removeStore } from "../../Slices/StoreManagement";
 
 const AddStore = () => {
   const dispatch = useDispatch();

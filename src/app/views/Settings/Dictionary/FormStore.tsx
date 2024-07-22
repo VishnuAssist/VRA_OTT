@@ -16,8 +16,8 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addStore, updateStore } from "../Slices/StoreManagement";
-import { Store } from "../../Models/StoreManagement";
+import { addStore, updateStore } from "../../Slices/StoreManagement";
+import { Store } from "../../../Models/StoreManagement";
 
 interface Props {
   openmodel: boolean;

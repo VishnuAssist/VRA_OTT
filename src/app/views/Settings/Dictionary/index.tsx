@@ -1,6 +1,6 @@
 // import { Box, Container } from '@mui/material'
 import Store from './TableStore'
-import PageTitleWrapper from '../../components/PageTitleWrapper';
+import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import PageHeader from './pageHeader';
 import { Container, } from '@mui/material';
 
