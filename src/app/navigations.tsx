@@ -7,6 +7,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
+  { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon/> },
   // { label: "PAGES", type: "label" },
   // {
   //   name: "Session/Auth",

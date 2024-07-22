@@ -1,8 +1,8 @@
 import { useState, Fragment } from "react";
 import { Icon, IconButton, styled } from "@mui/material";
-
+import SearchIcon from '@mui/icons-material/Search';
 import { topBarHeight } from "../utils/constant";
-
+import CloseIcon from '@mui/icons-material/Close';
 // STYLED COMPONENTS
 const SearchContainer = styled("div")(({ theme }) => ({
   position: "absolute",
@@ -41,15 +41,15 @@ export default function MatxSearchBox() {
     <Fragment>
       {!open && (
         <IconButton onClick={toggle}>
-          <Icon sx={{ color: "text.primary" }}>search</Icon>
+          <Icon sx={{ color: "text.primary" }}><SearchIcon/></Icon>
         </IconButton>
       )}
 
       {open && (
         <SearchContainer>
           <SearchInput type="text" placeholder="Search here..." autoFocus />
-          <IconButton onClick={toggle} sx={{ mx: 2, verticalAlign: "middle" }}>
-            <Icon sx={{ color: "text.primary" }}>close</Icon>
+          <IconButton onClick={toggle} sx={{ mx: 1, verticalAlign: "middle" }}>
+            <Icon sx={{ color: "text.primary" }}><CloseIcon/></Icon>
           </IconButton>
         </SearchContainer>
       )}
