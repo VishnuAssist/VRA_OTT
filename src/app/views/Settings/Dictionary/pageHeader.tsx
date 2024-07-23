@@ -14,7 +14,7 @@ function PageHeader() {
   return (
     <>
     <Box display="flex" justifyContent="space-between" flexWrap="wrap" >
-    <Typography variant='h2'>Store</Typography>
+    <Typography variant='h2'>Dictionary Entries</Typography>
     <Button variant="contained" onClick={openstoremodel}>Add</Button>
     </Box>
     <FormStore openmodel={openmodel} closestoremodel={closestoremodel}/>

@@ -40,7 +40,7 @@ import { useSelector } from "react-redux";
 
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CalendarSlot } from "../../Slices/CalendarSlotManagement";
+import { CalendarSlot } from "../../../Slices/CalendarSlotManagement";
 
 const locales = {
   "en-US": enUS,

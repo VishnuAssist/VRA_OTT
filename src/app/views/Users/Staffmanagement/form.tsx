@@ -16,7 +16,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { addStaff, updateStaff } from "../../Slices/StaffManagementSlice";
+import { addStaff, updateStaff } from "../../../Slices/StaffManagementSlice";
 import { useDispatch } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
 

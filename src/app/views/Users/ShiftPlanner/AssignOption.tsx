@@ -17,7 +17,7 @@ import {
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addSlot, CalendarSlot } from "../../Slices/CalendarSlotManagement";
+import { addSlot, CalendarSlot } from "../../../Slices/CalendarSlotManagement";
 
 interface Props {
   assign: boolean;
