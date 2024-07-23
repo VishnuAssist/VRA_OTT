@@ -13,7 +13,7 @@ const index = () => {
       <PageHeader/>
       </PageTitleWrapper>            
            
-    <Container maxWidth={"lg"}>
+    <Container maxWidth={"lg"} sx={{mt:1}}>
    <Heading/>
    </Container>
   

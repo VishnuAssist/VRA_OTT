@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Card, Checkbox, Grid, TextField, Box, styled, useTheme } from "@mui/material";
+import { Card, Checkbox, Grid, TextField, Box, styled, useTheme, Avatar, CardHeader, Divider, Typography } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import Stack from '@mui/material/Stack';
 import useAuth from "../../hooks/useAuth";
 import { Paragraph } from "../../components/Typography";
+import { deepOrange } from "@mui/material/colors";
 
 // STYLED COMPONENTS
 const FlexBox = styled(Box)(() => ({
@@ -24,8 +26,8 @@ const StyledRoot = styled("div")(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "#1A2038",
-  minHeight: "100% !important",
+  backgroundColor: "#81C9BE",
+  minHeight: "100vh !important",
   "& .card": {
     maxWidth: 800,
     minHeight: 400,
@@ -80,14 +82,22 @@ export default function JwtLogin() {
   return (
     <StyledRoot>
       <Card className="card">
+      
         <Grid container>
+          
           <Grid item sm={6} xs={12}>
             <div className="img-wrapper">
-              <img src="/assets/images/illustrations/dreamer.svg" width="100%" alt="" />
+              <img src="https://okcredit-blog-images-prod.storage.googleapis.com/2021/03/staffmanagement5.jpg" width="100%" alt="" />
             </div>
           </Grid>
-
-          <Grid item sm={6} xs={12}>
+          
+         
+          <Grid item sm={6} xs={12} >
+          <Box sx={{display: "flex",  justifyContent:"center",alignItems:"center"}}>
+          <Typography sx={{ fontSize: 25, fontWeight: "bold" }}>URetail</Typography>
+      <Divider />
+       
+        </Box>
             <ContentBox>
               <Formik
                 onSubmit={handleFormSubmit}
@@ -154,14 +164,14 @@ export default function JwtLogin() {
                       Login
                     </LoadingButton>
 
-                    <Paragraph>
-                      Don't have an account?
-                      <NavLink
+                    {/* <Paragraph>
+                      Don't have an account? */}
+                      {/* <NavLink
                         to="/session/signup"
                         style={{ color: theme.palette.primary.main, marginLeft: 5 }}>
                         Register
-                      </NavLink>
-                    </Paragraph>
+                      </NavLink> */}
+                    {/* </Paragraph> */}
                   </form>
                 )}
               </Formik>

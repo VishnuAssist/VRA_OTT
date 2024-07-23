@@ -1,5 +1,5 @@
 
-import { Box, Card, Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import { Box, Card, CardHeader, Divider, Grid, Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
@@ -11,11 +11,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 const Mytable = () => {
   return (
-    <Box sx={{ m: 1, p: 1 }}>
-      <StyledCard elevation={6}>
-      <Typography variant="h6">Today's Transactions</Typography>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    
+    
+      <StyledCard elevation={6}sx={{ width: "100" }}>
+      <Box sx={{display: "flex",  flexDirection: "column",alignSelf: 'flex-start'}}>
+        <CardHeader title="Today's Transaction" />
+      <Divider />
+       
+        </Box>
+      <TableContainer >
+        <Table  aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
@@ -49,7 +54,8 @@ const Mytable = () => {
       </TableContainer>
       </StyledCard>
       
-    </Box>
+    
+    
   );
 };
 

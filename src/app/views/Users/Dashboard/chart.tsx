@@ -1,5 +1,5 @@
 
-import { Box, Card, Grid, MenuItem, Select, styled, Typography } from '@mui/material';
+import { Box, Card, CardHeader, Divider, Grid, MenuItem, Select, styled, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const uData = [350, 200, 300, 400, 500, 600];
@@ -12,7 +12,7 @@ const xLabels = [
   'Page D',
   'Page E',
   'Page F',
-  'Page G',
+  
 ];
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
@@ -28,23 +28,18 @@ const Chart = () => {
   return (
     <>
      
-    <Grid item xs={12}  md={12}>
-    <Grid container spacing={1}>
+   
+    
         
         <StyledCard elevation={8}>
         <Box sx={{display: "flex",  flexDirection: "column",alignSelf: 'flex-start'}}>
-        <Typography sx={{ fontSize: 20 ,}}>Sales Summary</Typography>
-        <Box  sx={{display: "flex", alignItems:"center" ,alignSelf: 'flex-start'}}>
-        <Typography sx={{ fontSize: 16,}}>Show Summary For</Typography>
-        <Select size="small" defaultValue="July 2024">
-          <MenuItem value="This Month">July 2024</MenuItem>
-          <MenuItem value="Last Month">Jun 2024</MenuItem>
-        </Select>
-        </Box>
+        <CardHeader title="Sales Summary" />
+      <Divider />
+       
         </Box>
         <Box sx={{width:"100%"}}>
         <LineChart
-      width={800}
+      width={700}
       height={300}
       series={[
         { data: pData, label: 'pv' },
@@ -57,10 +52,10 @@ const Chart = () => {
 </Box>
 </StyledCard>
         
-        </Grid>
+        
         
            
-</Grid>
+
     </>
   )
 }
