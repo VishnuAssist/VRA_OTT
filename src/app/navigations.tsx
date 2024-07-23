@@ -5,6 +5,7 @@ import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import StorageIcon from '@mui/icons-material/Storage';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+import AddTaskIcon from '@mui/icons-material/AddTask';
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
   // { label: "PAGES", type: "label" },
@@ -31,7 +32,8 @@ export const navigations = [
 
       { label: "Settings", type: "label" },
 
-      { name: "Stores", path: "/Settings/stores", icon: <StorageIcon/> },
+      { name: "Dictionary", path: "/Settings/dictionary", icon: <StorageIcon/> },
+      { name: "Task", path: "/Settings/task", icon: <AddTaskIcon/> },
 
   
   // { label: "Components", type: "label" },

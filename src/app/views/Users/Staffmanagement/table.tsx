@@ -11,14 +11,14 @@ import {
   Paper,
   Box,
   TextField,
-  Fab,
+  // Fab,
   Card,
   IconButton,
   Divider,
   Badge,
   Avatar,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+// import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -26,7 +26,7 @@ import Create from "./form";
 import Edit from "./editview";
 import { useDispatch, useSelector } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
-import { removeStaff } from "../../Slices/StaffManagementSlice";
+import { removeStaff } from "../../../Slices/StaffManagementSlice";
 
 const Viewtable: React.FC = () => {
   const { userList } = useSelector((state: any) => state.staff);
@@ -37,9 +37,9 @@ const Viewtable: React.FC = () => {
 
 
   const [addnewuser, setAddnewuser] = useState(false);      //add new user
-  const handleAddClick = () => {
-    setAddnewuser(true);
-  };
+  // const handleAddClick = () => {
+  //   setAddnewuser(true);
+  // };
 
   const handleDialogClose = () => {
     setAddnewuser(false);
@@ -86,14 +86,14 @@ const Viewtable: React.FC = () => {
         >
           <TextField label="Search" />
 
-          <Fab
+          {/* <Fab
             onClick={handleAddClick}
             size="small"
             color="primary"
             aria-label="add"
           >
             <AddIcon />
-          </Fab>
+          </Fab> */}
         </Box>
         <Divider />
         
