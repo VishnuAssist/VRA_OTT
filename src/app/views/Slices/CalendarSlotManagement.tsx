@@ -8,17 +8,17 @@ interface CalendarState {
 
 const initialState: CalendarState = {
   slots: [
-    {
-        id:1,
-        resource: 1,
-        title: "overtime",
-        option: "overtime",
-        shift: "Morning Shift",
-        start:"23-4-2023",
-        end: "24-4-2023" ,
-        color:"green",
+    // {
+    //     id:1,
+    //     resource: 1,
+    //     title: "overtime",
+    //     option: "overtime",
+    //     shift: "Morning Shift",
+    //     start:"23-4-2023",
+    //     end: "24-4-2023" ,
+    //     color:"green",
        
-    }
+    // }
   ],
   selectedSlot: null,
 };

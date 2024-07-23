@@ -8,7 +8,7 @@ export interface Staff {
     "joinDate":string;
     "position": string;
     "role":string;
-    "store": string;
+    "storecode": string;
     "status":string;
 
     "profilePicture"?: string | null ;
