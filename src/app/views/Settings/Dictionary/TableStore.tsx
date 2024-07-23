@@ -1,5 +1,6 @@
 import {
   Box,
+  Card,
   Chip,
   Container,
   Divider,
@@ -7,25 +8,27 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   TextField,
   useTheme
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import VisibilityIcon from "@mui/icons-material/Visibility";
+// import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 // import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import FormStore from "./FormStore";
 import { useDispatch, useSelector } from "react-redux";
-import { Store } from "../../../Models/StoreManagement";
-import PreviewStore from "./PreviewStore";
-import { removeStore } from "../../Slices/StoreManagement";
+// import PreviewStore from "./PreviewStore";
+import { removeStore } from "../../../Slices/StoreManagement";
+import { DictionaryType } from "../../../Models/DictionaryType";
 
 const AddStore = () => {
   const dispatch = useDispatch();
-  const { storeList } = useSelector((state: any) => state.store);
+  const { DictionaryList } = useSelector((state: any) => state.dictionary);
+  console.log(DictionaryList)
 
   const theme = useTheme();
   // const [form, setForm] = useState(false);
@@ -35,8 +38,8 @@ const AddStore = () => {
  
 
   const [update, setUpdate] = useState(false);
-  const [datatoedit, setDataToEdit] = useState<Store | null>(null);
-  const openUpdate = (data: Store) => {
+  const [datatoedit, setDataToEdit] = useState<DictionaryType | null>(null);
+  const openUpdate = (data: DictionaryType) => {
     setDataToEdit(data);
     setUpdate(true);
   };
@@ -44,23 +47,24 @@ const AddStore = () => {
     setUpdate(false);
   };
 
-  const [preview, setPreview] = useState(false);
-  const [previewdata, setPreviewData] = useState<Store | null>(null);
-  const openPreview = (data: Store) => {
-    setPreview(true);
-    setPreviewData(data);
-  };
-  const closePreview = () => {
-    setPreview(false);
-  };
+  // const [preview, setPreview] = useState(false);
+  // const [previewdata, setPreviewData] = useState<DictionaryType | null>(null);
+  // const openPreview = (data: Store) => {
+  //   setPreview(true);
+  //   setPreviewData(data);
+  // };
+  // const closePreview = () => {
+  //   setPreview(false);
+  // };
 
-  const deleteStore = (data: Store) => {
+  const deleteStore = (data: DictionaryType) => {
     dispatch(removeStore({ id: data.id }));
   };
 
   return (
     <>
       <Container maxWidth='lg'>
+        <Card sx={{ p: 2, height: "100%" }}>
         <Box
           display={"flex"}
           justifyContent={"space-between"}
@@ -78,27 +82,34 @@ const AddStore = () => {
           </Fab> */}
         </Box>
         <Divider />
+        <TableContainer sx={{overflow:"auto"}} >
 
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell sx={{ fontSize: '18px' }}>Code</TableCell>
-              <TableCell sx={{ fontSize: '18px' }}>Country</TableCell>
-              <TableCell sx={{ fontSize: '18px' }}>Status</TableCell>
-              <TableCell sx={{ fontSize: '18px' }}>Action</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>#</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>CATEGORY</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>Entry NAME</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>CODE</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>DESCRIPTION</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>IS ACTIVE</TableCell>
+              <TableCell sx={{ fontSize: '15px' }}>ACTIONS</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {storeList &&
-              storeList.map((storeDetails: Store) => (
-                <TableRow key={storeDetails.id}>
-                  <TableCell>{storeDetails.storecode}</TableCell>
-                  <TableCell>{storeDetails.country}</TableCell>
+            {DictionaryList &&
+              DictionaryList.map((Dic: DictionaryType,index:number) => (
+                <TableRow key={Dic.id}>
+                  <TableCell>{index+1}</TableCell>
+                  <TableCell>{Dic.category}</TableCell>
+                  <TableCell>{Dic.entryname}</TableCell>
+                  <TableCell>{Dic.code}</TableCell>
+                  <TableCell>{Dic.description}</TableCell>
                   <TableCell>
                     <Chip
-                      label={storeDetails.status ? "Active" : "Inactive"}
+                      label={Dic.status ? "Active" : "Inactive"}
                       sx={{
-                        backgroundColor: storeDetails.status
+                        backgroundColor: Dic.status
                           ? theme.palette.success.main
                           : theme.palette.error.main,
                         color: theme.palette.common.white,
@@ -106,19 +117,19 @@ const AddStore = () => {
                     />
                   </TableCell>
                   <TableCell>
-                    <IconButton
+                    {/* <IconButton
                       size="small"
                       color="primary"
                       aria-label="view"
-                      onClick={() => openPreview(storeDetails)}
+                      onClick={() => openPreview(Dic)}
                     >
                       <VisibilityIcon />
-                    </IconButton>
+                    </IconButton> */}
                     <IconButton
                       size="small"
                       color="primary"
                       aria-label="edit"
-                      onClick={() => openUpdate(storeDetails)}
+                      onClick={() => openUpdate(Dic)}
                     >
                       <EditIcon />
                     </IconButton>
@@ -126,7 +137,7 @@ const AddStore = () => {
                       size="small"
                       color="error"
                       aria-label="delete"
-                      onClick={() => deleteStore(storeDetails)}
+                      onClick={() => deleteStore(Dic)}
                     >
                       <DeleteIcon />
                     </IconButton>
@@ -135,10 +146,11 @@ const AddStore = () => {
               ))}
           </TableBody>
         </Table>
+        </TableContainer>
+        </Card>
       </Container>
 
-      <PreviewStore preview={preview} closePreview={closePreview} PreviewDetails={previewdata} />
-      <FormStore openmodel={update} closestoremodel={closeUpdate} initialStore={datatoedit} />
+      <FormStore openmodel={update} closestoremodel={closeUpdate} initialData={datatoedit} />
     </>
   );
 };

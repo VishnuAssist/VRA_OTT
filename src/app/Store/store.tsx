@@ -1,12 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import staffReducer from "../Slices/StaffManagementSlice";
-import slotReducer from "../Slices/CalendarSlotManagement"
-import storeReducer from "../Slices/StoreManagement"
+import slotReducer from "../Slices/CalendarSlotManagement";
+import storeReducer from "../Slices/StoreManagement";
+import taskReducer from "../Slices/TaskSlice"
+import DictionaryReducer from "../Slices/DictionarySlice"
 export const store = configureStore({
   reducer: {
     staff: staffReducer,
     slot:slotReducer,
     store:storeReducer,
+    task:taskReducer,
+    dictionary:DictionaryReducer,
   },
 });
 

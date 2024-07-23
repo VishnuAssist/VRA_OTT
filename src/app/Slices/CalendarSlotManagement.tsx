@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CalendarSlot } from "../../Models/CalendarSlot";
+import { CalendarSlot } from "../Models/CalendarSlot";
 
 interface CalendarState {
   slots: CalendarSlot[];

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Staff } from "../../Models/StaffMangement";
+import { Staff } from "../Models/StaffMangement";
 
 interface UserState {
   userList: Staff[];
