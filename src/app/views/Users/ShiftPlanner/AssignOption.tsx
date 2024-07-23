@@ -22,7 +22,7 @@ import { addSlot, CalendarSlot, updateSlot } from "../../../Slices/CalendarSlotM
 interface Props {
   assign: boolean;
   closeAssign: () => void;
-  initialUserData?: CalendarSlot | null;
+  initialUserData?: CalendarSlot | null | undefined;
 }
 
 const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
@@ -37,11 +37,11 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
   console.log(initialUserData)
   const { register, handleSubmit, setValue,reset } = useForm();
   const dispatch = useDispatch();
-  const dateTime = new Date(
-    new Date().getTime() - new Date().getTimezoneOffset() * 60_000
-  )
-    .toISOString()
-    .slice(0, 16);
+  // const dateTime = new Date(
+  //   new Date().getTime() - new Date().getTimezoneOffset() * 60_000
+  // )
+  //   .toISOString()
+  //   .slice(0, 16);
 
   const [age, setAge] = React.useState("");
 
@@ -68,7 +68,9 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
 
   useEffect(() => {
     console.log(initialUserData)
-    reset(initialUserData );
+   if (initialUserData) {
+      reset(initialUserData); 
+    }
   }, [initialUserData, reset]);
 
   // useEffect(() => {

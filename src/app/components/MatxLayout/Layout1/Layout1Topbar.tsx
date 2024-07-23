@@ -117,10 +117,10 @@ const Layout1Topbar = (_Fixed:any) => {
             <Menu />
           </StyledIconButton>
 
-          <IconBox>
+          {/* <IconBox>
             <StyledIconButton>
               <MailOutline />
-            </StyledIconButton> */}
+            </StyledIconButton> */} 
 
             {/* <StyledIconButton>
               <WebAsset />
@@ -144,11 +144,11 @@ const Layout1Topbar = (_Fixed:any) => {
           <MatxMenu
             menuButton={
               <UserMenu>
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                   <Span>
                     Hi <strong>{""}</strong>
                   </Span>
-                </Hidden>
+                </Hidden> */}
                 <Avatar src={""} sx={{ cursor: "pointer" }} />
               </UserMenu>
             }>

@@ -1,7 +1,7 @@
 
 import Heading from './heading'
 
-import { Box, Container, Typography } from '@mui/material'
+import { Container } from '@mui/material'
  import PageTitleWrapper from '../../../components/PageTitleWrapper'   
  import PageHeader from './pageHeader'
 
@@ -13,7 +13,7 @@ const index = () => {
       <PageHeader/>
       </PageTitleWrapper>            
            
-    <Container maxWidth={"lg"} sx={{mt:1}}>
+    <Container maxWidth={"lg"} >
    <Heading/>
    </Container>
   

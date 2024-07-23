@@ -1,25 +1,15 @@
 import {
-  Box,
-  Button,
+
   Card,
-  Checkbox,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControl,
+  Container,
   Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
+
 } from "@mui/material";
-import LayersIcon from "@mui/icons-material/Layers";
-import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
+// import LayersIcon from "@mui/icons-material/Layers";
 import AssignOption from "./AssignOption";
-import React, { FC, useState } from "react";
+import { FC, useState } from "react";
 import { Calendar, dateFnsLocalizer, Event, Views } from "react-big-calendar";
+import PreviewModel from "./PreviewModel";
 import withDragAndDrop, {
   withDragAndDropProps,
 } from "react-big-calendar/lib/addons/dragAndDrop";
@@ -44,7 +34,7 @@ import { CalendarSlot, removeSlot } from "../../../Slices/CalendarSlotManagement
 import { formatDate } from "../../../utils/utils";
 
 
-import CustomEvent_ from "./Envent";
+// import CustomEvent_ from "./Envent";
 
 const locales = {
   "en-US": enUS,
@@ -67,33 +57,33 @@ const DnDCalendar = withDragAndDrop(Calendar);
 interface User {
   id: number;
   name: string;
-  title:()=>void;
+  title: () => void;
 }
 
 const CalendarTable: FC = () => {
-  const { userList} = useSelector((state: any) => state.staff);
-const dispatch=useDispatch()
+  const { userList } = useSelector((state: any) => state.staff);
+  const dispatch = useDispatch()
   const users: User[] = userList.map((user: any) => ({
     id: user.id,
     name: user.username,
   }));
-const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
+  const [editselectslot, setEditSelectslot] = useState<CalendarSlot | null>(null);
   const edithandleAddClick = (data: any) => {
     setEditSelectslot({
-     ...data, start:formatDate(data.start),
-     end: formatDate( data.end)
+      ...data, start: formatDate(data.start),
+      end: formatDate(data.end)
     });
     setAssign(true);
   };
 
   const { slots } = useSelector((state: any) => state.slot);
- 
+
   const [_events, setEvents] = useState<Event[]>([
     {
       title: "Learn cool stuff",
       start,
       end,
-    
+
       resource: 0,
     },
   ]);
@@ -123,16 +113,18 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     );
   };
   const [assign, setAssign] = useState(false);
-  console.log(selectedUser,slots  )
+  console.log(selectedUser, slots)
   const onSelectSlot = (slotInfo: any) => {
 
     if (selectedUser) {
-   
-      setEditSelectslot({title:'', start:formatDate(slotInfo.start),
-            end: formatDate( slotInfo.end),
-             resource: selectedUser?.id})
-  setAssign(true)
-   
+
+      setEditSelectslot({
+        title: '', start: formatDate(slotInfo.start),
+        end: formatDate(slotInfo.end),
+        resource: selectedUser?.id
+      })
+      setAssign(true)
+
     } else {
       toast.error("Please select a user first", {
         position: "top-right",
@@ -147,33 +139,24 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
       });
     }
   };
-  
-  const handleSetAssign = (value: boolean): string | null => {
-    if (value) {
-      // Example logic to get title
-      return "Some Title"; // Replace this with actual logic
-    }
-    return null;
-  };
-  
 
 
-  const [preview,setPreview]=useState(false)
+  const [preview, setPreview] = useState(false)
   const [previewdata, setPreviewData] = useState<CalendarSlot | null>(null);
 
-  const openPreview=(data: any)=>{
+  const openPreview = (data: any) => {
     console.log(data)
     setPreview(true)
     setPreviewData(data);
   }
-  const closePreview=()=>{
+  const closePreview = () => {
     setPreview(false)
     setPreviewData(null)
   }
-  
-  
- 
-  
+
+
+
+
 
   const eventStyleGetter = (
     event: Event,
@@ -196,62 +179,20 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     };
   };
 
-  // this is normal content
-  const [schedule, setSchedule] = useState(false);
-  const openSchedule = () => {
-    setSchedule(true);
-  };
-  const closeSchedule = () => {
-    setSchedule(false);
-  };
 
-  const [fromTime, setFromTime] = useState("");
-  const [toTime, setToTime] = useState("");
-
-  const handleFromTimeChange = (event: any) => {
-    setFromTime(event.target.value);
-  };
-
-  const handleToTimeChange = (event: any) => {
-    setToTime(event.target.value);
-  };
-
-  const [checked, setChecked] = React.useState({
-    mon: true,
-    tue: true,
-    wed: true,
-    thu: true,
-    fri: true,
-    sat: true,
-    sun: true,
-  });
-  const [_employee, setEmployee] = React.useState("");
-  const [store, setStore] = React.useState("");
-  const [task, settask] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setEmployee(event.target.value as string);
-    setStore(event.target.value as string);
-    settask(event.target.value as string);
-  };
-
-  
-  // const openAssign = () => {
-  //   setAssign(true);
-  // };
   const closeAssign = () => {
     setAssign(false);
   };
 
-  const deleteEvent=(id:number)=>{
-dispatch(removeSlot({id:id}))
-setPreview(false)
+  const deleteEvent = (id: number) => {
+    dispatch(removeSlot({ id: id }))
+    setPreview(false)
   }
   return (
     <>
-      <Card sx={{ p: 2 }}>
+      <Container >
         <Grid container spacing={2}>
-          <Grid item md={12} sx={{ display: "flex", alignItems: "center" ,flexDirection:'row-reverse'}}>
+          {/* <Grid item md={12} sx={{ display: "flex", alignItems: "center" ,flexDirection:'row-reverse'}}>
             <Button
               variant="contained"
               startIcon={<LayersIcon fontSize="small" />}
@@ -260,21 +201,16 @@ setPreview(false)
             >
               Schedule
             </Button>
-          </Grid>
-          {/* <Grid item md={2}>
-            <Button variant="contained" onClick={openAssign}>
-              calendar option
-            </Button>
           </Grid> */}
-          
+
         </Grid>
-        <Card sx={{ mt: 1,p:1 }}>
+        <Card sx={{ mt: 1, p: 1 }}>
           <div style={{ display: "flex" }}>
             <div style={{ width: "200px", marginRight: "20px" }}>
               <h3>Users</h3>
               <ul style={{ listStyle: "none" }}>
                 {users.map((user) => (
-                  <Card sx={{ my: 1}}>
+                  <Card sx={{ my: 1 }}>
                     <li
                       key={user.id}
                       style={{
@@ -302,205 +238,67 @@ setPreview(false)
                 onEventDrop={onEventDrop}
                 onEventResize={onEventResize}
                 onSelectSlot={onSelectSlot}
-                onSelectEvent={ openPreview}
+                onSelectEvent={openPreview}
                 eventPropGetter={eventStyleGetter}
                 resizable
                 style={{ height: "100vh" }}
-             
+
               />
             </div>
           </div>
         </Card>
-      </Card>
+      </Container>
 
-      <Dialog open={schedule} onClose={closeSchedule} maxWidth="xs" fullWidth>
-        <DialogContent>
-          <Grid container spacing={0.5}>
-            <Grid item md={12} sx={{ mb: 1 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Store</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={store}
-                  label="store"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={1}>TWG001</MenuItem>
-                  <MenuItem value={2}>TWG002</MenuItem>
-                  <MenuItem value={3}>TWG003</MenuItem>
-                  <MenuItem value={4}>TWG004</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item md={12} sx={{ mb: 1 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Task</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={task}
-                  label="store"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={11}>Cashier</MenuItem>
-                  <MenuItem value={12}>Store keeper</MenuItem>
-                  <MenuItem value={13}>
-                    Customer service representative
-                  </MenuItem>
-                  <MenuItem value={14}>Shop Assistant</MenuItem>
-                  <MenuItem value={15}>Organizes product displays</MenuItem>
-                  <MenuItem value={16}>Unloading delivery trucks</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item md={6} sx={{ mb: 1 }}>
-              <TextField
-                fullWidth
-                label="From Time"
-                type="time"
-                value={fromTime}
-                onChange={handleFromTimeChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  step: 300, // 5 minutes
-                }}
-              />
-            </Grid>
-            <Grid item md={6}>
-              <TextField
-                fullWidth
-                label="To Time"
-                type="time"
-                value={toTime}
-                onChange={handleToTimeChange}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  step: 300, // 5 minutes
-                }}
-              />
-            </Grid>
-          </Grid>
 
-          <Grid container spacing={2}>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.mon}
-                onClick={() => setChecked({ ...checked, mon: !checked.mon })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Monday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.tue}
-                onClick={() => setChecked({ ...checked, tue: !checked.tue })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Tuesday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.wed}
-                onClick={() => setChecked({ ...checked, wed: !checked.wed })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Wednesday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.thu}
-                onClick={() => setChecked({ ...checked, thu: !checked.thu })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Thursday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.fri}
-                onClick={() => setChecked({ ...checked, fri: !checked.fri })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Friday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.sat}
-                onClick={() => setChecked({ ...checked, sat: !checked.sat })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Saturday</Typography>
-            </Grid>
-            <Grid item md={4} sx={{ display: "flex", alignItems: "center" }}>
-              <Checkbox
-                checked={checked.sun}
-                onClick={() => setChecked({ ...checked, sun: !checked.sun })}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-              <Typography>Sunday</Typography>
-            </Grid>
-          </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button variant="contained" sx={{}}>
-            Schedule
-          </Button>
-        </DialogActions>
-      </Dialog>
-
+{/* 
       <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle sx={{color:'darkblue'}}>Preview Slot Details</DialogTitle>
-          <DialogContent>
-            <Box sx={{p:2}}>
-              <Grid container spacing={1}>
-                <Grid item md={6} xs={6}>
+        <DialogTitle sx={{ color: 'darkblue' }}>Preview Slot Details</DialogTitle>
+        <DialogContent>
+          <Box sx={{ p: 2 }}>
+            <Grid container spacing={1}>
+              <Grid item md={6} xs={6}>
                 <Typography>Title :</Typography>
-                </Grid>
-                <Grid item md={6}  xs={6}>
-                <Typography> {previewdata?.option}   </Typography>
-                </Grid>
-                <Grid item md={6}  xs={6}>
-                <Typography>Shift :</Typography>
-                </Grid>
-                <Grid item md={6}  xs={6}>
-                <Typography>  {previewdata?.shift}  </Typography>
-                </Grid>
-                <Grid item md={6} xs={6}>
-                <Typography>From :</Typography>
-                </Grid>
-                <Grid item md={6} xs={6}>
-                <Typography> {previewdata?.start?.toLocaleString()}  </Typography>
-                </Grid>
-                <Grid item md={6} xs={6}>
-                <Typography>To :</Typography>
-                </Grid>
-                <Grid item md={6} xs={6}>
-                <Typography> {previewdata?.end?.toLocaleString()}  </Typography>
-                </Grid>
-
-                <Grid item md={6} xs={6}>
-                <Button variant="outlined" onClick={()=>edithandleAddClick(previewdata)} color="success">Edit</Button>
-                </Grid>
-                <Grid item md={6} xs={6}>
-                {/* <Button variant="outlined"  color="error"> */}
-                <Button variant="outlined" onClick={() => deleteEvent(previewdata?.id||0)} color="error">
-  Delete
-</Button>
-                </Grid>
-                
-                
               </Grid>
-              
-            </Box>
-          </DialogContent>
-      </Dialog>
-      {/* <AssignOption assign={assign} closeAssign={closeAssign} /> */}
-      <AssignOption assign={assign} closeAssign={closeAssign} initialUserData={editselectslot}  />
-      <ToastContainer/>
+              <Grid item md={6} xs={6}>
+                <Typography> {previewdata?.option}   </Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography>Shift :</Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography>  {previewdata?.shift}  </Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography>From :</Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography> {previewdata?.start?.toLocaleString()}  </Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography>To :</Typography>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Typography> {previewdata?.end?.toLocaleString()}  </Typography>
+              </Grid>
+
+              <Grid item md={6} xs={6}>
+                <Button variant="outlined" onClick={() => edithandleAddClick(previewdata)} color="success">Edit</Button>
+              </Grid>
+              <Grid item md={6} xs={6}>
+                <Button variant="outlined" onClick={() => deleteEvent(previewdata?.id || 0)} color="error">
+                  Delete
+                </Button>
+              </Grid>
+
+
+            </Grid>
+
+          </Box>
+        </DialogContent>
+      </Dialog> */}
+      <AssignOption assign={assign} closeAssign={closeAssign} initialUserData={editselectslot} />
+      <PreviewModel preview={preview} closePreview={closePreview} previewdata={previewdata} edithandleAddClick={edithandleAddClick} deleteEvent={deleteEvent}  />
+      <ToastContainer />
     </>
   );
 };
