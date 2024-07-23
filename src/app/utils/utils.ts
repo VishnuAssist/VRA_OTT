@@ -106,3 +106,7 @@ export function getTimeDifference(date: Date): string {
   else if (difference < 86400 * 30 * 12) return `${Math.floor(difference / 86400 / 30)} mon`;
   else return `${(difference / 86400 / 30 / 12).toFixed(1)} y`;
 }
+export const formatDate = (date:Date) => {
+  const pad = (n:any) => (n < 10 ? '0' + n : n);
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+};

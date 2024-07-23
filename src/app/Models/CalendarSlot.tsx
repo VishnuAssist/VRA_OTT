@@ -1,11 +1,11 @@
 export interface CalendarSlot {
   
-   "id":number;
+   "id"?:number;
     "title":string;
-    "option": string;
-    "shift": string;
+    "option"?: string;
+    "shift"?: string;
     "start": string;
     "end": string;
     "resource":number;
-    "color":string;
+    "color"?:string;
   }
