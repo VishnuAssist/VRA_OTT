@@ -1,8 +1,7 @@
-// import { Box, Container } from '@mui/material'
-import Store from './TableStore'
-import PageTitleWrapper from '../../components/PageTitleWrapper';
-import PageHeader from './pageHeader';
+import PageTitleWrapper from '../../../components/PageTitleWrapper';
+import PageHeader from './pageheader';
 import { Container, } from '@mui/material';
+import TaskTable from './table';
 
 function Index() {
   return (
@@ -12,7 +11,7 @@ function Index() {
       <PageHeader/>
    </PageTitleWrapper>
    <Container maxWidth="lg">
-    <Store/>
+    <TaskTable/>
     </Container>
     </>
    

@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Grid, Typography } from '@mui/material'
 import  { FC } from 'react'
-import { Store } from '../../Models/StoreManagement';
+import { Store } from '../../../Models/StoreManagement';
 
 interface Props {
     preview:boolean,

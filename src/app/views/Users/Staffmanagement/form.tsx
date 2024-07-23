@@ -16,14 +16,14 @@ import {
   FormControl,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { addStaff, updateStaff } from "../../Slices/StaffManagementSlice";
+import { addStaff, updateStaff } from "../../../Slices/StaffManagementSlice";
 import { useDispatch } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
 
 interface CreateProps {
   dialogOpen: boolean;
   handleDialogClose: () => void;
-  initialUserData?: Staff | null; // Replace 'User' with your actual type for user data
+  initialUserData?: Staff | null; 
 }
 
 const Create: FC<CreateProps> = ({
@@ -260,10 +260,14 @@ const Create: FC<CreateProps> = ({
               </Grid>
             </Grid>
 
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box sx={{ display: "flex", justifyContent: "space-between", marginTop:"10px"}}>
+            <Button type="submit" variant="contained" color="error">
+                Close
+              </Button>
               <Button type="submit" variant="contained" color="primary">
                 {initialUserData ? "Update" : "Save"}
               </Button>
+            
             </Box>
           </form>
         </DialogContent>

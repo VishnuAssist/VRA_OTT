@@ -1,14 +1,14 @@
-import { Box, Button, Card, CardActions, CardContent, Divider, Grid, Stack, Tabs, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
-import { useState } from "react";
+import { Box, Button, Card, CardActions, CardContent, Divider, Grid,  Typography,useTheme } from "@mui/material"
+interface PageheadingProps {
+  Type: string;
+}
 
-
-const Pageheading=()=>{
-    const dummy=[{type:"Leave Request",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"MC",Fromdate:"01-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"Leave Request",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"MC",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Over Time work"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas", Reason:"Over Time work"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas", Reason:"Over Time work"}]
-    const  [Type,setType]=useState("Leave Request")
-    
+const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
+  const dummy=[{type:"Leave Request",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"MC",Fromdate:"01-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"Leave Request",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"MC",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Fever"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas",Reason:"Over Time work"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas", Reason:"Over Time work"},{type:"Commision",Fromdate:"10-07-2024",Todate:"11-07-2024",Name:"Riyas", Reason:"Over Time work"}]
+    const theme = useTheme()
     return(
         <>
-<Box display={'flex'} justifyContent={"space-between"} flexWrap={"wrap"}>
+{/* <Box display={'flex'} justifyContent={"space-between"} flexWrap={"wrap"}>
           <Typography variant="h5" component="h3" gutterBottom>
             Approvals
           </Typography>
@@ -29,14 +29,14 @@ const Pageheading=()=>{
             </ToggleButton>
           </ToggleButtonGroup>
         
-       </Box>
+       </Box> */}
        <Grid container spacing={2}>
         {dummy.map((d=>(<>{
 Type=="Leave Request"&&d.type=="Leave Request"&&(
     
     <Grid item xs={12} sm={6} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
-            <Box sx={{bgcolor:"#115293",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
+            <Box sx={{bgcolor:theme.colors.secondary.dark,color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography variant="h6" >
     Leave Request
 </Typography>
@@ -92,7 +92,7 @@ Type=="Leave Request"&&d.type=="Leave Request"&&(
 Type=="MC"&&d.type=="MC"&&(
     <Grid item xs={12} sm={4} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
-            <Box sx={{bgcolor:"#754CB9",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
+            <Box sx={{bgcolor:theme.colors.info.dark,color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography>
     Medical Leave
 </Typography>
@@ -150,7 +150,7 @@ Type=="MC"&&d.type=="MC"&&(
 Type=="Commision"&&d.type=="Commision"&&(
     <Grid item xs={12} sm={4} md={4} lg={4}>
         <Card sx={{height:"100%"}}>
-            <Box sx={{bgcolor:"#94810A",color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
+            <Box sx={{bgcolor:theme.colors.warning.dark,color:"#FAFAFA",display:"flex", justifyContent:"center",alignItems:"center",width:"100%",height:80}}>
 <Typography>
     Commision
 </Typography>

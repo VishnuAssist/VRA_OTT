@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Store } from "../../Models/StoreManagement";
+import { Store } from "../Models/StoreManagement";
 
 interface StoreState {
   storeList: Store[];
