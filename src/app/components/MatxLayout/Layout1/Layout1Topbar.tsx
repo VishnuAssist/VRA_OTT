@@ -117,37 +117,37 @@ const Layout1Topbar = (_Fixed:any) => {
             <Menu />
           </StyledIconButton>
 
-          <IconBox>
-            <StyledIconButton>
+          {/* <IconBox> */}
+            {/* <StyledIconButton>
               <MailOutline />
-            </StyledIconButton>
+            </StyledIconButton> */}
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <WebAsset />
-            </StyledIconButton>
+            </StyledIconButton> */}
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <StarOutline />
             </StyledIconButton>
-          </IconBox>
+          </IconBox> */}
         </Box>
 
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={2}>
           <MatxSearchBox />
 
           <NotificationProvider>
             <NotificationBar />
           </NotificationProvider>
 
-          <ShoppingCart container={undefined} />
+          {/* <ShoppingCart container={undefined} /> */}
 
           <MatxMenu
             menuButton={
               <UserMenu>
                 <Hidden xsDown>
-                  <Span>
+                  {/* <Span>
                     Hi <strong>{""}</strong>
-                  </Span>
+                  </Span> */}
                 </Hidden>
                 <Avatar src={""} sx={{ cursor: "pointer" }} />
               </UserMenu>
