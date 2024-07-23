@@ -3,10 +3,12 @@ import {
   Box,
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
   Grid,
   IconButton,
+  Paper,
   Typography,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
@@ -43,73 +45,77 @@ const Edit: FC<CreateProps> = ({
         </DialogTitle>
 
         <DialogContent>
-          <Grid container spacing={2}>
-            <Grid
-              item
-              xs={6}
-              lg={6}
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                flexDirection: "column",
-              }}
-            >
-              <Avatar
+          <Grid container spacing={3}>
+            <Grid item xs={6} lg={12}>
+              <Paper
+                square={false}
                 sx={{
-                  width: 140,
-                  height: 140,
-                  cursor: "pointer",
-                  bgcolor: blue,
+                  p: 2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+
+                  // backgroundColor: "#D5F0C1",
+                  height: "100%",
+                  border: " 1px solid",
+                  // boxShadow:"1px 2px 1px 2pxblack"
                 }}
-                alt={edituserData?.username}
-                src={edituserData?.profilePicture ?? ""}
-              />
-              <Typography
-                variant="h5"
-                sx={{ textAlign: "center", fontWeight: "bold" }}
               >
-                {edituserData?.username}
-              </Typography>
-              <Typography sx={{ textAlign: "center" }}>
-                {edituserData?.role}
-              </Typography>
+                <Avatar
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    cursor: "pointer",
+                    bgcolor: blue,
+                  }}
+                  alt={edituserData?.username}
+                  src={edituserData?.profilePicture ?? ""}
+                />
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography variant="h5">{edituserData?.username}</Typography>
+                  <Typography variant="h6">{edituserData?.email}</Typography>
+                </Box>
+                <Typography variant="h6">{edituserData?.role}</Typography>
+              </Paper>
             </Grid>
-            <Grid item xs={6} lg={6} container spacing={2}>
-              <Grid
-                item
-                xs={12}
-                lg={8}
-                sx={{ display: "flex", flexDirection: "column" }}
-              >
+
+            <Grid item xs={6} lg={12} container spacing={2}>
+              <Grid item xs={12} md={6}>
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Employee ID
                 </Typography>
+              </Grid>
+              <Grid
+                item
+                md={6}
+                sx={{ diplay: "flex", justifyContent: "center" }}
+              >
                 <Typography sx={{ fontSize: 13 }}>
                   {edituserData?.employeeID}
                 </Typography>
               </Grid>
-              <Grid
-                item
-                xs={12}
-                lg={8}
-                sx={{ display: "flex", flexDirection: "column" }}
-              >
+
+              <Grid item xs={12} lg={6}>
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Store
                 </Typography>
+              </Grid>
+              <Grid item md={6}>
                 <Typography sx={{ fontSize: 13 }}>
-                  {edituserData?.store}
+                  {edituserData?.storecode}
                 </Typography>
               </Grid>
               <Grid
                 item
                 xs={12}
-                lg={8}
+                lg={6}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Joining Date
                 </Typography>
+              </Grid>
+              <Grid item md={6}>
                 <Typography sx={{ fontSize: 13 }}>
                   {edituserData?.joinDate}
                 </Typography>
@@ -117,21 +123,20 @@ const Edit: FC<CreateProps> = ({
               <Grid
                 item
                 xs={12}
-                lg={8}
+                lg={6}
                 sx={{ display: "flex", flexDirection: "column" }}
               >
                 <Typography sx={{ fontSize: 18, fontWeight: "bold" }}>
                   Average Work Hours
                 </Typography>
+              </Grid>
+              <Grid item md={6}>
                 <Typography sx={{ fontSize: 13 }}>08:00</Typography>
               </Grid>
               <Grid
                 item
-                xs={12}
-                lg={8}
-                md={8}
-                sm={7}
-                sx={{ display: "flex", flexDirection: "column" }}
+                md={12}
+                sx={{ display: "flex", justifyContent: "center" }}
               >
                 <Box
                   sx={{
@@ -140,7 +145,6 @@ const Edit: FC<CreateProps> = ({
                     display: "flex",
                     gap: 4,
                     borderRadius: 1,
-                    alignItems: "center",
                     m: 1,
                   }}
                 >
@@ -162,7 +166,9 @@ const Edit: FC<CreateProps> = ({
               </Grid>
             </Grid>
           </Grid>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        </DialogContent>
+        <DialogActions>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <Button
               variant="contained"
               color="error"
@@ -174,7 +180,7 @@ const Edit: FC<CreateProps> = ({
               EDIT
             </Button> */}
           </Box>
-        </DialogContent>
+        </DialogActions>
       </Dialog>
     </>
   );

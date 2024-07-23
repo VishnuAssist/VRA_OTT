@@ -116,23 +116,23 @@ const Layout1Topbar = (_Fixed:any) => {
           <StyledIconButton onClick={handleSidebarToggle}>
             <Menu />
           </StyledIconButton>
-{/* 
+
           <IconBox>
             <StyledIconButton>
               <MailOutline />
-            </StyledIconButton>
+            </StyledIconButton> */}
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <WebAsset />
-            </StyledIconButton>
+            </StyledIconButton> */}
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <StarOutline />
             </StyledIconButton>
           </IconBox> */}
         </Box>
 
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={2}>
           <MatxSearchBox />
 
           <NotificationProvider>
@@ -144,11 +144,11 @@ const Layout1Topbar = (_Fixed:any) => {
           <MatxMenu
             menuButton={
               <UserMenu>
-                {/* <Hidden xsDown>
+                <Hidden xsDown>
                   <Span>
                     Hi <strong>{""}</strong>
                   </Span>
-                </Hidden> */}
+                </Hidden>
                 <Avatar src={""} sx={{ cursor: "pointer" }} />
               </UserMenu>
             }>

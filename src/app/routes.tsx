@@ -17,6 +17,7 @@ const JwtRegister = Loadable(lazy(() => import("./views/sessions/JwtRegister")))
 const ForgotPassword = Loadable(lazy(() => import("./views/sessions/ForgotPassword")));
 // E-CHART PAGE
 const AppEchart = Loadable(lazy(() => import("./views/charts/echarts/AppEchart")));
+const Dashboard = Loadable(lazy(() => import("./views/Users/Dashboard")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 const  StaffManagement= Loadable(lazy(() => import("./views/Users/Staffmanagement")));
@@ -37,6 +38,7 @@ const routes = [
       // ...materialRoutes,
       // dashboard route
       { path: "/dashboard/default", element: <Analytics />, auth: authRoles.admin },
+      { path: "/dashboard/ui", element: <Dashboard />, auth: authRoles.admin },
       // e-chart route
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },

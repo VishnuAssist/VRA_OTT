@@ -13,9 +13,9 @@ const initialState: UserState = {
       username: "Rizwan",
       employeeID: "ASSIST123",
       phone: "9856742321",
-      email: "abc@gmail.com",
-      position: "admin",
-      store: "twg001",
+      email: "rizwan@gmail.com",
+      position: "Project Manager",
+      storecode: "TWG001",
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin"

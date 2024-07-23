@@ -14,10 +14,10 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addSlot, CalendarSlot } from "../../../Slices/CalendarSlotManagement";
+import { addSlot, CalendarSlot, updateSlot } from "../../../Slices/CalendarSlotManagement";
 
 interface Props {
   assign: boolean;
@@ -56,15 +56,20 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
   const addSubmit = (data: any) => {
     const newUpdatedData={...data,start:new Date(data?.start),end:new Date(data?.end)}
     console.log(newUpdatedData);
-    dispatch(addSlot(newUpdatedData));
-   
+    if(initialUserData?.id){
+      dispatch(updateSlot(newUpdatedData))
+    }
+    else{dispatch(addSlot(newUpdatedData)); }
+    
+    closeAssign()
 
     reset()
   };
 
-  // useEffect(() => {
-  //   reset(initialUserData || data);
-  // }, [initialUserData, reset]);
+  useEffect(() => {
+    console.log(initialUserData)
+    reset(initialUserData );
+  }, [initialUserData, reset]);
 
   // useEffect(() => {
   //   if (initialUserData) {
@@ -143,14 +148,14 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
                   <Grid item md={6} xs={12}>
                     <TextField
                       type="datetime-local"
-                      defaultValue={dateTime}
+                      // defaultValue={dateTime}
                       {...register("start")}
                     />
                   </Grid>
                   <Grid item md={6} xs={12}>
                     <TextField
                       type="datetime-local"
-                      defaultValue={dateTime}
+                      // defaultValue={dateTime}
                       {...register("end")}
                     />
                   </Grid>

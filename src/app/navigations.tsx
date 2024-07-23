@@ -8,6 +8,7 @@ import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import AddTaskIcon from '@mui/icons-material/AddTask';
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
+  { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon/> },
   // { label: "PAGES", type: "label" },
   // {
   //   name: "Session/Auth",

@@ -34,13 +34,17 @@ import {
 import enUS from "date-fns/locale/en-US";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CalendarSlot } from "../../../Slices/CalendarSlotManagement";
+import { CalendarSlot, removeSlot } from "../../../Slices/CalendarSlotManagement";
+import { formatDate } from "../../../utils/utils";
+
+
+import CustomEvent_ from "./Envent";
 
 const locales = {
   "en-US": enUS,
@@ -61,21 +65,24 @@ const end = addHours(start, 2);
 const DnDCalendar = withDragAndDrop(Calendar);
 
 interface User {
-  id: string;
+  id: number;
   name: string;
   title:()=>void;
 }
 
 const CalendarTable: FC = () => {
   const { userList} = useSelector((state: any) => state.staff);
-
+const dispatch=useDispatch()
   const users: User[] = userList.map((user: any) => ({
     id: user.id,
     name: user.username,
   }));
 const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
   const edithandleAddClick = (data: any) => {
-    setEditSelectslot(data);
+    setEditSelectslot({
+     ...data, start:formatDate(data.start),
+     end: formatDate( data.end)
+    });
     setAssign(true);
   };
 
@@ -87,7 +94,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
       start,
       end,
     
-      resource: users[0]?.id || "",
+      resource: 0,
     },
   ]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -116,22 +123,16 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     );
   };
   const [assign, setAssign] = useState(false);
-  
+  console.log(selectedUser,slots  )
   const onSelectSlot = (slotInfo: any) => {
+
     if (selectedUser) {
-      const title = handleSetAssign(true); 
-  
-      if (title) {
-        setEvents((currentEvents) => [
-          ...currentEvents,
-          {
-            title,
-            start: slotInfo.start,
-            end: slotInfo.end,
-            resourceId: selectedUser.id,
-          },
-        ]);
-      }
+   
+      setEditSelectslot({title:'', start:formatDate(slotInfo.start),
+            end: formatDate( slotInfo.end),
+             resource: selectedUser?.id})
+  setAssign(true)
+   
     } else {
       toast.error("Please select a user first", {
         position: "top-right",
@@ -160,42 +161,18 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
   const [preview,setPreview]=useState(false)
   const [previewdata, setPreviewData] = useState<CalendarSlot | null>(null);
 
-  const openPreview=(data: CalendarSlot)=>{
+  const openPreview=(data: any)=>{
+    console.log(data)
     setPreview(true)
     setPreviewData(data);
   }
   const closePreview=()=>{
     setPreview(false)
+    setPreviewData(null)
   }
   
   
-  // const dispatch = useDispatch();
-  // const _deleteUser = (data: CalendarSlot) => {
-  //   dispatch(removeSlot({ id: data.resource }));
-  // };
-    
-    
-  
-
-  // const onSelectEvent = (event: Event) => {
-  //   console.log("heeee",event);
-    
-  //   const action = window.prompt("Edit or Delete? (e/d)");
-  //   if (action === "e") {
-  //     const newTitle = window.prompt("New Event name", event.resource);
-  //     if (newTitle) {
-  //       setEvents((currentEvents) =>
-  //         currentEvents.map((evt) =>
-  //           evt === event ? { ...evt, title: newTitle } : evt
-  //         )
-  //       );
-  //     }
-  //   } else if (action === "d") {
-  //     setEvents((currentEvents) =>
-  //       currentEvents.filter((evt) => evt !== event)
-  //     );
-  //   }
-  // };
+ 
   
 
   const eventStyleGetter = (
@@ -205,7 +182,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     _isSelected: boolean
   ) => {
     const backgroundColor =
-      event.resource === selectedUser?.id ? "#ADD8E6" : "#3174ad";
+      event.resource === selectedUser?.id ? "#ADD8E6" : "red";
     const style = {
       backgroundColor,
       borderRadius: "5px",
@@ -266,7 +243,10 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
     setAssign(false);
   };
 
-  
+  const deleteEvent=(id:number)=>{
+dispatch(removeSlot({id:id}))
+setPreview(false)
+  }
   return (
     <>
       <Card sx={{ p: 2 }}>
@@ -322,10 +302,11 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
                 onEventDrop={onEventDrop}
                 onEventResize={onEventResize}
                 onSelectSlot={onSelectSlot}
-                onSelectEvent={() => openPreview}
+                onSelectEvent={ openPreview}
                 eventPropGetter={eventStyleGetter}
                 resizable
                 style={{ height: "100vh" }}
+             
               />
             </div>
           </div>
@@ -502,11 +483,11 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
                 </Grid>
 
                 <Grid item md={6} xs={6}>
-                <Button variant="outlined" onClick={edithandleAddClick} color="success">Edit</Button>
+                <Button variant="outlined" onClick={()=>edithandleAddClick(previewdata)} color="success">Edit</Button>
                 </Grid>
                 <Grid item md={6} xs={6}>
-                <Button variant="outlined"  color="error">
-                {/* <Button variant="outlined" onClick={() => deleteUser(previewdata)} color="error"> */}
+                {/* <Button variant="outlined"  color="error"> */}
+                <Button variant="outlined" onClick={() => deleteEvent(previewdata?.id||0)} color="error">
   Delete
 </Button>
                 </Grid>
@@ -517,7 +498,7 @@ const [editselectslot,setEditSelectslot]=useState<CalendarSlot | null>(null);
             </Box>
           </DialogContent>
       </Dialog>
-      <AssignOption assign={assign} closeAssign={closeAssign} />
+      {/* <AssignOption assign={assign} closeAssign={closeAssign} /> */}
       <AssignOption assign={assign} closeAssign={closeAssign} initialUserData={editselectslot}  />
       <ToastContainer/>
     </>
