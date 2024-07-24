@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material"
+import {  Button, Grid, Typography } from "@mui/material"
 import { useState } from "react"
 import Create from "./form"
 
@@ -13,10 +13,15 @@ function PageHeader() {
     }
   return (
     <>
-    <Box display="flex" justifyContent="space-between" flexWrap="wrap" >
-    <Typography variant='h2'>Staff Management</Typography>
+    <Grid container spacing={2}  >
+      <Grid item md={10}>
+      <Typography variant='h2'>Staff Management</Typography>
+      </Grid>
+    <Grid item md={2}>
     <Button variant="contained" onClick={openstoremodel}>Add User</Button>
-    </Box>
+    </Grid>
+   
+    </Grid>
     <Create dialogOpen={openmodel} handleDialogClose={closestoremodel }/>
     </>
   )

@@ -11,6 +11,7 @@ import {
     MenuItem,
     Select,
     TextField,
+    Typography,
   } from "@mui/material";
   import { FC, useEffect, useState } from "react";
   import { useForm } from "react-hook-form";
@@ -18,7 +19,10 @@ import {
   import { TaskType } from "../../../Models/TaskType";
   import { addTask, updateTask } from "../../../Slices/TaskSlice";
   import { Staff } from "../../../Models/StaffMangement";
-  
+
+  import { useDropzone } from 'react-dropzone';
+  import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
   interface Props {
     openmodel: boolean;
     closetaskmodel: () => void;
@@ -28,9 +32,15 @@ import {
   const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
     const data: TaskType = {
       users: "",
+      taskProgress: "",
+      assigner: "",
+      staff: "",
       task: "",
+      description: "",
+      priority: "",
       date: "",
       id: 0,
+      status: ""
     };
   
     const { userList } = useSelector((state: any) => state.staff);
@@ -41,7 +51,10 @@ import {
     const [selectedUser, setSelectedUser] = useState<Staff | null>(null);
   
     const submitData = (data: TaskType) => {
+      console.log("data",data)
+      console.log("selectedUser",selectedUser)
       const taskData = {
+
         ...data,
         users: selectedUser ? selectedUser.username : "",
       };
@@ -54,6 +67,7 @@ import {
       reset();
       setSelectedUser(null);
       closetaskmodel();
+      console.log("tttttttttttttt",data)
     };
   
     useEffect(() => {
@@ -62,9 +76,16 @@ import {
   
     useEffect(() => {
       if (initialTask) {
-        setValue("users", initialTask.users);
-        setValue("task", initialTask.task);
         setValue("id", initialTask.id);
+        setValue("taskProgress",initialTask.taskProgress);
+        setValue("assigner",initialTask.assigner);
+        setValue("staff", initialTask.staff);
+        setValue("task", initialTask.task);
+        setValue("description",initialTask.description);
+        setValue("date",initialTask.date);
+        setValue("priority", initialTask.priority);
+
+        
         // Assuming initialTask.users is a single username
         const initialSelectedUser = userList.find((user:Staff )=> user.username === initialTask.users
         );
@@ -73,7 +94,16 @@ import {
     }, [initialTask, setValue, userList]);
   
     const task = watch("task");
+    const priority = watch("priority");
+    const TaskProgress = watch("taskProgress");
   
+    const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
+    
+    // const files = acceptedFiles.map(file => (
+    //     <li key={file.path}>
+    //         {file.path} - {file.size} bytes
+    //     </li>
+    // ));
     return (
       <>
         <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
@@ -83,20 +113,46 @@ import {
           <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
             <form onSubmit={handleSubmit(submitData)}>
               <Grid container spacing={2}>
+              <Grid item xs={12} md={12} >
+                  <FormControl fullWidth>
+                    <InputLabel id="TaskProgress-select-label">TaskProgress</InputLabel>
+                    <Select
+                      labelId="TaskProgress-select-label"
+                      id="TaskProgress-select"
+                      value={TaskProgress || ""}
+                      {...register("taskProgress")}
+                      label="TaskProgress"
+                    >
+                      <MenuItem value="To Do">To Do</MenuItem>
+                      <MenuItem value="In Progress">In Progress</MenuItem>
+                      <MenuItem value="Completed">Completed</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              <Grid item md={12} sx={{mt:1}}>
+                  <TextField
+                    type="text"
+                    id="Assigned by"
+                    label="Assigned By"
+                    {...register("assigner")}
+                    fullWidth
+                  />
+                </Grid>
                 <Grid item xs={12} md={12} sx={{ mt: 1 }}>
                   <Autocomplete
                     options={userList}
                     getOptionLabel={(option: Staff) => option.username}
                     value={selectedUser}
+                    {...register("staff")}
                     onChange={(_, value) => {
                       setSelectedUser(value);
                     }}
                     renderInput={(params) => (
-                      <TextField {...params} label="Select User" />
+                      <TextField {...params} label="Select Staff's" />
                     )}
                   />
                 </Grid>
-                <Grid item xs={12} md={12} sx={{ mt: 1 }}>
+                <Grid item xs={12} md={6} >
                   <FormControl fullWidth>
                     <InputLabel id="task-select-label">Task</InputLabel>
                     <Select
@@ -106,34 +162,67 @@ import {
                       {...register("task")}
                       label="Task"
                     >
-                      <MenuItem value="TWG001">Design Phase</MenuItem>
-                      <MenuItem value="TWG002">Development Phase</MenuItem>
-                      <MenuItem value="TWG003">Testing Phase</MenuItem>
-                      <MenuItem value="TWG004">Deployment Phase</MenuItem>
-                      <MenuItem value="TWG005">Maintenance Phase</MenuItem>
-                      <MenuItem value="TWG006">Documentation Phase</MenuItem>
-                      <MenuItem value="TWG007">Review Phase</MenuItem>
-                      <MenuItem value="TWG008">Planning Phase</MenuItem>
-                      <MenuItem value="TWG009">Bug Fixing Phase</MenuItem>
-                      <MenuItem value="TWG010">Closure Phase</MenuItem>
+                      <MenuItem value="Design Phase">Design Phase</MenuItem>
+                      <MenuItem value="Development Phase">Development Phase</MenuItem>
+                     
                     </Select>
                   </FormControl>
                 </Grid>
+                
   
-                <Grid item xs={12} md={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     type="date"
                     id="date"
-                    label="Date"
+                    label=""
                     {...register("date")}
                     fullWidth
                   />
                 </Grid>
+                <Grid item md={12}>
+                <TextField
+                    type="text"
+                    id="Description"
+                    label="Description"
+                    multiline
+                    rows={4}
+                    fullWidth
+                    {...register("description")}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6} >
+                  <FormControl fullWidth>
+                    <InputLabel id="priority-select-label">Priority</InputLabel>
+                    <Select
+                      labelId="priority-select-label"
+                      id="priority-select"
+                      value={priority || ""}
+                      {...register("priority")}
+                      label="priority"
+                    >
+                      <MenuItem value="Low">Low</MenuItem>
+                      <MenuItem value="Normal">Normal</MenuItem>
+                      <MenuItem value="High">High</MenuItem>
+                      <MenuItem value="Urgent">Urgent</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item md={6}>
+                <div {...getRootProps({ style: { border: '2px dashed #cccccc', padding: '20px', textAlign: 'center' } })}>
+                    <input {...getInputProps()} />
+                    <CloudUploadIcon style={{ fontSize: 40 }} />
+                    <Typography variant="h6">
+                        Drag and drop 
+                    </Typography>
+                </div>
+            </Grid>
+            
+            
               </Grid>
   
               <DialogActions>
                 <Button type="submit" variant="contained" color="primary">
-                  {initialTask ? "Update" : "Save"}
+                  {initialTask ? "Update" : "Create Task"}
                 </Button>
               </DialogActions>
             </form>

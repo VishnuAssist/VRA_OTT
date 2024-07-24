@@ -9,10 +9,16 @@ interface UserState {
 const initialState: UserState = {
   taskList: [
     {
+      users:"hari",
       id: 1,
-      task: "ReviewPhase",
-      users: "Rizwan",
-      date: "22-02-2024",
+      taskProgress:"To Do",
+      assigner:"Rizwan Sir",
+      task: "To make a Dashboard UI",
+      description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
+      priority:"Low",
+      staff:"vishnu",
+      date: "2024-07-12",
+      status:""
     },
   ],
   selectedUser: null,

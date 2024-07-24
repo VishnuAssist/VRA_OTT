@@ -14,7 +14,10 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  DialogActions,
+  IconButton,
 } from "@mui/material";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import { useForm } from "react-hook-form";
 import { addStaff, updateStaff } from "../../../Slices/StaffManagementSlice";
 import { useDispatch } from "react-redux";
@@ -23,7 +26,7 @@ import { Staff } from "../../../Models/StaffMangement";
 interface CreateProps {
   dialogOpen: boolean;
   handleDialogClose: () => void;
-  initialUserData?: Staff | null; 
+  initialUserData?: Staff | null; // Replace 'User' with your actual type for user data
 }
 
 const Create: FC<CreateProps> = ({
@@ -37,7 +40,7 @@ const Create: FC<CreateProps> = ({
     employeeID: "",
     email: "",
     role: "",
-    store: "",
+    storecode: "",
     joinDate: "",
     position: "",
     status: "",
@@ -45,7 +48,10 @@ const Create: FC<CreateProps> = ({
   };
 
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, setValue } = useForm<Staff>();
+  const { register, handleSubmit, reset, setValue, watch,formState:{errors} } = useForm<Staff>();
+
+  // console.log("this is the error on the form",errors)
+
   const [isActive, setIsActive] = useState(true);
   const [profilePic, setProfilePic] = useState<string | null>(null);
 
@@ -61,13 +67,16 @@ const Create: FC<CreateProps> = ({
       setValue("email", initialUserData.email);
       setValue("position", initialUserData.position);
       setValue("joinDate", initialUserData.joinDate);
-      setValue("store", initialUserData.store);
+      setValue("storecode", initialUserData.storecode);
       setValue("role", initialUserData.role);
       setValue("id", initialUserData.id);
       setIsActive(initialUserData.isActive ?? true);
       setProfilePic(initialUserData.profilePicture || null);
     }
   }, [initialUserData, setValue]);
+
+  const storecode = watch("storecode");
+  const role = watch("role");
 
   const submitData = (data: Staff) => {
     data.isActive = isActive;
@@ -114,9 +123,19 @@ const Create: FC<CreateProps> = ({
         fullWidth
       >
         <DialogTitle>
-          {initialUserData ? "Update User" : " New User"}
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            {initialUserData ? "Update User" : " New User"}
+
+            <IconButton
+              color="error"
+              aria-label="delete"
+              onClick={handleDialogClose}
+            >
+              <HighlightOffSharpIcon />
+            </IconButton>
+          </Box>
         </DialogTitle>
-        <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
+        <DialogContent>
           <form onSubmit={handleSubmit(submitData)}>
             <Grid container spacing={2}>
               <Grid item xs={12} lg={4}>
@@ -169,8 +188,17 @@ const Create: FC<CreateProps> = ({
                 />
               </Grid>
 
-              <Grid item xs={12} lg={8} container spacing={1}>
-                <Grid item xs={6} sx={{ mb: 2 }}>
+              <Grid item xs={12} lg={8} container spacing={2}>
+                <Grid item xs={6} sx={{ mt: 1 }}>
+                  <TextField
+                    type="text"
+                    id="username"
+                    label="Name"
+                    {...register("username",{required:'UserName is required'})}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6} sx={{ mt: 1 }}>
                   <TextField
                     type="text"
                     id="employeeID"
@@ -179,16 +207,8 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} >
-                  <TextField
-                    type="text"
-                    id="username"
-                    label="Username"
-                    {...register("username")}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={6} >
+
+                <Grid item xs={6}>
                   <TextField
                     type="number"
                     id="phone"
@@ -197,7 +217,7 @@ const Create: FC<CreateProps> = ({
                     fullWidth
                   />
                 </Grid>
-                <Grid item xs={6} >
+                <Grid item xs={6}>
                   <TextField
                     type="email"
                     id="email"
@@ -208,15 +228,6 @@ const Create: FC<CreateProps> = ({
                 </Grid>
                 <Grid item xs={6}>
                   <TextField
-                    type="text"
-                    id="position"
-                    label="Position"
-                    {...register("position")}
-                    fullWidth
-                  />
-                </Grid>
-                <Grid item xs={6} >
-                  <TextField
                     type="date"
                     id="joinDate"
                     {...register("joinDate")}
@@ -224,30 +235,40 @@ const Create: FC<CreateProps> = ({
                     InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
-                <Grid item xs={6} >
+
+                <Grid item xs={6}>
                   <FormControl fullWidth>
                     <InputLabel id="store-select-label">Store</InputLabel>
                     <Select
                       labelId="store-select-label"
                       id="store-select"
-                      value={initialUserData ? initialUserData.store : ""}
-                      {...register("store")}
-                      label="Store"
+                      value={storecode || ""}
+                      {...register("storecode")}
+                      label="storecode"
                     >
-                      <MenuItem value="twg001">TWG001</MenuItem>
-                      <MenuItem value="twg002">TWG002</MenuItem>
-                      <MenuItem value="twg003">TWG003</MenuItem>
-                      <MenuItem value="twg004">TWG004</MenuItem>
+                      <MenuItem value="TWG001">TWG001</MenuItem>
+                      <MenuItem value="TWG002">TWG002</MenuItem>
+                      <MenuItem value="TWG003">TWG003</MenuItem>
+                      <MenuItem value="TWG004">TWG004</MenuItem>
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} >
+                <Grid item xs={6}>
+                  <TextField
+                    type="text"
+                    id="position"
+                    label="Position"
+                    {...register("position")}
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={6}>
                   <FormControl fullWidth>
                     <InputLabel id="role-select-label">Role</InputLabel>
                     <Select
                       labelId="role-select-label"
                       id="role-select"
-                      value={initialUserData ? initialUserData.role : ""}
+                      value={role || ""}
                       {...register("role")}
                       label="Role"
                     >
@@ -259,16 +280,19 @@ const Create: FC<CreateProps> = ({
                 </Grid>
               </Grid>
             </Grid>
-
-            <Box sx={{ display: "flex", justifyContent: "space-between", marginTop:"10px"}}>
-            <Button type="submit" variant="contained" color="error">
-                Close
-              </Button>
-              <Button type="submit" variant="contained" color="primary">
-                {initialUserData ? "Update" : "Save"}
-              </Button>
-            
-            </Box>
+            <DialogActions>
+              <Box
+                sx={{
+                  display: "flex",
+                  // justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Button type="submit" variant="contained" color="primary">
+                  {initialUserData ? "Update" : "Save"}
+                </Button>
+              </Box>
+            </DialogActions>
           </form>
         </DialogContent>
       </Dialog>
