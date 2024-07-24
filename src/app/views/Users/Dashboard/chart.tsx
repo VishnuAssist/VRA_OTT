@@ -1,5 +1,5 @@
 
-import { Box, Card, CardHeader, Divider, Grid, MenuItem, Select, styled, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Divider, Grid, MenuItem, Select, styled, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const uData = [350, 200, 300, 400, 500, 600];
@@ -37,9 +37,9 @@ const Chart = () => {
       <Divider />
        
         </Box>
-        <Box sx={{width:"100%"}}>
+        <CardContent sx={{width:"100%",p:2}}>
         <LineChart
-      width={700}
+      
       height={300}
       series={[
         { data: pData, label: 'pv' },
@@ -49,7 +49,7 @@ const Chart = () => {
       xAxis={[{ scaleType: 'point', data: xLabels }]}
     />
     
-</Box>
+</CardContent>
 </StyledCard>
         
         

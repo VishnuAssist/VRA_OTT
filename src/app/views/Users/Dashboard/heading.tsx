@@ -26,7 +26,7 @@ const Heading = () => {
     return (
         <>
             <Grid container spacing={2}>
-                <Grid item md={8}>
+                <Grid item md={8} xs={12}>
                     <Grid container spacing={2}>
                 <Grid item xs={12} md={4}>
                     
@@ -64,8 +64,8 @@ const Heading = () => {
             </Grid>
             </Grid>
             </Grid>
-            <Grid item md={4}>
-           <Grid item md={12}>
+            <Grid item md={4}xs={12}>
+           <Grid item md={12} >
 
             <Card sx={{ px: 1, py: 2, mb: 1}}>
            
