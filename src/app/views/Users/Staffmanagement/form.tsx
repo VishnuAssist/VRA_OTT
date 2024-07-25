@@ -45,6 +45,7 @@ const Create: FC<CreateProps> = ({
     position: "",
     status: "",
     id: 0,
+    store: undefined
   };
 
   const dispatch = useDispatch();

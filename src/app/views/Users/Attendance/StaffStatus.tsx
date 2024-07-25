@@ -107,7 +107,7 @@ const StaffStatus = () => {
               <Typography>Average Work Hours</Typography>
             </Grid>
             
-            <Grid item xs={12} md={3} container spacing={0.1} sx={{p:2}}>
+            <Grid item xs={12} md={3} container spacing={0.1} sx={{p:2,display: "flex",justifyContent:"center",alignItems:"center", flexDirection: "row" }}>
               <Grid item xs={6} md={8}>
                 Annual Leave
               </Grid>

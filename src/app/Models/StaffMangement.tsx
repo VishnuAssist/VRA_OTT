@@ -1,4 +1,5 @@
 export interface Staff {
+    store: any;
     
     "id": number;
     "username": string;

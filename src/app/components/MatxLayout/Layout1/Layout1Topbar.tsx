@@ -4,7 +4,7 @@ import {
   Box,
   styled,
   Avatar,
-  Hidden,
+  // Hidden,
   useTheme,
   MenuItem,
   IconButton,
@@ -17,7 +17,7 @@ import useAuth from "../../../hooks/useAuth";
 import useSettings from "../../../hooks/useSettings";
 
 import { Span } from "../../Typography";
-import ShoppingCart from "../../ShoppingCart";
+// import ShoppingCart from "../../ShoppingCart";
 import { MatxMenu, MatxSearchBox } from "../..";
 import { NotificationBar } from "../../NotificationBar";
 import { themeShadows } from "../../MatxTheme/themeColors";
@@ -29,9 +29,9 @@ import {
   Menu,
   Person,
   Settings,
-  WebAsset,
-  MailOutline,
-  StarOutline,
+  // WebAsset,
+  // MailOutline,
+  // StarOutline,
   PowerSettingsNew
 } from "@mui/icons-material";
 
@@ -83,10 +83,10 @@ const StyledItem = styled(MenuItem)(({ theme }) => ({
   "& span": { marginRight: "10px", color: theme.palette.text.primary }
 }));
 
-const IconBox = styled("div")(({ theme }) => ({
-  display: "inherit",
-  [theme.breakpoints.down("md")]: { display: "none !important" }
-}));
+// const IconBox = styled("div")(({ theme }) => ({
+//   display: "inherit",
+//   [theme.breakpoints.down("md")]: { display: "none !important" }
+// }));
 
 const Layout1Topbar = (_Fixed:any) => {
   const theme = useTheme();
@@ -117,38 +117,38 @@ const Layout1Topbar = (_Fixed:any) => {
             <Menu />
           </StyledIconButton>
 
-          <IconBox>
+          {/* <IconBox>
             <StyledIconButton>
               <MailOutline />
-            </StyledIconButton>
+            </StyledIconButton> */} 
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <WebAsset />
-            </StyledIconButton>
+            </StyledIconButton> */}
 
-            <StyledIconButton>
+            {/* <StyledIconButton>
               <StarOutline />
             </StyledIconButton>
-          </IconBox>
+          </IconBox> */}
         </Box>
 
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={2}>
           <MatxSearchBox />
 
           <NotificationProvider>
             <NotificationBar />
           </NotificationProvider>
 
-          <ShoppingCart container={undefined} />
+          {/* <ShoppingCart container={undefined} /> */}
 
           <MatxMenu
             menuButton={
               <UserMenu>
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                   <Span>
                     Hi <strong>{""}</strong>
                   </Span>
-                </Hidden>
+                </Hidden> */}
                 <Avatar src={""} sx={{ cursor: "pointer" }} />
               </UserMenu>
             }>

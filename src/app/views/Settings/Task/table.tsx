@@ -89,130 +89,139 @@ const TaskTable: React.FC = () => {
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item md={4}>
+        <Grid item md={12}>
           <Card sx={{ p: 2, height: "100%", width: "100%" }}>
             <Box sx={{ display: "flex", p: 1 }}>
               <CircleIcon sx={{ color: "violet", mr: 2 }} />
               <Typography> To Do</Typography>
             </Box>
             <Divider sx={{ backgroundColor: "violet" }} />
-            {taskList &&
-              taskList.map((taskDetail: TaskType) => (
-                <Card
-                  sx={{
-                    p: 1,
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "#F1F5FA",
-                  }}
-                >
-                  <Box
-                    sx={{ display: "flex", justifyContent: "space-between" }}
-                  >
-                    <Typography variant="h5" sx={{ color: "violet" }}>
-                      {taskDetail.assigner}
-                    </Typography>
-                    <>
-                      <IconButton
-                        aria-controls="simple-menu"
-                        aria-haspopup="true"
-                        onClick={handleClick}
-                      >
-                        <MoreHorizIcon />
-                      </IconButton>
-                      <Menu
-                        id="simple-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                      >
-                        <MenuItem
-                          onClick={() => edithandleAddClick(taskDetail)}
-                        >
-                          edit
-                        </MenuItem>
-                        {/* <MenuItem >edit</MenuItem> */}
-                        <MenuItem onClick={() => openDelete(taskDetail)}>
-                          delete
-                        </MenuItem>
-                      </Menu>
-                    </>
-                  </Box>
-
-                  <Grid container spacing={2}>
-                    <Grid item md={12} sx={{ fontSize: "18px" }}>
-                      <Typography variant="h5">{taskDetail.task}</Typography>
-                    </Grid>
-                    <Grid item md={12}>
-                      <Typography>{taskDetail.description}</Typography>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Typography variant={"h5"} sx={{ color: "#8D6F64" }}>
-                        {taskDetail.priority}
-                      </Typography>
-                    </Grid>
-                    <Grid item md={4}>
-                      <Typography variant={"h5"} sx={{ color: "#FC0F0F" }}>
-                        Completed
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      item
-                      md={4}
-                      sx={{ display: "flex", alignItems: "center" }}
+            <Grid container spacing={2}>
+              {taskList &&
+                taskList.map((taskDetail: TaskType) => (
+                  <Grid item md={4}>
+                    <Card
+                      sx={{
+                        p: 1,
+                        mt: 1,
+                        width: "100%",
+                        backgroundColor: "#F1F5FA",
+                      }}
                     >
-                      <Typography>{taskDetail.date}</Typography>
-                    </Grid>
-                    <Grid item md={5}>
-                      <AvatarGroup max={20}>
-                        <Avatar
-                          alt={taskDetail.staff}
-                          src="/static/images/avatar/1.jpg"
-                        />
-                        <Avatar
-                          alt={taskDetail.staff}
-                          src="/static/images/avatar/2.jpg"
-                        />
-                        <Avatar
-                          alt={taskDetail.staff}
-                          src="/static/images/avatar/3.jpg"
-                        />
-                      </AvatarGroup>
-                    </Grid>
+                      <Box
+                        sx={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <Typography variant="h5" sx={{ color: "violet" }}>
+                          {taskDetail.assigner}
+                        </Typography>
+                        <>
+                          <IconButton
+                            aria-controls="simple-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                          >
+                            <MoreHorizIcon />
+                          </IconButton>
+                          <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <MenuItem
+                              onClick={() => edithandleAddClick(taskDetail)}
+                            >
+                              edit
+                            </MenuItem>
+                            {/* <MenuItem >edit</MenuItem> */}
+                            <MenuItem onClick={() => openDelete(taskDetail)}>
+                              delete
+                            </MenuItem>
+                          </Menu>
+                        </>
+                      </Box>
 
-                    <Grid item md={3.5}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: "100%",
-                        }}
-                      >
-                        <CommentIcon />
-                        <Typography sx={{ ml: 1 }}>Comments</Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item md={3.5}>
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: "100%",
-                        }}
-                      >
-                        <DriveFolderUploadIcon />
-                        <Typography sx={{ ml: 1 }}>Files</Typography>
-                      </Box>
-                    </Grid>
+                      <Grid container spacing={2}>
+                        <Grid item md={12} sx={{ fontSize: "18px" }}>
+                          <Typography variant="h5">
+                            {taskDetail.task}
+                          </Typography>
+                        </Grid>
+                        <Grid item md={12}>
+                          <Typography>{taskDetail.description}</Typography>
+                        </Grid>
+                        <Grid item md={4}>
+                          <Typography variant={"h5"} sx={{ color: "#8D6F64" }}>
+                            {taskDetail.priority}
+                          </Typography>
+                        </Grid>
+                        <Grid item md={4}>
+                          <Typography variant={"h5"} sx={{ color: "#FC0F0F" }}>
+                            Completed
+                          </Typography>
+                        </Grid>
+                        <Grid
+                          item
+                          md={4}
+                          sx={{ display: "flex", alignItems: "center" }}
+                        >
+                          <Typography>{taskDetail.date}</Typography>
+                        </Grid>
+                        <Grid item md={5}>
+                          <AvatarGroup max={20}>
+                            <Avatar
+                              alt={taskDetail.staff}
+                              src="/static/images/avatar/1.jpg"
+                            />
+                            <Avatar
+                              alt={taskDetail.staff}
+                              src="/static/images/avatar/2.jpg"
+                            />
+                            <Avatar
+                              alt={taskDetail.staff}
+                              src="/static/images/avatar/3.jpg"
+                            />
+                          </AvatarGroup>
+                        </Grid>
+
+                        <Grid item md={3.5}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              height: "100%",
+                            }}
+                          >
+                            <CommentIcon />
+                            <Typography sx={{ ml: 1 }}>Comments</Typography>
+                          </Box>
+                        </Grid>
+                        <Grid item md={3.5}>
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              height: "100%",
+                            }}
+                          >
+                            <DriveFolderUploadIcon />
+                            <Typography sx={{ ml: 1 }}>Files</Typography>
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </Card>
                   </Grid>
-                </Card>
-              ))}
+                ))}
+            </Grid>
           </Card>
         </Grid>
-        <Grid item md={4}>
+        {/* <Grid item md={4}>
           <Card sx={{ p: 2, height: "100%", width: "100%" }}>
             <Box sx={{ display: "flex", p: 1 }}>
               <CircleIcon sx={{ color: "orange", mr: 2 }} />
@@ -392,7 +401,7 @@ const TaskTable: React.FC = () => {
               </Grid>
             </Card>
           </Card>
-        </Grid>
+        </Grid> */}
       </Grid>
 
       <Dialog
