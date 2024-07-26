@@ -4,11 +4,18 @@ import {
   Card,
   CardActions,
   CardContent,
+  Dialog,
+  DialogContent,
+  DialogTitle,
   Divider,
   Grid,
   Typography,
   useTheme,
 } from "@mui/material";
+import { useState } from "react";
+import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
+import { ApprovalsLeave } from "../../Models/Approvals";
+import { removeApproval } from "../../Slices/ApprovalsSlice";
 interface PageheadingProps {
   Type: string;
 }
@@ -16,6 +23,7 @@ interface PageheadingProps {
 const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
   const dummy = [
     {
+      id: 1,
       type: "Leave Request",
       Fromdate: "10-07-2024",
       Todate: "11-07-2024",
@@ -23,6 +31,7 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
       Reason: "Fever",
     },
     {
+      id: 2,
       type: "MC",
       Fromdate: "01-07-2024",
       Todate: "11-07-2024",
@@ -30,13 +39,15 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
       Reason: "Fever",
     },
     {
+      id: 3,
       type: "Leave Request",
-      Fromdate: "10-07-2024",
+      Fromdate: "11-07-2024",
       Todate: "11-07-2024",
       Name: "Riyas",
       Reason: "Fever",
     },
     {
+      id: 4,
       type: "MC",
       Fromdate: "10-07-2024",
       Todate: "11-07-2024",
@@ -44,6 +55,7 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
       Reason: "Fever",
     },
     {
+      id: 5,
       type: "Commision",
       Fromdate: "10-07-2024",
       Todate: "11-07-2024",
@@ -51,6 +63,7 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
       Reason: "Over Time work",
     },
     {
+      id: 6,
       type: "Commision",
       Fromdate: "10-07-2024",
       Todate: "11-07-2024",
@@ -58,6 +71,7 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
       Reason: "Over Time work",
     },
     {
+      id: 7,
       type: "Commision",
       Fromdate: "10-07-2024",
       Todate: "11-07-2024",
@@ -66,6 +80,40 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
     },
   ];
   const theme = useTheme();
+
+  const [preview, setPreview] = useState(false);
+  const [previewdata, setPreviewData] = useState<ApprovalsLeave | null>(null);
+
+  const openPreview = (data: ApprovalsLeave) => {
+    // console.log("data", data);
+    setPreviewData(data);
+    // console.log("previewdata", previewdata);
+    setPreview(true);
+  };
+  const closePreview = () => {
+    setPreview(false);
+  };
+
+
+  // this is for delete
+  // const [alertdeleteStore, setAlertDeleteStore] = useState(false);
+  // const [userToDelete, setUserToDelete] = useState<ApprovalsLeave | null>(null);
+
+  // const deleteStore = () => {
+  //   if (userToDelete) {
+  //     dispatch(removeApproval({ id: userToDelete.id }));
+  //     setAlertDeleteStore(false);
+  //     setUserToDelete(null);
+  //   }
+  // };
+  // const openDelete = (user: ApprovalsLeave) => {
+  //   setAlertDeleteStore(true);
+  //   setUserToDelete(user);
+  // };
+  // const closeDelete = () => {
+  //   setAlertDeleteStore(false);
+  //   setUserToDelete(null);
+  // };
   return (
     <>
       {/* <Box display={'flex'} justifyContent={"space-between"} flexWrap={"wrap"}>
@@ -101,13 +149,16 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                       bgcolor: theme.colors.secondary.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "center",
+                      justifyContent: "space-between",
                       alignItems: "center",
+                      p: 1,
                       width: "100%",
                       height: 80,
                     }}
                   >
                     <Typography variant="h6">Leave Request</Typography>
+                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
+
                     <Divider />
                   </Box>
                   <CardContent>
@@ -180,13 +231,15 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                       bgcolor: theme.colors.info.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "center",
+                      justifyContent: "space-between",
                       alignItems: "center",
+                      p: 1,
                       width: "100%",
                       height: 80,
                     }}
                   >
-                    <Typography>Medical Leave</Typography>
+                    <Typography variant="h6">Medical Leave</Typography>
+                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
                   </Box>
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
@@ -258,13 +311,15 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                       bgcolor: theme.colors.warning.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "center",
+                      justifyContent: "space-between",
                       alignItems: "center",
+                      p: 1,
                       width: "100%",
                       height: 80,
                     }}
                   >
-                    <Typography>Commision</Typography>
+                    <Typography variant="h6">Commission</Typography>
+                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
                   </Box>
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
@@ -330,6 +385,44 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
           </>
         ))}
       </Grid>
+
+      <Dialog open={preview} onClose={closePreview}>
+        <DialogTitle>
+          <Typography variant="h5" sx={{color:"darkblue"}}>Details</Typography>
+        </DialogTitle>
+
+        <DialogContent>
+          <Grid container spacing={2}>
+            <>
+              <Grid item md={6}>
+                <Typography variant="h5">Name :</Typography>
+              </Grid>
+
+              <Grid item md={6}>
+                {previewdata?.Name}
+              </Grid>
+              <Grid item md={6}>
+                <Typography variant="h5">FromDate :</Typography>
+              </Grid>
+              <Grid item md={6}>
+                {previewdata?.Fromdate}
+              </Grid>
+              <Grid item md={6}>
+                <Typography variant="h5">To Date :</Typography>
+              </Grid>
+              <Grid item md={6}>
+                {previewdata?.Todate}
+              </Grid>
+              <Grid item md={6}>
+                <Typography variant="h5">Reason :</Typography>
+              </Grid>
+              <Grid item md={6}>
+                {previewdata?.Reason}
+              </Grid>
+            </>
+          </Grid>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

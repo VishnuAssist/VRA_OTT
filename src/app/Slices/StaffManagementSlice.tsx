@@ -18,7 +18,8 @@ const initialState: UserState = {
       storecode: "TWG001",
       status: "pending",
       joinDate: "12-6-2023",
-      role: "admin"
+      role: "admin",
+      store: undefined
     },
     {
       id: 2,
@@ -30,7 +31,8 @@ const initialState: UserState = {
       storecode: "TWG001",
       status: "pending",
       joinDate: "12-6-2023",
-      role: "admin"
+      role: "admin",
+      store: undefined
     },
     {
       id: 1,
@@ -42,7 +44,8 @@ const initialState: UserState = {
       storecode: "TWG001",
       status: "pending",
       joinDate: "12-6-2023",
-      role: "admin"
+      role: "admin",
+      store: undefined
     },
     {
       id: 1,
@@ -54,7 +57,8 @@ const initialState: UserState = {
       storecode: "TWG001",
       status: "pending",
       joinDate: "12-6-2023",
-      role: "admin"
+      role: "admin",
+      store: undefined
     },
   ],
   selectedUser: null,
