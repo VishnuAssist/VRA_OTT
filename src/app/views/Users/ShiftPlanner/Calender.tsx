@@ -1,8 +1,12 @@
 import {
 
+  Box,
   Card,
   Container,
   Grid,
+  List,
+  ListItem,
+  Typography,
 
 } from "@mui/material";
 // import LayersIcon from "@mui/icons-material/Layers";
@@ -164,8 +168,16 @@ const CalendarTable: FC = () => {
     _end: Date,
     _isSelected: boolean
   ) => {
-    const backgroundColor =
-      event.resource === selectedUser?.id ? "#ADD8E6" : "red";
+    console.log(event)
+    let backgroundColor = "#ADD8E6"; 
+    if (event.title === "offDay") {
+      backgroundColor = "orange";
+    } else if (event.title === "overtime") {
+      backgroundColor = "lightgreen";
+    }
+    else if (event.title === "shift") {
+      backgroundColor = "yellow";
+    }
     const style = {
       backgroundColor,
       borderRadius: "5px",
@@ -191,45 +203,39 @@ const CalendarTable: FC = () => {
   return (
     <>
       <Container >
-        <Grid container spacing={2}>
-          {/* <Grid item md={12} sx={{ display: "flex", alignItems: "center" ,flexDirection:'row-reverse'}}>
-            <Button
-              variant="contained"
-              startIcon={<LayersIcon fontSize="small" />}
-              onClick={openSchedule}
-              sx={{ px: 10, py: 1.7 }}
-            >
-              Schedule
-            </Button>
-          </Grid> */}
+        {/* <Grid container spacing={2}> */}
 
-        </Grid>
-        <Card sx={{ mt: 1, p: 1 }}>
-          <div style={{ display: "flex" }}>
-            <div style={{ width: "200px", marginRight: "20px" }}>
-              <h3>Users</h3>
-              <ul style={{ listStyle: "none" }}>
+<Grid item xs={12} md={12}>
+    
+        <Card sx={{ mt: 1, p:1 }}>
+          <Box style={{ display: "flex" }}>
+            <Box style={{ width: "180px", marginRight: "10px" }}>
+              <Typography variant="h4">Users</Typography>
+              <List style={{ listStyle: "none" }}>
                 {users.map((user) => (
                   <Card sx={{ my: 1 }}>
-                    <li
+                    <ListItem
                       key={user.id}
-                      style={{
+                      sx={{
                         cursor: "pointer",
                         backgroundColor:
                           selectedUser?.id === user.id ? "lightblue" : "white",
                         padding: "5px",
 
                         borderRadius: "5px",
+                        display:"flex",
+                        textAlign:"center",
+                        justifyContent:"center"
                       }}
                       onClick={() => setSelectedUser(user)}
                     >
                       {user.name}
-                    </li>
+                    </ListItem>
                   </Card>
                 ))}
-              </ul>
-            </div>
-            <div style={{ flex: 1 }}>
+              </List>
+            </Box>
+            <Box style={{ flex: 1 }}>
               <DnDCalendar
                 selectable
                 defaultView={Views.WEEK}
@@ -244,60 +250,17 @@ const CalendarTable: FC = () => {
                 style={{ height: "100vh" }}
 
               />
-            </div>
-          </div>
+            </Box>
+          </Box>
         </Card>
+        </Grid>
+        {/* </Grid> */}
       </Container>
 
 
-{/* 
-      <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle sx={{ color: 'darkblue' }}>Preview Slot Details</DialogTitle>
-        <DialogContent>
-          <Box sx={{ p: 2 }}>
-            <Grid container spacing={1}>
-              <Grid item md={6} xs={6}>
-                <Typography>Title :</Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography> {previewdata?.option}   </Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography>Shift :</Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography>  {previewdata?.shift}  </Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography>From :</Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography> {previewdata?.start?.toLocaleString()}  </Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography>To :</Typography>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Typography> {previewdata?.end?.toLocaleString()}  </Typography>
-              </Grid>
 
-              <Grid item md={6} xs={6}>
-                <Button variant="outlined" onClick={() => edithandleAddClick(previewdata)} color="success">Edit</Button>
-              </Grid>
-              <Grid item md={6} xs={6}>
-                <Button variant="outlined" onClick={() => deleteEvent(previewdata?.id || 0)} color="error">
-                  Delete
-                </Button>
-              </Grid>
-
-
-            </Grid>
-
-          </Box>
-        </DialogContent>
-      </Dialog> */}
       <AssignOption assign={assign} closeAssign={closeAssign} initialUserData={editselectslot} />
-      <PreviewModel preview={preview} closePreview={closePreview} previewdata={previewdata} edithandleAddClick={edithandleAddClick} deleteEvent={deleteEvent}  />
+      <PreviewModel preview={preview} closePreview={closePreview} previewdata={previewdata} edithandleAddClick={edithandleAddClick} deleteEvent={deleteEvent} />
       <ToastContainer />
     </>
   );

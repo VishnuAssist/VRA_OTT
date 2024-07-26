@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogTitle,
   FormControl,
   FormControlLabel,
   Grid,
@@ -24,6 +25,12 @@ interface Props {
   closeAssign: () => void;
   initialUserData?: CalendarSlot | null | undefined;
 }
+
+const labelStyles = {
+  fontWeight: "bold",
+  fontSize: "12px",
+  marginBottom: "4px",
+};
 
 const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
   // const data: CalendarSlot = {
@@ -89,13 +96,16 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
   return (
     <>
       <Dialog open={assign} onClose={closeAssign} maxWidth={"sm"} fullWidth>
+      <DialogTitle sx={{ color: "darkblue" }}>
+           Create Schedule
+          </DialogTitle>
         <form onSubmit={handleSubmit(addSubmit)}>
           <DialogContent>
             <Grid container spacing={2}>
               
-              <Grid item md={12} xs={12}>
+              <Grid item md={6} xs={12}>
+              <InputLabel htmlFor="Shift" sx={labelStyles} > Shift</InputLabel>
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Shift</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -110,9 +120,40 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
                   </Select>
                 </FormControl>
               </Grid>
+              <Grid item xs={12} md={6}>
+            <InputLabel htmlFor="Shift" sx={labelStyles} > Task</InputLabel>
+
+              <TextField
+                type="text"
+                id="task"
+                {...register("task")}
+                fullWidth
+              />
+            </Grid>
              
-              {age !== "offDay" && (
+            {age !== "offDay" && (
                 <>
+                 
+                  <Grid item md={6} xs={12}>
+                  <InputLabel htmlFor="Start Date And Time" sx={labelStyles} > Start Date And Time</InputLabel>
+
+                    <TextField
+                      type="datetime-local"
+                      // defaultValue={dateTime}
+                      fullWidth
+                      {...register("start")}
+                    />
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                  <InputLabel htmlFor="Start Date And Time" sx={labelStyles} > End Date And Time</InputLabel>
+
+                    <TextField
+                      type="datetime-local"
+                      // defaultValue={dateTime}
+                      fullWidth
+                      {...register("end")}
+                    />
+                  </Grid>
                   <Grid item md={12}>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -146,20 +187,6 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
                         </Grid>
                       </Grid>
                     </RadioGroup>
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      type="datetime-local"
-                      // defaultValue={dateTime}
-                      {...register("start")}
-                    />
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                    <TextField
-                      type="datetime-local"
-                      // defaultValue={dateTime}
-                      {...register("end")}
-                    />
                   </Grid>
                 </>
               )}
