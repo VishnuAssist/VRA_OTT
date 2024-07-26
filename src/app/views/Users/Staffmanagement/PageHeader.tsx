@@ -54,10 +54,10 @@ function PageHeader() {
         <ToggleButtonGroup
           value={Tab}
           exclusive
-          onChange={openstoremodel}
+          
         >
           <ToggleButton
-          
+          onChange={openstoremodel}
             value="user"
             disableRipple
             sx={{ display: "flex", justifyContent: "space-between" }}

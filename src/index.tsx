@@ -8,6 +8,9 @@ import App from "./app/App";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 import {Provider} from 'react-redux'
 import {store} from "./app/Store/store"
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 
 
@@ -19,7 +22,11 @@ if (rootElement) {
   root.render(
     <BrowserRouter>
     <Provider store={store}>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    {/* <DemoContainer components={['DatePicker']}> */}
       <App />
+      {/* </DemoContainer> */}
+      </LocalizationProvider>
       </Provider>
     </BrowserRouter>
   );
