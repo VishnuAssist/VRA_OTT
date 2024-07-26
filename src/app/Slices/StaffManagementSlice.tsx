@@ -8,18 +8,54 @@ interface UserState {
 
 const initialState: UserState = {
   userList: [
-    {
-      id: 1,
-      username: "Rizwan",
-      employeeID: "ASSIST123",
-      phone: "9856742321",
-      email: "rizwan@gmail.com",
-      position: "Project Manager",
-      storecode: "TWG001",
-      status: "pending",
-      joinDate: "12-6-2023",
-      role: "admin"
-    },
+    // {
+    //   id: 1,
+    //   username: "Rizwan",
+    //   employeeID: "ASSIST123",
+    //   phone: "9856742321",
+    //   email: "rizwan@gmail.com",
+    //   position: "Project Manager",
+    //   storecode: "TWG001",
+    //   status: "pending",
+    //   joinDate: "12-6-2023",
+    //   role: "admin"
+    // },
+    // {
+    //   id: 2,
+    //   username: "sheik",
+    //   employeeID: "001",
+    //   phone: "9856742321",
+    //   email: "rizwan@gmail.com",
+    //   position: "Project Manager",
+    //   storecode: "TWG001",
+    //   status: "pending",
+    //   joinDate: "12-6-2023",
+    //   role: "admin"
+    // },
+    // {
+    //   id: 1,
+    //   username: "Hari",
+    //   employeeID: "002",
+    //   phone: "9856742321",
+    //   email: "rizwan@gmail.com",
+    //   position: "Project Manager",
+    //   storecode: "TWG001",
+    //   status: "pending",
+    //   joinDate: "12-6-2023",
+    //   role: "admin"
+    // },
+    // {
+    //   id: 1,
+    //   username: "Riyas",
+    //   employeeID: "003",
+    //   phone: "9856742321",
+    //   email: "rizwan@gmail.com",
+    //   position: "Project Manager",
+    //   storecode: "TWG001",
+    //   status: "pending",
+    //   joinDate: "12-6-2023",
+    //   role: "admin"
+    // },
   ],
   selectedUser: null,
 };
