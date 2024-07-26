@@ -26,6 +26,7 @@ const  ShifftPlaner= Loadable(lazy(() => import("./views/Users/ShiftPlanner")));
 const  Stores= Loadable(lazy(() => import("./views/Settings/Dictionary/index")));
 const  Approvals= Loadable(lazy(() => import("./views/MyApprovals/Approvals")));
 const  Task= Loadable(lazy(() => import("./views/Settings/Task/index")));
+const  Profile= Loadable(lazy(() => import("./views/profile")));
 
 const routes = [
   {
@@ -46,7 +47,8 @@ const routes = [
       { path: "/users/shiftplanner", element: <ShifftPlaner />, auth: authRoles.admin },
       { path: "/myapproval/Approvals", element: <Approvals />, auth: authRoles.admin },
       { path: "/Settings/dictionary", element: <Stores />, auth: authRoles.admin },
-      { path: "/Settings/task", element: <Task />, auth: authRoles.admin }
+      { path: "/Settings/task", element: <Task />, auth: authRoles.admin },
+      { path: "/About/profile", element: <Profile />, auth: authRoles.admin }
     ]
   },
 
