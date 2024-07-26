@@ -1,8 +1,12 @@
 export interface TaskType {
-  
+  "users":string;
+  "taskProgress":string;
     "id":number;
-     "users":string;
+    "assigner":string;
+     "staff":string;
      "task": string;
+     "description":string;
+     "priority":string;
      "date": string;
-    
+    "status":string;
    }

@@ -11,14 +11,18 @@ import {
   Paper,
   Box,
   TextField,
-  // Fab,
+  Fab,
   Card,
   IconButton,
   Divider,
   Badge,
   Avatar,
+  DialogContent,
+  Dialog,
+  DialogActions,
+  Button,
 } from "@mui/material";
-// import AddIcon from "@mui/icons-material/Add";
+import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -37,9 +41,9 @@ const Viewtable: React.FC = () => {
 
 
   const [addnewuser, setAddnewuser] = useState(false);      //add new user
-  // const handleAddClick = () => {
-  //   setAddnewuser(true);
-  // };
+  const handleAddClick = () => {
+    setAddnewuser(true);
+  };
 
   const handleDialogClose = () => {
     setAddnewuser(false);
@@ -69,8 +73,29 @@ const Viewtable: React.FC = () => {
 
   
 
-  const deleteUser = (data: Staff) => {
-    dispatch(removeStaff({ id: data.id }));
+  // const deleteUser = (data: Staff) => {
+  //   dispatch(removeStaff({ id: data.id }));
+  // };
+
+
+  const [alertdeleteStaff, setAlertDeleteStaff] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<Staff | null>(null);
+
+  const deleteUser=()=>{
+
+    if (userToDelete){
+      dispatch(removeStaff({ id: userToDelete.id }));
+      setAlertDeleteStaff(false);
+      setUserToDelete(null);
+    }
+  }
+  const openDelete = (user:Staff) => {
+    setAlertDeleteStaff(true);
+    setUserToDelete(user);
+  };
+  const closeDelete = () => {
+    setAlertDeleteStaff(false);
+    setUserToDelete(null);
   };
 
   return (
@@ -86,14 +111,14 @@ const Viewtable: React.FC = () => {
         >
           <TextField label="Search" />
 
-          {/* <Fab
+          <Fab
             onClick={handleAddClick}
             size="small"
             color="primary"
             aria-label="add"
           >
             <AddIcon />
-          </Fab> */}
+          </Fab>
         </Box>
         <Divider />
         
@@ -111,7 +136,7 @@ const Viewtable: React.FC = () => {
                 <TableCell sx={{fontSize:'12px'}}>Name</TableCell>
                 <TableCell sx={{fontSize:'12px'}}>Position</TableCell>
                 <TableCell sx={{fontSize:'12px'}}>Store</TableCell>
-                <TableCell sx={{fontSize:'12px'}}>Status</TableCell>
+                {/* <TableCell sx={{fontSize:'12px'}}>Status</TableCell> */}
                 <TableCell sx={{fontSize:'12px'}}>Action</TableCell>
                 
               </TableRow>
@@ -132,8 +157,8 @@ const Viewtable: React.FC = () => {
                   </TableCell>
                     <TableCell>{user.username}</TableCell>
                     <TableCell>{user.employeeID}</TableCell>
-                    <TableCell>{user.joinDate}</TableCell>
-                    <TableCell>{user.status}</TableCell>
+                    <TableCell>{user.storecode}</TableCell>
+                    {/* <TableCell>{user.status}</TableCell> */}
                     <TableCell>
                       <IconButton
                         size="small"
@@ -154,7 +179,7 @@ const Viewtable: React.FC = () => {
                       <IconButton
                         color="error"
                         aria-label="delete"
-                        onClick={() => deleteUser(user)}
+                        onClick={() => openDelete(user)}
                       >
                         <DeleteIcon />
                       </IconButton>
@@ -166,7 +191,19 @@ const Viewtable: React.FC = () => {
         </TableContainer>
         
       </Card>
-
+      <Dialog open={alertdeleteStaff} onClose={closeDelete}  maxWidth="xs" fullWidth>
+        <DialogContent>
+          Are you sure you want to delete this store ?
+        </DialogContent>
+        <DialogActions>
+          <Button color="primary" onClick={closeDelete}>
+            Cancel
+          </Button>
+          <Button color="error" onClick={deleteUser}>
+            Confirm
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Create dialogOpen={addnewuser} handleDialogClose={handleDialogClose} //addnewuser
  /> 
       <Edit
