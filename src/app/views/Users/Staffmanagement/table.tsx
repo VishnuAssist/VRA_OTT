@@ -9,12 +9,7 @@ import {
   Checkbox,
   FormGroup,
   Paper,
-  Box,
-  TextField,
-  Fab,
-  Card,
   IconButton,
-  Divider,
   Badge,
   Avatar,
   DialogContent,
@@ -22,12 +17,11 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Create from "./form";
-import Edit from "./editview";
+import Create from "./FormStaff";
+import Edit from "./EditStaff";
 import { useDispatch, useSelector } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
 import { removeStaff } from "../../../Slices/StaffManagementSlice";
@@ -102,25 +96,7 @@ const Viewtable: React.FC = () => {
     <>
     
     
-      <Card sx={{ p: 4, height: "100%", border: "1px solid #24665D" }}>
-        <Box
-          display={"flex"}
-          justifyContent={"space-between"}
-          flexWrap={"wrap"}
-          p={2}
-        >
-          <TextField label="Search" />
-
-          <Fab
-            onClick={handleAddClick}
-            size="small"
-            color="primary"
-            aria-label="add"
-          >
-            <AddIcon />
-          </Fab>
-        </Box>
-        <Divider />
+      
         
         <TableContainer sx={{overflow:"auto"}} component={Paper}>
           <Table>
@@ -190,7 +166,7 @@ const Viewtable: React.FC = () => {
           </Table>
         </TableContainer>
         
-      </Card>
+     
       <Dialog open={alertdeleteStaff} onClose={closeDelete}  maxWidth="xs" fullWidth>
         <DialogContent>
           Are you sure you want to delete this store ?

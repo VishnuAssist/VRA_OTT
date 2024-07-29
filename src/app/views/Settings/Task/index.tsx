@@ -4,6 +4,8 @@ import { Container, Grid, } from '@mui/material';
 import TaskTable from './table';
 import FooterForUretail from "./footer";
 import { Box } from '@mui/system';
+import TableView from './TableView';
+import ToggleOption from './ToggleOption';
 
 function Index() {
   return (
@@ -17,12 +19,21 @@ function Index() {
           <PageHeader/>
         </PageTitleWrapper>
         <Container maxWidth="lg">
-          <TaskTable/>
+          <ToggleOption/>
+          {/* <TaskTable/> */}
         </Container>
       </Box>
+
+
+
+
+
       <Box mt="auto">
-        <FooterForUretail/>
+        {/* <FooterForUretail/> */}
       </Box>
+
+
+      {/* <TableView/> */}
     </Box>
   );
 }

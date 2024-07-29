@@ -4,6 +4,8 @@ import Form from './Heading';
 import Viewtable from './table';
 import PageTitleWrapper from '../../../components/PageTitleWrapper';
 import PageHeader from './PageHeader';
+import GroupTable from './TableGroupStaff';
+import ToggleOptions from './ToggleOption';
 
 const Index: React.FC = () => {
   return (
@@ -17,10 +19,13 @@ const Index: React.FC = () => {
           <Form />
         </Grid>
         <Grid item xs={12}>
-          <Viewtable />
+          <ToggleOptions/>
+          {/* <Viewtable /> */}
         </Grid>
       </Grid>
     </Container>
+
+    {/* <GroupTable/> */}
     </>
   );
 };
