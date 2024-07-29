@@ -111,6 +111,7 @@ export default function JwtLogin() {
                       type="email"
                       name="email"
                       label="Email"
+                      
                       variant="outlined"
                       onBlur={handleBlur}
                       value={values.email}

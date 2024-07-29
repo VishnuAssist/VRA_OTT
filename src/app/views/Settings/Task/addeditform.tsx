@@ -20,7 +20,7 @@ import {
   import { addTask, updateTask } from "../../../Slices/TaskSlice";
   import { Staff } from "../../../Models/StaffMangement";
 
-  import { useDropzone } from 'react-dropzone';
+  
   import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
   interface Props {
@@ -97,13 +97,7 @@ import {
     const priority = watch("priority");
     const TaskProgress = watch("taskProgress");
   
-    const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
     
-    // const files = acceptedFiles.map(file => (
-    //     <li key={file.path}>
-    //         {file.path} - {file.size} bytes
-    //     </li>
-    // ));
     return (
       <>
         <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
@@ -208,13 +202,7 @@ import {
                   </FormControl>
                 </Grid>
                 <Grid item md={6}>
-                <div {...getRootProps({ style: { border: '2px dashed #cccccc', padding: '20px', textAlign: 'center' } })}>
-                    <input {...getInputProps()} />
-                    <CloudUploadIcon style={{ fontSize: 40 }} />
-                    <Typography variant="h6">
-                        Drag and drop 
-                    </Typography>
-                </div>
+               
             </Grid>
             
             
