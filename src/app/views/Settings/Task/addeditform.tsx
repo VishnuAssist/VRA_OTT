@@ -20,9 +20,6 @@ import { TaskType } from "../../../Models/TaskType";
 import { addTask, updateTask } from "../../../Slices/TaskSlice";
 import { Staff } from "../../../Models/StaffMangement";
 
-import { useDropzone } from "react-dropzone";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
 interface Props {
   openmodel: boolean;
   closetaskmodel: () => void;

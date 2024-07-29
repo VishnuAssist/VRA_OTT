@@ -49,7 +49,7 @@ const Create: FC<CreateProps> = ({
   };
 
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, setValue, watch,formState:{errors} } = useForm<Staff>();
+  const { register, handleSubmit, reset, setValue, watch, } = useForm<Staff>();
 
   // console.log("this is the error on the form",errors)
 

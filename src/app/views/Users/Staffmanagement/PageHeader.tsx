@@ -1,30 +1,36 @@
-import { Box,  Tab,  ToggleButton, ToggleButtonGroup, Typography } from "@mui/material"
-import { useState } from "react"
-import Create from "./form"
-import Groupview from "./groupview";
+import {
+  Box,
+  Tab,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import Create from "./FormStaff";
+import Groupview from "./FormGroupStaff";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 function PageHeader() {
-    const [openmodel, setOpenModel]=useState<boolean>(false)
-    const [group,setGroup]=useState(false)
+  const [openmodel, setOpenModel] = useState<boolean>(false);
+  const [group, setGroup] = useState(false);
 
-    const handleGroupclick = ()=>{
-      setGroup(true);
-     };
-  
-     const handleGroupclose = ()=>{
-      setGroup(false);
-     };
+  const handleGroupclick = () => {
+    setGroup(true);
+  };
 
-    const openstoremodel = () =>{
-      setOpenModel(true)
-    }
-    const closestoremodel = () =>{
-      setOpenModel(false)
-    }
+  const handleGroupclose = () => {
+    setGroup(false);
+  };
+
+  const openstoremodel = () => {
+    setOpenModel(true);
+  };
+  const closestoremodel = () => {
+    setOpenModel(false);
+  };
   return (
     <>
-    {/* <Box display="flex" justifyContent="space-between" flexWrap="wrap" >
+      {/* <Box display="flex" justifyContent="space-between" flexWrap="wrap" >
     <Typography variant='h2'>Staff Management</Typography>
     <Button variant="contained" onClick={openstoremodel}>Add User</Button>
     <ToggleButtonGroup
@@ -49,15 +55,11 @@ function PageHeader() {
             </ToggleButton>
     </Box>
     <Create dialogOpen={openmodel} handleDialogClose={closestoremodel }/> */}
-    <Box display="flex" justifyContent="space-between" flexWrap="wrap">
+      <Box display="flex" justifyContent="space-between" flexWrap="wrap">
         <Typography variant="h2">Staff Management</Typography>
-        <ToggleButtonGroup
-          value={Tab}
-          exclusive
-          
-        >
+        <ToggleButtonGroup value={Tab} exclusive>
           <ToggleButton
-          onChange={openstoremodel}
+            onChange={openstoremodel}
             value="user"
             disableRipple
             sx={{ display: "flex", justifyContent: "space-between" }}
@@ -65,7 +67,7 @@ function PageHeader() {
             <PersonAddIcon /> <Typography sx={{ pl: 1 }}>User</Typography>
           </ToggleButton>
           <ToggleButton onClick={handleGroupclick} value="group" disableRipple>
-            <GroupAddIcon  /> <Typography sx={{ pl: 1 }}>Group</Typography>
+            <GroupAddIcon /> <Typography sx={{ pl: 1 }}>Group</Typography>
           </ToggleButton>
         </ToggleButtonGroup>
       </Box>
@@ -75,4 +77,4 @@ function PageHeader() {
   );
 }
 
-export default PageHeader
+export default PageHeader;

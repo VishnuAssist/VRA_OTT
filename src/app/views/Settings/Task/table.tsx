@@ -9,11 +9,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogActions,
-  TextField,
   Badge,
 } from "@mui/material";
 
@@ -31,40 +26,38 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import * as React from "react";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import DeleteAlert from "../../../components/DeleteAlert";
 
 interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
   value: number;
+  index: number;
+  children: React.ReactNode;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+interface Props {
+  value: number;
+  CustomTabPanel: (props: TabPanelProps) => JSX.Element;
+}
 
+const TabPanel: React.FC<TabPanelProps> = ({ children, value, index, ...other }) => {
   return (
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`tabpanel-${index}`}
+      aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && (
+        <Box p={3}>
+          {children}
+        </Box>
+      )}
     </div>
   );
-}
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-const TaskTable: React.FC = () => {
+};
+const TaskTable: React.FC<Props> = ({value,CustomTabPanel}) => {
   const dispatch = useDispatch();
   const { taskList } = useSelector((state: any) => state.task);
 
@@ -139,11 +132,11 @@ const TaskTable: React.FC = () => {
     }
   };
 
-  const [value, setValue] = React.useState(0);
+  // const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+  // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  //   setValue(newValue);
+  // };
   return (
     <>
       <Card sx={{ p: 1, height: "100%" }}>
@@ -153,24 +146,8 @@ const TaskTable: React.FC = () => {
           flexWrap={"wrap"}
           p={2}
         >
-          <TextField
-            label="Search"
-            variant="outlined"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={value}
-              onChange={handleChange}
-              aria-label="basic tabs example"
-            >
-              <Tab sx={{backgroundColor:"violet"}} color="voilet" label="To Do" {...a11yProps(0)} />
-              <Tab sx={{backgroundColor:"orange"}} label="In Progress" {...a11yProps(1)} />
-              <Tab sx={{backgroundColor:"green"}} label="Completed" {...a11yProps(2)} />
-            </Tabs>
-          </Box>
+          <Typography variant="h3">Card View</Typography>
+        
         </Box>
 
         <CustomTabPanel value={value} index={0}>
@@ -558,25 +535,6 @@ const TaskTable: React.FC = () => {
         </CustomTabPanel>
       </Card>
 
-      <Dialog
-        open={alertdeleteStore}
-        onClose={closeDelete}
-        maxWidth="xs"
-        fullWidth
-      >
-        <DialogContent>
-          Are you sure you want to delete this store ?
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={closeDelete}>
-            Cancel
-          </Button>
-          <Button color="error" onClick={deleteStore}>
-            Confirm
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <AddEditForm
         openmodel={dialogOpen}
         closetaskmodel={closeEdit}
@@ -592,6 +550,7 @@ const TaskTable: React.FC = () => {
         closePreview={closePreview}
         PreviewDetails={previewdata}
       />
+      <DeleteAlert DeleteAlert={alertdeleteStore} closeDelete={closeDelete} DeleteOption={deleteStore}/>
     </>
   );
 };
