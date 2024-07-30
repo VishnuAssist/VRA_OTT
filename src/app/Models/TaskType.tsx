@@ -9,5 +9,5 @@ export interface TaskType {
      "priority":string;
      "date": string;
     "status":string;
-    "file"?: string | null ;
+    "file"?: File[] | null;
    }

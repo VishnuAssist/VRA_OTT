@@ -46,7 +46,7 @@ const StaffStatus = () => {
             <Grid
               item
               xs={6}
-              md={2.5}
+              md={2.4}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -78,7 +78,7 @@ const StaffStatus = () => {
             <Grid
               item
               xs={6}
-              md={2}
+              md={2.4}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -94,7 +94,7 @@ const StaffStatus = () => {
             <Grid
               item
               xs={6}
-              md={2}
+              md={2.4}
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -107,35 +107,35 @@ const StaffStatus = () => {
               <Typography>Average Work Hours</Typography>
             </Grid>
             
-            <Grid item xs={12} md={3} container spacing={0.1} sx={{p:2,display: "flex",justifyContent:"center",alignItems:"center", flexDirection: "row" }}>
-              <Grid item xs={6} md={8}>
+            <Grid item xs={12} md={2.4} container spacing={1} sx={{p:2,display: "flex",justifyContent:"center",alignItems:"center", flexDirection: "row" ,width:"100%"}}>
+              <Grid item xs={10} md={8} lg={8}>
                 Annual Leave
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={1} md={4} lg={4} >
                 12
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={10} md={8} lg={8}>
                 Brithday Leave
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={1} md={4} lg={4}>
                 12
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={10} md={8} lg={8}>
                 Family care
               </Grid>
-              <Grid item  xs={6} md={4}>
+              <Grid item  xs={1} md={4} lg={4}>
                 12
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={10} md={8} lg={8}>
                 MC
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={1} md={4} lg={4}>
                 12
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={10} md={8} lg={8}>
                 Emergency Leave
               </Grid>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={1} md={4} lg={4}>
                 12
               </Grid>
             </Grid>

@@ -31,7 +31,7 @@ const Form: React.FC = () => {
   return (
     <>
       <Grid container spacing={2} sx={{mt:1}}>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={3.5} lg={3}>
           <StyledCard
             elevation={6}
             sx={{ display: "flex", flexDirection: "column",  backgroundColor: "#F8EDE3",
@@ -59,9 +59,9 @@ const Form: React.FC = () => {
             </Box>
           </StyledCard>
         </Grid>
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={8.5} lg={9}>
           <Grid container spacing={2}>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={4} md={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#FF6969",
                   border: "1px solid",
@@ -80,7 +80,7 @@ const Form: React.FC = () => {
                 </Typography>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4} lg={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#BB9AB1",
                   border: "1px solid",
@@ -99,7 +99,7 @@ const Form: React.FC = () => {
                 </Typography>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4} lg={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#B5C18E",
                   border: "1px solid",
@@ -118,7 +118,7 @@ const Form: React.FC = () => {
                 </Typography>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4} lg={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#F1F1F1",
                   border: "1px solid",
@@ -137,7 +137,7 @@ const Form: React.FC = () => {
                 </Typography>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} md={4} lg={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#C4E4FF",
                   border: "1px solid",
@@ -156,7 +156,7 @@ const Form: React.FC = () => {
                 </Typography>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} lg={4}>
+            <Grid item xs={12} lg={4} md={4}>
               <StyledCard elevation={6} sx={{
                   backgroundColor: "#B6BBC4",
                   border: "1px solid",
