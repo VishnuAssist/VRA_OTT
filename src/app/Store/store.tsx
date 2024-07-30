@@ -5,6 +5,7 @@ import storeReducer from "../Slices/StoreManagement";
 import taskReducer from "../Slices/TaskSlice"
 import DictionaryReducer from "../Slices/DictionarySlice"
 import groupStaffReducer from "../Slices/GroupStaff"
+import ApprovalReducer from "../Slices/ApprovalsSlice"
 export const store = configureStore({
   reducer: {
     staff: staffReducer,
@@ -13,7 +14,7 @@ export const store = configureStore({
     store:storeReducer,
     task:taskReducer,
     dictionary:DictionaryReducer,
-
+    approval:ApprovalReducer
   },
 });
 

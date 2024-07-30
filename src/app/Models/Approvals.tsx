@@ -6,5 +6,5 @@ export interface ApprovalsLeave {
      "Fromdate"?: string;
      "Todate"?: string;
      "Reason": string;
-     
+     "status":string;
    }

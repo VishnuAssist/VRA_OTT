@@ -20,6 +20,30 @@ const initialState: UserState = {
       date: "2024-07-12",
       status:""
     },
+    {
+      users:"varun",
+      id: 2,
+      taskProgress:"In Progress",
+      assigner:"kumar",
+      task: "To make a Dashboard UI",
+      description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
+      priority:"Low",
+      staff:"vishnu",
+      date: "2024-07-12",
+      status:""
+    },
+    {
+      users:"ram",
+      id: 3,
+      taskProgress:"Completed",
+      assigner:"Rizwan Sir",
+      task: "To make a Dashboard UI",
+      description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
+      priority:"Low",
+      staff:"vishnu",
+      date: "2024-07-12",
+      status:""
+    },
   ],
   selectedUser: null,
 };
