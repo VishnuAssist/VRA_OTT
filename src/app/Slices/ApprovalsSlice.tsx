@@ -7,7 +7,69 @@ interface ApprovalState {
 }
 
 const initialState: ApprovalState = {
-  approvalList: [],
+  approvalList: [{
+    id: 1,
+    type: "Leave Request",
+    Fromdate: "10-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Fever",
+    status:"Pending"
+  },
+  {
+    id: 2,
+    type: "MC",
+    Fromdate: "01-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Fever",
+    status: "Pending"
+  },
+  {
+    id: 3,
+    type: "Leave Request",
+    Fromdate: "11-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Fever",
+    status: "Pending"
+  },
+  {
+    id: 4,
+    type: "MC",
+    Fromdate: "10-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Fever",
+    status: "Pending"
+  },
+  {
+    id: 5,
+    type: "Commision",
+    Fromdate: "10-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Over Time work",
+    status: "Pending"
+  },
+  {
+    id: 6,
+    type: "Commision",
+    Fromdate: "10-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Over Time work",
+    status: "Pending"
+  },
+  {
+    id: 7,
+    type: "Commision",
+    Fromdate: "10-07-2024",
+    Todate: "11-07-2024",
+    Name: "Riyas",
+    Reason: "Over Time work",
+    status: "Pending"
+  }],
   selectedApproval: null,
 };
 

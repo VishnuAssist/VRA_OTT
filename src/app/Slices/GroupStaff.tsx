@@ -13,7 +13,26 @@ interface GroupStaffState {
 }
 
 const initialState: GroupStaffState = {
-  groupList: [],
+  groupList: [
+    {
+      id:1,
+      groupname:"Store Keeping",
+      staffs:"john",
+      description:"To keep the store neat and clean"
+    },
+    {
+      id:2,
+      groupname:"Keeping",
+      staffs:"kemy",
+      description:"make store clean"
+    },
+    {
+      id:3,
+      groupname:"Bill Counter",
+      staffs:"john",
+      description:"make a bill for customer"
+    },
+  ],
   selectedGroup: null,
 };
 

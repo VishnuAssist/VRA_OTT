@@ -4,9 +4,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  Dialog,
-  DialogContent,
-  DialogTitle,
   Divider,
   Grid,
   Typography,
@@ -15,131 +12,55 @@ import {
 import { useState } from "react";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import { ApprovalsLeave } from "../../Models/Approvals";
-import { removeApproval } from "../../Slices/ApprovalsSlice";
+import PreviewApproval from "./PreviewApproval";
+import ApprovalAlert from "../../components/ApprovalAlert";
+import ApprovalDeleteAlert from "../../components/ApprovalDeleteAlert";
+import { useSelector } from "react-redux";
 interface PageheadingProps {
   Type: string;
 }
 
 const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
-  const dummy = [
-    {
-      id: 1,
-      type: "Leave Request",
-      Fromdate: "10-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Fever",
-    },
-    {
-      id: 2,
-      type: "MC",
-      Fromdate: "01-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Fever",
-    },
-    {
-      id: 3,
-      type: "Leave Request",
-      Fromdate: "11-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Fever",
-    },
-    {
-      id: 4,
-      type: "MC",
-      Fromdate: "10-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Fever",
-    },
-    {
-      id: 5,
-      type: "Commision",
-      Fromdate: "10-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Over Time work",
-    },
-    {
-      id: 6,
-      type: "Commision",
-      Fromdate: "10-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Over Time work",
-    },
-    {
-      id: 7,
-      type: "Commision",
-      Fromdate: "10-07-2024",
-      Todate: "11-07-2024",
-      Name: "Riyas",
-      Reason: "Over Time work",
-    },
-  ];
+  const {  approvalList} = useSelector((state: any) => state.approval);
+const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pending")
+
   const theme = useTheme();
 
   const [preview, setPreview] = useState(false);
   const [previewdata, setPreviewData] = useState<ApprovalsLeave | null>(null);
 
   const openPreview = (data: ApprovalsLeave) => {
-    // console.log("data", data);
+    
     setPreviewData(data);
-    // console.log("previewdata", previewdata);
+    
     setPreview(true);
   };
   const closePreview = () => {
     setPreview(false);
   };
 
+  const [approveAlert, setApproveAlert] = useState(false);
+  const openApproveAlert = () => {
+    setApproveAlert(true);
+  };
+  const closeApproveAlert = () => {
+    setApproveAlert(false);
+  };
 
-  // this is for delete
-  // const [alertdeleteStore, setAlertDeleteStore] = useState(false);
-  // const [userToDelete, setUserToDelete] = useState<ApprovalsLeave | null>(null);
+  const [deleteAlert, setDeleteAlert] = useState(false);
+  const openDeleteAlert = () => {
+    setDeleteAlert(true);
+  };
+  const closeDeleteAlert = () => {
+    setDeleteAlert(false);
+  };
 
-  // const deleteStore = () => {
-  //   if (userToDelete) {
-  //     dispatch(removeApproval({ id: userToDelete.id }));
-  //     setAlertDeleteStore(false);
-  //     setUserToDelete(null);
-  //   }
-  // };
-  // const openDelete = (user: ApprovalsLeave) => {
-  //   setAlertDeleteStore(true);
-  //   setUserToDelete(user);
-  // };
-  // const closeDelete = () => {
-  //   setAlertDeleteStore(false);
-  //   setUserToDelete(null);
-  // };
+  // delete function
   return (
     <>
-      {/* <Box display={'flex'} justifyContent={"space-between"} flexWrap={"wrap"}>
-          <Typography variant="h5" component="h3" gutterBottom>
-            Approvals
-          </Typography>
-          <ToggleButtonGroup
-            value={Tabs}
-            exclusive
-          >
-            <ToggleButton
-              disableRipple
-              value="watch_list_columns"
-              sx={{ display: "flex", justifyContent: "space-between" }}
-            >
-              <Stack spacing={2} direction="row">
-              <Button variant="contained" onClick={()=>setType("Leave Request")} >Leave</Button>
-              <Button variant="contained" onClick={()=>setType("MC")} sx={{bgcolor:"#754CB9"}}>MC</Button>
-              <Button variant="contained" onClick={()=>setType("Commision")}sx={{bgcolor:"#94810A"}}>Commision</Button>
-              </Stack>
-            </ToggleButton>
-          </ToggleButtonGroup>
-        
-       </Box> */}
+    
       <Grid container spacing={2}>
-        {dummy.map((d) => (
+        {pendingList.map((d:ApprovalsLeave) => (
           <>
             {Type == "Leave Request" && d.type == "Leave Request" && (
               <Grid item xs={12} sm={6} md={4} lg={4}>
@@ -157,7 +78,10 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                     }}
                   >
                     <Typography variant="h6">Leave Request</Typography>
-                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
+                    <RemoveRedEyeOutlinedIcon
+                      onClick={() => openPreview(d)}
+                      sx={{ ml: 20 }}
+                    />
 
                     <Divider />
                   </Box>
@@ -213,10 +137,19 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                   <CardActions
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Button variant="contained" color="success">
+                    <Button
+                      variant="contained"
+                      color="success"
+                      onClick={openApproveAlert}
+                    >
                       Approved
                     </Button>
-                    <Button variant="contained" color="error">
+
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={openDeleteAlert}
+                    >
                       Reject
                     </Button>
                   </CardActions>
@@ -293,10 +226,19 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                   <CardActions
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Button variant="contained" color="success">
+                     <Button
+                      variant="contained"
+                      color="success"
+                      onClick={openApproveAlert}
+                    >
                       Approved
                     </Button>
-                    <Button variant="contained" color="error">
+
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={openDeleteAlert}
+                    >
                       Reject
                     </Button>
                   </CardActions>
@@ -372,10 +314,19 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
                   <CardActions
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Button variant="contained" color="success">
+                     <Button
+                      variant="contained"
+                      color="success"
+                      onClick={openApproveAlert}
+                    >
                       Approved
                     </Button>
-                    <Button variant="contained" color="error">
+
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={openDeleteAlert}
+                    >
                       Reject
                     </Button>
                   </CardActions>
@@ -386,43 +337,19 @@ const Pageheading: React.FC<PageheadingProps> = ({ Type }) => {
         ))}
       </Grid>
 
-      <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle>
-          <Typography variant="h5" sx={{color:"darkblue"}}>Details</Typography>
-        </DialogTitle>
-
-        <DialogContent>
-          <Grid container spacing={2}>
-            <>
-              <Grid item md={6}>
-                <Typography variant="h5">Name :</Typography>
-              </Grid>
-
-              <Grid item md={6}>
-                {previewdata?.Name}
-              </Grid>
-              <Grid item md={6}>
-                <Typography variant="h5">FromDate :</Typography>
-              </Grid>
-              <Grid item md={6}>
-                {previewdata?.Fromdate}
-              </Grid>
-              <Grid item md={6}>
-                <Typography variant="h5">To Date :</Typography>
-              </Grid>
-              <Grid item md={6}>
-                {previewdata?.Todate}
-              </Grid>
-              <Grid item md={6}>
-                <Typography variant="h5">Reason :</Typography>
-              </Grid>
-              <Grid item md={6}>
-                {previewdata?.Reason}
-              </Grid>
-            </>
-          </Grid>
-        </DialogContent>
-      </Dialog>
+      <PreviewApproval
+        preview={preview}
+        closePreview={closePreview}
+        previewdata={previewdata}
+      />
+      <ApprovalAlert
+        approveAlert={approveAlert}
+        closeApproveAlert={closeApproveAlert}
+      />
+      <ApprovalDeleteAlert
+        approveAlert={deleteAlert}
+        closeApprovalAlert={closeDeleteAlert}
+      />
     </>
   );
 };

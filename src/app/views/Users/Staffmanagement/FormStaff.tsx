@@ -18,16 +18,39 @@ import {
   IconButton,
 } from "@mui/material";
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
-import { useForm } from "react-hook-form";
+
 import { addStaff, updateStaff } from "../../../Slices/StaffManagementSlice";
 import { useDispatch } from "react-redux";
 import { Staff } from "../../../Models/StaffMangement";
+
+import {  useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormHelperText from '@mui/material/FormHelperText';
 
 interface CreateProps {
   dialogOpen: boolean;
   handleDialogClose: () => void;
   initialUserData?: Staff | null; // Replace 'User' with your actual type for user data
 }
+
+const schema = yup.object().shape({
+  username: yup.string().required("Username is mandatory"),
+  phone: yup.string().required("Phone number is mandatory").min(10),
+  employeeID: yup.string().required(),
+  email: yup
+    .string()
+    .email("Please enter the valid Email")
+    .required("Enter Email"),
+  role: yup.string().required("Select the Role"),
+  storecode: yup.string().required("select the store code"),
+  joinDate: yup.string().required("Select the Joining Date"),
+  position: yup.string().required("Select the position"),
+  status: yup.string().required(),
+  id: yup.number().integer().positive().required(),
+});
+
+
 
 const Create: FC<CreateProps> = ({
   dialogOpen,
@@ -45,11 +68,21 @@ const Create: FC<CreateProps> = ({
     position: "",
     status: "",
     id: 0,
-    store: undefined
+    store: undefined,
   };
 
   const dispatch = useDispatch();
-  const { register, handleSubmit, reset, setValue, watch, } = useForm<Staff>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors, isValid, isDirty },
+  } = useForm<Staff>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
 
   // console.log("this is the error on the form",errors)
 
@@ -195,8 +228,12 @@ const Create: FC<CreateProps> = ({
                     type="text"
                     id="username"
                     label="Name"
-                    {...register("username",{required:'UserName is required'})}
+                    {...register("username", {
+                      required: "UserName is required",
+                    })}
                     fullWidth
+                    error={!!errors.username}
+                    helperText={errors?.username?.message}
                   />
                 </Grid>
                 <Grid item xs={6} sx={{ mt: 1 }}>
@@ -206,6 +243,8 @@ const Create: FC<CreateProps> = ({
                     label="Employee ID"
                     {...register("employeeID")}
                     fullWidth
+                    error={!!errors.employeeID}
+                    helperText={errors?.employeeID?.message}
                   />
                 </Grid>
 
@@ -216,6 +255,8 @@ const Create: FC<CreateProps> = ({
                     label="Phone Number"
                     {...register("phone")}
                     fullWidth
+                    error={!!errors.phone}
+                    helperText={errors?.phone?.message}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -225,6 +266,8 @@ const Create: FC<CreateProps> = ({
                     label="Email"
                     {...register("email")}
                     fullWidth
+                    error={!!errors.email}
+                    helperText={errors?.email?.message}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -234,6 +277,8 @@ const Create: FC<CreateProps> = ({
                     {...register("joinDate")}
                     fullWidth
                     InputLabelProps={{ shrink: true }}
+                    error={!!errors.joinDate}
+                    helperText={errors?.joinDate?.message}
                   />
                 </Grid>
 
@@ -246,12 +291,15 @@ const Create: FC<CreateProps> = ({
                       value={storecode || ""}
                       {...register("storecode")}
                       label="storecode"
+                      error={!!errors.storecode}
                     >
+                    
                       <MenuItem value="TWG001">TWG001</MenuItem>
                       <MenuItem value="TWG002">TWG002</MenuItem>
                       <MenuItem value="TWG003">TWG003</MenuItem>
                       <MenuItem value="TWG004">TWG004</MenuItem>
                     </Select>
+                    <FormHelperText>{errors?.storecode?.message}</FormHelperText>
                   </FormControl>
                 </Grid>
                 <Grid item xs={6}>
@@ -261,6 +309,8 @@ const Create: FC<CreateProps> = ({
                     label="Position"
                     {...register("position")}
                     fullWidth
+                    error={!!errors.position}
+                    helperText={errors?.position?.message}
                   />
                 </Grid>
                 <Grid item xs={6}>
@@ -289,7 +339,12 @@ const Create: FC<CreateProps> = ({
                   alignItems: "center",
                 }}
               >
-                <Button type="submit" variant="contained" color="primary">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  disabled={isDirty && !isValid}
+                >
                   {initialUserData ? "Update" : "Save"}
                 </Button>
               </Box>

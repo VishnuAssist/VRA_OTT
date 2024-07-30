@@ -105,11 +105,6 @@ const PreviewTaskDetails: FC<Props> = ({
             <Grid item md={6}>
               <Typography>{PreviewDetails?.priority}</Typography>
             </Grid>
-
-            </Grid>
-            </Grid>
-            <Grid item md={6}>
-                <Grid container spacing={2}>
             <Grid item md={6}>
               <Box display="flex" alignItems="center">
                 <PeopleAltOutlinedIcon />
@@ -125,13 +120,19 @@ const PreviewTaskDetails: FC<Props> = ({
               <Box display="flex" alignItems="center">
                 <CalendarMonthOutlinedIcon />
                 <Typography variant="h5" ml={1}>
-                  Priority :
+                  Due Date :
                 </Typography>
               </Box>
             </Grid>
             <Grid item md={6}>
               <Typography>{PreviewDetails?.date}</Typography>
             </Grid>
+
+            </Grid>
+            </Grid>
+            <Grid item md={6}>
+                <Grid container spacing={2}>
+            
             <Grid item md={6}>
             <Box display="flex" alignItems="center">
                 <AttachFileOutlinedIcon />
@@ -140,8 +141,9 @@ const PreviewTaskDetails: FC<Props> = ({
                 </Typography>
               </Box>
             </Grid>
+            
             <Grid item md={6}>
-              <Typography>{PreviewDetails?.file}</Typography>
+              <Box sx={{px:6,py:6,border:'dashed'}}>File Preview</Box>
             </Grid>
             </Grid>
             </Grid>

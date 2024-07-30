@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@mobiscroll/react": "npm:@mobiscroll/react-next-trial@^5.31.1",
     "@mui/x-charts": "^7.11.0",
     "or": "^0.2.0",

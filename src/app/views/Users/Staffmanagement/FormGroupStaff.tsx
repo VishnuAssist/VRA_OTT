@@ -8,10 +8,12 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { GroupStaff } from "../../../Models/GroupStaff";
+import { useDispatch } from "react-redux";
+import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
 
 const users = [
   { label: "John" },
@@ -23,15 +25,45 @@ const users = [
 interface Props {
   openpGroup: boolean;
   closeGroup: () => void;
+  initialStore: GroupStaff | null;
 }
 
-const Groupview: FC<Props> = ({ openpGroup, closeGroup }) => {
-
-  const { register, handleSubmit } = useForm<GroupStaff>();
-
-  const submitValue=(data:GroupStaff)=>{
-    console.log("data",data)
+const Groupview: FC<Props> = ({ openpGroup, closeGroup,initialStore }) => {
+  const data:GroupStaff={
+  groupname:"",
+  description:"",
+  staffs:"",
+  id:0,
   }
+  const dispatch = useDispatch();
+  const { register, handleSubmit,reset,setValue } = useForm<GroupStaff>();
+
+
+ 
+  const submitValue=(data:GroupStaff)=>{
+    if(initialStore){
+      dispatch(updateGroup(data))
+        
+      }else{
+        dispatch(addGroup(data))
+      }
+      reset();
+      closeGroup();
+    }
+    useEffect(() => {
+      reset(initialStore || data);
+    }, [initialStore, reset]);
+  
+    useEffect(() => {
+      if (initialStore) {
+        setValue("groupname", initialStore.groupname);
+        setValue("description", initialStore.description);
+        setValue("staffs", initialStore.staffs);
+        setValue("id", initialStore.id);
+      }
+    }, [initialStore, setValue]);
+    
+  
 
   return (
     <>
@@ -58,9 +90,7 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup }) => {
               <Grid item xs={12} md={12}>
                 <TextField fullWidth label="Description" {...register("description")}/>
               </Grid>
-            </Grid>
-            {/* </Grid> */}
-            {/* </Grid> */}
+            </Grid> 
             <DialogActions>
               <Button type="submit" variant="contained" color="primary">
                 Save

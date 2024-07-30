@@ -1,13 +1,18 @@
 import { Box, Button, ButtonGroup, Typography, useTheme } from "@mui/material";
 
+
 interface PageHeaderProps {
   setType: (type: string) => void;
   Type: string;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ setType, Type }) => {
+  
+  
+
   const handleTypeChange = (newType: string) => {
     setType(newType);
+    
   };
   const theme = useTheme();
   return (
