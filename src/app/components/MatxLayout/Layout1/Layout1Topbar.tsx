@@ -110,6 +110,7 @@ const Layout1Topbar = (_Fixed:any) => {
   };
 
   return (
+    
     <TopbarRoot>
       <TopbarContainer>
         <Box display="flex">
@@ -149,15 +150,17 @@ const Layout1Topbar = (_Fixed:any) => {
                     Hi <strong>{""}</strong>
                   </Span>
                 </Hidden> */}
+                
                 <Avatar src={""} sx={{ cursor: "pointer" }} />
+                
               </UserMenu>
             }>
-            <StyledItem>
+            {/* <StyledItem>
               <Link to="/">
                 <Home />
                 <Span>Home</Span>
               </Link>
-            </StyledItem>
+            </StyledItem> */}
 
             <StyledItem>
               <Link to="/About/profile">
