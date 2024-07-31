@@ -18,7 +18,7 @@ const initialState: UserState = {
       priority:"Low",
       staff:"vishnu",
       date: "2024-07-12",
-      status:""
+      status:"",
     },
     {
       users:"varun",

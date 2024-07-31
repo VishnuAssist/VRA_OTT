@@ -11,20 +11,36 @@ import {
   MenuItem,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+
 import { useDispatch, useSelector } from "react-redux";
 import { TaskType } from "../../../Models/TaskType";
 import { addTask, updateTask } from "../../../Slices/TaskSlice";
 import { Staff } from "../../../Models/StaffMangement";
 
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormHelperText from "@mui/material/FormHelperText";
 interface Props {
   openmodel: boolean;
   closetaskmodel: () => void;
   initialTask?: TaskType | null;
 }
+
+const schema = yup.object().shape({
+  users: yup.string().required('user is mandatory'),
+  taskProgress: yup.string().required('choose the TaskProgress'),
+  assigner: yup.string().required("Assigner is mandatory"),
+  staff: yup.string().required('Select the Staff'),
+  task: yup.string().required('Select the Task'),
+  description: yup.string().required("Description is mandatory"),
+  priority: yup.string().required("Select the Priority"),
+  date: yup.string().required(),
+  id: yup.number().integer().positive().required(),
+  status: yup.string().required(),
+});
 
 const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const data: TaskType = {
@@ -43,19 +59,18 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const { userList } = useSelector((state: any) => state.staff);
   console.log(userList);
 
-  const { register, handleSubmit, reset, setValue, watch } =
-    useForm<TaskType>();
+  const { register, handleSubmit, reset, setValue, watch, formState: { errors, isValid, isDirty }, } =
+    useForm<TaskType>()
   const dispatch = useDispatch();
   const [selectedUser, setSelectedUser] = useState<Staff | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File[]>([]);
 
   const submitData = (data: TaskType) => {
-    // console.log("data", data);
-    // console.log("selectedUser", selectedUser);
     const taskData = {
       ...data,
       users: selectedUser ? selectedUser.username : "",
+      file: selectedFile,
     };
-    console.log("statusss", taskData);
     if (initialTask) {
       dispatch(updateTask(taskData));
     } else {
@@ -63,8 +78,22 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
     }
     reset();
     setSelectedUser(null);
+    // setSelectedFile([]);
     closetaskmodel();
-    console.log("tttttttttttttt", data);
+    console.log("Submitted Data", selectedFile.length);
+  };
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile((prevFiles) => [...prevFiles, file]);
+      // if (selectedFile == null){
+      //   setSelectedFile([file] );
+      // }
+      // else{
+      //   setSelectedFile([...selectedFile,file])
+      // }
+    }
   };
 
   useEffect(() => {
@@ -82,7 +111,6 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
       setValue("date", initialTask.date);
       setValue("priority", initialTask.priority);
 
-      // Assuming initialTask.users is a single username
       const initialSelectedUser = userList.find(
         (user: Staff) => user.username === initialTask.users
       );
@@ -92,20 +120,8 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
 
   const task = watch("task");
   const priority = watch("priority");
-  const TaskProgress = watch("taskProgress");
+  const taskProgress = watch("taskProgress");
 
-  // const { getRootProps, getInputProps, acceptedFiles } = useDropzone();
-
-  // const files = acceptedFiles.map(file => (
-  //     <li key={file.path}>
-  //         {file.path} - {file.size} bytes
-  //     </li>
-  // ));
-  const [file, setFile] = useState();
-  function handleFile(event: any) {
-    setFile(event.target.files[0]);
-    console.log(file);
-  }
   return (
     <>
       <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
@@ -115,34 +131,33 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
         <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
           <form onSubmit={handleSubmit(submitData)}>
             <Grid container spacing={2}>
-              if (initialState === true)
-              {
-                <Grid item xs={12} md={12}>
-                  <FormControl fullWidth>
-                    <InputLabel id="TaskProgress-select-label">
-                      TaskProgress
-                    </InputLabel>
-                    <Select
-                      labelId="TaskProgress-select-label"
-                      id="TaskProgress-select"
-                      value={TaskProgress || ""}
-                      {...register("taskProgress")}
-                      label="TaskProgress"
-                    >
-                      <MenuItem value="To Do">To Do</MenuItem>
-                      <MenuItem value="In Progress">In Progress</MenuItem>
-                      <MenuItem value="Completed">Completed</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-              }
+              <Grid item xs={12} md={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="taskProgress-select-label">
+                    TaskProgress
+                  </InputLabel>
+                  <Select
+                    labelId="taskProgress-select-label"
+                    id="taskProgress-select"
+                    value={taskProgress || ""}
+                    {...register("taskProgress")}
+                    label="TaskProgress"
+                  >
+                    <MenuItem value="To Do">To Do</MenuItem>
+                    <MenuItem value="In Progress">In Progress</MenuItem>
+                    <MenuItem value="Completed">Completed</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
               <Grid item md={12} sx={{ mt: 1 }}>
                 <TextField
                   type="text"
-                  id="Assigned by"
+                  id="assigned-by"
                   label="Assigned By"
                   {...register("assigner")}
                   fullWidth
+                  error={!!errors.assigner}
+                  helperText={errors?.assigner?.message}
                 />
               </Grid>
               <Grid item xs={12} md={12} sx={{ mt: 1 }}>
@@ -150,7 +165,6 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   options={userList}
                   getOptionLabel={(option: Staff) => option.username}
                   value={selectedUser}
-                  {...register("staff")}
                   onChange={(_, value) => {
                     setSelectedUser(value);
                   }}
@@ -183,17 +197,21 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   label=""
                   {...register("date")}
                   fullWidth
+                  error={!!errors.date}
+                  helperText={errors?.date?.message}
                 />
               </Grid>
               <Grid item md={12}>
                 <TextField
                   type="text"
-                  id="Description"
+                  id="description"
                   label="Description"
                   multiline
                   rows={4}
                   fullWidth
                   {...register("description")}
+                  error={!!errors.description}
+                  helperText={errors?.description?.message}
                 />
               </Grid>
               <Grid item xs={12} md={6}>
@@ -213,30 +231,21 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   </Select>
                 </FormControl>
               </Grid>
-              {/* <Grid item md={6}>
-                <div
-                  {...getRootProps({
-                    style: {
-                      border: "2px dashed #cccccc",
-                      padding: "20px",
-                      textAlign: "center",
-                    },
-
-                  })}
-                >
-                  <input {...getInputProps()} />
-                  <CloudUploadIcon style={{ fontSize: 40 }} />
-                  <Typography variant="h6">Drag and drop</Typography>
-                </div>
-              </Grid> */}
               <Grid item md={6}>
-                <input type="file" name="file" onChange={handleFile} />
-                <Button>Upload</Button>
+                <input
+                  type="file"
+                  id="file"
+                  {...register("file")}
+                  onChange={handleFileChange}
+                  // error={!!errors.file}
+                  // helperText={errors?.file?.message}
+                />
               </Grid>
             </Grid>
 
             <DialogActions>
               <Button type="submit" variant="contained" color="primary">
+              {/* disabled={isDirty && !isValid} */}
                 {initialTask ? "Update" : "Create Task"}
               </Button>
             </DialogActions>

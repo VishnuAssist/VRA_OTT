@@ -172,7 +172,7 @@ const Create: FC<CreateProps> = ({
         <DialogContent>
           <form onSubmit={handleSubmit(submitData)}>
             <Grid container spacing={2}>
-              <Grid item xs={12} lg={4}>
+              <Grid item xs={12} md={6} sm={6} lg={5}  >
                 <Tooltip
                   title={isActive ? "Click to Deactivate" : "Click to Activate"}
                   arrow
@@ -222,8 +222,8 @@ const Create: FC<CreateProps> = ({
                 />
               </Grid>
 
-              <Grid item xs={12} lg={8} container spacing={2}>
-                <Grid item xs={6} sx={{ mt: 1 }}>
+              <Grid item xs={12} sm={6} md={6} lg={7} container spacing={2}>
+                <Grid item xs={12} sm={6} md={6} lg={6} sx={{ mt: 1 }}>
                   <TextField
                     type="text"
                     id="username"
@@ -236,7 +236,7 @@ const Create: FC<CreateProps> = ({
                     helperText={errors?.username?.message}
                   />
                 </Grid>
-                <Grid item xs={6} sx={{ mt: 1 }}>
+                <Grid item xs={12} sm={6} md={6} lg={6} sx={{ mt: 1 }}>
                   <TextField
                     type="text"
                     id="employeeID"
@@ -248,7 +248,7 @@ const Create: FC<CreateProps> = ({
                   />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <TextField
                     type="number"
                     id="phone"
@@ -259,7 +259,7 @@ const Create: FC<CreateProps> = ({
                     helperText={errors?.phone?.message}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <TextField
                     type="email"
                     id="email"
@@ -270,7 +270,7 @@ const Create: FC<CreateProps> = ({
                     helperText={errors?.email?.message}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <TextField
                     type="date"
                     id="joinDate"
@@ -282,7 +282,7 @@ const Create: FC<CreateProps> = ({
                   />
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <FormControl fullWidth>
                     <InputLabel id="store-select-label">Store</InputLabel>
                     <Select
@@ -302,7 +302,7 @@ const Create: FC<CreateProps> = ({
                     <FormHelperText>{errors?.storecode?.message}</FormHelperText>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <TextField
                     type="text"
                     id="position"
@@ -313,7 +313,7 @@ const Create: FC<CreateProps> = ({
                     helperText={errors?.position?.message}
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6} md={6} lg={6}>
                   <FormControl fullWidth>
                     <InputLabel id="role-select-label">Role</InputLabel>
                     <Select
