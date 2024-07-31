@@ -10,8 +10,11 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const StaffStatus = () => {
+  const {selectedUser } = useSelector((state: any) => state.staff);
+  console.log(selectedUser)
   const data = [
     {
       date: "10-7-2024",

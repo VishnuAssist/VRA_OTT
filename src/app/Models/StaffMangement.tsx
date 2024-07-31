@@ -14,4 +14,14 @@ export interface Staff {
 
     "profilePicture"?: string | null ;
     "isActive"?: boolean;
+'attendance'?:Attendance[]|null
   }
+
+export interface Attendance {
+  'attendanceId':number,
+  'date':string,
+  'checkin':string,
+  'checkout':string,
+  'status':string,
+  'file'?:File
+}
