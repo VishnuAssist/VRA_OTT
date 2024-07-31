@@ -16,6 +16,9 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { FC } from "react";
 import { Staff } from "../../../Models/StaffMangement";
+import { useDispatch } from "react-redux";
+import { setSelectedStaff } from "../../../Slices/StaffManagementSlice";
+import { useNavigate } from "react-router-dom";
 
 interface CreateProps {
   editdialogOpen: boolean;
@@ -27,6 +30,13 @@ const Edit: FC<CreateProps> = ({
   edithandleDialogClose,
   edituserData,
 }) => {
+  console.log(edituserData);
+  const dispatch = useDispatch();
+  const navigation = useNavigate()
+  const setattendancedata = () => {
+    dispatch(setSelectedStaff(edituserData));
+    navigation("/users/attendence") 
+  };
   return (
     <>
       <Dialog
@@ -40,7 +50,9 @@ const Edit: FC<CreateProps> = ({
             <Typography variant="h6">
               {edituserData ? "Update User" : ""}
             </Typography>
-            <Button variant="contained">Attendance Status</Button>
+            <Button variant="contained" onClick={() => setattendancedata()}>
+              Attendance Status
+            </Button>
           </Box>
         </DialogTitle>
 

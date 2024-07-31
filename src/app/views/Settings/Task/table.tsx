@@ -28,6 +28,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import * as React from "react";
 import Box from "@mui/material/Box";
 import DeleteAlert from "../../../components/DeleteAlert";
+import { filterbystatus } from "./utile";
 
 interface TabPanelProps {
   value: number;
@@ -115,8 +116,19 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
     setPreview(false);
   };
 
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
 
+  // const filterToDo = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "To Do"
+  // );
+  // const filterInProgress = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "In Progress"
+  // );
+  // const filterCompleted = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "Completed"
+  // );
+const [filtereddata,setfiltereddata] =useState([])
+React.useEffect(()=>{
   const filterToDo = taskList.filter(
     (data: TaskType) => data.taskProgress === "To Do"
   );
@@ -126,7 +138,15 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
   const filterCompleted = taskList.filter(
     (data: TaskType) => data.taskProgress === "Completed"
   );
-
+  if(value==0){
+    setfiltereddata(filterToDo)
+  }else if(value==1 ){
+    setfiltereddata(filterInProgress)
+  }else if(value==2){
+    setfiltereddata(filterCompleted)
+  }
+// setfiltereddata(filterbystatus(taskList,value))
+},[value])
   const getProgressColor = (progress: string) => {
     switch (progress.toLowerCase()) {
       case "to do":
@@ -151,15 +171,15 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
           <Typography variant="h3">Card View</Typography>
         </Box>
 
-        <CustomTabPanel value={value} index={0}>
+        {/* <CustomTabPanel value={value} index={0}> */}
           <Grid container spacing={2}>
             <Grid item md={12}>
               <Card
                 sx={{ p: 2, height: "100%", width: "100%" }}
                 // key={taskDetail.id}
               >
-                {filterToDo &&
-                  filterToDo.map((taskDetail: TaskType) => (
+                {
+                  filtereddata?.map((taskDetail: TaskType) => (
                     <>
                       <Box sx={{ display: "flex", p: 1 }}>
                         <CircleIcon
@@ -338,8 +358,8 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
               </Card>
             </Grid>
           </Grid>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
+        {/* </CustomTabPanel> */}
+        {/* <CustomTabPanel value={value} index={1}>
           <Grid container spacing={2}>
             <Grid item md={12}>
               
@@ -517,8 +537,8 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                 
             </Grid>
           </Grid>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
+        </CustomTabPanel> */}
+        {/* <CustomTabPanel value={value} index={2}>
           <Grid container spacing={2}>
             <Grid item md={12}>
               
@@ -696,7 +716,7 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
              
             </Grid>
           </Grid>
-        </CustomTabPanel>
+        </CustomTabPanel> */}
       </Card>
 
       <AddEditForm

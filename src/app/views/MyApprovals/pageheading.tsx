@@ -177,45 +177,45 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
                     <Grid item xs={12} md={12} container spacing={2}>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} md={3} sm={3} >
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Name:
                         </Typography>
                       </Grid>
-                      <Grid item xs={9}>
+                      <Grid item xs={9} md={9} sm={9}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {" "}
                           {d.Name}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} md={3} sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Fromdate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} md={7} sm={7}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Fromdate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} md={3} sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Todate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} md={7} sm={7}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Todate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} md={3} sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Reason:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} md={7} sm={7}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Reason}
                         </Typography>
@@ -265,46 +265,46 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                   </Box>
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
-                    <Grid item xs={12} md={12} container spacing={2}>
-                      <Grid item xs={3}>
+                    <Grid item xs={12} md={12}  container spacing={2}>
+                      <Grid item xs={3}  sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Name:
                         </Typography>
                       </Grid>
-                      <Grid item xs={9}>
+                      <Grid item xs={9}  sm={9}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {" "}
                           {d.Name}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3}  sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Fromdate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} sm={7}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Fromdate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} sm={3.5}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Todate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} sm={7.5}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Todate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}>
+                      <Grid item xs={3} sm={3}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Reason:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item xs={7} sm={7.5}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Reason}
                         </Typography>

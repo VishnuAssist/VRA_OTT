@@ -19,7 +19,8 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined
+      store: undefined,
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
     },
     {
       id: 2,
@@ -32,10 +33,11 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined
+      store: undefined,
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
     },
     {
-      id: 1,
+      id: 3,
       username: "Hari",
       employeeID: "002",
       phone: "9856742321",
@@ -45,10 +47,11 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined
+      store: undefined,
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
     },
     {
-      id: 1,
+      id: 4,
       username: "Riyas",
       employeeID: "003",
       phone: "9856742321",
@@ -58,7 +61,8 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined
+      store: undefined,
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
     },
   ],
   selectedUser: null,
@@ -86,6 +90,8 @@ const StaffManagementSlice = createSlice({
     setSelectedStaff: (state, action: PayloadAction<Staff | null>) => {
       state.selectedUser = action.payload;
     },
+
+
   },
 });
 
