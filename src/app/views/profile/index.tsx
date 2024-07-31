@@ -64,7 +64,7 @@ const index = () => {
              
              <Box sx={{display:"flex",justifyContent:"space-between"}}>
              <CardHeader title="Task Activity" />
-       <Divider />
+             <Divider sx={{ mb: 2,backgroundColor:"#E08A6B" }} />
           <Select size="small" defaultValue="This week">
             <MenuItem value="this_month">This week</MenuItem>
             <MenuItem value="last_month">Last week</MenuItem>

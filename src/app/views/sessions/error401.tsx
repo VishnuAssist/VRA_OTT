@@ -1,8 +1,6 @@
 import { Box, Button, styled, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import img from "../../components/assest/error500.png"
-
-
+import pic from "../../components/assest/error401.png"
 // STYLED COMPONENTS
 const FlexBox = styled(Box)({
   display: "flex",
@@ -34,11 +32,12 @@ export default function NotFound() {
 
   return (
     <NotFoundRoot>
+      
       <JustifyBox >
-      <Typography sx={{fontSize:40,fontWeight:"bold"}} variant="h6">Page Not Found</Typography>
-        <IMG style={{width:400}} src={img} alt="" />
-        <Typography sx={{fontSize:25,fontWeight:"bold"}} variant="h6">Internal Server error</Typography>
-        <p>We're experiencing internal server problem.</p>
+        <Typography sx={{fontSize:40,fontWeight:"bold"}} variant="h6">Page Not Found</Typography>
+        <IMG style={{width:500}} src={pic} alt="" />
+        <Typography sx={{fontSize:25,fontWeight:"bold"}} variant="h6">Unauthorized Server error</Typography>
+        <p>Your credentials do not match to log on</p>
         <p>Click here from previous page</p>
         <Button
           color="primary"

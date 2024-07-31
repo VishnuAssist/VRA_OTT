@@ -11,11 +11,14 @@ import {
 // import React, { useState } from "react";
 import StaffStatus from "./StaffStatus";
 
+
 const StaffRole = () => {
   // const [searchTerm, setSearchTerm] = useState("");
   // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSearchTerm(event.target.value);
   // };
+ 
+
   return (
     <>
     
@@ -38,6 +41,7 @@ const StaffRole = () => {
             
             <CardContent>
               <Grid container spacing={2}>
+                
                 <Grid item xs={12} md={1} sx={{display:"flex" ,justifyContent:"center",alignItems:'center'}}>
                   <Avatar sx={{width:70,height:70}}></Avatar>
                 </Grid>
@@ -57,6 +61,7 @@ const StaffRole = () => {
                   <Typography variant="h6">Store</Typography>
                   <Typography>BBWE</Typography>
                 </Grid>
+              
               </Grid>
               </CardContent>
             </Card>

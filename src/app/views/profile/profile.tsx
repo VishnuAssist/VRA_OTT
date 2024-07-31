@@ -46,13 +46,14 @@ const Profile = () => {
               <Typography variant="h5" align="center" sx={{ mt: 2 }}>
                 Tony Stark
               </Typography>
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Box sx={{ display: "flex", mb: 2 }}>
+              <Box sx={{ display: "flex" ,mt: 2 }}>
                 <Button variant="contained" color="primary" sx={{ width: 130 }}>
                   Admin
                 </Button>
               </Box>
+            </Grid>
+            <Grid item sx={{display: "flex" ,flexDirection:"column",justifyContent:"center"}} xs={12} sm={6}>
+            
               
               <InfoContainer>
                 <InfoItem>

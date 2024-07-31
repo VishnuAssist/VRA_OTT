@@ -16,6 +16,7 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { FC } from "react";
 import { Staff } from "../../../Models/StaffMangement";
+import { Link } from "react-router-dom";
 
 interface CreateProps {
   editdialogOpen: boolean;
@@ -40,7 +41,9 @@ const Edit: FC<CreateProps> = ({
             <Typography variant="h6">
               {edituserData ? "Update User" : ""}
             </Typography>
+            <Link to="/users/attendence">
             <Button variant="contained">Attendance Status</Button>
+            </Link>
           </Box>
         </DialogTitle>
 
