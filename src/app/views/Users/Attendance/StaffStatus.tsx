@@ -6,6 +6,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Typography,
@@ -141,7 +142,9 @@ const StaffStatus = () => {
             </Grid>
           </Grid>
         </Card>
+        <Grid item md={12} xs={12}>
         <Card sx={{ mt: 2, p: 1 }}>
+        <TableContainer sx={{ overflow: "auto" }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -154,7 +157,7 @@ const StaffStatus = () => {
             <TableBody>
               {data && data.map((staff)=>(
               <TableRow>
-                <TableCell>{staff.date}</TableCell>
+                <TableCell width={'100%'}>{staff.date}</TableCell>
                 <TableCell>{staff.checkin}</TableCell>
                 <TableCell>{staff.checkout}</TableCell>
                 <TableCell><Button variant="contained">{staff.status}</Button></TableCell>
@@ -162,7 +165,9 @@ const StaffStatus = () => {
              )) }
             </TableBody>
           </Table>
+          </TableContainer>
         </Card>
+        </Grid>
     </>
   );
 };

@@ -99,7 +99,7 @@ const ToggleOption = () => {
           />
           
         </Box>
-        {selectedView ==="Grid"? <TaskTable value={value} CustomTabPanel={CustomTabPanel}/>:<TableView />}
+        {selectedView ==="Grid"? <TaskTable value={value} CustomTabPanel={CustomTabPanel}/>:<TableView value={value} CustomTabPanel={CustomTabPanel}/>}
 
         {/* <TaskTable />
         <TableView/> */}

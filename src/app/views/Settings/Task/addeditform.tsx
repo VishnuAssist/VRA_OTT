@@ -30,11 +30,11 @@ interface Props {
 }
 
 const schema = yup.object().shape({
-  users: yup.string().required('user is mandatory'),
-  taskProgress: yup.string().required('choose the TaskProgress'),
+  users: yup.string().required("user is mandatory"),
+  taskProgress: yup.string().required("choose the TaskProgress"),
   assigner: yup.string().required("Assigner is mandatory"),
-  staff: yup.string().required('Select the Staff'),
-  task: yup.string().required('Select the Task'),
+  staff: yup.string().required("Select the Staff"),
+  task: yup.string().required("Select the Task"),
   description: yup.string().required("Description is mandatory"),
   priority: yup.string().required("Select the Priority"),
   date: yup.string().required(),
@@ -59,8 +59,17 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const { userList } = useSelector((state: any) => state.staff);
   console.log(userList);
 
-  const { register, handleSubmit, reset, setValue, watch, formState: { errors, isValid, isDirty }, } =
-    useForm<TaskType>()
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors, isValid, isDirty },
+  } = useForm<TaskType>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
   const dispatch = useDispatch();
   const [selectedUser, setSelectedUser] = useState<Staff | null>(null);
   const [selectedFile, setSelectedFile] = useState<File[]>([]);
@@ -125,11 +134,12 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   return (
     <>
       <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
-        <DialogTitle sx={{ color: "darkblue" }}>
-          {initialTask ? "Update Task" : "New Task"}
-        </DialogTitle>
-        <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
-          <form onSubmit={handleSubmit(submitData)}>
+        <form onSubmit={handleSubmit(submitData)}>
+          <DialogTitle sx={{ color: "darkblue" }}>
+            {initialTask ? "Update Task" : "New Task"}
+          </DialogTitle>
+
+          <DialogContent sx={{ display: "flex", flexDirection: "column",maxHeight:500,overflow:"auto" }}>
             <Grid container spacing={2}>
               <Grid item xs={12} md={12}>
                 <FormControl fullWidth>
@@ -143,9 +153,9 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                     {...register("taskProgress")}
                     label="TaskProgress"
                   >
-                    <MenuItem value="To Do">To Do</MenuItem>
-                    <MenuItem value="In Progress">In Progress</MenuItem>
-                    <MenuItem value="Completed">Completed</MenuItem>
+                    <MenuItem value="1">To Do</MenuItem>
+                    <MenuItem value="2">In Progress</MenuItem>
+                    <MenuItem value="3">Completed</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -242,15 +252,14 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                 />
               </Grid>
             </Grid>
-
-            <DialogActions>
-              <Button type="submit" variant="contained" color="primary">
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit" variant="contained" color="primary">
               {/* disabled={isDirty && !isValid} */}
-                {initialTask ? "Update" : "Create Task"}
-              </Button>
-            </DialogActions>
-          </form>
-        </DialogContent>
+              {initialTask ? "Update" : "Create Task"}
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   );
