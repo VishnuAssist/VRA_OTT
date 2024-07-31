@@ -12,6 +12,7 @@ import MatxLayout from "./components/MatxLayout/MatxLayout";
 "app/views/material-kit/MaterialRoutes"
 // SESSION PAGES
 const NotFound = Loadable(lazy(() => import("./views/sessions/NotFound")));
+const Error401 = Loadable(lazy(() => import("./views/sessions/error401")));
 const Error500 = Loadable(lazy(() => import("./views/sessions/error500")));
 const JwtLogin = Loadable(lazy(() => import("./views/sessions/JwtLogin")));
 const JwtRegister = Loadable(lazy(() => import("./views/sessions/JwtRegister")));
@@ -55,6 +56,7 @@ const routes = [
 
   // session pages route
   { path: "/session/404", element: <NotFound /> },
+  { path: "/session/401", element: <Error401 /> },
   { path: "/session/500", element: <Error500 /> },
   { path: "/session/signin", element: <JwtLogin /> },
   { path: "/session/signup", element: <JwtRegister /> },
