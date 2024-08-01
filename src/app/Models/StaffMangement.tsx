@@ -15,6 +15,7 @@ export interface Staff {
     "profilePicture"?: string | null ;
     "isActive"?: boolean;
 'attendance'?:Attendance[]|null
+'leaves'?:Leaves|null
   }
 
 export interface Attendance {
@@ -24,4 +25,12 @@ export interface Attendance {
   'checkout':string,
   'status':string,
   'file'?:File
+}
+export interface Leaves {
+  'annualleave':number,
+  'casualleave':number,
+  'flexileave':number,
+  'familycare':number,
+  'medicalleave':number,
+  'emergencyleave':number,
 }

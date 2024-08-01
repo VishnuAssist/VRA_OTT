@@ -24,7 +24,7 @@ import { useState } from "react";
 import { removeGroup } from "../../../Slices/GroupStaff";
 import DeleteAlert from "../../../components/DeleteAlert";
 import Groupview from "./FormGroupStaff";
-
+import CloseIcon from '@mui/icons-material/Close';
 const GroupTable = () => {
   const { groupList } = useSelector((state: any) => state.groupStaff);
 
@@ -97,10 +97,10 @@ const GroupTable = () => {
                       <Checkbox defaultChecked />
                     </FormGroup>
                   </TableCell>
-                  <TableCell>{groupDetails.groupname}</TableCell>
+                  <TableCell>{groupDetails?.groupname}</TableCell>
 
-                  <TableCell>{groupDetails.staffs}</TableCell>
-                  <TableCell>{groupDetails.description}</TableCell>
+                  <TableCell>{groupDetails?.staffs?.length}</TableCell>
+                  <TableCell>{groupDetails?.description}</TableCell>
 
                   <TableCell>
                     <IconButton
@@ -134,7 +134,10 @@ const GroupTable = () => {
       </TableContainer>
 
       <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle variant="h5">Group of Staff Members</DialogTitle>
+        <DialogTitle sx={{display:"flex",alignItems:"center",justifyContent:"space-between"}} variant="h5">Group of Staff Members<IconButton ><CloseIcon color="error"/>
+        </IconButton>
+        </DialogTitle>
+        
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item md={6}>
@@ -156,7 +159,9 @@ const GroupTable = () => {
             </Grid>
 
             <Grid item md={6}>
-              {previewdata?.staffs}
+              {previewdata?.staffs?.map(name=>(
+                <Typography>{name?.username}</Typography>
+              ))}
             </Grid>
           </Grid>
         </DialogContent>
