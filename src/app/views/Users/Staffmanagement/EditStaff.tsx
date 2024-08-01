@@ -16,12 +16,18 @@ import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import EmailIcon from "@mui/icons-material/Email";
 import { FC } from "react";
 import { Staff } from "../../../Models/StaffMangement";
+<<<<<<< HEAD
 // <<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedStaff } from "../../../Slices/StaffManagementSlice";
 
 
+=======
+import { useDispatch } from "react-redux";
+import { setSelectedStaff } from "../../../Slices/StaffManagementSlice";
+import { useNavigate } from "react-router-dom";
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
 
 interface CreateProps {
   editdialogOpen: boolean;
@@ -33,11 +39,13 @@ const Edit: FC<CreateProps> = ({
   edithandleDialogClose,
   edituserData,
 }) => {
-  console.log(edituserData)
-  const dispatch=useDispatch()
-  const setattendancedata=()=>{
-dispatch(setSelectedStaff(edituserData))
-  }
+  console.log(edituserData);
+  const dispatch = useDispatch();
+  const navigation = useNavigate()
+  const setattendancedata = () => {
+    dispatch(setSelectedStaff(edituserData));
+    navigation("/users/attendence") 
+  };
   return (
     <>
       <Dialog
@@ -51,10 +59,16 @@ dispatch(setSelectedStaff(edituserData))
             <Typography variant="h6">
               {edituserData ? "Update User" : ""}
             </Typography>
+<<<<<<< HEAD
             <Link to="/users/attendence">
             <Button variant="contained" onClick={()=>setattendancedata()}>Attendance Status</Button>
             
             </Link>
+=======
+            <Button variant="contained" onClick={() => setattendancedata()}>
+              Attendance Status
+            </Button>
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
           </Box>
         </DialogTitle>
 

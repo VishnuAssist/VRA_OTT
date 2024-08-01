@@ -14,6 +14,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
   Tooltip,
@@ -85,6 +86,7 @@ const StaffStatus = () => {
             <Typography>08:00</Typography>
             <Typography>Average Work Hours</Typography>
           </Grid>
+<<<<<<< HEAD
 
           <Grid item xs={6} md={3} sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <Timelapse />
@@ -163,15 +165,43 @@ const StaffStatus = () => {
             {selectedUser?.attendance && selectedUser?.attendance.map((staff: Attendance) => (
               <TableRow key={staff.date}>
                 <TableCell>{staff.date}</TableCell>
+=======
+        </Card>
+        <Grid item md={12} xs={12}>
+        <Card sx={{ mt: 2, p: 1 }}>
+        <TableContainer sx={{ overflow: "auto" }}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date</TableCell>
+                <TableCell>Check In</TableCell>
+                <TableCell>Check Out</TableCell>
+                <TableCell>Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data && data.map((staff)=>(
+              <TableRow>
+                <TableCell width={'100%'}>{staff.date}</TableCell>
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
                 <TableCell>{staff.checkin}</TableCell>
                 <TableCell>{staff.checkout}</TableCell>
                 <TableCell><Chip sx={{ backgroundColor: "#81C9BE" }} label={staff.status} /></TableCell>
                 <TableCell><IconButton onClick={handleClickOpen}><FolderOutlinedIcon /></IconButton></TableCell>
               </TableRow>
+<<<<<<< HEAD
             ))}
           </TableBody>
         </Table>
       </Card>
+=======
+             )) }
+            </TableBody>
+          </Table>
+          </TableContainer>
+        </Card>
+        </Grid>
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
     </>
   );
 };
