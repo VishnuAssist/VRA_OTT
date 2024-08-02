@@ -5,11 +5,13 @@ import {
   DialogContent,
   DialogTitle,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
 import { FC, useState } from "react";
 import { ApprovalsLeave } from "../../Models/Approvals";
 import ApprovalAlert from "../../components/ApprovalAlert";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Props {
   preview: boolean;
@@ -29,10 +31,11 @@ const PreviewApproval: FC<Props> = ({ preview, closePreview, previewdata }) => {
   return (
     <>
       <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle>
-          <Typography variant="h5" sx={{ color: "darkblue" }}>
+        <DialogTitle sx={{display:"flex",justifyContent:"space-between"}}>
+          <Typography variant="h7" sx={{ color: "darkblue" }}>
             Details
           </Typography>
+          <IconButton onClick={closePreview}><CloseIcon color="error"/></IconButton>
         </DialogTitle>
 
         <DialogContent>

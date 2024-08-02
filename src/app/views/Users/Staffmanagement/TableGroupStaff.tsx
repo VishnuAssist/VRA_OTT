@@ -134,7 +134,7 @@ const GroupTable = () => {
       </TableContainer>
 
       <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle sx={{display:"flex",alignItems:"center",justifyContent:"space-between"}} variant="h5">Group of Staff Members<IconButton ><CloseIcon color="error"/>
+        <DialogTitle sx={{display:"flex",alignItems:"center",justifyContent:"space-between"}} variant="h5">Group of Staff Members<IconButton onClick={closePreview} ><CloseIcon color="error"/>
         </IconButton>
         </DialogTitle>
         
