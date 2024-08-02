@@ -3,7 +3,7 @@ export interface TaskType {
   "taskProgress":string;
     "id":number;
     "assigner":string;
-     "staff":string;
+     "staff":string[];
      "task": string;
      "description":string;
      "priority":string;

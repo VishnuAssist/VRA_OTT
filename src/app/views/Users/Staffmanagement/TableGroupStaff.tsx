@@ -14,6 +14,8 @@ import {
   Dialog,
   Grid,
   Typography,
+  AvatarGroup,
+  Avatar,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -24,10 +26,12 @@ import { useState } from "react";
 import { removeGroup } from "../../../Slices/GroupStaff";
 import DeleteAlert from "../../../components/DeleteAlert";
 import Groupview from "./FormGroupStaff";
+import { Staff } from "../../../Models/StaffMangement";
 
 const GroupTable = () => {
   const { groupList } = useSelector((state: any) => state.groupStaff);
-
+  console.log("groupList", groupList);
+  const { userList } = useSelector((state: any) => state.staff);
   const [preview, setPreview] = useState(false);
   const [previewdata, setPreviewData] = useState<GroupStaff | null>(null);
   const openPreview = (data: GroupStaff) => {
@@ -90,16 +94,27 @@ const GroupTable = () => {
           </TableHead>
           <TableBody>
             {groupList &&
-              groupList.map((groupDetails: GroupStaff) => (
-                <TableRow>
+              groupList.map((groupDetails: any) => (
+                <TableRow key={groupDetails.id}>
                   <TableCell>
                     <FormGroup>
                       <Checkbox defaultChecked />
                     </FormGroup>
                   </TableCell>
-                  <TableCell>{groupDetails.groupname}</TableCell>
 
-                  <TableCell>{groupDetails.staffs}</TableCell>
+                  <TableCell>{groupDetails.groupname}</TableCell>
+                  <TableCell>{groupDetails?.users?.length}
+                    {/* {groupDetails.users && groupDetails.users.length > 0 ? (
+                      groupDetails.users.map((user: any) => (
+                        <div key={user.id}>
+                          <p> {user.username.length}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <p>No users available</p>
+                    )} */}
+                  </TableCell>
+                 
                   <TableCell>{groupDetails.description}</TableCell>
 
                   <TableCell>
@@ -168,7 +183,7 @@ const GroupTable = () => {
         DeleteOption={deleteStore}
       />
 
-<Groupview
+      <Groupview
         openpGroup={update}
         closeGroup={closeUpadate}
         initialStore={datatoedit}

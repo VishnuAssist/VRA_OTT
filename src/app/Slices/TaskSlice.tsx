@@ -9,40 +9,40 @@ interface UserState {
 const initialState: UserState = {
   taskList: [
     {
-      users:"hari",
+      users:"Hari",
       id: 1,
       taskProgress:"To Do",
-      assigner:"Rizwan Sir",
+      assigner:"Rizwan",
       task: "To make a Dashboard UI",
       description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
       priority:"Low",
-      staff:"vishnu",
+      staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
-      status:"",
+      status:"0",
     },
     {
-      users:"varun",
+      users:"Rizwan",
       id: 2,
       taskProgress:"In Progress",
-      assigner:"kumar",
+      assigner:"Manoj",
       task: "To make a Dashboard UI",
       description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
       priority:"Low",
-      staff:"vishnu",
+      staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
-      status:""
+      status:"1"
     },
     {
-      users:"ram",
+      users:"Riyas",
       id: 3,
       taskProgress:"Completed",
-      assigner:"Rizwan Sir",
+      assigner:"Rizwan",
       task: "To make a Dashboard UI",
       description:"The Dashboard should contains user details, user working graph and pie chart for the yearly task .",
       priority:"Low",
-      staff:"vishnu",
+      staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
-      status:""
+      status:"2"
     },
   ],
   selectedUser: null,

@@ -8,21 +8,22 @@ import {
   Grid,
   TextField,
 } from "@mui/material";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { GroupStaff } from "../../../Models/GroupStaff";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Staff } from "../../../Models/StaffMangement";
 // import FormHelperText from "@mui/material/FormHelperText";
 
-const users = [
-  { label: "John" },
-  { label: "Kemy" },
-  { label: "emy" },
-  { label: "Andrew" },
-];
+// const users = [
+//   { label: "John" },
+//   { label: "Kemy" },
+//   { label: "emy" },
+//   { label: "Andrew" },
+// ];
 
 interface Props {
   openpGroup: boolean;
@@ -42,29 +43,41 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
   const data: GroupStaff = {
     groupname: "",
     description: "",
-    staffs: "",
+    staffs:"",
     id: 0,
   };
+
+  const { userList } = useSelector((state: any) => state.staff);
+
   const dispatch = useDispatch();
+  const [selectedUser, setSelectedUser] = useState<Staff[] | null>(null);
+
   const {
     register,
     handleSubmit,
     reset,
     setValue,
     formState: { errors },
-  } = useForm<GroupStaff>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+  } = useForm<GroupStaff>();
+  // ({
+  //   resolver: yupResolver(schema),
+  //   mode: "onChange",
+  // });
 
   const submitValue = (data: GroupStaff) => {
+    const taskData = {
+      ...data,
+      users: selectedUser ? selectedUser:[]
+    };
     if (initialStore) {
-      dispatch(updateGroup(data));
+      dispatch(updateGroup(taskData));
     } else {
-      dispatch(addGroup(data));
+      dispatch(addGroup(taskData));
     }
     reset();
+    setSelectedUser(null);
     closeGroup();
+    console.log("data",taskData)
   };
   useEffect(() => {
     reset(initialStore || data);
@@ -76,8 +89,13 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
       setValue("description", initialStore.description);
       setValue("staffs", initialStore.staffs);
       setValue("id", initialStore.id);
+
+      const initialSelectedUser = userList.find(
+        (user: Staff) => user.username === initialStore.users
+      );
+      setSelectedUser(initialSelectedUser || null);
     }
-  }, [initialStore, setValue]);
+  }, [initialStore, setValue, userList]);
 
   return (
     <>
@@ -96,19 +114,22 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
                 />
               </Grid>
               <Grid item xs={12} md={12}>
+               
                 <Autocomplete
                   multiple
                   disablePortal
                   id="combo-box-demo"
-                  options={users}
+                  options={userList}
+                  getOptionLabel={(option: Staff) => option.username}
+                  // value={selectedUser}
+                  onChange={(_, value) => {
+                    setSelectedUser(value);
+                  }}
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      fullWidth
-                      label="Users"
+                      label="Select Staff's"
                       {...register("staffs")}
-                      error={!!errors.staffs}
-                      helperText={errors?.staffs?.message}
                     />
                   )}
                 />

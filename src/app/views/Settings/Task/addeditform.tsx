@@ -19,6 +19,9 @@ import { TaskType } from "../../../Models/TaskType";
 import { addTask, updateTask } from "../../../Slices/TaskSlice";
 import { Staff } from "../../../Models/StaffMangement";
 
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,7 +48,7 @@ const schema = yup.object().shape({
 const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const data: TaskType = {
     users: "",
-    taskProgress: "",
+    taskProgress: "To Do",
     assigner: "",
     staff: "",
     task: "",
@@ -65,20 +68,21 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
     reset,
     setValue,
     watch,
-    formState: { errors, isValid, isDirty },
-  } = useForm<TaskType>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    formState: { errors },
+  } = useForm<TaskType>();
+  // ({
+  //   resolver: yupResolver(schema),
+  //   mode: "onChange",
+  // });
   const dispatch = useDispatch();
-  const [selectedUser, setSelectedUser] = useState<Staff | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File[]>([]);
+  const [selectedUser, setSelectedUser] = useState<Staff[] | null>(null);
+  
 
   const submitData = (data: TaskType) => {
     const taskData = {
       ...data,
-      users: selectedUser ? selectedUser.username : "",
-      file: selectedFile,
+      users: selectedUser ? selectedUser : [],
+      file: selectedFiles,
     };
     if (initialTask) {
       dispatch(updateTask(taskData));
@@ -87,22 +91,46 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
     }
     reset();
     setSelectedUser(null);
-    // setSelectedFile([]);
+    setSelectedFiles([]);
     closetaskmodel();
-    console.log("Submitted Data", selectedFile.length);
+    // console.log("Submitted Data", selectedFile.length);
+    console.log("task data ", taskData);
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setSelectedFile((prevFiles) => [...prevFiles, file]);
-      // if (selectedFile == null){
-      //   setSelectedFile([file] );
-      // }
-      // else{
-      //   setSelectedFile([...selectedFile,file])
-      // }
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     setSelectedFile((prevFiles) => [...prevFiles, file]);
+  //     // if (selectedFile == null){
+  //     //   setSelectedFile([file] );
+  //     // }
+  //     // else{
+  //     //   setSelectedFile([...selectedFile,file])
+  //     // }
+  //   }
+  // };
+
+  const [selectedFiles, setSelectedFiles] = useState<files[]>();
+  const maxFiles = 5;
+
+  const handleFileChange = (event:any) => {
+    const files = Array.from(event.target.files);
+    if (files.length > maxFiles) {
+      
+      toast.error(`You can only select up to ${maxFiles} files.`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
     }
+    setSelectedFiles(files);
   };
 
   useEffect(() => {
@@ -131,34 +159,47 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const priority = watch("priority");
   const taskProgress = watch("taskProgress");
 
+  const today = new Date().toISOString().split('T')[0];
   return (
     <>
-      <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
+      <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth >
         <form onSubmit={handleSubmit(submitData)}>
           <DialogTitle sx={{ color: "darkblue" }}>
             {initialTask ? "Update Task" : "New Task"}
           </DialogTitle>
 
-          <DialogContent sx={{ display: "flex", flexDirection: "column",maxHeight:500,overflow:"auto" }}>
+          <DialogContent
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              maxHeight: 400,
+              overflow: "auto",
+            }}
+          >
             <Grid container spacing={2}>
-              <Grid item xs={12} md={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="taskProgress-select-label">
-                    TaskProgress
-                  </InputLabel>
-                  <Select
-                    labelId="taskProgress-select-label"
-                    id="taskProgress-select"
-                    value={taskProgress || ""}
-                    {...register("taskProgress")}
-                    label="TaskProgress"
-                  >
-                    <MenuItem value="1">To Do</MenuItem>
-                    <MenuItem value="2">In Progress</MenuItem>
-                    <MenuItem value="3">Completed</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
+              {initialTask ? (
+                <Grid item xs={12} md={12} sx={{mt:1}}>
+                  <FormControl fullWidth>
+                    
+                    <InputLabel id="taskProgress-select-label">
+                      TaskProgress
+                    </InputLabel>
+                    <Select
+                      labelId="taskProgress-select-label"
+                      id="taskProgress-select"
+                      value={taskProgress || ""}
+                      {...register("taskProgress")}
+                      label="TaskProgress"
+                    >
+                      <MenuItem value="To Do">To Do</MenuItem>
+                      <MenuItem value="In Progress">In Progress</MenuItem>
+                      <MenuItem value="Completed">Completed</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+              ) : (
+                ""
+              )}
               <Grid item md={12} sx={{ mt: 1 }}>
                 <TextField
                   type="text"
@@ -171,7 +212,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                 />
               </Grid>
               <Grid item xs={12} md={12} sx={{ mt: 1 }}>
-                <Autocomplete
+                {/* <Autocomplete
                   options={userList}
                   getOptionLabel={(option: Staff) => option.username}
                   value={selectedUser}
@@ -179,7 +220,25 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                     setSelectedUser(value);
                   }}
                   renderInput={(params) => (
-                    <TextField {...params} label="Select Staff's" />
+                    <TextField {...params} label="Select Staff's" {...register('staff')}/>
+                  )}
+                /> */}
+                <Autocomplete
+                  multiple
+                  disablePortal
+                  id="combo-box-demo"
+                  options={userList}
+                  getOptionLabel={(option: Staff) => option.username}
+                  // value={selectedUser}
+                  onChange={(_, value) => {
+                    setSelectedUser(value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Select Staff's"
+                      {...register("staff")}
+                    />
                   )}
                 />
               </Grid>
@@ -201,16 +260,19 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                 </FormControl>
               </Grid>
               <Grid item xs={12} md={6}>
-                <TextField
-                  type="date"
-                  id="date"
-                  label=""
-                  {...register("date")}
-                  fullWidth
-                  error={!!errors.date}
-                  helperText={errors?.date?.message}
-                />
-              </Grid>
+        <TextField
+          type="date"
+          id="date"
+          label=""
+          {...register("date", {
+            validate: value => new Date(value) >= new Date(today) || "Please select a future date"
+          })}
+          fullWidth
+          InputProps={{ inputProps: { min: today } }} // Set the min attribute
+          error={!!errors.date}
+          helperText={errors?.date?.message}
+        />
+      </Grid>
               <Grid item md={12}>
                 <TextField
                   type="text"
@@ -219,6 +281,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   multiline
                   rows={4}
                   fullWidth
+                  // value={'hello'}
                   {...register("description")}
                   error={!!errors.description}
                   helperText={errors?.description?.message}
@@ -243,12 +306,12 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
               </Grid>
               <Grid item md={6}>
                 <input
+              
                   type="file"
                   id="file"
                   {...register("file")}
+                  multiple
                   onChange={handleFileChange}
-                  // error={!!errors.file}
-                  // helperText={errors?.file?.message}
                 />
               </Grid>
             </Grid>
@@ -261,6 +324,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
           </DialogActions>
         </form>
       </Dialog>
+      <ToastContainer />
     </>
   );
 };
