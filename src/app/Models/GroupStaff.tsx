@@ -1,7 +1,8 @@
 export interface GroupStaff {
+    users: string;
     "id": number;
     "groupname": string;
-    "staffs":string;
+    "staff":string[];
     "description":string;
     
 }

@@ -10,15 +10,18 @@ import {
   Menu,
   MenuItem,
   Badge,
+  Tooltip,
+  styled,
 } from "@mui/material";
 
+import Profile from "./profile";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask } from "../../../Slices/TaskSlice";
 import { TaskType } from "../../../Models/TaskType";
 import AddEditForm from "./addeditform";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import CommentIcon from "@mui/icons-material/Comment";
+// import CommentIcon from "@mui/icons-material/Comment";
 import CircleIcon from "@mui/icons-material/Circle";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import PreviewTaskDetails from "./PreviewTaskDetails";
@@ -28,7 +31,7 @@ import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined
 import * as React from "react";
 import Box from "@mui/material/Box";
 import DeleteAlert from "../../../components/DeleteAlert";
-import { filterbystatus } from "./utile";
+import { getProgressColor, taskProgressName } from "./utile";
 
 interface TabPanelProps {
   value: number;
@@ -62,7 +65,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
 const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
   const dispatch = useDispatch();
   const { taskList } = useSelector((state: any) => state.task);
-  // console.log{"taskList",taskList}
+  console.log("taskList", taskList);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -127,598 +130,239 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
   // const filterCompleted = taskList.filter(
   //   (data: TaskType) => data.taskProgress === "Completed"
   // );
-const [filtereddata,setfiltereddata] =useState([])
-React.useEffect(()=>{
-  const filterToDo = taskList.filter(
-    (data: TaskType) => data.taskProgress === "To Do"
-  );
-  const filterInProgress = taskList.filter(
-    (data: TaskType) => data.taskProgress === "In Progress"
-  );
-  const filterCompleted = taskList.filter(
-    (data: TaskType) => data.taskProgress === "Completed"
-  );
-  if(value==0){
-    setfiltereddata(filterToDo)
-  }else if(value==1 ){
-    setfiltereddata(filterInProgress)
-  }else if(value==2){
-    setfiltereddata(filterCompleted)
-  }
-// setfiltereddata(filterbystatus(taskList,value))
-},[value])
-  const getProgressColor = (progress: string) => {
-    switch (progress.toLowerCase()) {
-      case "to do":
-        return "violet";
-      case "in progress":
-        return "orange";
-      case "completed":
-        return "green";
-      default:
-        return "grey";
+  const [filtereddata, setfiltereddata] = useState([]);
+  React.useEffect(() => {
+    const filterToDo = taskList.filter(
+      (data: TaskType) => data.taskProgress === "To Do"
+    );
+    const filterInProgress = taskList.filter(
+      (data: TaskType) => data.taskProgress === "In Progress"
+    );
+    const filterCompleted = taskList.filter(
+      (data: TaskType) => data.taskProgress === "Completed"
+    );
+    if (value == 0) {
+      setfiltereddata(filterToDo);
+    } else if (value == 1) {
+      setfiltereddata(filterInProgress);
+    } else if (value == 2) {
+      setfiltereddata(filterCompleted);
     }
+    // setfiltereddata(filterbystatus(taskList,value))
+  }, [value]);
+
+  const StyledAvatar = styled(Avatar)(() => ({
+    width: "32px !important",
+    height: "32px !important",
+  }));
+  const [profile, setProfile] = useState(false);
+  const handleProfileclick = () => {
+    setProfile(true);
+  };
+
+  const handleProfileclose = () => {
+    setProfile(false);
   };
   return (
     <>
-      <Card sx={{ p: 1, height: "100%" }}>
-        <Box
-          display={"flex"}
-          justifyContent={"space-between"}
-          flexWrap={"wrap"}
-          p={2}
-        >
-          <Typography variant="h3">Card View</Typography>
-        </Box>
-
+      <Grid container spacing={2}>
         {/* <CustomTabPanel value={value} index={0}> */}
-          <Grid container spacing={2}>
-            <Grid item md={12}>
-              <Card
-                sx={{ p: 2, height: "100%", width: "100%" }}
-                // key={taskDetail.id}
-              >
-                {
-                  filtereddata?.map((taskDetail: TaskType) => (
-                    <>
-                      <Box sx={{ display: "flex", p: 1 }}>
-                        <CircleIcon
-                          sx={{
-                            color: getProgressColor(taskDetail.taskProgress),
-                            mr: 2,
-                          }}
-                        />
-                        <Typography> {taskDetail.taskProgress}</Typography>
-                      </Box>
-                      <Divider
+        <Grid container spacing={2}>
+          <Grid item md={12}>
+            <Box sx={{ p: 2, height: "100%", width: "100%" }}>
+              <>
+                <Box sx={{ display: "flex", p: 1 }}>
+                  <CircleIcon
+                    sx={{
+                      color: getProgressColor(value),
+                      mr: 2,
+                    }}
+                  />
+                  <Typography> {taskProgressName(value)}</Typography>
+                </Box>
+                <Divider
+                  sx={{
+                    backgroundColor: getProgressColor(value),
+                  }}
+                />
+
+                <Grid container spacing={2}>
+                  {filtereddata?.map((taskDetail: TaskType) => (
+                    <Grid
+                      item
+                      md={4}
+                      sx={{ display: "flex" }}
+                      key={taskDetail.id}
+                    >
+                      <Card
                         sx={{
-                          backgroundColor: getProgressColor(
-                            taskDetail.taskProgress
-                          ),
+                          p: 1,
+                          mt: 1,
+                          width: "100%",
+                          backgroundColor: "#F1F5FA",
                         }}
-                      />
-                      <Grid container spacing={2}>
-                        <Grid item md={4}>
-                          <Card
-                            sx={{
-                              p: 1,
-                              mt: 1,
-                              width: "100%",
-                              backgroundColor: "#F1F5FA",
-                            }}
+                      >
+                        <Grid
+                          container
+                          spacing={1}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            py: 1,
+                            pr: 1,
+                          }}
+                        >
+                          <Grid item md={10}>
+                            <Typography
+                              variant="h5"
+                              sx={{
+                                color: getProgressColor(
+                                  taskDetail.taskProgress
+                                ),
+                              }}
+                            >
+                              {taskDetail.assigner}
+                            </Typography>
+                          </Grid>
+
+                          <Grid item md={2}>
+                            <IconButton
+                              aria-controls="simple-menu"
+                              aria-haspopup="true"
+                              onClick={handleClick}
+                            >
+                              <MoreHorizIcon />
+                            </IconButton>
+                            <Menu
+                              id="simple-menu"
+                              anchorEl={anchorEl}
+                              keepMounted
+                              open={Boolean(anchorEl)}
+                              onClose={handleClose}
+                            >
+                              <MenuItem onClick={() => openPreview(taskDetail)}>
+                                <RemoveRedEyeIcon />
+                                <Typography sx={{ ml: 1 }}>Preview</Typography>
+                              </MenuItem>
+                              <MenuItem
+                                onClick={() => edithandleAddClick(taskDetail)}
+                              >
+                                <CreateOutlinedIcon />
+                                <Typography sx={{ ml: 1 }}>Edit</Typography>
+                              </MenuItem>
+                              <MenuItem onClick={() => openDelete(taskDetail)}>
+                                <DeleteOutlineOutlinedIcon />
+                                <Typography sx={{ ml: 1 }}>Delete</Typography>
+                              </MenuItem>
+                            </Menu>
+                          </Grid>
+                        </Grid>
+
+                        <Grid container spacing={2}>
+                          <Grid item md={12} sx={{ fontSize: "18px" }}>
+                            <Typography variant="h5">
+                              {taskDetail.task}
+                            </Typography>
+                          </Grid>
+                          <Grid item md={12}>
+                            <Typography
+                              sx={{
+                                height: "40px",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                display: "-webkit-box",
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: "vertical",
+                              }}
+                            >
+                              {taskDetail.description}
+                            </Typography>
+                          </Grid>
+
+                          <Grid item md={6}>
+                            <Typography
+                              variant={"h5"}
+                              sx={{ color: "#8D6F64" }}
+                            >
+                              {taskDetail.priority}
+                            </Typography>
+                          </Grid>
+                          <Grid
+                            item
+                            md={6}
+                            sx={{ display: "flex", alignItems: "center" }}
                           >
-                            <Grid
-                              container
-                              spacing={1}
+                            <Typography>{taskDetail.date}</Typography>
+                          </Grid>
+                          <Grid item md={5} sx={{ ml: 1 }}>
+                            {/* <Typography>{taskDetail?.users?.length}</Typography> */}
+                            <Box
+                              display="flex"
+                              flexDirection="row"
+                              position="relative"
+                              marginLeft="-0.875rem !important"
+                            >
+                              {Array.isArray(taskDetail.users) &&
+                              taskDetail.users.length > 0 ? (
+                                <>
+                                  {taskDetail.users.map((user: any) => (
+                                    <div key={user.id}>
+                                      <Tooltip
+                                        title={<Box>{user?.username}</Box>}
+                                        arrow
+                                      >
+                                        <StyledAvatar src="/assets/images/face-4.jpg" />
+                                      </Tooltip>
+                                    </div>
+                                  ))}
+                                  {taskDetail.users.length > 3 && (
+                                    <StyledAvatar
+                                      onClick={handleProfileclick}
+                                      sx={{ fontSize: "14px" }}
+                                    >
+                                      +{taskDetail.users.length - 3}
+                                    </StyledAvatar>
+                                  )}
+                                </>
+                              ) : (
+                                <p>No users available</p>
+                              )}
+                            </Box>
+                          </Grid>
+
+                          <Grid item md={3.5}>
+                            <Box
                               sx={{
                                 display: "flex",
                                 alignItems: "center",
-                                py: 1,
-                                pr: 1,
+                                justifyContent: "center",
+                                height: "100%",
                               }}
                             >
-                              <Grid item md={8}>
-                                <Typography
-                                  variant="h5"
-                                  sx={{
-                                    color: getProgressColor(
-                                      taskDetail.taskProgress
-                                    ),
-                                  }}
+                              <IconButton>
+                                <Badge
+                                  badgeContent={taskDetail?.file?.length}
+                                  color="secondary"
                                 >
-                                  {taskDetail.assigner}
-                                </Typography>
-                              </Grid>
-
-                              <Grid item md={2}>
-                                <RemoveRedEyeIcon
-                                  onClick={() => openPreview(taskDetail)}
-                                />
-                              </Grid>
-
-                              <Grid item md={2}>
-                                <IconButton
-                                  aria-controls="simple-menu"
-                                  aria-haspopup="true"
-                                  onClick={handleClick}
-                                >
-                                  <MoreHorizIcon />
-                                </IconButton>
-                                <Menu
-                                  id="simple-menu"
-                                  anchorEl={anchorEl}
-                                  keepMounted
-                                  open={Boolean(anchorEl)}
-                                  onClose={handleClose}
-                                >
-                                  <MenuItem
-                                    onClick={() =>
-                                      edithandleAddClick(taskDetail)
-                                    }
-                                  >
-                                    <CreateOutlinedIcon />
-                                    <Typography sx={{ ml: 1 }}>Edit</Typography>
-                                  </MenuItem>
-                                  <MenuItem
-                                    onClick={() => openDelete(taskDetail)}
-                                  >
-                                    <DeleteOutlineOutlinedIcon />
-                                    <Typography sx={{ ml: 1 }}>
-                                      Delete
-                                    </Typography>
-                                  </MenuItem>
-                                </Menu>
-                              </Grid>
-                            </Grid>
-
-                            <Grid container spacing={2}>
-                              <Grid item md={12} sx={{ fontSize: "18px" }}>
-                                <Typography variant="h5">
-                                  {taskDetail.task}
-                                </Typography>
-                              </Grid>
-                              <Grid item md={12}>
-                                <Typography>
-                                  {taskDetail.description}
-                                </Typography>
-                              </Grid>
-                              <Grid item md={6}>
-                                <Typography
-                                  variant={"h5"}
-                                  sx={{ color: "#8D6F64" }}
-                                >
-                                  {taskDetail.priority}
-                                </Typography>
-                              </Grid>
-                              <Grid
-                                item
-                                md={6}
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <Typography>{taskDetail.date}</Typography>
-                              </Grid>
-                              <Grid item md={5}>
-                                <AvatarGroup max={20}>
-                                  <Avatar
-                                    alt={taskDetail.staff}
-                                    src="/static/images/avatar/1.jpg"
-                                  />
-                                  <Avatar
-                                    alt={taskDetail.staff}
-                                    src="/static/images/avatar/2.jpg"
-                                  />
-                                  <Avatar
-                                    alt={taskDetail.staff}
-                                    src="/static/images/avatar/3.jpg"
-                                  />
-                                </AvatarGroup>
-                              </Grid>
-
-                              <Grid item md={3.5}>
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    height: "100%",
-                                  }}
-                                >
-                                  <CommentIcon />
-                                  <Typography sx={{ ml: 1 }}>
-                                    Comments
-                                  </Typography>
-                                </Box>
-                              </Grid>
-                              <Grid item md={3.5}>
-                                <Box
-                                  sx={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    height: "100%",
-                                  }}
-                                >
-                                  <IconButton>
-                                    <Badge
-                                      badgeContent={taskDetail?.file?.length}
-                                      color="secondary"
-                                    >
-                                      <DriveFolderUploadIcon />
-                                    </Badge>
-                                  </IconButton>
-                                  <Typography sx={{ ml: 1 }}>Files</Typography>
-                                </Box>
-                              </Grid>
-                            </Grid>
-                          </Card>
+                                  <DriveFolderUploadIcon />
+                                </Badge>
+                              </IconButton>
+                              <Typography sx={{ ml: 1 }}>Files</Typography>
+                            </Box>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </>
+                      </Card>
+                    </Grid>
                   ))}
-              </Card>
-            </Grid>
+                </Grid>
+              </>
+            </Box>
           </Grid>
+        </Grid>
         {/* </CustomTabPanel> */}
-        {/* <CustomTabPanel value={value} index={1}>
-          <Grid container spacing={2}>
-            <Grid item md={12}>
-              
-                  <Card
-                    sx={{ p: 2, height: "100%", width: "100%" }}
-                    // key={taskDetail.id}
-                  >
-                    {filterInProgress &&
-                filterInProgress.map((taskDetail: TaskType) => (
-                  <>
-                    <Box sx={{ display: "flex", p: 1 }}>
-                      <CircleIcon
-                        sx={{
-                          color: getProgressColor(taskDetail.taskProgress),
-                          mr: 2,
-                        }}
-                      />
-                      <Typography> {taskDetail.taskProgress}</Typography>
-                    </Box>
-                    <Divider
-                      sx={{
-                        backgroundColor: getProgressColor(
-                          taskDetail.taskProgress
-                        ),
-                      }}
-                    />
-                    <Grid container spacing={2}>
-                      <Grid item md={4}>
-                        <Card
-                          sx={{
-                            p: 1,
-                            mt: 1,
-                            width: "100%",
-                            backgroundColor: "#F1F5FA",
-                          }}
-                        >
-                          <Grid
-                            container
-                            spacing={1}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              py: 1,
-                              pr: 1,
-                            }}
-                          >
-                            <Grid item md={8}>
-                              <Typography
-                                variant="h5"
-                                sx={{
-                                  color: getProgressColor(
-                                    taskDetail.taskProgress
-                                  ),
-                                }}
-                              >
-                                {taskDetail.assigner}
-                              </Typography>
-                            </Grid>
+      </Grid>
 
-                            <Grid item md={2}>
-                              <RemoveRedEyeIcon
-                                onClick={() => openPreview(taskDetail)}
-                              />
-                            </Grid>
-
-                            <Grid item md={2}>
-                              <IconButton
-                                aria-controls="simple-menu"
-                                aria-haspopup="true"
-                                onClick={handleClick}
-                              >
-                                <MoreHorizIcon />
-                              </IconButton>
-                              <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                              >
-                                <MenuItem
-                                  onClick={() => edithandleAddClick(taskDetail)}
-                                >
-                                  <CreateOutlinedIcon />
-                                  <Typography sx={{ ml: 1 }}>Edit</Typography>
-                                </MenuItem>
-                                <MenuItem
-                                  onClick={() => openDelete(taskDetail)}
-                                >
-                                  <DeleteOutlineOutlinedIcon />
-                                  <Typography sx={{ ml: 1 }}>Delete</Typography>
-                                </MenuItem>
-                              </Menu>
-                            </Grid>
-                          </Grid>
-
-                          <Grid container spacing={2}>
-                            <Grid item md={12} sx={{ fontSize: "18px" }}>
-                              <Typography variant="h5">
-                                {taskDetail.task}
-                              </Typography>
-                            </Grid>
-                            <Grid item md={12}>
-                              <Typography>{taskDetail.description}</Typography>
-                            </Grid>
-                            <Grid item md={6}>
-                              <Typography
-                                variant={"h5"}
-                                sx={{ color: "#8D6F64" }}
-                              >
-                                {taskDetail.priority}
-                              </Typography>
-                            </Grid>
-                            <Grid
-                              item
-                              md={6}
-                              sx={{ display: "flex", alignItems: "center" }}
-                            >
-                              <Typography>{taskDetail.date}</Typography>
-                            </Grid>
-                            <Grid item md={5}>
-                              <AvatarGroup max={20}>
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/1.jpg"
-                                />
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/2.jpg"
-                                />
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/3.jpg"
-                                />
-                              </AvatarGroup>
-                            </Grid>
-
-                            <Grid item md={3.5}>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  height: "100%",
-                                }}
-                              >
-                                <CommentIcon />
-                                <Typography sx={{ ml: 1 }}>Comments</Typography>
-                              </Box>
-                            </Grid>
-                            <Grid item md={3.5}>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  height: "100%",
-                                }}
-                              >
-                                <IconButton>
-                                  <Badge badgeContent={3} color="secondary">
-                                    <DriveFolderUploadIcon />
-                                  </Badge>
-                                </IconButton>
-                                <Typography sx={{ ml: 1 }}>Files</Typography>
-                              </Box>
-                            </Grid>
-                          </Grid>
-                        </Card>
-                      </Grid>
-                    </Grid>
-                    </>
-                    ))}
-                  </Card>
-                
-            </Grid>
-          </Grid>
-        </CustomTabPanel> */}
-        {/* <CustomTabPanel value={value} index={2}>
-          <Grid container spacing={2}>
-            <Grid item md={12}>
-              
-                  <Card
-                    sx={{ p: 2, height: "100%", width: "100%" }}
-                    // key={taskDetail.id}
-                  >
-                    {filterCompleted &&
-                filterCompleted.map((taskDetail: TaskType) => (
-                  <>
-                    <Box sx={{ display: "flex", p: 1 }}>
-                      <CircleIcon
-                        sx={{
-                          color: getProgressColor(taskDetail.taskProgress),
-                          mr: 2,
-                        }}
-                      />
-                      <Typography> {taskDetail.taskProgress}</Typography>
-                    </Box>
-                    <Divider
-                      sx={{
-                        backgroundColor: getProgressColor(
-                          taskDetail.taskProgress
-                        ),
-                      }}
-                    />
-                    <Grid container spacing={2}>
-                      <Grid item md={4}>
-                        <Card
-                          sx={{
-                            p: 1,
-                            mt: 1,
-                            width: "100%",
-                            backgroundColor: "#F1F5FA",
-                          }}
-                        >
-                          <Grid
-                            container
-                            spacing={1}
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                              py: 1,
-                              pr: 1,
-                            }}
-                          >
-                            <Grid item md={8}>
-                              <Typography
-                                variant="h5"
-                                sx={{
-                                  color: getProgressColor(
-                                    taskDetail.taskProgress
-                                  ),
-                                }}
-                              >
-                                {taskDetail.assigner}
-                              </Typography>
-                            </Grid>
-
-                            <Grid item md={2}>
-                              <RemoveRedEyeIcon
-                                onClick={() => openPreview(taskDetail)}
-                              />
-                            </Grid>
-
-                            <Grid item md={2}>
-                              <IconButton
-                                aria-controls="simple-menu"
-                                aria-haspopup="true"
-                                onClick={handleClick}
-                              >
-                                <MoreHorizIcon />
-                              </IconButton>
-                              <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                              >
-                                <MenuItem
-                                  onClick={() => edithandleAddClick(taskDetail)}
-                                >
-                                  <CreateOutlinedIcon />
-                                  <Typography sx={{ ml: 1 }}>Edit</Typography>
-                                </MenuItem>
-                                <MenuItem
-                                  onClick={() => openDelete(taskDetail)}
-                                >
-                                  <DeleteOutlineOutlinedIcon />
-                                  <Typography sx={{ ml: 1 }}>Delete</Typography>
-                                </MenuItem>
-                              </Menu>
-                            </Grid>
-                          </Grid>
-
-                          <Grid container spacing={2}>
-                            <Grid item md={12} sx={{ fontSize: "18px" }}>
-                              <Typography variant="h5">
-                                {taskDetail.task}
-                              </Typography>
-                            </Grid>
-                            <Grid item md={12}>
-                              <Typography>{taskDetail.description}</Typography>
-                            </Grid>
-                            <Grid item md={6}>
-                              <Typography
-                                variant={"h5"}
-                                sx={{ color: "#8D6F64" }}
-                              >
-                                {taskDetail.priority}
-                              </Typography>
-                            </Grid>
-                            <Grid
-                              item
-                              md={6}
-                              sx={{ display: "flex", alignItems: "center" }}
-                            >
-                              <Typography>{taskDetail.date}</Typography>
-                            </Grid>
-                            <Grid item md={5}>
-                              <AvatarGroup max={20}>
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/1.jpg"
-                                />
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/2.jpg"
-                                />
-                                <Avatar
-                                  alt={taskDetail.staff}
-                                  src="/static/images/avatar/3.jpg"
-                                />
-                              </AvatarGroup>
-                            </Grid>
-
-                            <Grid item md={3.5}>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  height: "100%",
-                                }}
-                              >
-                                <CommentIcon />
-                                <Typography sx={{ ml: 1 }}>Comments</Typography>
-                              </Box>
-                            </Grid>
-                            <Grid item md={3.5}>
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "center",
-                                  height: "100%",
-                                }}
-                              >
-                                <IconButton>
-                                  <Badge badgeContent={3} color="secondary">
-                                    <DriveFolderUploadIcon />
-                                  </Badge>
-                                </IconButton>
-                                <Typography sx={{ ml: 1 }}>Files</Typography>
-                              </Box>
-                            </Grid>
-                          </Grid>
-                        </Card>
-                      </Grid>
-                    </Grid>
-                    </>
-                  ))}
-                  </Card>
-             
-            </Grid>
-          </Grid>
-        </CustomTabPanel> */}
-      </Card>
-
+      <Profile openprofile={profile} closeprofile={handleProfileclose} />
       <AddEditForm
         openmodel={dialogOpen}
         closetaskmodel={closeEdit}
@@ -732,8 +376,8 @@ React.useEffect(()=>{
       <PreviewTaskDetails
         preview={preview}
         closePreview={closePreview}
-        PreviewDetails={previewdata}
-      />
+        PreviewDetails={previewdata} 
+        edithandleAddClick={undefined}      />
       <DeleteAlert
         DeleteAlert={alertdeleteStore}
         closeDelete={closeDelete}

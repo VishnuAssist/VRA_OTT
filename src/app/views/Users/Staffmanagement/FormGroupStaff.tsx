@@ -13,21 +13,49 @@ import {
   Typography,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
+=======
+<<<<<<< HEAD
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { GroupStaff } from "../../../Models/GroupStaff";
 import { useDispatch } from "react-redux";
 import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
 import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
 import DeleteIcon from "@mui/icons-material/Delete";
+<<<<<<< HEAD
 import { Staff } from "../../../Models/StaffMangement";
 
+=======
+import { Staff } from "../../../Models/StaffManagement"; // Ensure the path is correct
+=======
+import { FC, useEffect } from "react";
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
+import { GroupStaff } from "../../../Models/GroupStaff";
+import { useDispatch, useSelector } from "react-redux";
+import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Staff } from "../../../Models/StaffMangement";
+// import FormHelperText from "@mui/material/FormHelperText";
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
+>>>>>>> 0096a30553b90bf6ea0887dfe4f3a30293fdbe60
 
+<<<<<<< HEAD
+// const users = [
+//   { label: "John" },
+//   { label: "Kemy" },
+//   { label: "emy" },
+//   { label: "Andrew" },
+// ];
+=======
 const users = [
   { label: "John" },
   { label: "Kemy" },
   { label: "Emy" },
   { label: "Andrew" },
 ];
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
 
 interface Props {
   openpGroup: boolean;
@@ -160,6 +188,134 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
         </form>
       </DialogContent>
     </Dialog>
+<<<<<<< HEAD
+=======
+=======
+const schema = yup.object().shape({
+  groupname: yup.string().required("GroupName is mandatory"),
+  staffs: yup.string(),
+  description: yup.string().required("Description is mandatory"),
+
+  id: yup.number().integer().positive().required(),
+});
+
+const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
+  const data: GroupStaff = {
+    groupname: "",
+    description: "",
+    staffs:"",
+    id: 0,
+  };
+
+  const { userList } = useSelector((state: any) => state.staff);
+
+  const dispatch = useDispatch();
+  const [selectedUser, setSelectedUser] = useState<Staff[] | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<GroupStaff>();
+  // ({
+  //   resolver: yupResolver(schema),
+  //   mode: "onChange",
+  // });
+
+  const submitValue = (data: GroupStaff) => {
+    const taskData = {
+      ...data,
+      users: selectedUser ? selectedUser:[]
+    };
+    if (initialStore) {
+      dispatch(updateGroup(taskData));
+    } else {
+      dispatch(addGroup(taskData));
+    }
+    reset();
+    setSelectedUser(null);
+    closeGroup();
+    console.log("data",taskData)
+  };
+  useEffect(() => {
+    reset(initialStore || data);
+  }, [initialStore, reset]);
+
+  useEffect(() => {
+    if (initialStore) {
+      setValue("groupname", initialStore.groupname);
+      setValue("description", initialStore.description);
+      setValue("staffs", initialStore.staffs);
+      setValue("id", initialStore.id);
+
+      const initialSelectedUser = userList.find(
+        (user: Staff) => user.username === initialStore.users
+      );
+      setSelectedUser(initialSelectedUser || null);
+    }
+  }, [initialStore, setValue, userList]);
+
+  return (
+    <>
+      <Dialog open={openpGroup} onClose={closeGroup} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ color: "darkblue" }}>Group</DialogTitle>
+        <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
+          <form onSubmit={handleSubmit(submitValue)}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  fullWidth
+                  label="Group Name"
+                  {...register("groupname")}
+                  error={!!errors.groupname}
+                  helperText={errors?.groupname?.message}
+                />
+              </Grid>
+              <Grid item xs={12} md={12}>
+               
+                <Autocomplete
+                  multiple
+                  disablePortal
+                  id="combo-box-demo"
+                  options={userList}
+                  getOptionLabel={(option: Staff) => option.username}
+                  // value={selectedUser}
+                  onChange={(_, value) => {
+                    setSelectedUser(value);
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Select Staff's"
+                      {...register("staffs")}
+                    />
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12} md={12}>
+                <TextField
+                  fullWidth
+                  label="Description"
+                  {...register("description")}
+                  error={!!errors.description}
+                  helperText={errors?.description?.message}
+                />
+              </Grid>
+            </Grid>
+            <DialogActions>
+              <Button type="submit" variant="contained" color="primary">
+                Save
+              </Button>
+            </DialogActions>
+          </form>
+        </DialogContent>
+      </Dialog>
+    </>
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
+>>>>>>> 0096a30553b90bf6ea0887dfe4f3a30293fdbe60
   );
 };
 

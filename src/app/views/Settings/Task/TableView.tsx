@@ -7,7 +7,6 @@ import {
   TableHead,
   TableRow,
   Box,
-  Card,
   IconButton,
   Avatar,
   Tooltip,
@@ -15,7 +14,6 @@ import {
 } from "@mui/material";
 import Profile from "./profile";
 import EditIcon from "@mui/icons-material/Edit";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { removeTask } from "../../../Slices/TaskSlice";
@@ -55,7 +53,7 @@ const TabPanel: React.FC<TabPanelProps> = ({
     </div>
   );
 };
-const TableView: React.FC<Props> = ({ value, CustomTabPanel }) => {
+const TableView: React.FC<Props> = ({ value }) => {
   const { taskList } = useSelector((state: any) => state.task);
   const dispatch = useDispatch();
   const [selectdata, setSelectdata] = useState<TaskType | null>(null);
@@ -115,16 +113,34 @@ const TableView: React.FC<Props> = ({ value, CustomTabPanel }) => {
     setUserToDelete(null);
   };
 
-  const filterToDo = taskList.filter(
-    (data: TaskType) => data.taskProgress === "To Do"
-  );
-  const filterInProgress = taskList.filter(
-    (data: TaskType) => data.taskProgress === "In Progress"
-  );
-  const filterCompleted = taskList.filter(
-    (data: TaskType) => data.taskProgress === "Completed"
-  );
-
+  // const filterToDo = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "To Do"
+  // );
+  // const filterInProgress = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "In Progress"
+  // );
+  // const filterCompleted = taskList.filter(
+  //   (data: TaskType) => data.taskProgress === "Completed"
+  // );
+  const [filtereddata, setfiltereddata] = useState([]);
+  React.useEffect(() => {
+    const filterToDo = taskList.filter(
+      (data: TaskType) => data.taskProgress === "To Do"
+    );
+    const filterInProgress = taskList.filter(
+      (data: TaskType) => data.taskProgress === "In Progress"
+    );
+    const filterCompleted = taskList.filter(
+      (data: TaskType) => data.taskProgress === "Completed"
+    );
+    if (value == 0) {
+      setfiltereddata(filterToDo);
+    } else if (value == 1) {
+      setfiltereddata(filterInProgress);
+    } else if (value == 2) {
+      setfiltereddata(filterCompleted);
+    }
+  }, [value]);
   const getProgressColor = (progress: string) => {
     switch (progress.toLowerCase()) {
       case "to do":
@@ -139,256 +155,102 @@ const TableView: React.FC<Props> = ({ value, CustomTabPanel }) => {
   };
   return (
     <>
-      <Card sx={{ p: 2, height: "100%" }}>
-        <TableContainer sx={{ overflow: "auto" }}>
-          <Table>
-            <TableHead>
+      <TableContainer sx={{ overflow: "auto" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontSize: "12px" }}>TaskProgress</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Assigned By</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Task</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Description</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Assignees</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Due Date</TableCell>
+              <TableCell sx={{ fontSize: "12px" }}>Action</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {/* <CustomTabPanel value={value} index={0}> */}
+
+            {filtereddata?.map((Task: TaskType) => (
               <TableRow>
-                <TableCell sx={{ fontSize: "12px" }}>TaskProgress</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Assigned By</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Task</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Description</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Assignees</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Due Date</TableCell>
-                <TableCell sx={{ fontSize: "12px" }}>Action</TableCell>
+                <TableCell>
+                  <Tooltip title={<Box>Assigned</Box>} arrow>
+                    <CircleRoundedIcon
+                      sx={{
+                        color: getProgressColor(Task.taskProgress),
+                        mr: 2,
+                      }}
+                    />
+                  </Tooltip>
+                </TableCell>
+                <TableCell sx={{ fontSize: "12px" }}>{Task.assigner}</TableCell>
+                <TableCell sx={{ fontSize: "12px" }}>{Task.task}</TableCell>
+                <TableCell sx={{ fontSize: "12px", overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical" }}>
+                  {Task.description}
+                </TableCell>
+                <TableCell align="center" sx={{ textTransform: "capitalize" }}>
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    position="relative"
+                    marginLeft="-0.875rem !important"
+                  >
+                    {Array.isArray(Task.users) && Task.users.length > 0 ? (
+                      <>
+                        {Task.users.map((user: any) => (
+                          <div key={user.id}>
+                            <Tooltip title={<Box>{user?.username}</Box>} arrow>
+                              <StyledAvatar src="/assets/images/face-4.jpg" />
+                            </Tooltip>
+                          </div>
+                        ))}
+                        {Task.users.length > 3 && (
+                          <StyledAvatar
+                            onClick={handleProfileclick}
+                            sx={{ fontSize: "14px" }}
+                          >
+                            +{Task.users.length - 3}
+                          </StyledAvatar>
+                        )}
+                      </>
+                    ) : (
+                      <p>No users available</p>
+                    )}
+                  </Box>
+                </TableCell>
+                <TableCell sx={{ fontSize: "12px", width: "100px" }}>
+                  {Task.date}
+                </TableCell>
+                <TableCell sx={{ width: "150px" }}>
+                  <IconButton
+                    size="small"
+                    color="primary"
+                    aria-label="edit"
+                    onClick={() => openPreview(Task)}
+                  >
+                    <RemoveRedEyeIcon />{" "}
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    color="primary"
+                    aria-label="edit"
+                    onClick={() => edithandleAddClick(Task)}
+                  >
+                    <EditIcon />{" "}
+                  </IconButton>
+                  <IconButton
+                    color="error"
+                    aria-label="delete"
+                    onClick={() => openDelete(Task)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>{" "}
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {/* <CustomTabPanel value={value} index={0}> */}
-                {filterToDo &&
-                  filterToDo.map((Task: TaskType) => (
-                    <TableRow>
-                      <TableCell>
-                        <Tooltip title={<Box>Assigned</Box>} arrow>
-                          <CircleRoundedIcon
-                            sx={{
-                              color: getProgressColor(Task.taskProgress),
-                              mr: 2,
-                            }}
-                          />
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>{"vsdv"}</TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.task}
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.description}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{ textTransform: "capitalize" }}
-                      >
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          position="relative"
-                          marginLeft="-0.875rem !important"
-                        >
-                          <Tooltip title={<Box>James</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>kemy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>emy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-
-                          <StyledAvatar
-                            onClick={handleProfileclick}
-                            sx={{ fontSize: "14px" }}
-                          >
-                            +3
-                          </StyledAvatar>
-                        </Box>
-                      </TableCell>
-
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.date}
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          size="small"
-                          color="primary"
-                          aria-label="edit"
-                          onClick={() => edithandleAddClick(Task)}
-                        >
-                          <EditIcon />{" "}
-                        </IconButton>
-                        <IconButton
-                          color="error"
-                          aria-label="delete"
-                          onClick={() => openDelete(Task)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>{" "}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              {/* </CustomTabPanel> */}
-              <CustomTabPanel value={value} index={1}>
-                {filterInProgress &&
-                  filterInProgress.map((Task: TaskType) => (
-                    <TableRow>
-                      <TableCell>
-                        <Tooltip title={<Box>Assigned</Box>} arrow>
-                          <CircleRoundedIcon
-                            sx={{
-                              color: getProgressColor(Task.taskProgress),
-                              mr: 2,
-                            }}
-                          />
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.assigner}
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.task}
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.description}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{ textTransform: "capitalize" }}
-                      >
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          position="relative"
-                          marginLeft="-0.875rem !important"
-                        >
-                          <Tooltip title={<Box>James</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>kemy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>emy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-
-                          <StyledAvatar
-                            onClick={handleProfileclick}
-                            sx={{ fontSize: "14px" }}
-                          >
-                            +3
-                          </StyledAvatar>
-                        </Box>
-                      </TableCell>
-
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.date}
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          size="small"
-                          color="primary"
-                          aria-label="edit"
-                          onClick={() => openPreview(Task)}
-                        >
-                          <RemoveRedEyeIcon />
-                        </IconButton>
-                        <IconButton
-                          size="small"
-                          color="primary"
-                          aria-label="edit"
-                          onClick={() => edithandleAddClick(Task)}
-                        >
-                          <EditIcon />{" "}
-                        </IconButton>
-                        <IconButton
-                          color="error"
-                          aria-label="delete"
-                          onClick={() => openDelete(Task)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>{" "}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={2}>
-                {filterCompleted &&
-                  filterCompleted.map((Task: TaskType) => (
-                    <TableRow>
-                      <TableCell>
-                        <Tooltip title={<Box>Assigned</Box>} arrow>
-                          <CircleRoundedIcon
-                            sx={{
-                              color: getProgressColor(Task.taskProgress),
-                              mr: 2,
-                            }}
-                          />
-                        </Tooltip>
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.assigner}
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.task}
-                      </TableCell>
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.description}
-                      </TableCell>
-                      <TableCell
-                        align="center"
-                        sx={{ textTransform: "capitalize" }}
-                      >
-                        <Box
-                          display="flex"
-                          alignItems="center"
-                          position="relative"
-                          marginLeft="-0.875rem !important"
-                        >
-                          <Tooltip title={<Box>James</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>kemy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-                          <Tooltip title={<Box>emy</Box>} arrow>
-                            <StyledAvatar src="/assets/images/face-4.jpg" />
-                          </Tooltip>
-
-                          <StyledAvatar
-                            onClick={handleProfileclick}
-                            sx={{ fontSize: "14px" }}
-                          >
-                            +3
-                          </StyledAvatar>
-                        </Box>
-                      </TableCell>
-
-                      <TableCell sx={{ fontSize: "12px" }}>
-                        {Task.date}
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          size="small"
-                          color="primary"
-                          aria-label="edit"
-                          onClick={() => edithandleAddClick(Task)}
-                        >
-                          <EditIcon />{" "}
-                        </IconButton>
-                        <IconButton
-                          color="error"
-                          aria-label="delete"
-                          onClick={() => openDelete(Task)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>{" "}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-              </CustomTabPanel>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Card>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <AddEditForm
         openmodel={dialogOpen}
@@ -401,6 +263,8 @@ const TableView: React.FC<Props> = ({ value, CustomTabPanel }) => {
         preview={preview}
         closePreview={closePreview}
         PreviewDetails={previewdata}
+        edithandleAddClick={edithandleAddClick}
+        openDelete={openDelete}
       />
       <AddEditForm
         openmodel={dialogOpen}

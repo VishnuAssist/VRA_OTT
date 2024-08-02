@@ -17,7 +17,7 @@ const initialState: GroupStaffState = {
     {
       id:1,
       groupname:"Store Keeping",
-      staffs:"john",
+      staff:["Rizwan","sheik","Hari","Riyas"],
       description:"To keep the store neat and clean"
     },
     {
