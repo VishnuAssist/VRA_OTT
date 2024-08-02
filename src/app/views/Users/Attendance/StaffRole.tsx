@@ -10,6 +10,9 @@ import {
 } from "@mui/material";
 // import React, { useState } from "react";
 import StaffStatus from "./StaffStatus";
+import { useSelector } from "react-redux";
+import { Staff } from "../../../Models/StaffMangement";
+
 
 
 const StaffRole = () => {
@@ -17,6 +20,7 @@ const StaffRole = () => {
   // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setSearchTerm(event.target.value);
   // };
+  const {selectedUser } = useSelector((state: any) => state.staff);
  
 
   return (
@@ -38,30 +42,40 @@ const StaffRole = () => {
           </Grid> */}
 
           <Card>
-            
+          
             <CardContent>
+              
               <Grid container spacing={2}>
-                
+
+             
+              
+                <>
+              
+
                 <Grid item xs={12} md={1} sx={{display:"flex" ,justifyContent:"center",alignItems:'center'}}>
+
+               
+
                   <Avatar sx={{width:70,height:70}}></Avatar>
                 </Grid>
                 <Grid item xs={6} md={2}  sx={{display:"flex" ,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
-                  <Typography variant="h6">Vishnu</Typography>
-                  <Typography>cashier</Typography>
+                  <Typography variant="h6">{selectedUser?.username}</Typography>
+                  <Typography>{selectedUser?.role}</Typography>
                 </Grid>
                 <Grid item xs={6} md={3} sx={{display:"flex" ,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
                   <Typography variant="h6">Employee ID</Typography>
-                  <Typography>6767112</Typography>
+                  <Typography>{selectedUser?.employeeID}</Typography>
                 </Grid>
                 <Grid item xs={6} md={3} sx={{display:"flex" ,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
                   <Typography variant="h6">Joining Date</Typography>
-                  <Typography>june 12</Typography>
+                  <Typography>{selectedUser?.joinDate}</Typography>
                 </Grid>
                 <Grid item xs={6} md={3} sx={{display:"flex" ,justifyContent:"center",alignItems:'center',flexDirection:"column"}}>
                   <Typography variant="h6">Store</Typography>
-                  <Typography>BBWE</Typography>
+                  <Typography>{selectedUser?.store}</Typography>
                 </Grid>
-              
+                </>
+             
               </Grid>
               </CardContent>
             </Card>

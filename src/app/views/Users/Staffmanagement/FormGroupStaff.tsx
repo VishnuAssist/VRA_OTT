@@ -1,14 +1,32 @@
 import {
   Autocomplete,
+  Avatar,
   Button,
+  Card,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Grid,
+  IconButton,
   TextField,
+  Typography,
 } from "@mui/material";
+<<<<<<< HEAD
 import { FC, useEffect, useState } from "react";
+=======
+<<<<<<< HEAD
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { GroupStaff } from "../../../Models/GroupStaff";
+import { useDispatch } from "react-redux";
+import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { Staff } from "../../../Models/StaffManagement"; // Ensure the path is correct
+=======
+import { FC, useEffect } from "react";
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
 import { GroupStaff } from "../../../Models/GroupStaff";
 import { useDispatch, useSelector } from "react-redux";
 import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
@@ -17,13 +35,23 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Staff } from "../../../Models/StaffMangement";
 // import FormHelperText from "@mui/material/FormHelperText";
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
 
+<<<<<<< HEAD
 // const users = [
 //   { label: "John" },
 //   { label: "Kemy" },
 //   { label: "emy" },
 //   { label: "Andrew" },
 // ];
+=======
+const users = [
+  { label: "John" },
+  { label: "Kemy" },
+  { label: "Emy" },
+  { label: "Andrew" },
+];
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
 
 interface Props {
   openpGroup: boolean;
@@ -31,6 +59,133 @@ interface Props {
   initialStore: GroupStaff | null;
 }
 
+<<<<<<< HEAD
+const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
+  const dispatch = useDispatch();
+  const { register, handleSubmit, reset, setValue } = useForm<GroupStaff>();
+
+  const [userdata, setUserdata] = useState<Staff | null>(null);
+  const [usersdata, setUsersdata] = useState<Staff[]>([]);
+
+  useEffect(() => {
+    if (initialStore) {
+      reset(initialStore);
+      setUsersdata(initialStore.staffs ? JSON.parse(initialStore.staffs) : []);
+    } else {
+      reset({
+        groupname: "",
+        description: "",
+        staffs: [],
+        id: 0,
+      });
+    }
+  }, [initialStore, reset]);
+
+  const submitValue = (data: GroupStaff) => {
+    const updatedData = { ...data, staffs: usersdata };
+    if (initialStore) {
+      dispatch(updateGroup(updatedData));
+    } else {
+      dispatch(addGroup(updatedData));
+    }
+    reset();
+    closeGroup();
+  };
+
+  const handleDeleteUser = (index: number) => {
+    const updatedUsers = [...usersdata];
+    updatedUsers.splice(index, 1);
+    setUsersdata(updatedUsers);
+  };
+
+  return (
+    <Dialog open={openpGroup} onClose={closeGroup} maxWidth="sm" fullWidth>
+      <DialogTitle sx={{ color: "darkblue" }}>
+        {initialStore ? "Edit Group" : "Add Group"}
+      </DialogTitle>
+      <DialogContent>
+        <form onSubmit={handleSubmit(submitValue)}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Group Name"
+                placeholder="Group Name"
+                {...register("groupname", { required: true })}
+                required
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Description"
+                placeholder="Description"
+                {...register("description")}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={8}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={users}
+                getOptionLabel={(option) => option.label}
+                onChange={(_, selectedValue) => {
+                  if (selectedValue) {
+                    const newUser = { username: selectedValue.label }; // Adjust if `Staff` structure differs
+                    setUserdata(newUser);
+                  }
+                }}
+                renderInput={(params) => (
+                  <TextField {...params} fullWidth label="Users" />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "center" }}>
+              <IconButton
+                onClick={() => {
+                  if (userdata) {
+                    setUsersdata((prev) => [...prev, userdata]);
+                    setUserdata(null);
+                  }
+                }}
+              >
+                <AddCircleTwoToneIcon fontSize="large" color="primary" />
+              </IconButton>
+            </Grid>
+
+            <Grid item xs={12}>
+              {usersdata.map((user, index) => (
+                <Card key={user?.username} sx={{p:2, display: "flex", justifyContent: "space-between", mb: 2 }}>
+                  <Avatar>{user?.username.charAt(0)}</Avatar>
+                  <Typography sx={{ ml: 1, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    {user?.username}
+                  </Typography>
+                  <IconButton
+                    onClick={() => handleDeleteUser(index)}
+                    sx={{ ml: "auto" }}
+                  >
+                    <DeleteIcon color="error" />
+                  </IconButton>
+                </Card>
+              ))}
+            </Grid>
+          </Grid>
+
+          <DialogActions>
+            <Button type="submit" variant="contained" color="primary">
+              Save
+            </Button>
+            <Button onClick={closeGroup} variant="outlined" color="secondary">
+              Cancel
+            </Button>
+          </DialogActions>
+        </form>
+      </DialogContent>
+    </Dialog>
+=======
 const schema = yup.object().shape({
   groupname: yup.string().required("GroupName is mandatory"),
   staffs: yup.string(),
@@ -154,6 +309,7 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
         </DialogContent>
       </Dialog>
     </>
+>>>>>>> 6a0de3eb9ea10000634726f1308ed2d395684cc4
   );
 };
 

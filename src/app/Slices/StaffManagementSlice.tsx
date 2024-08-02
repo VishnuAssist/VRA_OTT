@@ -19,8 +19,9 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined,
-      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
+      store: "TW00001",
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00PM',checkout:'3:00PM'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00PM',checkout:'12:00AM'}],
+      leaves:{annualleave:12, casualleave:8, flexileave:6, familycare:9, medicalleave:10, emergencyleave:7}
     },
     {
       id: 2,
@@ -33,8 +34,9 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined,
-      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
+      store: "TW00001",
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00PM',checkout:'3:00PM'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00PM',checkout:'12:00AM'}],
+      leaves:{annualleave:12, casualleave:5, flexileave:4, familycare:7, medicalleave:8, emergencyleave:4}
     },
     {
       id: 3,
@@ -47,8 +49,9 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined,
-      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
+      store: "TW00001",
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00PM',checkout:'3:00PM'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00PM',checkout:'12:00AM'}],
+      leaves:{annualleave:12, casualleave:7, flexileave:4, familycare:5, medicalleave:4, emergencyleave:6}
     },
     {
       id: 4,
@@ -61,8 +64,9 @@ const initialState: UserState = {
       status: "pending",
       joinDate: "12-6-2023",
       role: "admin",
-      store: undefined,
-      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00Pm',checkout:'3:00Pm'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00Pm',checkout:'12:00AM'}]
+      store: "TW00001",
+      attendance:[{attendanceId:1, status: "PRESENT",date:new Date().toISOString(),checkin:'2:00PM',checkout:'3:00PM'},{attendanceId:2, status: "PRESENT",date:new Date().toISOString(),checkin:'9:00PM',checkout:'12:00AM'}],
+      leaves:{annualleave:12, casualleave:8, flexileave:6, familycare:9, medicalleave:10, emergencyleave:7}
     },
   ],
   selectedUser: null,

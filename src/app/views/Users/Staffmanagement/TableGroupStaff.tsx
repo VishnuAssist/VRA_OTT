@@ -26,8 +26,12 @@ import { useState } from "react";
 import { removeGroup } from "../../../Slices/GroupStaff";
 import DeleteAlert from "../../../components/DeleteAlert";
 import Groupview from "./FormGroupStaff";
+<<<<<<< HEAD
 import { Staff } from "../../../Models/StaffMangement";
 
+=======
+import CloseIcon from '@mui/icons-material/Close';
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
 const GroupTable = () => {
   const { groupList } = useSelector((state: any) => state.groupStaff);
   console.log("groupList", groupList);
@@ -101,6 +105,7 @@ const GroupTable = () => {
                       <Checkbox defaultChecked />
                     </FormGroup>
                   </TableCell>
+<<<<<<< HEAD
 
                   <TableCell>{groupDetails.groupname}</TableCell>
                   <TableCell>{groupDetails?.users?.length}
@@ -116,6 +121,12 @@ const GroupTable = () => {
                   </TableCell>
                  
                   <TableCell>{groupDetails.description}</TableCell>
+=======
+                  <TableCell>{groupDetails?.groupname}</TableCell>
+
+                  <TableCell>{groupDetails?.staffs?.length}</TableCell>
+                  <TableCell>{groupDetails?.description}</TableCell>
+>>>>>>> 8ce8294e2317199f812859f0dc78906c2be7d2cd
 
                   <TableCell>
                     <IconButton
@@ -149,7 +160,10 @@ const GroupTable = () => {
       </TableContainer>
 
       <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle variant="h5">Group of Staff Members</DialogTitle>
+        <DialogTitle sx={{display:"flex",alignItems:"center",justifyContent:"space-between"}} variant="h5">Group of Staff Members<IconButton ><CloseIcon color="error"/>
+        </IconButton>
+        </DialogTitle>
+        
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item md={6}>
@@ -171,7 +185,9 @@ const GroupTable = () => {
             </Grid>
 
             <Grid item md={6}>
-              {previewdata?.staffs}
+              {previewdata?.staffs?.map(name=>(
+                <Typography>{name?.username}</Typography>
+              ))}
             </Grid>
           </Grid>
         </DialogContent>

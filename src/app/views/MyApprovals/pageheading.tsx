@@ -70,18 +70,18 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                       bgcolor: theme.colors.secondary.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
                       alignItems: "center",
                       p: 1,
                       width: "100%",
                       height: 80,
                     }}
                   >
-                    <Typography variant="h6">Leave Request</Typography>
-                    <RemoveRedEyeOutlinedIcon
+                    <Typography sx={{display:"flex",justifyContent:"center",alignItems:"center"}} variant="h6">Leave Request</Typography>
+                    {/* <RemoveRedEyeOutlinedIcon
                       onClick={() => openPreview(d)}
                       sx={{ ml: 20 }}
-                    />
+                    /> */}
 
                     <Divider />
                   </Box>
@@ -144,7 +144,10 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                     >
                       Approved
                     </Button>
-
+                    <RemoveRedEyeOutlinedIcon
+                      onClick={() => openPreview(d)}
+                      sx={{ fontSize:35  }}
+                    />
                     <Button
                       variant="contained"
                       color="error"
@@ -164,7 +167,7 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                       bgcolor: theme.colors.info.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
                       alignItems: "center",
                       p: 1,
                       width: "100%",
@@ -172,7 +175,7 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                     }}
                   >
                     <Typography variant="h6">Medical Leave</Typography>
-                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
+                    
                   </Box>
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
@@ -188,23 +191,23 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                           {d.Name}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} md={3} sm={3}>
+                      <Grid item xs={3} md={3} sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Fromdate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7} md={7} sm={7}>
+                      <Grid item xs={7} md={7} sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Fromdate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} md={3} sm={3}>
+                      <Grid item xs={3} md={3} sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Todate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7} md={7} sm={7}>
+                      <Grid item xs={7} md={7} sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Todate}
                         </Typography>
@@ -233,7 +236,10 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                     >
                       Approved
                     </Button>
-
+                    <RemoveRedEyeOutlinedIcon
+                      onClick={() => openPreview(d)}
+                      sx={{ fontSize:35  }}
+                    />
                     <Button
                       variant="contained"
                       color="error"
@@ -246,14 +252,14 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
               </Grid>
             )}
             {Type == "Commision" && d.type == "Commision" && (
-              <Grid item xs={12} sm={4} md={4} lg={4}>
+              <Grid item xs={12} sm={4} md={4} >
                 <Card sx={{ height: "100%" }}>
                   <Box
                     sx={{
                       bgcolor: theme.colors.warning.dark,
                       color: "#FAFAFA",
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "center",
                       alignItems: "center",
                       p: 1,
                       width: "100%",
@@ -261,50 +267,50 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                     }}
                   >
                     <Typography variant="h6">Commission</Typography>
-                    <RemoveRedEyeOutlinedIcon onClick={() => openPreview(d)} />
+                    
                   </Box>
                   <CardContent>
                     <Divider orientation="vertical" variant="middle" flexItem />
                     <Grid item xs={12} md={12}  container spacing={2}>
-                      <Grid item xs={3}  sm={3}>
+                      <Grid item xs={3}  sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Name:
                         </Typography>
                       </Grid>
-                      <Grid item xs={9}  sm={9}>
+                      <Grid item xs={9}  sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {" "}
                           {d.Name}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3}  sm={3}>
+                      <Grid item xs={3}  sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           Fromdate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7} sm={7}>
+                      <Grid item xs={7} sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Fromdate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} sm={3.5}>
+                      <Grid item xs={3} sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Todate:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7} sm={7.5}>
+                      <Grid item xs={7} sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Todate}
                         </Typography>
                       </Grid>
-                      <Grid item xs={3} sm={3}>
+                      <Grid item xs={3} sm={4}>
                         <Typography sx={{ fontSize: 20, fontWeight: "bold" }}>
                           {" "}
                           Reason:
                         </Typography>
                       </Grid>
-                      <Grid item xs={7} sm={7.5}>
+                      <Grid item xs={7} sm={8}>
                         <Typography sx={{ fontSize: 20, marginLeft: "20px" }}>
                           {d.Reason}
                         </Typography>
@@ -321,7 +327,10 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
                     >
                       Approved
                     </Button>
-
+                    <RemoveRedEyeOutlinedIcon
+                      onClick={() => openPreview(d)}
+                      sx={{ fontSize:35  }}
+                    />
                     <Button
                       variant="contained"
                       color="error"
