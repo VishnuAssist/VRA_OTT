@@ -1,11 +1,16 @@
 import {
   Box,
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
   Divider,
   Grid,
+  IconButton,
+  Tab,
+  Tabs,
+  TextField,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -16,6 +21,17 @@ import PreviewApproval from "./PreviewApproval";
 import ApprovalAlert from "../../components/ApprovalAlert";
 import ApprovalDeleteAlert from "../../components/ApprovalDeleteAlert";
 import { useSelector } from "react-redux";
+import TableRowsIcon from "@mui/icons-material/TableRows";
+import ViewModuleIcon from "@mui/icons-material/ViewModule";
+
+
+
+
+
+
+
+
+
 interface PageheadingProps {
   Type: string;
 }
@@ -38,7 +54,7 @@ const pendingList=approvalList.filter((data:ApprovalsLeave)=>data.status==="Pend
   const closePreview = () => {
     setPreview(false);
   };
-
+  
   const [approveAlert, setApproveAlert] = useState(false);
   const openApproveAlert = () => {
     setApproveAlert(true);

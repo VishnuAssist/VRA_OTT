@@ -16,7 +16,12 @@ import {
   Typography,
   AvatarGroup,
   Avatar,
+  Card,
+  Box,
+  Tooltip,
+  styled,
 } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -27,6 +32,7 @@ import { removeGroup } from "../../../Slices/GroupStaff";
 import DeleteAlert from "../../../components/DeleteAlert";
 import Groupview from "./FormGroupStaff";
 import { Staff } from "../../../Models/StaffMangement";
+
 
 const GroupTable = () => {
   const { groupList } = useSelector((state: any) => state.groupStaff);
@@ -74,6 +80,10 @@ const GroupTable = () => {
     setAlertDeleteStore(false);
     setUserToDelete(null);
   };
+  const StyledAvatar = styled(Avatar)(() => ({
+    width: "32px !important",
+    height: "32px !important",
+  }));
   return (
     <>
       <TableContainer sx={{ overflow: "auto" }} component={Paper}>
@@ -94,7 +104,7 @@ const GroupTable = () => {
           </TableHead>
           <TableBody>
             {groupList &&
-              groupList.map((groupDetails: any) => (
+              groupList.map((groupDetails) =>( 
                 <TableRow key={groupDetails.id}>
                   <TableCell>
                     <FormGroup>
@@ -102,18 +112,52 @@ const GroupTable = () => {
                     </FormGroup>
                   </TableCell>
 
-                  <TableCell>{groupDetails.groupname}</TableCell>
-                  <TableCell>{groupDetails?.users?.length}
-                    {/* {groupDetails.users && groupDetails.users.length > 0 ? (
-                      groupDetails.users.map((user: any) => (
-                        <div key={user.id}>
-                          <p> {user.username.length}</p>
-                        </div>
-                      ))
+                  <TableCell>
+                    {groupDetails.groupname}</TableCell>
+                  {/* <TableCell>  <AvatarGroup max={4}>
+                    {groupDetails?.staffs?.map((staffs) => (<Avatar
+                          
+                          src={staffs?.avatarUrl} 
+                          sx={{ width: 24, height: 24, margin: '0 2px' }}
+                        />
+                      ))}
+                    </AvatarGroup>
+                  </TableCell> */}
+                   {/* <TableCell> <AvatarGroup max={4}>
+                    {groupDetails.staffs?.map((staffs)=>(<Avatar
+                    
+                    
+                          sx={{ width: 24, height: 24, margin: '0 2px' }}
+                    />))}</AvatarGroup></TableCell> */}<TableCell align="center" sx={{ textTransform: "capitalize" }}>
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    position="relative"
+                    marginLeft="-0.875rem !important"
+                  >
+                    {Array.isArray(groupDetails.staffs) && groupDetails.staffs.length > 0 ? (
+                      <>
+                        {groupDetails.staffs?.map((user: any) => (
+                          <div key={user.id}>
+                            <Tooltip title={<Box>{user?.username}</Box>} arrow>
+                              <StyledAvatar src="/assets/images/face-4.jpg" />
+                            </Tooltip>
+                          </div>
+                        ))}
+                        {groupDetails.staffs?.length > 3 && (
+                          <StyledAvatar
+                          
+                            sx={{ fontSize: "14px" }}
+                          >
+                            +{groupDetails.staffs?.length - 3}
+                          </StyledAvatar>
+                        )}
+                      </>
                     ) : (
                       <p>No users available</p>
-                    )} */}
-                  </TableCell>
+                    )}
+                  </Box>
+                </TableCell>
                  
                   <TableCell>{groupDetails.description}</TableCell>
 
@@ -155,13 +199,15 @@ const GroupTable = () => {
         
         <DialogContent>
           <Grid container spacing={2}>
+          
             <Grid item md={6}>
               <Typography variant="h5">Group Name :</Typography>
             </Grid>
-
+           
             <Grid item md={6}>
               {previewdata?.groupname}
             </Grid>
+            
             <Grid item md={6}>
               <Typography variant="h5">Description :</Typography>
             </Grid>
@@ -172,12 +218,15 @@ const GroupTable = () => {
             <Grid item md={6}>
               <Typography variant="h5">Staff's :</Typography>
             </Grid>
-
+            
             <Grid item md={6}>
+            
               {previewdata?.staffs?.map(name=>(
                 <Typography>{name?.username}</Typography>
               ))}
+             
             </Grid>
+           
           </Grid>
         </DialogContent>
       </Dialog>
