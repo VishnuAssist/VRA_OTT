@@ -19,6 +19,7 @@ const initialState: UserState = {
       staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
       status:"0",
+      file:[]
     },
     {
       users:"Rizwan",
@@ -30,7 +31,8 @@ const initialState: UserState = {
       priority:"Low",
       staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
-      status:"1"
+      status:"1",
+      file:[]
     },
     {
       users:"Riyas",
@@ -42,7 +44,8 @@ const initialState: UserState = {
       priority:"Low",
       staff:["Rizwan","sheik","Hari","Riyas"],
       date: "2024-07-12",
-      status:"2"
+      status:"2",
+      file:[]
     },
   ],
   selectedUser: null,

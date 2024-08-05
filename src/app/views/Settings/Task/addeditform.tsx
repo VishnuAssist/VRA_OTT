@@ -7,10 +7,12 @@ import {
   DialogTitle,
   FormControl,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 
@@ -19,13 +21,18 @@ import { TaskType } from "../../../Models/TaskType";
 import { addTask, updateTask } from "../../../Slices/TaskSlice";
 import { Staff } from "../../../Models/StaffMangement";
 
-import { Bounce, ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormHelperText from "@mui/material/FormHelperText";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 interface Props {
   openmodel: boolean;
   closetaskmodel: () => void;
@@ -76,7 +83,6 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   // });
   const dispatch = useDispatch();
   const [selectedUser, setSelectedUser] = useState<Staff[] | null>(null);
-  
 
   const submitData = (data: TaskType) => {
     const taskData = {
@@ -97,40 +103,62 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
     console.log("task data ", taskData);
   };
 
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setSelectedFile((prevFiles) => [...prevFiles, file]);
-  //     // if (selectedFile == null){
-  //     //   setSelectedFile([file] );
-  //     // }
-  //     // else{
-  //     //   setSelectedFile([...selectedFile,file])
-  //     // }
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  // const maxFiles = 5;
+  // const conversiontostring = (e: File) => {
+  //   console.log("e", e);
+
+  //   if (e) {
+  //     const file = e;
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       if (typeof reader.result === "string") {
+  //         return reader.result;
+  //       } else {
+  //         return "";
+  //       }
+  //     };
   //   }
   // };
+  // const handleFileChange = (event: any) => {
+  //   console.log("data", event.target.files);
 
-  const [selectedFiles, setSelectedFiles] = useState<files[]>();
-  const maxFiles = 5;
+  //   const files = Array.from(event.target.files)?.map((inputfile) => {
+  //     console.log("files", inputfile);
+  //     console.log(conversiontostring(inputfile));
+
+  //     return conversiontostring(inputfile);
+  //   });
+
+  //   // if (files.length > maxFiles) {
+
+  //   //   toast.error(`You can only select up to ${maxFiles} files.`, {
+  //   //     position: "top-right",
+  //   //     autoClose: 5000,
+  //   //     hideProgressBar: false,
+  //   //     closeOnClick: true,
+  //   //     pauseOnHover: true,
+  //   //     draggable: true,
+  //   //     progress: undefined,
+  //   //     theme: "light",
+  //   //     transition: Bounce,
+  //   //   });
+  //   //   return;
+  //   // }
+  //   setSelectedFiles(files);
+  // };
 
   const handleFileChange = (event:any) => {
     const files = Array.from(event.target.files);
-    if (files.length > maxFiles) {
-      
-      toast.error(`You can only select up to ${maxFiles} files.`, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
-      return;
-    }
     setSelectedFiles(files);
+    setValue('file', files); 
+  };
+
+  const handleDeleteFile = (fileToDelete:any) => {
+    const updatedFiles = selectedFiles.filter((file) => file !== fileToDelete);
+    setSelectedFiles(updatedFiles);
+    setValue('file', updatedFiles); 
   };
 
   useEffect(() => {
@@ -159,13 +187,22 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
   const priority = watch("priority");
   const taskProgress = watch("taskProgress");
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   return (
     <>
-      <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth >
+      <Dialog open={openmodel} onClose={closetaskmodel} maxWidth="sm" fullWidth>
         <form onSubmit={handleSubmit(submitData)}>
-          <DialogTitle sx={{ color: "darkblue" }}>
-            {initialTask ? "Update Task" : "New Task"}
+          <DialogTitle sx={{display:"flex",justifyContent:"space-between",alignItems:"center", color: "darkblue" }}>
+            <Typography variant="h4">
+            {initialTask ? "Update Task" : "New Task"}</Typography>
+
+            <IconButton
+                color="error"
+                aria-label="delete"
+                onClick={closetaskmodel}
+              >
+                <HighlightOffSharpIcon />
+              </IconButton>
           </DialogTitle>
 
           <DialogContent
@@ -178,9 +215,8 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
           >
             <Grid container spacing={2}>
               {initialTask ? (
-                <Grid item xs={12} md={12} sx={{mt:1}}>
+                <Grid item xs={12} sm={12} md={12} lg={12} sx={{ mt: 1 }}>
                   <FormControl fullWidth>
-                    
                     <InputLabel id="taskProgress-select-label">
                       TaskProgress
                     </InputLabel>
@@ -200,7 +236,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
               ) : (
                 ""
               )}
-              <Grid item md={12} sx={{ mt: 1 }}>
+              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ mt: 1 }}>
                 <TextField
                   type="text"
                   id="assigned-by"
@@ -211,7 +247,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   helperText={errors?.assigner?.message}
                 />
               </Grid>
-              <Grid item xs={12} md={12} sx={{ mt: 1 }}>
+              <Grid item xs={12} sm={12} md={12} lg={12} sx={{ mt: 1 }}>
                 {/* <Autocomplete
                   options={userList}
                   getOptionLabel={(option: Staff) => option.username}
@@ -242,7 +278,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   )}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <FormControl fullWidth>
                   <InputLabel id="task-select-label">Task</InputLabel>
                   <Select
@@ -259,35 +295,23 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={12} md={6}>
-        <TextField
-          type="date"
-          id="date"
-          label=""
-          {...register("date", {
-            validate: value => new Date(value) >= new Date(today) || "Please select a future date"
-          })}
-          fullWidth
-          InputProps={{ inputProps: { min: today } }} // Set the min attribute
-          error={!!errors.date}
-          helperText={errors?.date?.message}
-        />
-      </Grid>
-              <Grid item md={12}>
+              <Grid item xs={12} sm={12} md={6} lg={6}>
                 <TextField
-                  type="text"
-                  id="description"
-                  label="Description"
-                  multiline
-                  rows={4}
+                  type="date"
+                  id="date"
+                  label=""
+                  {...register("date", {
+                    validate: (value) =>
+                      new Date(value) >= new Date(today) ||
+                      "Please select a future date",
+                  })}
                   fullWidth
-                  // value={'hello'}
-                  {...register("description")}
-                  error={!!errors.description}
-                  helperText={errors?.description?.message}
+                  InputProps={{ inputProps: { min: today } }} 
+                  error={!!errors.date}
+                  helperText={errors?.date?.message}
                 />
               </Grid>
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} sm={12} md={8} lg={8}>
                 <FormControl fullWidth>
                   <InputLabel id="priority-select-label">Priority</InputLabel>
                   <Select
@@ -304,15 +328,60 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item md={6}>
-                <input
+              <Grid item xs={12} sm={12} md={12} lg={12}>
+                <TextField
+                  type="text"
+                  id="description"
+                  label="Description"
+                  multiline
+                  rows={4}
+                  fullWidth
+                  // value={'hello'}
+                  {...register("description")}
+                  error={!!errors.description}
+                  helperText={errors?.description?.message}
+                />
+              </Grid>
               
+              <Grid item xs={12} sm={12} md={12} lg={12} >
+                <input
+                  {...register("file")}
                   type="file"
                   id="file"
-                  {...register("file")}
+                  style={{ display: "none" }}
                   multiple
                   onChange={handleFileChange}
+
                 />
+                <Button
+                  variant="contained"
+                  onClick={() => document.getElementById("file").click()}
+                  sx={{width:"100%"}}
+                  startIcon={<DriveFolderUploadOutlinedIcon fontSize="small" />}
+                >
+                  Upload Files
+                </Button>
+                <div>
+                  {selectedFiles.map((file:any, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        marginTop: 10,
+                      }}
+                    >
+                      <span>{file.name}</span>
+                      <IconButton
+                        onClick={() => handleDeleteFile(file)}
+                        aria-label="delete"
+                        size="small"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </div>
+                  ))}
+                </div>
               </Grid>
             </Grid>
           </DialogContent>

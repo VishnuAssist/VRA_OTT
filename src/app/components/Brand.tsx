@@ -1,7 +1,8 @@
 import { Box, styled } from "@mui/material";
 
 import { Span } from "./Typography";
-import { MatxLogo } from ".";
+import { MatxLogo } from "./";
+
 import useSettings from "../hooks/useSettings";
 
 // STYLED COMPONENTS
@@ -28,7 +29,7 @@ export default function Brand({ children }:any) {
       <Box display="flex" alignItems="center">
         <MatxLogo />
         <StyledSpan mode={mode} >
-          Matx
+          Uretail
         </StyledSpan>
       </Box>
 

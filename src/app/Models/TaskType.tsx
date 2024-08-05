@@ -10,4 +10,5 @@ export interface TaskType {
      "date": string;
     "status":string;
     "file"?: File[] | null;
+    // "file"?: string | null ;
    }

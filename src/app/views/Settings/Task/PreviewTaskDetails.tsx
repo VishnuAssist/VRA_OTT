@@ -25,6 +25,7 @@ import AddEditForm from "./addeditform";
 import { removeTask } from "../../../Slices/TaskSlice";
 import { useDispatch } from "react-redux";
 // import FilePreviewer from "react-file-previewer";
+// import DocViewer from "react-doc-viewer";
 
 interface Props {
   preview: boolean;
@@ -68,6 +69,30 @@ const PreviewTaskDetails: FC<Props> = ({
     setAlertDeleteStore(false);
     setUserToDelete(null);
   };
+
+
+const images = [
+  { thumbnail: 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=600', full: 'https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { thumbnail: 'https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=600', full: 'https://images.pexels.com/photos/206359/pexels-photo-206359.jpeg?auto=compress&cs=tinysrgb&w=600' },
+  { thumbnail: 'https://4kwallpapers.com/images/walls/thumbs/17548.png', full: 'https://4kwallpapers.com/images/walls/thumbs/17548.png' },
+  { thumbnail: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQQ4M70Vx97A63nbxXXEPRjGdGUVled8AbV1eDxvgDObXFGGGu&s', full: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQQ4M70Vx97A63nbxXXEPRjGdGUVled8AbV1eDxvgDObXFGGGu&s' },
+  { thumbnail: 'https://4kwallpapers.com/images/walls/thumbs/1455.jpg', full: 'https://4kwallpapers.com/images/walls/thumbs/1455.jpg' },
+  { thumbnail: 'https://4kwallpapers.com/images/walls/thumbs/3773.jpg', full: 'https://4kwallpapers.com/images/walls/thumbs/3773.jpg' },
+  
+];
+
+  const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleClickOpen = (images:any) => {
+    setSelectedImage(images);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedImage(null);
+  };
   return (
     <>
       <Dialog open={preview} onClose={closePreview} maxWidth={"sm"}>
@@ -77,12 +102,12 @@ const PreviewTaskDetails: FC<Props> = ({
             spacing={2}
             sx={{ display: "flex", alignItems: "center" }}
           >
-            <Grid item md={9}>
+            <Grid item xs={9} sm={9} md={9} lg={9}>
               <Typography variant="h4" color={"darkblue"}>
                 Task Details
               </Typography>
             </Grid>
-            <Grid item md={1}>
+            <Grid item xs={1} sm={1} md={1} lg={1}>
               <IconButton
                 size="small"
                 color="primary"
@@ -92,7 +117,7 @@ const PreviewTaskDetails: FC<Props> = ({
                 <EditIcon />{" "}
               </IconButton>
             </Grid>
-            <Grid item md={1}>
+            <Grid item xs={1} sm={1} md={1} lg={1}>
               <IconButton
                 color="error"
                 aria-label="delete"
@@ -101,7 +126,7 @@ const PreviewTaskDetails: FC<Props> = ({
                 <DeleteIcon />
               </IconButton>{" "}
             </Grid>
-            <Grid item md={1}>
+            <Grid item xs={1} sm={1} md={1} lg={1}>
               <IconButton
                 color="error"
                 aria-label="delete"
@@ -235,31 +260,40 @@ const PreviewTaskDetails: FC<Props> = ({
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      px: 6,
-                      py: 6,
-                      border: "dashed",
-                    }}
-                  >
-                    <div>
-                      <h1>My App</h1>
-                      {/* <FilePreviewer
-                        file={PreviewDetails?.file}
-                        // {{
-                        //     url: "https://cors-anywhere.herokuapp.com/http://africau.edu/images/default/sample.pdf"}}
-                      /> */}
-                    </div>
-                  </Box>
+                  
+                  <Grid container spacing={2}>
+                    {images.map((image, index) => (
+                      <Grid item xs={4} key={index}>
+                        <img
+                          src={image.thumbnail}
+                          alt={`Thumbnail ${index + 1}`}
+                          style={{ width: "100%",height:"120px", cursor: "pointer" }}
+                          onClick={() => handleClickOpen(image.full)}
+                          
+                        />
+                      </Grid>
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
+
+
+      <Dialog open={open} onClose={handleClose} maxWidth="lg">
+        <DialogContent style={{ padding: 0 }}>
+          {selectedImage && (
+            <img
+              src={selectedImage}
+              alt="Full size"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+
 
       <AddEditForm
         openmodel={dialogOpen}

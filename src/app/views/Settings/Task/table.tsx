@@ -212,7 +212,7 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                             pr: 1,
                           }}
                         >
-                          <Grid item md={10}>
+                          <Grid item xs={10} sm={10} md={10} lg={10}>
                             <Typography
                               variant="h5"
                               sx={{
@@ -225,7 +225,7 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                             </Typography>
                           </Grid>
 
-                          <Grid item md={2}>
+                          <Grid item xs={2} sm={2} md={2} lg={2}>
                             <IconButton
                               aria-controls="simple-menu"
                               aria-haspopup="true"
@@ -239,32 +239,40 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                               keepMounted
                               open={Boolean(anchorEl)}
                               onClose={handleClose}
+                              sx={{display:"flex",flexDirection:"column"}}
                             >
                               <MenuItem onClick={() => openPreview(taskDetail)}>
                                 <RemoveRedEyeIcon />
-                                <Typography sx={{ ml: 1 }}>Preview</Typography>
+                                {/* <Typography sx={{ ml: 1 }}>Preview</Typography> */}
                               </MenuItem>
                               <MenuItem
                                 onClick={() => edithandleAddClick(taskDetail)}
                               >
                                 <CreateOutlinedIcon />
-                                <Typography sx={{ ml: 1 }}>Edit</Typography>
+                                {/* <Typography sx={{ ml: 1 }}>Edit</Typography> */}
                               </MenuItem>
                               <MenuItem onClick={() => openDelete(taskDetail)}>
                                 <DeleteOutlineOutlinedIcon />
-                                <Typography sx={{ ml: 1 }}>Delete</Typography>
+                                {/* <Typography sx={{ ml: 1 }}>Delete</Typography> */}
                               </MenuItem>
                             </Menu>
                           </Grid>
                         </Grid>
 
                         <Grid container spacing={2}>
-                          <Grid item md={12} sx={{ fontSize: "18px" }}>
+                          <Grid
+                            item
+                            xs={12}
+                            sm={12}
+                            md={12}
+                            lg={12}
+                            sx={{ fontSize: "18px" }}
+                          >
                             <Typography variant="h5">
                               {taskDetail.task}
                             </Typography>
                           </Grid>
-                          <Grid item md={12}>
+                          <Grid item xs={12} sm={12} md={12} lg={12}>
                             <Typography
                               sx={{
                                 height: "40px",
@@ -275,11 +283,13 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                                 WebkitBoxOrient: "vertical",
                               }}
                             >
-                              {taskDetail.description}
+                              <Tooltip title={taskDetail.description} arrow>
+                                <span>{taskDetail.description}</span>
+                              </Tooltip>
                             </Typography>
                           </Grid>
 
-                          <Grid item md={6}>
+                          <Grid item xs={6} sm={6} md={6} lg={6}>
                             <Typography
                               variant={"h5"}
                               sx={{ color: "#8D6F64" }}
@@ -289,12 +299,13 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                           </Grid>
                           <Grid
                             item
+                            xs={6}
                             md={6}
                             sx={{ display: "flex", alignItems: "center" }}
                           >
                             <Typography>{taskDetail.date}</Typography>
                           </Grid>
-                          <Grid item md={5} sx={{ ml: 1 }}>
+                          <Grid item xs={5} sm={5} md={5} lg={5} sx={{ ml: 1 }}>
                             {/* <Typography>{taskDetail?.users?.length}</Typography> */}
                             <Box
                               display="flex"
@@ -330,7 +341,7 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
                             </Box>
                           </Grid>
 
-                          <Grid item md={3.5}>
+                          <Grid item xs={3.5} sm={3.5} md={3.5} lg={3.5}>
                             <Box
                               sx={{
                                 display: "flex",
@@ -376,8 +387,9 @@ const TaskTable: React.FC<Props> = ({ value, CustomTabPanel }) => {
       <PreviewTaskDetails
         preview={preview}
         closePreview={closePreview}
-        PreviewDetails={previewdata} 
-        edithandleAddClick={undefined}      />
+        PreviewDetails={previewdata}
+        // edithandleAddClick={undefined}
+      />
       <DeleteAlert
         DeleteAlert={alertdeleteStore}
         closeDelete={closeDelete}
