@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Avatar,
+  Box,
   Button,
   Card,
   Dialog,
@@ -20,6 +21,7 @@ import { Staff } from "../../../Models/StaffMangement";
 import { GroupStaff } from "../../../Models/GroupStaff";
 import { useDispatch } from "react-redux";
 import { addGroup, updateGroup } from "../../../Slices/GroupStaff";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 
 const users = [
   { label: "John" },
@@ -82,7 +84,18 @@ const Groupview: FC<Props> = ({ openpGroup, closeGroup, initialStore }) => {
   return (
     <Dialog open={openpGroup} onClose={closeGroup} maxWidth="sm" fullWidth>
       <DialogTitle sx={{ color: "darkblue" }}>
-        {initialStore ? "Edit Group" : "Add Group"}
+        
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            {initialStore ? "Update Group" : "Create Group"}
+
+            <IconButton
+              color="error"
+              aria-label="delete"
+              onClick={closeGroup}
+            >
+              <HighlightOffSharpIcon />
+            </IconButton>
+          </Box>
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit(submitValue)}>

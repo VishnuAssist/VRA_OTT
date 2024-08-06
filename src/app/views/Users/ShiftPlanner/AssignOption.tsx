@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -7,6 +8,7 @@ import {
   FormControl,
   FormControlLabel,
   Grid,
+  IconButton,
   InputLabel,
   MenuItem,
   Radio,
@@ -14,11 +16,14 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
+  Typography,
 } from "@mui/material";
 import React, { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addSlot, CalendarSlot, updateSlot } from "../../../Slices/CalendarSlotManagement";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+
 
 interface Props {
   assign: boolean;
@@ -97,7 +102,18 @@ const AssignOption: FC<Props> = ({ assign, closeAssign ,initialUserData}) => {
     <>
       <Dialog open={assign} onClose={closeAssign} maxWidth={"sm"} fullWidth>
       <DialogTitle sx={{ color: "darkblue" }}>
-           Create Schedule
+         
+           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h4">Create Schedule</Typography>
+
+            <IconButton
+              color="error"
+              aria-label="delete"
+              onClick={closeAssign}
+            >
+              <HighlightOffSharpIcon />
+            </IconButton>
+          </Box>
           </DialogTitle>
         <form onSubmit={handleSubmit(addSubmit)}>
           <DialogContent>

@@ -12,6 +12,7 @@ import {
   Tooltip,
   styled,
   TablePagination,
+  Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -162,19 +163,18 @@ const TableView: React.FC<{ value: number }> = ({ value }) => {
                   <TableCell sx={{ fontSize: "12px" }}>{Task.assigner}</TableCell>
                   <TableCell sx={{ fontSize: "12px" }}>{Task.task}</TableCell>
                   <TableCell
-                    sx={{
-                      width: "200px",
-                      height: "100%",
+                    
+                  >
+                    <Tooltip title={Task.description} arrow>
+                      <Typography sx={{
+                      width: "150px",
                       fontSize: "12px",
                       overflow: "hidden",
                       textOverflow: "ellipsis",
                       display: "-webkit-box",
                       WebkitLineClamp: 1,
                       WebkitBoxOrient: "vertical",
-                    }}
-                  >
-                    <Tooltip title={Task.description} arrow>
-                      <span>{Task.description}</span>
+                    }}>{Task.description}</Typography>
                     </Tooltip>
                   </TableCell>
                   <TableCell align="center" sx={{ textTransform: "capitalize" }}>

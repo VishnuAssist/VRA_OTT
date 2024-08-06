@@ -248,17 +248,7 @@ const AddEditForm: FC<Props> = ({ openmodel, closetaskmodel, initialTask }) => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={12} lg={12} sx={{ mt: 1 }}>
-                {/* <Autocomplete
-                  options={userList}
-                  getOptionLabel={(option: Staff) => option.username}
-                  value={selectedUser}
-                  onChange={(_, value) => {
-                    setSelectedUser(value);
-                  }}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Select Staff's" {...register('staff')}/>
-                  )}
-                /> */}
+               
                 <Autocomplete
                   multiple
                   disablePortal

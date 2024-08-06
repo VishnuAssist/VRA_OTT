@@ -9,6 +9,7 @@ import Stack from '@mui/material/Stack';
 import useAuth from "../../hooks/useAuth";
 import { Paragraph } from "../../components/Typography";
 import { deepOrange } from "@mui/material/colors";
+import image from "../../../../public/logo.svg";
 
 // STYLED COMPONENTS
 const FlexBox = styled(Box)(() => ({
@@ -94,6 +95,7 @@ export default function JwtLogin() {
          
           <Grid item sm={6} xs={12} >
           <Box sx={{display: "flex",  justifyContent:"center",alignItems:"center"}}>
+          <img src={image} alt="LOGO File" height={"30px"} width={"10%"}/>
           <Typography sx={{ fontSize: 25, fontWeight: "bold" }}>URetail</Typography>
       <Divider />
        

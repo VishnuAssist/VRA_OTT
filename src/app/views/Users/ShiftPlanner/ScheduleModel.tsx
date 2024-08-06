@@ -1,6 +1,7 @@
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 
 interface Props {
   schedule: boolean;
@@ -32,6 +33,19 @@ const ScheduleModel: FC<Props> = ({ schedule, closeSchedule }) => {
   return (
     <>
       <Dialog open={schedule} onClose={closeSchedule} maxWidth="xs" fullWidth>
+        <DialogTitle>
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h4">Schedule Time</Typography>
+
+            <IconButton
+              color="error"
+              aria-label="delete"
+              onClick={closeSchedule}
+            >
+              <HighlightOffSharpIcon />
+            </IconButton>
+          </Box>
+        </DialogTitle>
         <DialogContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={0.5}>

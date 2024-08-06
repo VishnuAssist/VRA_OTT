@@ -1,6 +1,6 @@
-import { Box, Button, Container, Dialog, DialogContent, DialogTitle, Grid, Typography } from '@mui/material'
+import { Box, Button, Container, Dialog, DialogContent, DialogTitle, Grid, IconButton, Typography } from '@mui/material'
 import { FC } from 'react';
-
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 
 interface Props{
     preview : boolean;
@@ -14,7 +14,21 @@ interface Props{
    <>
    <Container>
    <Dialog open={preview} onClose={closePreview}>
-        <DialogTitle sx={{ color: 'darkblue' }}>Preview Slot Details</DialogTitle>
+        <DialogTitle sx={{ color: 'darkblue' }}>
+          
+       
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography variant="h4">Preview Slot Details</Typography>
+
+            <IconButton
+              color="error"
+              aria-label="delete"
+              onClick={closePreview}
+            >
+              <HighlightOffSharpIcon />
+            </IconButton>
+          </Box>
+          </DialogTitle>
         <DialogContent>
           <Box sx={{ p: 2 }}>
             <Grid container spacing={1}>

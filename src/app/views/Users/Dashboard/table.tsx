@@ -1,5 +1,22 @@
+import {
+  Box,
+  Button,
+  Card,
+  CardHeader,
+  Divider,
+  Grid,
+  Paper,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 
-import { Box, Card, CardHeader, Divider, Grid, Paper, styled, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
   flexWrap: "wrap",
@@ -7,20 +24,25 @@ const StyledCard = styled(Card)(({ theme }) => ({
   justifyContent: "space-between",
   padding: "24px !important",
   background: theme.palette.background.paper,
-  [theme.breakpoints.down("sm")]: { padding: "16px !important" }
+  [theme.breakpoints.down("sm")]: { padding: "16px !important" },
 }));
 const Mytable = () => {
   return (
-    
-    
-      <StyledCard elevation={6}sx={{ width: "100" }}>
-      <Box sx={{display: "flex",  flexDirection: "column",alignSelf: 'flex-start'}}>
+    <StyledCard elevation={6} sx={{ width: "100" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent:"space-between",
+          width:"100%"
+        }}
+      >
         <CardHeader title="Today's Transaction" />
+        <Button endIcon={<ArrowRightIcon fontSize="small" />}>View all</Button>
+        
+      </Box>
       <Divider />
-       
-        </Box>
-      <TableContainer >
-        <Table  aria-label="simple table">
+      <TableContainer>
+        <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
@@ -32,7 +54,6 @@ const Mytable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            
             <TableRow>
               <TableCell>1</TableCell>
               <TableCell>Product A</TableCell>
@@ -52,10 +73,7 @@ const Mytable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      </StyledCard>
-      
-    
-    
+    </StyledCard>
   );
 };
 
