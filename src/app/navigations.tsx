@@ -6,6 +6,8 @@ import ApprovalIcon from '@mui/icons-material/Approval';
 import StorageIcon from '@mui/icons-material/Storage';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
+
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
   { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon/> },
@@ -26,6 +28,8 @@ export const navigations = [
       { name: "Staff Management", path: "/users/staffmanagement", icon: <PeopleIcon/> },
       { name: "Attendence", path: "/users/attendence", icon: <BookmarkIcon/> },
       { name: "Shift Planner", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
+      { name: "Log", path: "/users/log", icon: <ContactPageIcon/> },
+      
     
       { label: "My Approvals", type: "label" },
 

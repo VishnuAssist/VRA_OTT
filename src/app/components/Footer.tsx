@@ -58,7 +58,7 @@ export default function Footer() {
               </Grid>
               <Grid item md={3}>
                 <Box sx={{ display: "flex", 
-                        alignItems: 'center',gap: 2 }}>
+                        alignItems: 'center',gap: 1 }}>
                   <Typography fontSize={"15px"} sx={{color:"black"}}> @ Powered by </Typography>
                   <img
                     src={image}

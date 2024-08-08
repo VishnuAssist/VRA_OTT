@@ -6,6 +6,7 @@ import { authRoles } from "./auth/authRoles";
 
 import Loadable from "./components/Loadable";
 import MatxLayout from "./components/MatxLayout/MatxLayout";
+import { element } from "prop-types";
 
 // import materialRoutes from "./views/material-kit/MaterialRoutes";
 
@@ -25,6 +26,7 @@ const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 const  StaffManagement= Loadable(lazy(() => import("./views/Users/Staffmanagement")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShifftPlaner= Loadable(lazy(() => import("./views/Users/ShiftPlanner")));
+const Log=Loadable(lazy(()=> import ("./views/Users/Log/index")));
 const  Stores= Loadable(lazy(() => import("./views/Settings/Dictionary/index")));
 const  Approvals= Loadable(lazy(() => import("./views/MyApprovals/Approvals")));
 const  Task= Loadable(lazy(() => import("./views/Settings/Task/index")));
@@ -47,6 +49,7 @@ const routes = [
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
       { path: "/users/shiftplanner", element: <ShifftPlaner />, auth: authRoles.admin },
+      { path: "/users/log", element: <Log />,auth: authRoles.admin},
       { path: "/myapproval/Approvals", element: <Approvals />, auth: authRoles.admin },
       { path: "/Settings/dictionary", element: <Stores />, auth: authRoles.admin },
       { path: "/Settings/task", element: <Task />, auth: authRoles.admin },
