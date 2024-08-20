@@ -47,13 +47,13 @@ export default function Footer() {
 
   return (
     <ThemeProvider theme={footerTheme}>
-      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#81C9BE" }}>
+      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#ffd43b" }}>
         <AppFooter>
           <FooterContent>
             <Grid container spacing={2}>
               <Grid item md={9}>
                 <Typography fontSize={"15px"} sx={{color:"black"}}>
-                  © 2024 - Uretail Assist
+                  © 2024 - Food Assist
                 </Typography>
               </Grid>
               <Grid item md={3}>

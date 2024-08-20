@@ -71,7 +71,7 @@ const Schedule = () => {
 
   return (
     <>
-      <Paper sx={{ p: 4, mb: 4 }}>
+      <Box sx={{ p: 4, mb: 4 }}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={9}>
             <Typography variant="h5" fontWeight="bold">
@@ -189,7 +189,7 @@ const Schedule = () => {
               </Grid>
             </Paper>
           ))}
-      </Paper>
+      </Box>
       <ScheduleModel
         schedule={schedule}
         closeSchedule={closeSchedule}

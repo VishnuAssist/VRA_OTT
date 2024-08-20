@@ -20,6 +20,8 @@ import {
   TableHead,
   TableRow,
   Paper,
+  TextField,
+  InputAdornment,
 } from '@mui/material';
 import {
   Add as AddIcon,
@@ -35,6 +37,8 @@ import { removeStaff } from '../../../Slices/StaffManagementSlice';
 import { SiCodechef } from 'react-icons/si';
 import {  FaUserTie } from 'react-icons/fa';
 import { IoRestaurant } from 'react-icons/io5';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 const StaffTables = () => {
   const dispatch = useDispatch();
@@ -99,7 +103,19 @@ const StaffTables = () => {
       <Box sx={{ p: 4, m: 4 }} component={Paper}>
         
           <Box display="flex" justifyContent="space-between" mb={4}>
-            <Input placeholder="Search" sx={{ width: 240 }} />
+          <TextField
+          variant="outlined"
+          placeholder="Search"
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon color="action" />
+              </InputAdornment>
+            ),
+          }}
+          style={{ marginTop: 16, width: '240px' }}
+        />
             <IconButton
               aria-label="Add staff"
               color="primary"
