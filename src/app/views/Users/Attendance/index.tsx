@@ -1,30 +1,13 @@
 
-import StaffRole from './StaffRole'
-import PageHeader from './PageHeader'
-import PageTitleWrapper from '../../../components/PageTitleWrapper'
-import { Container } from '@mui/material'
-import { useSelector } from 'react-redux'
-// import StaffStatus from './StaffStatus'
-import Staffui from './staffui'
+import { Box } from '@mui/material'
+import StaffAttendance from './StaffAttendance'
 
-const Index = () => {
-
-  const {selectedUser } = useSelector((state: any) => state.staff);
-
-  
+const index = () => {
   return (
-    <>
-    <PageTitleWrapper>
-      <PageHeader/>
-    </PageTitleWrapper>
-    <Container>
-      {selectedUser? <StaffRole/>:<><Staffui/></>}
-      
-
-    </Container>
-    {/* <StaffStatus/> */}
-    </>
+    <Box sx={{p:2}}>
+      <StaffAttendance/>
+    </Box>
   )
 }
 
-export default Index
+export default index

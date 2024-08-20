@@ -27,18 +27,11 @@ export const navigations = [
    
       { name: "Staff Management", path: "/users/staffmanagement", icon: <PeopleIcon/> },
       { name: "Attendence", path: "/users/attendence", icon: <BookmarkIcon/> },
-      { name: "Shift Planner", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
-      { name: "Log", path: "/users/log", icon: <ContactPageIcon/> },
+      { name: "Shift Management", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
+      
       
     
-      { label: "My Approvals", type: "label" },
-
-      { name: "Approvals", path: "/myapproval/Approvals", icon: <ApprovalIcon/> },
-
-      { label: "Settings", type: "label" },
-
-      { name: "Dictionary", path: "/Settings/dictionary", icon: <StorageIcon/> },
-      { name: "Task", path: "/Settings/task", icon: <AddTaskIcon/> },
+      
 
   
   // { label: "Components", type: "label" },

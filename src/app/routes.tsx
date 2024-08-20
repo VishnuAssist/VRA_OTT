@@ -6,7 +6,7 @@ import { authRoles } from "./auth/authRoles";
 
 import Loadable from "./components/Loadable";
 import MatxLayout from "./components/MatxLayout/MatxLayout";
-import { element } from "prop-types";
+
 
 // import materialRoutes from "./views/material-kit/MaterialRoutes";
 
@@ -20,16 +20,15 @@ const JwtRegister = Loadable(lazy(() => import("./views/sessions/JwtRegister")))
 const ForgotPassword = Loadable(lazy(() => import("./views/sessions/ForgotPassword")));
 // E-CHART PAGE
 const AppEchart = Loadable(lazy(() => import("./views/charts/echarts/AppEchart")));
-const Dashboard = Loadable(lazy(() => import("./views/Users/Dashboard")))
+const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
-const  StaffManagement= Loadable(lazy(() => import("./views/Users/Staffmanagement")));
+
+const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement/index")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
-const  ShifftPlaner= Loadable(lazy(() => import("./views/Users/ShiftPlanner")));
-const Log=Loadable(lazy(()=> import ("./views/Users/Log/index")));
-const  Stores= Loadable(lazy(() => import("./views/Settings/Dictionary/index")));
-const  Approvals= Loadable(lazy(() => import("./views/MyApprovals/Approvals")));
-const  Task= Loadable(lazy(() => import("./views/Settings/Task/index")));
+const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
+
+
 const  Profile= Loadable(lazy(() => import("./views/profile")));
 
 const routes = [
@@ -48,11 +47,8 @@ const routes = [
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
-      { path: "/users/shiftplanner", element: <ShifftPlaner />, auth: authRoles.admin },
-      { path: "/users/log", element: <Log />,auth: authRoles.admin},
-      { path: "/myapproval/Approvals", element: <Approvals />, auth: authRoles.admin },
-      { path: "/Settings/dictionary", element: <Stores />, auth: authRoles.admin },
-      { path: "/Settings/task", element: <Task />, auth: authRoles.admin },
+      { path: "/users/shiftplanner", element: <ShiftManagement />, auth: authRoles.admin },
+
       { path: "/About/profile", element: <Profile />, auth: authRoles.admin }
     ]
   },

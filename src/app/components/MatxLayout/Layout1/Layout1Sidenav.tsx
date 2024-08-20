@@ -32,7 +32,7 @@ const SidebarNavRoot = styled(Box)<SidebarNavRootProps>(({ theme, width, image }
   overflow: "hidden",
   color: theme.palette.text.primary,
   transition: "all 250ms ease-in-out",
-  backgroundImage: `linear-gradient(to bottom, #24665d,#24665d ), url(${image})`,
+  backgroundImage: `linear-gradient(to bottom, #FBB03B,#FBB03B ), url(${image})`,
   "&:hover": {
     width: sideNavWidth + "px", // Ensure width is a string with units
     "& .sidenavHoverShow": { display: "block" },
