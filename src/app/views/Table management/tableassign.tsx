@@ -1,7 +1,21 @@
-import { Avatar, Box, Button, Card, Flex, Table as ChakraTable, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, Icon } from '@chakra-ui/react';
+import React from 'react';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  Grid,
+  Table as MuiTable,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  IconButton
+} from '@mui/material';
+import { Star as StarIcon } from '@mui/icons-material';
 import { createColumnHelper, flexRender, getCoreRowModel, getSortedRowModel, SortingState, useReactTable } from '@tanstack/react-table';
-import { StarIcon } from '@chakra-ui/icons'; // Import star icons
-import * as React from 'react';
 
 type RowObj = {
   name: string[];
@@ -14,89 +28,65 @@ const columnHelper = createColumnHelper<RowObj>();
 export default function Tableassign(props: { tableData: any }) {
   const { tableData } = props;
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const textColor = useColorModeValue('secondaryGray.900', 'white');
-  const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
-  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-  let defaultData = tableData;
   
   const columns = [
     columnHelper.accessor('name', {
       id: 'name',
       header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'>
+        <Typography variant="caption" color="textSecondary" align="center">
           WAITER
-        </Text>
+        </Typography>
       ),
       cell: (info: any) => (
-        <Flex align='center'>
+        <Grid container alignItems="center">
           <Avatar
             src={info.getValue()[1]}
-            w='30px'
-            h='30px'
-            me='8px'
+            sx={{ width: 30, height: 30, mr: 1 }}
           />
-          <Text
-            color={textColor}
-            fontSize='sm'
-            fontWeight='600'>
+          <Typography variant="body2" fontWeight="600">
             {info.getValue()[0]}
-          </Text>
-        </Flex>
+          </Typography>
+        </Grid>
       )
     }),
     columnHelper.accessor('artworks', {
       id: 'artworks',
       header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'>
+        <Typography variant="caption" color="textSecondary" align="center">
           Table Number
-        </Text>
+        </Typography>
       ),
       cell: (info) => (
-        <Text
-          color={textColorSecondary}
-          fontSize='sm'
-          fontWeight='500'>
+        <Typography variant="body2" color="textSecondary">
           {info.getValue()}
-        </Text>
+        </Typography>
       )
     }),
     columnHelper.accessor('rating', {
       id: 'rating',
       header: () => (
-        <Text
-          justifyContent='space-between'
-          align='center'
-          fontSize={{ sm: '10px', lg: '12px' }}
-          color='gray.400'>
+        <Typography variant="caption" color="textSecondary" align="center">
           RATING
-        </Text>
+        </Typography>
       ),
       cell: (info) => {
         const rating = info.getValue();
         const stars = Array.from({ length: 5 }, (_, index) => {
           if (rating >= index + 1) {
-            return <Icon key={index} as={StarIcon} color="yellow.400" />;
+            return <StarIcon key={index} sx={{ color: 'yellow' }} />;
           } else if (rating > index && rating < index + 1) {
-            return <Icon key={index} as={StarIcon} color="yellow.400" />;
+            return <StarIcon key={index} sx={{ color: 'yellow' }} />;
           } else {
-            return <Icon key={index} as={StarIcon} color="gray.300" />;
+            return <StarIcon key={index} sx={{ color: 'grey' }} />;
           }
         });
-		
-        return <Flex>{stars}</Flex>;
+        
+        return <Grid container>{stars}</Grid>;
       }
     })
   ];
   
-  const [data, setData] = React.useState(() => [ ...defaultData ]);
+  const [data, setData] = React.useState(() => [ ...tableData ]);
   const table = useReactTable({
     data,
     columns,
@@ -110,74 +100,54 @@ export default function Tableassign(props: { tableData: any }) {
   });
   
   return (
-    <Card sx={{ p: 2, mt: 5, width: "100%" }}>
-      <Flex direction='column' w='100%' overflowX={{ sm: "scroll", lg: "hidden" }}>
-        <Flex
-          align={{ sm: "flex-start", lg: "center" }}
-          justify='space-between'
-          w='100%'
-          px='22px'
-          pb='20px'
-          mb='10px'
-          boxShadow='0px 40px 58px -20px rgba(112, 144, 176, 0.26)'>
-          <Text color={textColor} fontSize='xl' fontWeight='600'>
-            Table Assignees
-          </Text>
-          <Button variant='action'>See all</Button>
-        </Flex>
-        <Box>
-          <ChakraTable variant='simple' color='gray.500' mt="12px">
-            <Thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <Tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <Th
+    <Card sx={{ p: 2, mt: 5, width: '100%' }}>
+      <Grid container direction="column" spacing={2}>
+        <Grid item container alignItems="center" justifyContent="space-between" sx={{ mb: 2, p: 2, boxShadow: 3 }}>
+          <Typography variant="h6">Table Assignees</Typography>
+          <Button variant="contained" color="primary">See all</Button>
+        </Grid>
+        <TableContainer>
+          <MuiTable>
+            <TableHead>
+              <TableRow>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <React.Fragment key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableCell
                         key={header.id}
-                        colSpan={header.colSpan}
-                        pe='10px'
-                        borderColor={borderColor}
-                        cursor='pointer'
-                        onClick={header.column.getToggleSortingHandler()}>
-                        <Flex
-                          justifyContent='space-between'
-                          align='center'
-                          fontSize={{ sm: '10px', lg: '12px' }}
-                          color='gray.400'>
-                          {flexRender(header.column.columnDef.header, header.getContext())}
+                        sortDirection={header.column.getIsSorted() ? header.column.getIsSorted() : false}
+                        onClick={header.column.getToggleSortingHandler()}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <Grid container justifyContent="space-between" alignItems="center">
+                          <Typography variant="caption" color="textSecondary">
+                            {flexRender(header.column.columnDef.header, header.getContext())}
+                          </Typography>
                           {{
-                            asc: '',
-                            desc: '',
+                            asc: '🔼',
+                            desc: '🔽',
                           }[header.column.getIsSorted() as string] ?? null}
-                        </Flex>
-                      </Th>
-                    );
-                  })}
-                </Tr>
+                        </Grid>
+                      </TableCell>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {table.getRowModel().rows.slice(0, 11).map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </Thead>
-            <Tbody>
-              {table.getRowModel().rows.slice(0, 11).map((row) => {
-                return (
-                  <Tr key={row.id}>
-                    {row.getVisibleCells().map((cell) => {
-                      return (
-                        <Td
-                          key={cell.id}
-                          fontSize={{ sm: '14px' }}
-                          minW={{ sm: '150px', md: '200px', lg: 'auto' }}
-                          borderColor='transparent'>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </Td>
-                      );
-                    })}
-                  </Tr>
-                );
-              })}
-            </Tbody>
-          </ChakraTable>
-        </Box>
-      </Flex>
+            </TableBody>
+          </MuiTable>
+        </TableContainer>
+      </Grid>
     </Card>
   );
 }
