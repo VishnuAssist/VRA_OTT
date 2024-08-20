@@ -24,7 +24,7 @@ const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
-const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement/index")));
+const StaffManagement = Loadable(lazy(() => import("./views/Users/Staffmanagement/index")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
 
