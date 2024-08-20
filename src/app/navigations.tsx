@@ -22,6 +22,15 @@ export const navigations = [
   //     { name: "Error", iconText: "404", path: "/session/404" }
   //   ]
   // },
+
+  { label: "Table Management", type: "label" },
+
+
+  { name: "Table Booking", path: "/users/staffmanagement", icon: <PeopleIcon/> },
+  { name: "Assignees", path: "/users/attendence", icon: <BookmarkIcon/> },
+  { name: "Table Status", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
+
+
   { label: "Users", type: "label" },
   
    
@@ -30,7 +39,7 @@ export const navigations = [
       { name: "Shift Management", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
       
       
-    
+      
       
 
   
