@@ -24,7 +24,9 @@ const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
-const StaffManagement = Loadable(lazy(() => import("./views/Users/Staffmanagement/index")));
+const TableManagement = Loadable(lazy(() => import("./views/Table management/index")));
+
+const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement/index")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
 
@@ -43,6 +45,8 @@ const routes = [
       // dashboard route
       { path: "/dashboard/default", element: <Analytics />, auth: authRoles.admin },
       { path: "/dashboard/ui", element: <Dashboard />, auth: authRoles.admin },
+      //table
+      { path: "/table/tablemanagement", element: <TableManagement />, auth: authRoles.admin },
       // e-chart route
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },

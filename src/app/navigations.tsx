@@ -2,11 +2,9 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
-import ApprovalIcon from '@mui/icons-material/Approval';
-import StorageIcon from '@mui/icons-material/Storage';
+
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-import AddTaskIcon from '@mui/icons-material/AddTask';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
+
 
 export const navigations = [
   { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
@@ -26,9 +24,8 @@ export const navigations = [
   { label: "Table Management", type: "label" },
 
 
-  { name: "Table Booking", path: "/users/staffmanagement", icon: <PeopleIcon/> },
-  { name: "Assignees", path: "/users/attendence", icon: <BookmarkIcon/> },
-  { name: "Table Status", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
+  { name: "Table Booking", path: "/table/tablemanagement", icon: <PeopleIcon/> },
+
 
 
   { label: "Users", type: "label" },
