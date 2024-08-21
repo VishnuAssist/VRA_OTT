@@ -1,39 +1,36 @@
 import React, { useState } from 'react';
 import {
-  Box, Button, Grid, Typography, Modal, TextField, Select, MenuItem, FormControl, InputLabel, IconButton, CircularProgress
+  Button, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogActions, TextField, 
+  IconButton, Box, Card, CardContent, CardMedia, useMediaQuery, useTheme
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-// import img1 from 'assets/img/table1/WhatsApp_Image_2024-08-14_at_12.10.57_2c8183c22-removebg-preview.png';
-import img1 from '../../assets/table1/fourseater.png';
-import img2 from '../../assets/img/table1/tableselect.png';
-import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
-import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
-import towseatselected from "../../assets/img/table1/twoseat selected.png";
-import threeseatselected from "../../assets/img/table1/threeseat selected.png";
+import CloseIcon from '@mui/icons-material/Close';
 
-const Table = () => {
-  const [tables, setTables] = useState([]);
+import img1 from "../../views/assets/image/fourseat.png";
+// import img2 from '../../assets/img/table1/tableselect.png';
+// import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
+// import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
+
+interface TableType {
+  id: number;
+  img: string;
+}
+
+const Table: React.FC = () => {
+  const [tables, setTables] = useState<TableType[]>([]);
   const [formValues, setFormValues] = useState({
     Name: '',
     reservationTime: '',
     notes: '',
   });
-
   const [selectedImage, setSelectedImage] = useState(img1);
-  const [form, setForm] = useState(false);
+  const [isReserveOpen, setReserveOpen] = useState(false);
+  const [isSelectOpen, setSelectOpen] = useState(false);
 
-  const [openReserveModal, setOpenReserveModal] = useState(false);
-  const [openSelectModal, setOpenSelectModal] = useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleOpenReserveModal = () => setOpenReserveModal(true);
-  const handleCloseReserveModal = () => setOpenReserveModal(false);
-  const handleOpenSelectModal = () => setOpenSelectModal(true);
-  const handleCloseSelectModal = () => setOpenSelectModal(false);
-
-  const cardShadow = '0px 18px 40px rgba(112, 144, 176, 0.12)';
-
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: any) => {
     const { source, destination } = result;
 
     if (!destination) {
@@ -47,13 +44,13 @@ const Table = () => {
     setTables(items);
   };
 
-  const handleTableClick = (index) => {
+  const handleTableClick = (index: number) => {
     const newTables = [...tables];
     newTables[index] = { ...newTables[index], img: img2 };
     setTables(newTables);
   };
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
@@ -61,27 +58,16 @@ const Table = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (form) {
-      setTables([...tables, { id: tables.length + 1, img: selectedImage }]);
-      setForm(false);
-    }
-    console.log('Form submitted:', formValues);
-    handleCloseReserveModal();
-  };
-
-  const handleClickOpen = () => {
-    setForm(true);
-  };
-
-  const handleClose = () => {
-    setForm(false);
+    setTables([...tables, { id: tables.length + 1, img: selectedImage }]);
+    setReserveOpen(false);
+    alert("Reservation successful. The table has been reserved.");
   };
 
   return (
-    <Box pt={{ base: '130px', md: '80px', xl: '80px' }} px={{ base: '4', md: '8', xl: '16' }} position="relative">
-      <Typography variant='h4' mb="4" fontWeight='700' textAlign='center'>
+    <Box pt={{ xs: '130px', md: '80px', xl: '80px' }} px={{ xs: '4', md: '8', xl: '16' }} position="relative">
+      <Typography variant="h4" mb={4} fontWeight="700" textAlign="center">
         Select a Table
       </Typography>
 
@@ -90,50 +76,51 @@ const Table = () => {
           <Droppable droppableId="droppable" direction="horizontal">
             {(provided) => (
               <Grid
+                container
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                container
                 spacing={3}
                 mb={6}
                 alignItems="flex-start"
-                style={{ flex: 1 }}
               >
                 {tables.length === 0 && (
                   <Grid item xs={12}>
-                    <Box
-                      boxShadow={cardShadow}
-                      borderRadius='8px'
-                      overflow='hidden'
-                      display='flex'
-                      justifyContent='center'
-                      alignItems='center'
-                      width='100%'
-                      height='100px'
-                      cursor='pointer'
-                      bgcolor='grey.200'
-                      textAlign='center'
-                      onClick={handleOpenSelectModal}
+                    <Card
+                      sx={{
+                        boxShadow: '0px 18px 40px rgba(112, 144, 176, 0.12)',
+                        cursor: 'pointer',
+                      }}
+                      onClick={() => setSelectOpen(true)}
                     >
-                      <Typography color="textSecondary">Add a Table</Typography>
-                    </Box>
+                      <CardContent>
+                        <Typography color="textSecondary" align="center">
+                          Add a Table
+                        </Typography>
+                      </CardContent>
+                    </Card>
                   </Grid>
                 )}
                 {tables.map((table, index) => (
                   <Draggable key={table.id} draggableId={`table-${table.id}`} index={index}>
                     {(provided) => (
                       <Grid item xs={12} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                        <Box
-                          boxShadow={cardShadow}
-                          borderRadius='8px'
-                          overflow='hidden'
-                          display='flex'
-                          justifyContent='space-between'
-                          alignItems='center'
-                          style={{ ...provided.draggableProps.style, width: '100%', height: 'auto' }}
+                        <Card
+                          sx={{
+                            boxShadow: '0px 18px 40px rgba(112, 144, 176, 0.12)',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            width: '100%',
+                          }}
                           onClick={() => handleTableClick(index)}
                         >
-                          <img src={table.img} alt={`Table ${table.id}`} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                        </Box>
+                          <CardMedia
+                            component="img"
+                            src={table.img}
+                            alt={`Table ${table.id}`}
+                            sx={{ width: '100%', height: 'auto' }}
+                          />
+                        </Card>
                       </Grid>
                     )}
                   </Draggable>
@@ -146,133 +133,121 @@ const Table = () => {
 
         <Box mt="auto" display="flex" justifyContent="center" alignItems="center" gap="4">
           <Button
-            color="white"
-            style={{ backgroundColor: 'red', fontSize: '22px', fontWeight: '700' }}
-            onClick={handleOpenSelectModal}
+            variant="contained"
+            color="primary"
+            onClick={() => setSelectOpen(true)}
           >
             Add Table
           </Button>
           <Button
-            color="white"
-            style={{ backgroundColor: 'red', fontSize: '22px', fontWeight: '700' }}
-            onClick={handleOpenReserveModal}
+            variant="contained"
+            color="primary"
+            onClick={() => setReserveOpen(true)}
           >
             Reserve
           </Button>
         </Box>
       </Box>
 
-      <Modal open={openReserveModal} onClose={handleCloseReserveModal}>
-        <Box
-          bgcolor="background.paper"
-          p={4}
-          mx="auto"
-          my={4}
-          width="80%"
-          maxWidth="600px"
-          borderRadius="8px"
-          boxShadow={3}
+      <Dialog
+        fullScreen={fullScreen}
+        open={isReserveOpen}
+        onClose={() => setReserveOpen(false)}
+      >
+        <DialogTitle>Reserve Table</DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setReserveOpen(false)}
+          aria-label="close"
+          sx={{ position: 'absolute', right: 8, top: 8 }}
         >
-          <Typography variant="h6" mb={2}>Reserve Table</Typography>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleCloseReserveModal}
-            style={{ position: 'absolute', top: 16, right: 16 }}
-          >
-            <CloseIcon />
-          </IconButton>
+          <CloseIcon />
+        </IconButton>
+        <DialogContent>
           <form onSubmit={handleSubmit}>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                label="Name"
-                name="Name"
-                value={formValues.Name}
-                onChange={handleFormChange}
-                placeholder='Enter name'
-                required
-                fullWidth
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                label="Reservation Time"
-                name="reservationTime"
-                type='datetime-local'
-                value={formValues.reservationTime}
-                onChange={handleFormChange}
-                required
-                fullWidth
-              />
-            </FormControl>
-            <FormControl fullWidth margin="normal">
-              <TextField
-                label="Notes"
-                name="notes"
-                value={formValues.notes}
-                onChange={handleFormChange}
-                placeholder='Additional notes'
-                multiline
-                rows={4}
-                fullWidth
-              />
-            </FormControl>
-            <Button type='submit' color="primary" variant="contained" fullWidth>
+            <TextField
+              label="Name"
+              name="Name"
+              value={formValues.Name}
+              onChange={handleFormChange}
+              fullWidth
+              margin="normal"
+              required
+            />
+            <TextField
+              label="Reservation Time"
+              name="reservationTime"
+              type="datetime-local"
+              value={formValues.reservationTime}
+              onChange={handleFormChange}
+              fullWidth
+              margin="normal"
+              required
+            />
+            <TextField
+              label="Notes"
+              name="notes"
+              value={formValues.notes}
+              onChange={handleFormChange}
+              fullWidth
+              margin="normal"
+              multiline
+              rows={4}
+            />
+            <Button type="submit" variant="contained" color="primary" fullWidth>
               Submit
             </Button>
           </form>
-        </Box>
-      </Modal>
+        </DialogContent>
+      </Dialog>
 
-      <Modal open={form} onClose={handleCloseSelectModal}>
-        <Box
-          bgcolor="background.paper"
-          p={4}
-          mx="auto"
-          my={4}
-          width="80%"
-          maxWidth="600px"
-          borderRadius="8px"
-          boxShadow={3}
+      <Dialog
+        fullScreen={fullScreen}
+        open={isSelectOpen}
+        onClose={() => setSelectOpen(false)}
+      >
+        <DialogTitle>Select Table</DialogTitle>
+        <IconButton
+          edge="end"
+          color="inherit"
+          onClick={() => setSelectOpen(false)}
+          aria-label="close"
+          sx={{ position: 'absolute', right: 8, top: 8 }}
         >
-          <Typography variant="h6" mb={2}>Select Table</Typography>
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={handleCloseSelectModal}
-            style={{ position: 'absolute', top: 16, right: 16 }}
+          <CloseIcon />
+        </IconButton>
+        <DialogContent>
+          <Grid container spacing={2}>
+            {[img3, img4, img1].map((img, idx) => (
+              <Grid item key={idx}>
+                <Card
+                  sx={{ width: 120, height: 120, cursor: 'pointer' }}
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <CardMedia
+                    component="img"
+                    image={img}
+                    alt={`Table Option ${idx}`}
+                    sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Button
+            variant="contained"
+            color="primary"
+            fullWidth
+            onClick={() => {
+              setTables([...tables, { id: tables.length + 1, img: selectedImage }]);
+              setSelectOpen(false);
+            }}
           >
-            <CloseIcon />
-          </IconButton>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(100px, 1fr))"
-            gap={2}
-          >
-            <img
-              src={img3}
-              alt="Image 3"
-              style={{ width: '100%', height: 'auto', display: 'block', cursor: 'pointer' }}
-              onClick={() => setSelectedImage(img3)}
-            />
-            <img
-              src={img4}
-              alt="Image 4"
-              style={{ width: '100%', height: 'auto', display: 'block', cursor: 'pointer' }}
-              onClick={() => setSelectedImage(img4)}
-            />
-            <img
-              src={img1}
-              alt="Image 1"
-              style={{ width: '100%', height: 'auto', display: 'block', cursor: 'pointer' }}
-              onClick={() => setSelectedImage(img1)}
-            />
-          </Box>
-          <Button type='submit' color="primary" variant="contained" fullWidth mt={2}>
             Submit
           </Button>
-        </Box>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };
