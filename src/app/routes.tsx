@@ -26,6 +26,7 @@ const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
 const TableManagement = Loadable(lazy(() => import("./views/Table management/index")));
 const MenuManagement = Loadable(lazy(() => import("./views/Menu Management/menus")));
+const OrderManagement = Loadable(lazy(() => import("./views/Order management/index")));
 const StaffManagement = Loadable(lazy(() => import("./views/Users/Staffmanagement/index")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
@@ -49,6 +50,7 @@ const routes = [
       { path: "/table/tablemanagement", element: <TableManagement />, auth: authRoles.admin },
       // e-chart route
       { path: "/menu/menumanagement", element: <MenuManagement />, auth: authRoles.admin },
+      { path: "/order/ordermanagement", element: <OrderManagement />, auth: authRoles.admin },
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },

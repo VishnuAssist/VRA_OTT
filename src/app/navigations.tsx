@@ -31,6 +31,12 @@ export const navigations = [
 
   { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon/> },
 
+  { name: "Menu", path: "/index/Orderanagement", icon: <PeopleIcon/> },
+
+  { label: "Order Management", type: "label" },
+
+  { name: "Order Modifications", path: "/users/Ordermanagement", icon: <PeopleIcon/> },
+  { name: "Order Status", path: "/users/Ordermanagement", icon: <PeopleIcon/> },
 
   { label: "Users", type: "label" },
   
