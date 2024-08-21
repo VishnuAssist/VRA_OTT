@@ -5,10 +5,10 @@ import {
 } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 // import img1 from 'assets/img/table1/WhatsApp_Image_2024-08-14_at_12.10.57_2c8183c22-removebg-preview.png';
-import img1 from '../../assets/table1/fourseater.png';
-import img2 from '../../assets/img/table1/tableselect.png';
-import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
-import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
+import img1 from '../assets/image/tableselect.png';
+import img2 from '../assets/image/threeseat.png';
+import img3 from "../assets/image/twoseat.png";
+import img4 from "../assets/image/twoseatremove.png";
 
 
 
