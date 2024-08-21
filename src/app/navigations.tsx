@@ -27,6 +27,10 @@ export const navigations = [
   { name: "Table Booking", path: "/table/tablemanagement", icon: <PeopleIcon/> },
 
 
+  { label: "Menu Management", type: "label" },
+
+  { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon/> },
+
 
   { label: "Users", type: "label" },
   
