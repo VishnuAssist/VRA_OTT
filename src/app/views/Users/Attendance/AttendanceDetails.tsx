@@ -33,7 +33,8 @@ const AttendanceDetails: React.FC<AttendanceDetailsProps> = ({ selectedStaff }) 
   };
 
   return (
-    <Paper style={{ padding: 16 }}>
+    <>
+    
       <Paper style={{ padding: 16, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', borderRadius: 8 }}>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={4}>
@@ -107,7 +108,7 @@ const AttendanceDetails: React.FC<AttendanceDetailsProps> = ({ selectedStaff }) 
         </Grid>
       </Paper>
 
-      {/* <Paper style={{ padding: 16, marginTop: 16, boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', borderRadius: 8 }}> */}
+     
         <TableContainer component={Paper} sx={{mt:2}}>
           <Table>
             <TableHead>
@@ -134,8 +135,8 @@ const AttendanceDetails: React.FC<AttendanceDetailsProps> = ({ selectedStaff }) 
             </TableBody>
           </Table>
         </TableContainer>
-      {/* </Paper> */}
-    </Paper>
+     
+    </>
   );
 };
 
