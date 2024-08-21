@@ -26,7 +26,7 @@ const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
 const TableManagement = Loadable(lazy(() => import("./views/TableManagement/index")));
 const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/menus")));
-const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement")));
+const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement/index")));
 
 const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
