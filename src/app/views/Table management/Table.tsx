@@ -4,7 +4,15 @@ import {
   IconButton, Box, Card, CardContent, CardMedia, useMediaQuery, useTheme
 } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+<<<<<<< HEAD
 import CloseIcon from '@mui/icons-material/Close';
+=======
+// import img1 from 'assets/img/table1/WhatsApp_Image_2024-08-14_at_12.10.57_2c8183c22-removebg-preview.png';
+import img1 from '../../assets/table1/fourseater.png';
+import img2 from '../../assets/img/table1/tableselect.png';
+import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
+import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
+>>>>>>> cca8946abd18362ab94c77f3ef3478db41d19079
 
 import img1 from "../../views/assets/image/fourseat.png";
 // import img2 from '../../assets/img/table1/tableselect.png';

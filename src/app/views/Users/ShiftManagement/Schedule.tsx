@@ -73,12 +73,12 @@ const Schedule = () => {
     <>
       <Box sx={{ p: 4, mb: 4 }}>
         <Grid container spacing={2} alignItems="center">
-          <Grid item xs={9}>
+          <Grid item xs={6}>
             <Typography variant="h5" fontWeight="bold">
               Schedule the Shift
             </Typography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6}>
             <TextField
               placeholder="Search"
               variant="outlined"
@@ -90,7 +90,7 @@ const Schedule = () => {
               fullWidth
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={6} sm={4} md={4} lg={4}>
             <Checkbox
               checked={selectAll}
               onChange={handleSelectAll}
@@ -100,7 +100,7 @@ const Schedule = () => {
               Select All
             </Typography>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={6} sm={4} md={4} lg={4}>
             <Button
               variant="contained"
               color="primary"
@@ -110,7 +110,7 @@ const Schedule = () => {
               Schedule Shift for Selected
             </Button>
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={12} sm={4} md={4} lg={4}>
             <Select
               native
               value={selectedRole}
@@ -133,31 +133,31 @@ const Schedule = () => {
               sx={{ p: 2, m: 2, border: '2px solid' }}
             >
               <Grid container spacing={2} alignItems="center">
-                <Grid item xs={1}>
+                <Grid item xs={3} sm={1} md={1} lg={1}>
                   <Checkbox
                     checked={selectedStaff.includes(staffDetails.employeeID || "")}
                     onChange={() => handleSelect(staffDetails.employeeID || "")}
                     color="primary"
                   />
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={4} sm={1} md={1} lg={1}>
                   <Avatar
                     alt={staffDetails?.username }
                     src="https://bit.ly/broken-link"
                   />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={5} sm={2} md={2} lg={2}>
                   <Typography variant="body1" fontSize="18px">
                     {staffDetails?.username}
                   </Typography>
                   <Typography variant="body2">{staffDetails?.employeeID}</Typography>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={12} sm={3} md={3} lg={3}>
                   <Typography variant="body2">{staffDetails.role}</Typography>
                 </Grid>
                 {staffDetails?.shiftDetails?.map((shift: Shift, index) => (
                   <React.Fragment key={index}>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} sm={3} md={3} lg={3}>
                       <Box>
                         <Typography variant="body2">{shift.shift}</Typography>
                         <Typography variant="body2">
@@ -166,7 +166,7 @@ const Schedule = () => {
                         <Typography variant="body2">{shift.day}</Typography>
                       </Box>
                     </Grid>
-                    <Grid item xs={1}>
+                    <Grid item xs={9} sm={1} md={1} lg={1}>
                       <IconButton
                         size="small"
                         onClick={() => openEditSchedule(shift)}
@@ -177,7 +177,7 @@ const Schedule = () => {
                     </Grid>
                   </React.Fragment>
                 ))}
-                <Grid item xs={1}>
+                <Grid item xs={3} sm={1} md={1} lg={1}>
                   <IconButton
                     size="small"
                     onClick={openSchedule}
