@@ -9,8 +9,6 @@ import img1 from '../../assets/table1/fourseater.png';
 import img2 from '../../assets/img/table1/tableselect.png';
 import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
 import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
-import towseatselected from "../../assets/img/table1/twoseat selected.png";
-import threeseatselected from "../../assets/img/table1/threeseat selected.png";
 
 const Table = () => {
   const [tables, setTables] = useState([]);

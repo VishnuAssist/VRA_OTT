@@ -51,22 +51,24 @@ export default function Footer() {
         <AppFooter>
           <FooterContent>
             <Grid container spacing={2}>
-              <Grid item md={9}>
-                <Typography fontSize={"15px"} sx={{color:"black"}}>
+              <Grid item xs={12} sm={8} md={9} >
+                <Typography fontSize={"15px"} sx={{ color: "black", display: "flex", alignItems: "center",gap:1}} >
                   © 2024 - Food Assist
                 </Typography>
               </Grid>
-              <Grid item md={3}>
-                <Box sx={{ display: "flex", 
-                        alignItems: 'center',gap: 1 }}>
-                  <Typography fontSize={"15px"} sx={{color:"black"}}> @ Powered by </Typography>
+              <Grid item xs={12} sm={4} md={3}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Typography fontSize={"15px"} sx={{ color: "black" }} >
+                 
+                    @ Powered by{" "}
+                  </Typography>
                   <img
                     src={image}
                     height={"30px"}
                     width={"30px"}
-                    style={{ borderRadius: "30%" }}
+                    style={{ borderRadius: "30%" }} 
                   />
-                  <a href="https://www.assist360.com.sg/" target="blank" >
+                  <a href="https://www.assist360.com.sg/" target="blank">
                     Assist 360
                   </a>
                 </Box>
