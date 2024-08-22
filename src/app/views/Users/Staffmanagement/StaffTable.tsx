@@ -22,6 +22,7 @@ import {
   Paper,
   TextField,
   InputAdornment,
+  Grid,
 } from "@mui/material";
 import {
   Add as AddIcon,
@@ -99,29 +100,35 @@ const StaffTables = () => {
   return (
     <>
       <Box sx={{ p: 4, m: 4 }} component={Paper}>
-        <Box display="flex" justifyContent="space-between" mb={4}>
-          <TextField
-            variant="outlined"
-            placeholder="Search"
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon color="action" />
-                </InputAdornment>
-              ),
-            }}
-            style={{ marginTop: 16, width: "240px" }}
-          />
-          <IconButton
-            aria-label="Add staff"
-            color="primary"
-            sx={{ height: "50px", border: "2px solid" }}
-            onClick={openForm}
-          >
-            <AddIcon />
-          </IconButton>
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={10}>
+            <TextField
+              variant="outlined"
+              placeholder="Search"
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon color="action" />
+                  </InputAdornment>
+                ),
+              }}
+              style={{  maxWidth: "240px" }}
+            />
+          </Grid>
+          <Grid item xs={2}>
+            {" "}
+            <IconButton
+              aria-label="Add staff"
+              color="primary"
+              sx={{ height: "50px", border: "2px solid" }}
+              onClick={openForm}
+            >
+              <AddIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+
         <Divider sx={{ mb: 4 }} />
 
         <TableContainer component={Paper}>

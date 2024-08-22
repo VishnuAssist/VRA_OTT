@@ -30,12 +30,8 @@ export const navigations = [
 
   { label: "Menu Management", type: "label" },
 
-  { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon /> },
+  { name: "Menu Dictionary", path: "/menu/menumanagement", icon: <PeopleIcon /> },
 
-  { name: "Menu", path: "/index/Orderanagement", icon: <PeopleIcon /> },
-
-
-  
   { label: "Order Management", type: "label" },
 
   {
@@ -60,6 +56,11 @@ export const navigations = [
   {
     name: "Shift Management",
     path: "/users/shiftplanner",
+    icon: <FollowTheSignsIcon />,
+  },
+  {
+    name: "Payment Management",
+    path: "/users/payment",
     icon: <FollowTheSignsIcon />,
   },
 

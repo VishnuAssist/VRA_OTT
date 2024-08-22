@@ -1,8 +1,10 @@
-import React from 'react'
+import Menus from "./Menu"
 
 const index = () => {
   return (
-    <div>index</div>
+    <>
+    <Menus/>
+    </>
   )
 }
 

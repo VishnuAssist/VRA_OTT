@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import staffReducer from "../Slices/StaffManagementSlice";
+import MenuReducer from "../Slices/MenuSlice"
 
 export const store = configureStore({
   reducer: {
     staff: staffReducer,
     shift:staffReducer,
-   
+    menu: MenuReducer,
+
   },
 });
 

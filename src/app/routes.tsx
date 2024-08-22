@@ -25,12 +25,13 @@ const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
 const TableManagement = Loadable(lazy(() => import("./views/TableManagement/index")));
-const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/menus")));
+const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/Menu")));
 const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement/index")));
 
 const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
+const  PaymentManagement= Loadable(lazy(() => import("./views/Users/PaymentManagement")));
 
 
 const  Profile= Loadable(lazy(() => import("./views/profile")));
@@ -56,6 +57,8 @@ const routes = [
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
       { path: "/users/shiftplanner", element: <ShiftManagement />, auth: authRoles.admin },
+      { path: "/users/payment", element: <PaymentManagement />, auth: authRoles.admin },
+
 
       { path: "/About/profile", element: <Profile />, auth: authRoles.admin }
     ]
