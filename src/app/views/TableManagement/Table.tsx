@@ -1,23 +1,14 @@
 import React, { useState } from 'react';
 import {
-  Button, Grid, Typography, Dialog, DialogTitle, DialogContent, DialogActions, TextField, 
+  Button, Grid, Typography, Dialog, DialogTitle, DialogContent, TextField, 
   IconButton, Box, Card, CardContent, CardMedia, useMediaQuery, useTheme
 } from '@mui/material';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-<<<<<<< HEAD
-import CloseIcon from '@mui/icons-material/Close';
-=======
-// import img1 from 'assets/img/table1/WhatsApp_Image_2024-08-14_at_12.10.57_2c8183c22-removebg-preview.png';
-import img1 from '../../assets/table1/fourseater.png';
-import img2 from '../../assets/img/table1/tableselect.png';
-import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
-import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
->>>>>>> cca8946abd18362ab94c77f3ef3478db41d19079
-
-import img1 from "../../views/assets/image/fourseat.png";
-// import img2 from '../../assets/img/table1/tableselect.png';
-// import img3 from "../../assets/img/table1/twoseat-removebg-preview (1).png";
-// import img4 from "../../assets/img/table1/threeseat-removebg-preview (1).png";
+import img1 from '../../views/assets/image/fourseat.png';
+import img2 from '../assets/image/threeseat.png';
+import img3 from "../assets/image/twoseatremove.png";
+import img4 from "../assets/image/threeseat-.png";
+import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 
 interface TableType {
   id: number;
@@ -53,9 +44,10 @@ const Table: React.FC = () => {
   };
 
   const handleTableClick = (index: number) => {
-    const newTables = [...tables];
-    newTables[index] = { ...newTables[index], img: img2 };
-    setTables(newTables);
+    if (index === tables.length) {
+      // This index is for the empty cell to add a table
+      setSelectOpen(true);
+    }
   };
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,7 +74,7 @@ const Table: React.FC = () => {
       <Box display="flex" flexDirection="column" minHeight="60vh">
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable" direction="horizontal">
-            {(provided) => (
+            {(provided: any) => (
               <Grid
                 container
                 ref={provided.innerRef}
@@ -90,35 +82,20 @@ const Table: React.FC = () => {
                 spacing={3}
                 mb={6}
                 alignItems="flex-start"
+                direction="row"
               >
-                {tables.length === 0 && (
-                  <Grid item xs={12}>
-                    <Card
-                      sx={{
-                        boxShadow: '0px 18px 40px rgba(112, 144, 176, 0.12)',
-                        cursor: 'pointer',
-                      }}
-                      onClick={() => setSelectOpen(true)}
-                    >
-                      <CardContent>
-                        <Typography color="textSecondary" align="center">
-                          Add a Table
-                        </Typography>
-                      </CardContent>
-                    </Card>
-                  </Grid>
-                )}
                 {tables.map((table, index) => (
                   <Draggable key={table.id} draggableId={`table-${table.id}`} index={index}>
-                    {(provided) => (
-                      <Grid item xs={12} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                    {(provided: any) => (
+                      <Grid item xs={12} sm={6} md={3} key={index} ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                         <Card
                           sx={{
                             boxShadow: '0px 18px 40px rgba(112, 144, 176, 0.12)',
+                            cursor: 'pointer',
+                            height: '150px',
                             display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            width: '100%',
+                            justifyContent: 'center',
+                            alignItems: 'center'
                           }}
                           onClick={() => handleTableClick(index)}
                         >
@@ -133,6 +110,26 @@ const Table: React.FC = () => {
                     )}
                   </Draggable>
                 ))}
+                {/* Empty cell for adding a new table */}
+                <Grid item xs={12} sm={6} md={3}>
+                  <Card
+                    sx={{
+                      boxShadow: '0px 18px 40px rgba(112, 144, 176, 0.12)',
+                      cursor: 'pointer',
+                      height: '150px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                    onClick={() => handleTableClick(tables.length)}
+                  >
+                    <CardContent>
+                      <Typography color="textSecondary" align="center">
+                        Add a Table
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
                 {provided.placeholder}
               </Grid>
             )}
@@ -140,7 +137,7 @@ const Table: React.FC = () => {
         </DragDropContext>
 
         <Box mt="auto" display="flex" justifyContent="center" alignItems="center" gap="4">
-          <Button
+          <Button sx={{ marginRight: 2 }}
             variant="contained"
             color="primary"
             onClick={() => setSelectOpen(true)}
@@ -170,7 +167,7 @@ const Table: React.FC = () => {
           aria-label="close"
           sx={{ position: 'absolute', right: 8, top: 8 }}
         >
-          <CloseIcon />
+          <CancelPresentationIcon />
         </IconButton>
         <DialogContent>
           <form onSubmit={handleSubmit}>
@@ -223,7 +220,7 @@ const Table: React.FC = () => {
           aria-label="close"
           sx={{ position: 'absolute', right: 8, top: 8 }}
         >
-          <CloseIcon />
+          <CancelPresentationIcon />
         </IconButton>
         <DialogContent>
           <Grid container spacing={2}>

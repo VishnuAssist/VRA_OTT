@@ -5,11 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Input,
-  FormControl,
-  FormLabel,
   Grid,
-  Select,
   MenuItem,
   Button,
   Typography,
@@ -84,7 +80,7 @@ const StaffForm: FC<Props> = ({ open, closeForm, initialStore }) => {
   });
 
   return (
-    <Dialog open={open} onClose={closeForm} maxWidth="md" fullWidth>
+    <Dialog open={open} onClose={closeForm} maxWidth="sm" fullWidth>
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="h6">
@@ -148,23 +144,19 @@ const StaffForm: FC<Props> = ({ open, closeForm, initialStore }) => {
               />
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-            
-             
-                <TextField
-                  id="role"
-                  value={role || ""}
-                  placeholder="Role"
-                  {...register("role")}
-                  select
-                  fullWidth
-                  
-                >
-                  <MenuItem value="waiter">Waiter</MenuItem>
-                  <MenuItem value="chef">Chef</MenuItem>
-                  <MenuItem value="cashier">Cashier</MenuItem>
-                  <MenuItem value="manager">Manager</MenuItem>
-                </TextField>
-             
+              <TextField
+                id="role"
+                value={role || ""}
+                placeholder="Role"
+                {...register("role")}
+                select
+                fullWidth
+              >
+                <MenuItem value="waiter">Waiter</MenuItem>
+                <MenuItem value="chef">Chef</MenuItem>
+                <MenuItem value="cashier">Cashier</MenuItem>
+                <MenuItem value="manager">Manager</MenuItem>
+              </TextField>
             </Grid>
             <Grid item xs={12}>
               <Box

@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   Badge,
@@ -22,23 +22,22 @@ import {
   Paper,
   TextField,
   InputAdornment,
-} from '@mui/material';
+} from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
   Visibility as ViewIcon,
   Delete as DeleteIcon,
-} from '@mui/icons-material';
-import { useDispatch, useSelector } from 'react-redux';
-import StaffForm from './StaffForm';
-import StaffPreview from './StaffPreview';
-import { Staff } from '../../../Models/StaffModel';
-import { removeStaff } from '../../../Slices/StaffManagementSlice';
-import { SiCodechef } from 'react-icons/si';
-import {  FaUserTie } from 'react-icons/fa';
-import { IoRestaurant } from 'react-icons/io5';
-import SearchIcon from '@mui/icons-material/Search';
-
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import StaffForm from "./StaffForm";
+import StaffPreview from "./StaffPreview";
+import { Staff } from "../../../Models/StaffModel";
+import { removeStaff } from "../../../Slices/StaffManagementSlice";
+import { SiCodechef } from "react-icons/si";
+import { FaUserTie } from "react-icons/fa";
+import { IoRestaurant } from "react-icons/io5";
+import SearchIcon from "@mui/icons-material/Search";
 
 const StaffTables = () => {
   const dispatch = useDispatch();
@@ -69,7 +68,6 @@ const StaffTables = () => {
     setPreviewOpen(true);
   };
 
-  
   const confirmDelete = () => {
     if (userToDelete && userToDelete.id !== undefined) {
       dispatch(removeStaff({ id: userToDelete.id }));
@@ -85,13 +83,13 @@ const StaffTables = () => {
 
   const getRoleIcon = (role: string) => {
     switch (role) {
-      case 'chef':
+      case "chef":
         return <SiCodechef style={{ marginRight: 8 }} />;
-      case 'manager':
+      case "manager":
         return <FaUserTie style={{ marginRight: 8 }} />;
-      case 'cashier':
+      case "cashier":
         return <FaUserTie style={{ marginRight: 8 }} />;
-      case 'waiter':
+      case "waiter":
         return <IoRestaurant style={{ marginRight: 8 }} />;
       default:
         return null;
@@ -101,97 +99,95 @@ const StaffTables = () => {
   return (
     <>
       <Box sx={{ p: 4, m: 4 }} component={Paper}>
-        
-          <Box display="flex" justifyContent="space-between" mb={4}>
+        <Box display="flex" justifyContent="space-between" mb={4}>
           <TextField
-          variant="outlined"
-          placeholder="Search"
-          fullWidth
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon color="action" />
-              </InputAdornment>
-            ),
-          }}
-          style={{ marginTop: 16, width: '240px' }}
-        />
-            <IconButton
-              aria-label="Add staff"
-              color="primary"
-              onClick={openForm}
-            >
-              <AddIcon />
-            </IconButton>
-          </Box>
-          <Divider sx={{ mb: 4 }} />
+            variant="outlined"
+            placeholder="Search"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="action" />
+                </InputAdornment>
+              ),
+            }}
+            style={{ marginTop: 16, width: "240px" }}
+          />
+          <IconButton
+            aria-label="Add staff"
+            color="primary"
+            sx={{ height: "50px", border: "2px solid" }}
+            onClick={openForm}
+          >
+            <AddIcon />
+          </IconButton>
+        </Box>
+        <Divider sx={{ mb: 4 }} />
 
-          <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Profile</TableCell>
-                  <TableCell>Staff Name</TableCell>
-                  <TableCell>Employee ID</TableCell>
-                  <TableCell>Role</TableCell>
-                  <TableCell>Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {userList?.length > 0 ? (
-                  userList.map((staffDetails: Staff) => (
-                    <TableRow key={staffDetails?.id}>
-                      <TableCell>
-                        <Badge variant="dot">
-                          <Avatar>{staffDetails.username?.charAt(0) || 'U'}</Avatar>
-                        </Badge>
-                      </TableCell>
-                      <TableCell>{staffDetails.username}</TableCell>
-                      <TableCell>{staffDetails.employeeID}</TableCell>
-                      <TableCell>
-                        {getRoleIcon(staffDetails?.role || '')}
-                        {staffDetails.role}
-                      </TableCell>
-                      <TableCell>
-                        <IconButton
-                          aria-label="Preview staff"
-                          onClick={() => openPreviewDetails(staffDetails)}
-                        >
-                          <ViewIcon />
-                        </IconButton>
-                        <IconButton
-                          aria-label="Edit staff"
-                          onClick={() => openUpdate(staffDetails)}
-                          sx={{ mx: 1 }}
-                        >
-                          <EditIcon />
-                        </IconButton>
-                        <IconButton
-                          aria-label="Delete staff"
-                          color="error"
-                          onClick={() => openDeleteConfirm(staffDetails)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={5}>No data available</TableCell>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Profile</TableCell>
+                <TableCell>Staff Name</TableCell>
+                <TableCell>Employee ID</TableCell>
+                <TableCell>Role</TableCell>
+                <TableCell>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {userList?.length > 0 ? (
+                userList.map((staffDetails: Staff) => (
+                  <TableRow key={staffDetails?.id}>
+                    <TableCell>
+                      <Badge variant="dot">
+                        <Avatar>
+                          {staffDetails.username?.charAt(0) || "U"}
+                        </Avatar>
+                      </Badge>
+                    </TableCell>
+                    <TableCell>{staffDetails.username}</TableCell>
+                    <TableCell>{staffDetails.employeeID}</TableCell>
+                    <TableCell>
+                      {getRoleIcon(staffDetails?.role || "")}
+                      {staffDetails.role}
+                    </TableCell>
+                    <TableCell>
+                      <IconButton
+                        aria-label="Preview staff"
+                        onClick={() => openPreviewDetails(staffDetails)}
+                      >
+                        <ViewIcon />
+                      </IconButton>
+                      <IconButton
+                        aria-label="Edit staff"
+                        onClick={() => openUpdate(staffDetails)}
+                        sx={{ mx: 1 }}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton
+                        aria-label="Delete staff"
+                        color="error"
+                        onClick={() => openDeleteConfirm(staffDetails)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
                   </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        
-      </Box >
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={5}>No data available</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
 
       {/* Delete Confirmation Dialog */}
-      <Dialog
-        open={isDeleteOpen}
-        onClose={() => setDeleteOpen(false)}
-      >
+      <Dialog open={isDeleteOpen} onClose={() => setDeleteOpen(false)}>
         <DialogTitle>Confirm Deletion</DialogTitle>
         <DialogContent>
           Are you sure you want to delete this staff?

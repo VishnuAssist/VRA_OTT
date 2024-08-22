@@ -1,14 +1,13 @@
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import FollowTheSignsIcon from '@mui/icons-material/FollowTheSigns';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import PeopleIcon from "@mui/icons-material/People";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
 
-import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
-
+import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 
 export const navigations = [
-  { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon/> },
-  { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon/> },
+  { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon /> },
+  { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon /> },
   // { label: "PAGES", type: "label" },
   // {
   //   name: "Session/Auth",
@@ -23,33 +22,47 @@ export const navigations = [
 
   { label: "Table Management", type: "label" },
 
-
-  { name: "Table Booking", path: "/table/tablemanagement", icon: <PeopleIcon/> },
-
+  {
+    name: "Table Booking",
+    path: "/table/tablemanagement",
+    icon: <PeopleIcon />,
+  },
 
   { label: "Menu Management", type: "label" },
 
-  { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon/> },
+  { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon /> },
 
-  { name: "Menu", path: "/index/Orderanagement", icon: <PeopleIcon/> },
+  { name: "Menu", path: "/index/Orderanagement", icon: <PeopleIcon /> },
 
+
+  
   { label: "Order Management", type: "label" },
 
-  { name: "Order Modifications", path: "/users/Ordermanagement", icon: <PeopleIcon/> },
-  { name: "Order Status", path: "/users/Ordermanagement", icon: <PeopleIcon/> },
+  {
+    name: "Orders",
+    path: "/order/Ordermanagement",
+    icon: <PeopleIcon />,
+  },
+  // {
+  //   name: "Order Status",
+  //   path: "/order/Ordermanagement",
+  //   icon: <PeopleIcon />,
+  // },
 
   { label: "Users", type: "label" },
-  
-   
-      { name: "Staff Management", path: "/users/staffmanagement", icon: <PeopleIcon/> },
-      { name: "Attendence", path: "/users/attendence", icon: <BookmarkIcon/> },
-      { name: "Shift Management", path: "/users/shiftplanner", icon: <FollowTheSignsIcon/> },
-      
-      
-      
-      
 
-  
+  {
+    name: "Staff Management",
+    path: "/users/staffmanagement",
+    icon: <PeopleIcon />,
+  },
+  { name: "Attendence", path: "/users/attendence", icon: <BookmarkIcon /> },
+  {
+    name: "Shift Management",
+    path: "/users/shiftplanner",
+    icon: <FollowTheSignsIcon />,
+  },
+
   // { label: "Components", type: "label" },
   // {
   //   name: "Components",
@@ -79,8 +92,8 @@ export const navigations = [
   // },
   {
     name: "Documentation",
-    icon: <DocumentScannerIcon/>,
+    icon: <DocumentScannerIcon />,
     type: "extLink",
-    path: "http://demos.ui-lib.com/matx-react-doc/"
-  }
+    path: "http://demos.ui-lib.com/matx-react-doc/",
+  },
 ];

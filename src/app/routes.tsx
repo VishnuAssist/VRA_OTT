@@ -24,10 +24,11 @@ const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
-const TableManagement = Loadable(lazy(() => import("./views/Table management/index")));
-const MenuManagement = Loadable(lazy(() => import("./views/Menu Management/menus")));
-const OrderManagement = Loadable(lazy(() => import("./views/Order management/index")));
-const StaffManagement = Loadable(lazy(() => import("./views/Users/Staffmanagement/index")));
+const TableManagement = Loadable(lazy(() => import("./views/TableManagement/index")));
+const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/menus")));
+const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement/index")));
+
+const StaffManagement = Loadable(lazy(() => import("./views/Users/Staffmanagement")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
 
