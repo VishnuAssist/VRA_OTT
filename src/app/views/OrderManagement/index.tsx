@@ -1,9 +1,10 @@
-import React from 'react'
+
+import Order from './ordermodification'
 
 const index = () => {
   return (
    <>
-   sd;g a;wegnOWNFI
+  <Order/>
    </>
   )
 }

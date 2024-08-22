@@ -35,7 +35,7 @@ export const navigations = [
   { label: "Order Management", type: "label" },
 
   {
-    name: "Order Modifications",
+    name: "Orders",
     path: "/order/Ordermanagement",
     icon: <PeopleIcon />,
   },
