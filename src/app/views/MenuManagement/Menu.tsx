@@ -1,12 +1,10 @@
-import {
-  Add as AddIcon,
-  Edit as EditIcon,
-  Visibility as ViewIcon,
-  Delete as DeleteIcon,
-} from "@mui/icons-material";
+import { Add as AddIcon } from "@mui/icons-material";
 import {
   Box,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
   Divider,
   Grid,
   IconButton,
@@ -22,17 +20,24 @@ import { useState } from "react";
 import AddMenuForm from "./AddMenuForm";
 import { useSelector } from "react-redux";
 import { Menu } from "../../Models/MenuModel";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { addMenu } from "../../Slices/MenuSlice";
+import { useDispatch } from "react-redux";
+import { useForm } from "react-hook-form";
 
 const Data = [
-    { Categories: "Soup" },
-    { Categories: "Appetizer" },
-    { Categories: "Desserts" },
-    { Categories: "Salad" },
-    { Categories: "Drinks" },
-  ];
+  { Categories: "Soup" },
+  { Categories: "Appetizer" },
+  { Categories: "Desserts" },
+  { Categories: "Salad" },
+  { Categories: "Drinks" },
+];
 
 const MenuItem = () => {
   const { menuList } = useSelector((state: any) => state.menu);
+  const { register, handleSubmit, reset, watch } = useForm<any>();
+  const dispatch = useDispatch();
+
   console.log("array", menuList);
   const [form, setForm] = useState(false);
   const openForm = () => {
@@ -42,11 +47,29 @@ const MenuItem = () => {
     setForm(false);
   };
 
-   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState(false);
+  const openCategory = () => {
+    setCategory(true);
+  };
+  const closeCategory = () => {
+    setCategory(false);
+  };
 
-  
-  const handleTabChange = (event: React.SyntheticEvent, newCategory: string | null) => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  const handleTabChange = (
+    event: React.SyntheticEvent,
+    newCategory: string | null
+  ) => {
     setSelectedCategory(newCategory);
+  };
+
+  const submitData = (data: any) => {
+    dispatch(addMenu(data));
+
+    console.log(data);
+    reset();
+    closeForm();
   };
   return (
     <>
@@ -65,6 +88,20 @@ const MenuItem = () => {
             }}
             style={{ marginTop: 16, width: "240px" }}
           />
+          <Grid container spacing={2}>
+            <Grid item md={12} display={"flex"} alignItems={'center'}>
+              <IconButton
+                aria-label="Add staff"
+                color="primary"
+                sx={{ height: "50px", borderRadius: "50%" }}
+                onClick={openCategory}
+              >
+                <AddCircleIcon />
+              </IconButton>
+              <Typography variant="h4">Add Categories</Typography>
+            </Grid>
+          </Grid>
+
           <IconButton
             aria-label="Add staff"
             color="primary"
@@ -77,21 +114,17 @@ const MenuItem = () => {
         <Divider sx={{ mb: 4 }} />
 
         <Tabs
-        value={selectedCategory}
-        onChange={handleTabChange}
-        variant="scrollable"
-        scrollButtons="auto"
-        aria-label="Categories Tabs"
-        sx={{ mb: 4, borderBottom: 1, borderColor: 'divider' }}
-      >
-        {Data.map((data, index) => (
-          <Tab
-            key={index}
-            label={data.Categories}
-            value={data.Categories}
-          />
-        ))}
-      </Tabs>
+          value={selectedCategory}
+          onChange={handleTabChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          aria-label="Categories Tabs"
+          sx={{ mb: 4, borderBottom: 1, borderColor: "divider" }}
+        >
+          {Data.map((data, index) => (
+            <Tab key={index} label={data.Categories} value={data.Categories} />
+          ))}
+        </Tabs>
 
         <Grid container spacing={2}>
           {menuList &&
@@ -140,6 +173,24 @@ const MenuItem = () => {
         </Grid>
       </Box>
       <AddMenuForm form={form} closeForm={closeForm} />
+      <Dialog open={category} onClose={closeCategory}>
+        <form onSubmit={handleSubmit(submitData)}>
+          <DialogContent>
+            <TextField
+              type="text"
+              id="Categories"
+              placeholder="Categories"
+              {...register("Categories")}
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button color="primary" variant="contained" type="submit">
+              Create
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     </>
   );
 };

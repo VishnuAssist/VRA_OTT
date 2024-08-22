@@ -2,11 +2,15 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import FollowTheSignsIcon from "@mui/icons-material/FollowTheSigns";
-
+import ContentPasteSearchIcon from '@mui/icons-material/ContentPasteSearch';
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import PaymentIcon from '@mui/icons-material/Payment';
+
 
 export const navigations = [
-  { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon /> },
+  // { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon /> },
   { name: "Dashboard", path: "/dashboard/ui", icon: <DashboardIcon /> },
   // { label: "PAGES", type: "label" },
   // {
@@ -25,25 +29,21 @@ export const navigations = [
   {
     name: "Table Booking",
     path: "/table/tablemanagement",
-    icon: <PeopleIcon />,
+    icon: <TableRestaurantIcon sx={{width:"22px",height:"22px"}}  />,
   },
 
   { label: "Menu Management", type: "label" },
 
-  { name: "Menu Dictionary", path: "/menu/menumanagement", icon: <PeopleIcon /> },
+  { name: "Menu Dictionary", path: "/menu/menumanagement", icon: <ContentPasteSearchIcon sx={{width:"22px",height:"22px"}} /> },
 
   { label: "Order Management", type: "label" },
 
   {
     name: "Orders",
     path: "/order/Ordermanagement",
-    icon: <PeopleIcon />,
+    icon: <BorderColorIcon sx={{width:"22px",height:"22px"}} />,
   },
-  // {
-  //   name: "Order Status",
-  //   path: "/order/Ordermanagement",
-  //   icon: <PeopleIcon />,
-  // },
+ 
 
   { label: "Users", type: "label" },
 
@@ -56,12 +56,12 @@ export const navigations = [
   {
     name: "Shift Management",
     path: "/users/shiftplanner",
-    icon: <FollowTheSignsIcon />,
+    icon: <FollowTheSignsIcon sx={{width:"22px",height:"22px"}}  />,
   },
   {
     name: "Payment Management",
     path: "/users/payment",
-    icon: <FollowTheSignsIcon />,
+    icon: <PaymentIcon sx={{width:"22px",height:"22px"}} />,
   },
 
   // { label: "Components", type: "label" },
