@@ -25,6 +25,7 @@ const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
 const TableManagement = Loadable(lazy(() => import("./views/TableManagement/index")));
+const Reservation = Loadable(lazy(() => import("./views/Reservation/index")));
 const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/menus")));
 const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement/index")));
 
@@ -50,6 +51,7 @@ const routes = [
       //table
       { path: "/table/tablemanagement", element: <TableManagement />, auth: authRoles.admin },
       // e-chart route
+      { path: "/reserve/reservation", element: <Reservation />, auth: authRoles.admin },
       { path: "/menu/menumanagement", element: <MenuManagement />, auth: authRoles.admin },
       { path: "/order/ordermanagement", element: <OrderManagement />, auth: authRoles.admin },
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },

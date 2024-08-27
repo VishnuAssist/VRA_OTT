@@ -28,6 +28,14 @@ export const navigations = [
     icon: <PeopleIcon />,
   },
 
+  { label: "Reservation Management", type: "label" },
+
+  {
+    name: "Reservation",
+    path: "/reserve/reservation",
+    icon: <PeopleIcon />,
+  },
+
   { label: "Menu Management", type: "label" },
 
   { name: "Menu", path: "/index/Menuanagement", icon: <PeopleIcon /> },
@@ -36,13 +44,13 @@ export const navigations = [
 
 
   
-  { label: "Order Management", type: "label" },
+  // { label: "Order Management", type: "label" },
 
-  {
-    name: "Orders",
-    path: "/order/Ordermanagement",
-    icon: <PeopleIcon />,
-  },
+  // {
+  //   name: "Orders",
+  //   path: "/order/Ordermanagement",
+  //   icon: <PeopleIcon />,
+  // },
   // {
   //   name: "Order Status",
   //   path: "/order/Ordermanagement",

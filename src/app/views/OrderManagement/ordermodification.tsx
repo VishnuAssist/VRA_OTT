@@ -7,13 +7,22 @@ import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Link, NavLink } from 'react-router-dom';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+
+const steps = [
+  'Order confirmed, 22-08-2024',
+  'Your food being prepared, 22-07-2024',
+  'Your food is Ready, 22-08-2024',
+];
 
 interface OrderType {
   id: number;
   name: string;
   table: number;
-  item: string;
+  item: any[];
   quantity: number;
   notes: string;
 }
@@ -24,6 +33,17 @@ const Order: React.FC = () => {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [isEditDialogOpen, setEditDialogOpen] = useState(false);
   const [editingOrderId, setEditingOrderId] = useState<number | null>(null);
+  const [status, setStatus] = useState(false);
+  const [userdata, setUserdata] = useState<any | null>(null);
+  const [usersdata, setUsersdata] = useState<any[]>([]);
+
+  const handleClickOpen = () => {
+    setStatus(true);
+  };
+
+  const handleClose = () => {
+    setStatus(false);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -48,7 +68,7 @@ const Order: React.FC = () => {
         id: orders.length + 1,
         name: formValues.name,
         table: parseInt(formValues.table, 10),
-        item: formValues.item,
+        item: usersdata,
         quantity: parseInt(formValues.quantity, 10),
         notes: formValues.notes,
       };
@@ -76,6 +96,19 @@ const Order: React.FC = () => {
     { label: "French fries" },
   ];
 
+  const handleAddUser = () => {
+    if (userdata) {
+      setUsersdata([...usersdata, userdata]);
+      setUserdata(null);
+    }
+  };
+
+  const handleDeleteUser = (index: number) => {
+    const updatedUsers = [...usersdata];
+    updatedUsers.splice(index, 1);
+    setUsersdata(updatedUsers);
+  };
+
   return (
     <Box p={3}>
       <Typography variant="h3" mb={4} fontWeight="700" textAlign="center">
@@ -99,10 +132,16 @@ const Order: React.FC = () => {
             <Card>
               <CardContent>
                 <Typography variant="h6">Customer: {order.name}</Typography>
-                <Typography variant="body1">Table: {order.table}</Typography>
-                <Typography variant="body1">Item: {order.item}</Typography>
-                <Typography variant="body1">Quantity: {order.quantity}</Typography>
-                <Typography variant="body2">Notes: {order.notes}</Typography>
+                <Typography variant="h6">Table: {order.table}</Typography>
+                <Typography variant="h6">Item: {order.item.map((Item) => (
+                <Card sx={{ p: 1, display: "flex", justifyContent: "space-between", mb: 1 }}>
+                  <Typography sx={{ ml: 2, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    {Item.label}
+                  </Typography>
+                </Card>
+              ))}</Typography>
+                <Typography variant="h6">Quantity: {order.quantity}</Typography>
+                <Typography variant="h6">Notes: {order.notes}</Typography>
                 <Box mt={2} display="flex" justifyContent="flex-end">
                   <IconButton color="primary" onClick={() => handleEditClick(order)}>
                     <EditIcon />
@@ -110,14 +149,12 @@ const Order: React.FC = () => {
                   <IconButton color="error" onClick={() => handleDeleteClick(order.id)}>
                     <DeleteIcon />
                   </IconButton>
-                
-                  <Button sx={{display:"flex",justifyContent:"flex-start"}}
-                   variant="contained"
-                   color="primary">
+                  <Button onClick={handleClickOpen} sx={{ display: "flex", justifyContent: "flex-start" }}
+                    variant="contained"
+                    color="primary">
                     View Status
-                    <ArrowForwardIcon/>
-                    </Button>
-                   
+                    <ArrowForwardIcon />
+                  </Button>
                 </Box>
               </CardContent>
             </Card>
@@ -156,28 +193,49 @@ const Order: React.FC = () => {
             <TextField
               label="Table Number"
               name="table"
-              
               value={formValues.table}
               onChange={handleChange}
               fullWidth
               margin="normal"
               required
             />
-            <Autocomplete
-              disablePortal
-              options={items}
-              getOptionLabel={(option) => option.label}
-              onChange={(_, selectedOption) => {
-                setFormValues({
-                  ...formValues,
-                  item: selectedOption?.label || '',
-                });
-              }}
-              value={items.find(item => item.label === formValues.item) || null}
-              renderInput={(params) => (
-                <TextField {...params} fullWidth label="Select Item" margin="normal" required />
-              )}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={8}>
+                <Autocomplete
+                  disablePortal
+                  options={items}
+                  getOptionLabel={(option) => option.label}
+                  onChange={(_, selectedOption) => {
+                    setFormValues({
+                      ...formValues,
+                      item: selectedOption?.label || '',
+                    });
+                    setUserdata(selectedOption);
+                  }}
+                  value={items.find(item => item.label === formValues.item) || null}
+                  renderInput={(params) => (
+                    <TextField {...params} fullWidth label="Select Item" margin="normal" required />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} md={4} sx={{ display: "flex", alignItems: "center" }}>
+                <IconButton onClick={handleAddUser}>
+                  <AddCircleTwoToneIcon fontSize="large" color="primary" />
+                </IconButton>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              {usersdata.map((Item, index) => (
+                <Card key={index} sx={{ p: 2, display: "flex", justifyContent: "space-between", mb: 2 }}>
+                  <Typography sx={{ ml: 2, display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    {Item.label}
+                  </Typography>
+                  <IconButton onClick={() => handleDeleteUser(index)} color="error">
+                    <DeleteIcon />
+                  </IconButton>
+                </Card>
+              ))}
+            </Grid>
             <TextField
               label="Quantity"
               name="quantity"
@@ -205,9 +263,24 @@ const Order: React.FC = () => {
             >
               {editingOrderId ? 'Update Order' : 'Submit Order'}
             </Button>
-            
           </form>
         </DialogContent>
+      </Dialog>
+      <Dialog
+        open={status}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <Box sx={{ width: '100%' }}>
+          <Stepper activeStep={1} alternativeLabel>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Box>
       </Dialog>
     </Box>
   );
