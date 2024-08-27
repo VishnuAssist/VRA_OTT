@@ -6,6 +6,7 @@ import { authRoles } from "./auth/authRoles";
 
 import Loadable from "./components/Loadable";
 import MatxLayout from "./components/MatxLayout/MatxLayout";
+import Reservation from "./views/TableManagement/reserve";
 
 
 // import materialRoutes from "./views/material-kit/MaterialRoutes";
