@@ -1,11 +1,15 @@
-
+import React from 'react';
+import { ToggleButton, ToggleButtonGroup, Box, Tabs, Tab } from '@mui/material';
 import Table from './Table';
-import { Tabs, Tab, Box } from '@mui/material'; // Material-UI components
-
 import Tableassign from './tableassign';
 import Tablestatus from './tablestatus';
 import tablestatus from '../../Slices/tablestatus';
+import Reserve from './reserve';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
+
+// Define your RowObj interface here
 interface RowObj  {
     name: string[];
     artworks: number; 
@@ -13,6 +17,16 @@ interface RowObj  {
 }
 
 const Index = () => {
+    const [alignment, setAlignment] = React.useState('web');
+
+    const handleChange = (
+        event: React.MouseEvent<HTMLElement>,
+        newAlignment: string,
+    ) => {
+        setAlignment(newAlignment);
+    };
+
+    // Define the table data
     const tableColumnsTopCreators: RowObj[] = [
         {
             name: ["@Tony", "https://images.unsplash.com/photo-1506863530036-1efeddceb993?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2244&q=80"],
@@ -43,16 +57,35 @@ const Index = () => {
 
     return (
         <>
-            <Table />
-  
-            <Tableassign tableData={tableColumnsTopCreators} />
-  
-            <Box>
-                <Tabs>
-                    <Tab label="Status" />
-                    {/* Add more Tab components if needed */}
-                </Tabs>
-                <Tablestatus tableData={tablestatus} />
+        <Box sx={{p:2,mt:2}}>
+            <ToggleButtonGroup
+                color="primary"
+                value={alignment}
+                exclusive
+                onChange={handleChange}
+                aria-label="Platform"
+            >
+                <ToggleButton value="Table"><TableChartIcon/> Table</ToggleButton>
+                <ToggleButton value="Reservation"><BookmarkIcon/>Reservation</ToggleButton>
+            </ToggleButtonGroup>
+
+            {alignment === 'Table' && (
+                <>
+                    <Table />
+                    <Tableassign tableData={tableColumnsTopCreators} />
+                    <Tablestatus tableData={tablestatus} />
+                </>
+            )}
+
+            {alignment === 'Reservation' && (
+                <Box>
+                   
+                <Reserve/>
+                      
+                   
+                   
+                </Box>
+            )}
             </Box>
         </>
     );

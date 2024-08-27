@@ -32,6 +32,14 @@ export const navigations = [
     icon: <TableRestaurantIcon sx={{width:"22px",height:"22px"}}  />,
   },
 
+  { label: "Reservation Management", type: "label" },
+
+  {
+    name: "Reservation",
+    path: "/reserve/reservation",
+    icon: <PeopleIcon />,
+  },
+
   { label: "Menu Management", type: "label" },
 
   { name: "Menu Items", path: "/menu/menumanagement", icon: <RestaurantMenuIcon sx={{width:"22px",height:"22px"}} /> },
