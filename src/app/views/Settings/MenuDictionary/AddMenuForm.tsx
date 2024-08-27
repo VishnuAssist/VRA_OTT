@@ -10,18 +10,35 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addMenu, updateMenu } from "../../Slices/MenuSlice";
+import { addMenu, updateMenu } from "../../../Slices/MenuSlice";
+import { Menu } from "../../../Models/MenuModel";
 
 interface Props {
   form: boolean;
   closeForm: () => void;
+  initialMenu: Menu | null;
 }
 
-const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
-  const { register, handleSubmit, reset, watch } = useForm<any>();
+const AddMenuForm: FC<Props> = ({ form, closeForm, initialMenu }) => {
+
+  const data: Menu = {
+    menuName: "",
+    menuImage: "",
+    price: "",
+    id: 0,
+    description: "",
+    ingredients: "",
+    offers: "",
+    deals: "",
+    discounts: "",
+    Categories: "",
+    HotSeller: "",
+    staticImage: ""
+  };
+  const { register, handleSubmit, reset,setValue, watch } = useForm<any>();
   const dispatch = useDispatch();
 
   const [image, setImage] = useState<string | null>(null);
@@ -45,23 +62,42 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
 
   const submitData = (data: any) => {
     if (image) {
-        data.menuImage = image;
+      data.menuImage = image;
     }
-    dispatch(addMenu(data));
 
-    console.log(data)
+    if (initialMenu) {
+      dispatch(updateMenu(data));
+    } else {
+      dispatch(addMenu(data));
+    }
+
+    console.log(data);
     reset();
     closeForm();
   };
+  useEffect(() => {
+    reset(initialMenu || data);
+  }, [initialMenu, reset]);
+
+  useEffect(() => {
+    if (initialMenu) {
+      setValue("menuName", initialMenu.menuName);
+      setValue("menuImage", initialMenu.menuImage);
+      setValue("price", initialMenu.price);
+      setValue("id", initialMenu.id);
+    }
+  }, [initialMenu, setValue]);
 
   return (
     <>
       <Dialog open={form} onClose={closeForm}>
-        <DialogTitle>Add New Menus</DialogTitle>
+        <DialogTitle>
+        {initialMenu ? "Update Menu" : "Add New Menus"}
+          </DialogTitle>
         <form onSubmit={handleSubmit(submitData)}>
           <DialogContent>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="menuname"
@@ -70,7 +106,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="description"
@@ -79,7 +115,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="ingredients"
@@ -88,7 +124,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="pricing"
@@ -97,7 +133,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="offers"
@@ -106,7 +142,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="deals"
@@ -115,7 +151,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="discounts"
@@ -124,7 +160,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   fullWidth
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   type="text"
                   id="Categories"
@@ -148,7 +184,7 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   <MenuItem value="appetizers">Appetizers</MenuItem>
                 </TextField>
               </Grid> */}
-              <Grid item xs={12} sm={6} md={6}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <TextField
                   id="hotseller"
                   value={hotSeller || ""}
@@ -157,13 +193,13 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                   select
                   fullWidth
                 >
-                  <MenuItem value="high">High Move</MenuItem>
-                  <MenuItem value="medium">Medium</MenuItem>
-                  <MenuItem value="low">Low</MenuItem>
-                  <MenuItem value="stop">Stop for a Days</MenuItem>
+                  <MenuItem value="High">High</MenuItem>
+                  <MenuItem value="Medium">Medium</MenuItem>
+                  <MenuItem value="Low">Low</MenuItem>
+                  <MenuItem value="Stop for a Days">Stop for a Days</MenuItem>
                 </TextField>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6} md={6} lg={6}>
                 <input
                   type="file"
                   accept="image/*"
@@ -174,7 +210,11 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
                     <img
                       src={imagePreview}
                       alt="Selected"
-                      style={{ width: '100px', height: '100px', objectFit: 'cover' }}
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                      }}
                     />
                     <Button
                       onClick={handleImageRemove}
@@ -192,12 +232,8 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
             <Button onClick={closeForm} color="primary">
               Cancel
             </Button>
-            <Button
-              color="primary"
-              variant="contained"
-              type="submit"
-            >
-              Create
+            <Button color="primary" variant="contained" type="submit">
+             {initialMenu ? "update":"Create"}
             </Button>
           </DialogActions>
         </form>
@@ -207,3 +243,8 @@ const AddMenuForm: FC<Props> = ({ form, closeForm }) => {
 };
 
 export default AddMenuForm;
+// if (selectedCategory === "HotSeller"){
+//     return menuDetails.Categories === selectedCategory && menuDetails?.HotSeller === "High";
+// }
+// return menuDetails.Categories === selectedCategory;
+// }

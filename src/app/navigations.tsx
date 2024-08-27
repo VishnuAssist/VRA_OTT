@@ -7,7 +7,7 @@ import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import PaymentIcon from '@mui/icons-material/Payment';
-
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 
 export const navigations = [
   // { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon /> },
@@ -34,7 +34,8 @@ export const navigations = [
 
   { label: "Menu Management", type: "label" },
 
-  { name: "Menu Dictionary", path: "/menu/menumanagement", icon: <ContentPasteSearchIcon sx={{width:"22px",height:"22px"}} /> },
+  { name: "Menu Items", path: "/menu/menumanagement", icon: <RestaurantMenuIcon sx={{width:"22px",height:"22px"}} /> },
+  
 
   { label: "Order Management", type: "label" },
 
@@ -58,11 +59,19 @@ export const navigations = [
     path: "/users/shiftplanner",
     icon: <FollowTheSignsIcon sx={{width:"22px",height:"22px"}}  />,
   },
+  
+
+  { label: "Payment and Billing", type: "label" },
+
   {
     name: "Payment Management",
-    path: "/users/payment",
+    path: "/pay/payment",
     icon: <PaymentIcon sx={{width:"22px",height:"22px"}} />,
   },
+  { label: "Settings ", type: "label" },
+
+  { name: "Menu Dictionary", path: "/setting/menudictionary", icon: <ContentPasteSearchIcon sx={{width:"22px",height:"22px"}} /> },
+
 
   // { label: "Components", type: "label" },
   // {

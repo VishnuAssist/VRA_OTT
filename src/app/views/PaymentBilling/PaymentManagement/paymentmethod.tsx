@@ -29,14 +29,7 @@ const PaymentMethod: React.FC = () => {
   return (
     <Box sx={{ padding: 2,mx:20 }}>
       <Grid container spacing={2}>
-        <Grid item md={6}>
-          <Typography variant="h4" sx={{mb:2}}>Order ID</Typography>
-          <TextField id="orderID" placeholder="Order ID" fullWidth />
-        </Grid>
-        <Grid item md={6}>
-          <Typography variant="h4" sx={{mb:2}}>Table Number</Typography>
-          <TextField id="tableID" placeholder="Table Number" fullWidth />
-        </Grid>
+       
         <Grid item md={8}>
           <Typography variant="h3" sx={{mb:2}}>Payment</Typography>
           <Paper style={{ padding: "26px", display: "flex", justifyContent: "space-around", alignItems: "center" }}>

@@ -16,7 +16,7 @@ interface Props {
 const DeleteAlert: FC<Props> = ({ DeleteAlert, closeDelete, DeleteOption }) => {
   return (
     <>
-      <Dialog open={DeleteAlert} onClose={closeDelete} maxWidth="xs" fullWidth>
+      <Dialog open={DeleteAlert} onClose={closeDelete} maxWidth="sm" fullWidth>
         <DialogContent>
           <Typography
             variant="h5"
@@ -25,7 +25,7 @@ const DeleteAlert: FC<Props> = ({ DeleteAlert, closeDelete, DeleteOption }) => {
           >
             Do you really want to<br/> delete this file ?
           </Typography>
-          <Box sx={{textAlign:"center",p:2}}>
+          <Box sx={{textAlign:"center",p:4}}>
           <img src={image} alt="Delete File" width={"300px"} height={"200px"} />
           </Box>
         </DialogContent>

@@ -4,13 +4,13 @@ export interface Menu {
     menuName: string;
     description: string;
     ingredients:string;
-    price: number;
+    price: string;
     offers:string;
     deals:string;
     discounts:string;
     Categories: string;
-    hotSeller:string;
-
+    HotSeller:string;
+    staticImage:string;
     "menuImage"?: string | null ;
   }
   
