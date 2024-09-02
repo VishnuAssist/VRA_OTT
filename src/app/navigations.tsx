@@ -8,6 +8,9 @@ import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import PaymentIcon from '@mui/icons-material/Payment';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import HistoryIcon from '@mui/icons-material/History';
+import Groups2Icon from '@mui/icons-material/Groups2';
+import AdjustIcon from '@mui/icons-material/Adjust';
 
 export const navigations = [
   // { name: "Dashboard", path: "/dashboard/default", icon: <DashboardIcon /> },
@@ -24,36 +27,7 @@ export const navigations = [
   //   ]
   // },
 
-  { label: "Table Management", type: "label" },
-
-  {
-    name: "Table Booking",
-    path: "/table/tablemanagement",
-    icon: <TableRestaurantIcon sx={{width:"22px",height:"22px"}}  />,
-  },
-
-  { label: "Reservation Management", type: "label" },
-
-  {
-    name: "Reservation",
-    path: "/reserve/reservation",
-    icon: <PeopleIcon />,
-  },
-
-  { label: "Menu Management", type: "label" },
-
-  { name: "Menu Items", path: "/menu/menumanagement", icon: <RestaurantMenuIcon sx={{width:"22px",height:"22px"}} /> },
-  
-
-  { label: "Order Management", type: "label" },
-
-  {
-    name: "Orders",
-    path: "/order/Ordermanagement",
-    icon: <BorderColorIcon sx={{width:"22px",height:"22px"}} />,
-  },
  
-
   { label: "Users", type: "label" },
 
   {
@@ -69,18 +43,11 @@ export const navigations = [
   },
   
 
-  { label: "Payment and Billing", type: "label" },
-
-  {
-    name: "Payment Management",
-    path: "/pay/payment",
-    icon: <PaymentIcon sx={{width:"22px",height:"22px"}} />,
-  },
-  { label: "Settings ", type: "label" },
-
-  { name: "Menu Dictionary", path: "/setting/menudictionary", icon: <ContentPasteSearchIcon sx={{width:"22px",height:"22px"}} /> },
+  
 
 
+ 
+ 
   // { label: "Components", type: "label" },
   // {
   //   name: "Components",

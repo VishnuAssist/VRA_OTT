@@ -6,7 +6,7 @@ import { authRoles } from "./auth/authRoles";
 
 import Loadable from "./components/Loadable";
 import MatxLayout from "./components/MatxLayout/MatxLayout";
-import Reservation from "./views/TableManagement/reserve";
+
 
 
 // import materialRoutes from "./views/material-kit/MaterialRoutes";
@@ -19,22 +19,21 @@ const Error500 = Loadable(lazy(() => import("./views/sessions/error500")));
 const JwtLogin = Loadable(lazy(() => import("./views/sessions/JwtLogin")));
 const JwtRegister = Loadable(lazy(() => import("./views/sessions/JwtRegister")));
 const ForgotPassword = Loadable(lazy(() => import("./views/sessions/ForgotPassword")));
-// E-CHART PAGE
+// E-CHART PAGE 
 const AppEchart = Loadable(lazy(() => import("./views/charts/echarts/AppEchart")));
 const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
-const TableManagement = Loadable(lazy(() => import("./views/TableManagement/index")));
-const MenuManagement = Loadable(lazy(() => import("./views/MenuManagement/Menu")));
-const OrderManagement = Loadable(lazy(() => import("./views/OrderManagement/index")));
+
 
 const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement")));
 const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
 const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
 
-const  PaymentManagement= Loadable(lazy(() => import("./views/PaymentBilling/PaymentManagement")));
-const MenuDictionary = Loadable(lazy(() => import("./views/Settings/MenuDictionary/MenuDictionary")));
+
+
+
 
 const  Profile= Loadable(lazy(() => import("./views/profile")));
 
@@ -50,21 +49,18 @@ const routes = [
       // dashboard route
       { path: "/dashboard/default", element: <Analytics />, auth: authRoles.admin },
       { path: "/dashboard/ui", element: <Dashboard />, auth: authRoles.admin },
-      //table
-      { path: "/table/tablemanagement", element: <TableManagement />, auth: authRoles.admin },
-      // e-chart route
-      { path: "/reserve/reservation", element: <Reservation />, auth: authRoles.admin },
-      { path: "/menu/menumanagement", element: <MenuManagement />, auth: authRoles.admin },
+  
+ 
       
 
-      { path: "/order/ordermanagement", element: <OrderManagement />, auth: authRoles.admin },
+      
       { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
       { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
       { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
       { path: "/users/shiftplanner", element: <ShiftManagement />, auth: authRoles.admin },
-      { path: "/pay/payment", element: <PaymentManagement />, auth: authRoles.admin },
+      
 
-      { path: "/setting/menudictionary", element: <MenuDictionary />, auth: authRoles.admin },
+   
       { path: "/About/profile", element: <Profile />, auth: authRoles.admin }
     ]
   },
