@@ -4,7 +4,6 @@ import {
   Box,
   styled,
   Avatar,
-  // Hidden,
   useTheme,
   MenuItem,
   IconButton,
@@ -25,7 +24,6 @@ import { themeShadows } from "../../MatxTheme/themeColors";
 import { topBarHeight } from "../../../utils/constant";
 
 import {
-  Home,
   Menu,
   Person,
   Settings,

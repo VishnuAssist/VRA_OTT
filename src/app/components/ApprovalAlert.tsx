@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField, Typography } from '@mui/material'
-import React, { FC } from 'react'
+
 
 interface Props{
     approveAlert:boolean,

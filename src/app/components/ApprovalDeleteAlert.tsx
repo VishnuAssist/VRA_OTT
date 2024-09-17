@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { FC } from "react";
+
 
 interface Props {
   approveAlert: boolean;
