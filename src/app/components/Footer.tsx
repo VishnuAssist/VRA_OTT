@@ -1,7 +1,6 @@
 import {
   AppBar,
   Box,
-  Button,
   Grid,
   styled,
   ThemeProvider,
@@ -10,7 +9,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { Paragraph, Span } from "./Typography";
+
 import useSettings from "../hooks/useSettings";
 import { topBarHeight } from "../utils/constant";
 import image from "./assest/companyLogo.jpeg";
@@ -47,13 +46,13 @@ export default function Footer() {
 
   return (
     <ThemeProvider theme={footerTheme}>
-      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#74c0fc" }}>
+      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#CBBC92" }}>
         <AppFooter>
           <FooterContent>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={8} md={9} >
                 <Typography fontSize={"15px"} sx={{ color: "black", display: "flex", alignItems: "center",gap:1}} >
-                  © 2024 - Food Assist
+                  © 2024 - IDBadge!
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={4} md={3}>

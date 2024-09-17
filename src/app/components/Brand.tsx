@@ -2,7 +2,7 @@ import { Box, styled } from "@mui/material";
 
 import { Span } from "./Typography";
 
-import image from "./assest/food.png";
+import image from "./assest/logo.png";
 
 import useSettings from "../hooks/useSettings";
 
@@ -29,9 +29,9 @@ export default function Brand({ children }:any) {
     <BrandRoot>
       <Box display="flex" alignItems="center">
         {/* <MatxLogo /> */}
-        <img src={image} alt="LOGO File" height={"30px"} width={"30px"}/>
+        <img src={image} alt="LOGO File" height={"35px"} width={"45px"} />
         <StyledSpan mode={mode} >
-          Food Assist
+          ID Badge!
         </StyledSpan>
       </Box>
 

@@ -7,35 +7,36 @@ import { authRoles } from "./auth/authRoles";
 import Loadable from "./components/Loadable";
 import MatxLayout from "./components/MatxLayout/MatxLayout";
 
-
-
 // import materialRoutes from "./views/material-kit/MaterialRoutes";
 
-"app/views/material-kit/MaterialRoutes"
+("app/views/material-kit/MaterialRoutes");
 // SESSION PAGES
 const NotFound = Loadable(lazy(() => import("./views/sessions/NotFound")));
 const Error401 = Loadable(lazy(() => import("./views/sessions/error401")));
 const Error500 = Loadable(lazy(() => import("./views/sessions/error500")));
-const JwtLogin = Loadable(lazy(() => import("./views/sessions/JwtLogin")));
-const JwtRegister = Loadable(lazy(() => import("./views/sessions/JwtRegister")));
-const ForgotPassword = Loadable(lazy(() => import("./views/sessions/ForgotPassword")));
-// E-CHART PAGE 
-const AppEchart = Loadable(lazy(() => import("./views/charts/echarts/AppEchart")));
-const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")))
+const JwtLogin = Loadable(lazy(() => import("./views/sessions/LoginPage")));
+const JwtRegister = Loadable(
+  lazy(() => import("./views/sessions/JwtRegister"))
+);
+const ForgotPassword = Loadable(
+  lazy(() => import("./views/sessions/ForgotPassword"))
+);
+// E-CHART PAGE
+const AppEchart = Loadable(
+  lazy(() => import("./views/charts/echarts/AppEchart"))
+);
+const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
+const EmployeeManagements = Loadable(
+  lazy(() => import("./views/EmployeeMangement"))
+);
+const BrandManagements = Loadable(
+  lazy(() => import("./views/BrandManagement"))
+);
 
-
-const StaffManagement = Loadable(lazy(() => import("./views/Users/StaffManagement")));
-const  Attendence= Loadable(lazy(() => import("./views/Users/Attendance/index")));
-const  ShiftManagement= Loadable(lazy(() => import("./views/Users/ShiftManagement/index")));
-
-
-
-
-
-const  Profile= Loadable(lazy(() => import("./views/profile")));
+const Profile = Loadable(lazy(() => import("./views/profile")));
 
 const routes = [
   {
@@ -47,22 +48,32 @@ const routes = [
     children: [
       // ...materialRoutes,
       // dashboard route
-      { path: "/dashboard/default", element: <Analytics />, auth: authRoles.admin },
+      {
+        path: "/dashboard/default",
+        element: <Analytics />,
+        auth: authRoles.admin,
+      },
       { path: "/dashboard/ui", element: <Dashboard />, auth: authRoles.admin },
-  
- 
-      
 
-      
-      { path: "/charts/echarts", element: <AppEchart />, auth: authRoles.editor },
-      { path: "/users/staffmanagement", element: <StaffManagement />, auth: authRoles.admin },
-      { path: "/users/attendence", element: <Attendence />, auth: authRoles.admin },
-      { path: "/users/shiftplanner", element: <ShiftManagement />, auth: authRoles.admin },
-      
+      {
+        path: "/charts/echarts",
+        element: <AppEchart />,
+        auth: authRoles.editor,
+      },
 
-   
-      { path: "/About/profile", element: <Profile />, auth: authRoles.admin }
-    ]
+      {
+        path: "/employee/employeeManagement",
+        element: <EmployeeManagements />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/brand/brandManagement",
+        element: <BrandManagements />,
+        auth: authRoles.admin,
+      },
+
+      { path: "/About/profile", element: <Profile />, auth: authRoles.admin },
+    ],
   },
 
   // session pages route
@@ -74,7 +85,7 @@ const routes = [
   { path: "/session/forgot-password", element: <ForgotPassword /> },
 
   { path: "/", element: <Navigate to="dashboard/default" /> },
-  { path: "*", element: <NotFound /> }
+  { path: "*", element: <NotFound /> },
 ];
 
 export default routes;
