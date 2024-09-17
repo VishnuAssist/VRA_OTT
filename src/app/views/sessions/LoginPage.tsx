@@ -34,10 +34,10 @@ const LoginPage: React.FC = () => {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#c1b094',
-            padding: '20px',
+            // padding: '20px',
           }}
         >
-             <Typography variant="h4" sx={{  color: '#fff',fontSize:"35px", fontWeight: '800' }}>
+             <Typography variant="h4" sx={{ mt:4, color: '#fff',fontSize:"35px", fontWeight: '800' }}>
             Welcome To IDBadge!
           </Typography>
           {/* Random image in place of the logo */}
@@ -61,7 +61,7 @@ const LoginPage: React.FC = () => {
             backgroundColor: '#4b4432',
           }}
         >
-          <Typography variant="h5" sx={{ color: '#fff', marginBottom: '20px' }}>
+          <Typography variant="h5" sx={{ color: '#fff', marginBottom: '20px',fontSize:"25px", fontWeight: '900' }}>
             Login
           </Typography>
           
