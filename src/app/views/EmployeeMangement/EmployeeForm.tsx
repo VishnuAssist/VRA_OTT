@@ -16,22 +16,47 @@ import {
   Switch,
   FormControlLabel,
   Avatar,
+  Autocomplete,
 } from "@mui/material";
-import { Close as CloseIcon, CloudUpload as CloudUploadIcon } from "@mui/icons-material";
+import {
+  Close as CloseIcon,
+  CloudUpload as CloudUploadIcon,
+} from "@mui/icons-material";
 import { EmployeeProfile } from "../../Models/EmployeeModel";
-import { addEmployee, updateEmployee, updateEmployeeImage } from "../../Slices/EmployeeSlice";
+import {
+  addEmployee,
+  updateEmployee,
+  updateEmployeeImage,
+} from "../../Slices/EmployeeSlice";
+import { useSelector } from "react-redux";
+import { DictionaryType } from "../../Models/DictionaryType";
 
 interface Props {
   open: boolean;
   closeForm: () => void;
   initialEmployee: EmployeeProfile | null;
-}
+}   
+
+
 
 const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
   const { control, handleSubmit, reset, setValue } = useForm<EmployeeProfile>();
   const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(true);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const [brandNameData, setBrandNameData] = useState<DictionaryType | null>(
+    null
+  );
+  const [gradeData, setGradeData] = useState<DictionaryType | null>(null);
+  const { DictionaryList } = useSelector((state: any) => state.dictionary);
+
+  const brand = DictionaryList.filter(
+    (data: DictionaryType) => data.category === "brandName"
+  );
+  const grade = DictionaryList.filter(
+    (data: DictionaryType) => data.category === "grade"
+  );
 
   useEffect(() => {
     if (initialEmployee) {
@@ -53,7 +78,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
-        setValue('picture', reader.result as string);
+        setValue("picture", reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -64,7 +89,12 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
     if (initialEmployee) {
       dispatch(updateEmployee(updatedData));
       if (imagePreview !== initialEmployee.picture) {
-        dispatch(updateEmployeeImage({ id: initialEmployee.employeeID, imageUrl: imagePreview || '' }));
+        dispatch(
+          updateEmployeeImage({
+            id: initialEmployee.employeeID,
+            imageUrl: imagePreview || "",
+          })
+        );
       }
     } else {
       dispatch(addEmployee(updatedData));
@@ -87,7 +117,14 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
       <DialogContent>
         <form onSubmit={handleSubmit(submitData)}>
           <Grid container spacing={2}>
-            <Grid item xs={12} display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+            <Grid
+              item
+              xs={10}
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+            >
               <Avatar
                 src={imagePreview || undefined}
                 sx={{ width: 100, height: 100, mb: 2 }}
@@ -106,6 +143,18 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 />
               </Button>
             </Grid>
+            <Grid item xs={2}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isActive}
+                    onChange={(e) => setIsActive(e.target.checked)}
+                    color="success"
+                  />
+                }
+                label="Active"
+              />
+            </Grid>
             <Grid item xs={12} sm={4}>
               <Controller
                 name="firstName"
@@ -115,7 +164,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="First Name"
+                    label={
+                      <span>
+                        First Name <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -142,7 +195,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Last Name"
+                    label={
+                      <span>
+                        Last Name <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -165,7 +222,12 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Email"
+                    // label="Email"
+                    label={
+                      <span>
+                        Email <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -182,7 +244,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Mobile"
+                    label={
+                      <span>
+                        Mobile <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -199,7 +265,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Department/Store"
+                    label={
+                      <span>
+                        Department/Store <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -216,7 +286,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Designation"
+                    label={
+                      <span>
+                        Designation <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -224,7 +298,84 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+
+            {/* <Grid item xs={12} md={6}>
+              <InputLabel htmlFor="brandName" sx={labelStyles}>
+                Brand
+              </InputLabel>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={brand}
+                getOptionLabel={(option: DictionaryType) =>
+                  option?.entryname || ""
+                }
+                value={brandNameData}
+                onChange={(_, selectedOption: DictionaryType | null) => {
+                  setBrandNameData(selectedOption);
+                  setValue("brandName", selectedOption?.id || undefined);
+                }}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                renderInput={(params) => <TextField {...params} label="" />}
+              />{" "}
+            </Grid> */}
+
+<Grid item xs={12} md={6}>
+  <Autocomplete
+    disablePortal
+    id="combo-box-demo"
+    options={brand}
+    getOptionLabel={(option: DictionaryType) =>
+      option?.entryname || ""
+    }
+    value={brandNameData}
+    onChange={(_, selectedOption: DictionaryType | null) => {
+      setBrandNameData(selectedOption);
+      setValue("brandName", selectedOption?.id || undefined);
+    }}
+    isOptionEqualToValue={(option, value) => option.id === value.id}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label={
+          <span>
+            Brand <span style={{ color: 'red',fontSize:"large" }}>*</span>
+          </span>
+        }
+        fullWidth
+      />
+    )}
+  />
+</Grid>
+
+            <Grid item xs={12} md={6}>
+              
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={grade}
+                getOptionLabel={(option: DictionaryType) =>
+                  option?.entryname || ""
+                }
+                value={gradeData}
+                onChange={(_, selectedOption: DictionaryType | null) => {
+                  setGradeData(selectedOption);
+                  setValue("grade", selectedOption?.id || undefined);
+                }}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                renderInput={(params) => <TextField
+                  {...params}
+                  label={
+                    <span>
+                      Grade <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                    </span>
+                  }
+                  fullWidth
+                />}
+              />{" "}
+            </Grid>
+
+            {/* <Grid item xs={12} sm={6}>
               <Controller
                 name="grade"
                 control={control}
@@ -240,7 +391,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                   />
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="employeeType"
@@ -251,7 +402,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                   <TextField
                     {...field}
                     select
-                    label="Employee Type"
+                    label={
+                      <span>
+                        Employee type <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -336,7 +491,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="City"
+                    label={
+                      <span>
+                        City <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -353,7 +512,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 render={({ field, fieldState: { error } }) => (
                   <TextField
                     {...field}
-                    label="Country"
+                    label={
+                      <span>
+                        Country <span style={{ color: 'red',fontSize:"large" }}>*</span>
+                      </span>
+                    }
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
@@ -393,18 +556,6 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                     helperText={error?.message}
                   />
                 )}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={isActive}
-                    onChange={(e) => setIsActive(e.target.checked)}
-                    color="primary"
-                  />
-                }
-                label="Active"
               />
             </Grid>
           </Grid>

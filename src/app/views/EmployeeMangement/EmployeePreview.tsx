@@ -11,6 +11,7 @@ import {
   Chip,
   Divider,
   Paper,
+  Card,
 } from '@mui/material';
 import {
   Close as CloseIcon,
@@ -32,12 +33,12 @@ interface Props {
 
 const InfoItem: FC<{ icon: React.ReactNode; label: string; value: string }> = ({ icon, label, value }) => (
   <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-    <Box sx={{ mr: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: 'primary.light', borderRadius: '50%', width: 32, height: 32 }}>
+    <Box sx={{ mr: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#fff', borderRadius: '50%', width: 32, height: 32 }}>
       {React.cloneElement(icon as React.ReactElement, { style: { fontSize: 18 } })}
     </Box>
     <Box>
-      <Typography variant="caption" color="text.secondary">{label}</Typography>
-      <Typography variant="body2">{value}</Typography>
+      <Typography variant="caption" color="#fff" sx={{fontSize:"15px",fontWeight:"600"}}>{label}</Typography>
+      <Typography variant="body2" color="#gray" sx={{fontSize:"14px",fontWeight:"600"}}>{value}</Typography>
     </Box>
   </Box>
 );
@@ -53,62 +54,51 @@ const EmployeePreview: FC<Props> = ({ preview, closePreview, PreviewDetails }) =
       fullWidth
     >
       <DialogTitle sx={{ p: 0 }}>
-        <IconButton
-          edge="end"
-          color="inherit"
-          onClick={closePreview}
-          aria-label="close"
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: 'primary.contrastText',
-            zIndex: 1
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
+      <Box display="flex" justifyContent="space-between" alignItems="center" sx={{p:2}}>
+          <Typography variant="h6" sx={{fontSize:"18px",fontWeight:"700"}}>User Details</Typography>
+          <IconButton onClick={closePreview}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+       
       </DialogTitle>
       <DialogContent sx={{
         p: 0,
         '&::-webkit-scrollbar': { display: 'none' },
         scrollbarWidth: 'none'
       }}>
-        <Paper elevation={0} sx={{
-          p: 2,
-          mb: 2,
-          background: theme => `linear-gradient(45deg, ${theme.palette.primary.main} 30%, ${theme.palette.primary.light} 90%)`,
-          color: 'primary.contrastText'
-        }}>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
+       
+        <Card sx={{p:4}}>
+          <Grid container spacing={2} >
+
+          <Grid item xs={12} md={4}  container component={Paper} sx={{p:2,bgcolor:"#E5DEC9"}}>
+          <Grid item xs={12} sx={{display:"flex",justifyContent:"center",alignItems:"center"}}>
               <Avatar
                 src={PreviewDetails.picture}
                 alt={`${PreviewDetails.firstName} ${PreviewDetails.lastName}`}
                 sx={{
                   width: 80,
                   height: 80,
-                  border: theme => `3px solid ${theme.palette.background.paper}`,
+                  border: theme => `3px solid ${PreviewDetails.isActive ? theme.palette.success.main : theme.palette.error.main}`,
+                  // border: theme => `3px solid ${theme.palette.background.paper}`,
                   boxShadow: 2
                 }}
               />
             </Grid>
-            <Grid item xs>
-              <Typography variant="h5" fontWeight="bold">{`${PreviewDetails.firstName} ${PreviewDetails.lastName}`}</Typography>
-              <Typography variant="subtitle1">{PreviewDetails.designation}</Typography>
-              <Chip 
+            <Grid item xs={12} sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
+              <Typography variant="h5"  sx={{fontSize:"18px",fontWeight:"800"}}>{`${PreviewDetails.firstName} ${PreviewDetails.lastName}`}</Typography>
+              <Typography variant="subtitle1" sx={{fontSize:"14px",fontWeight:"600"}}>{PreviewDetails.designation}</Typography>
+              {/* <Chip 
                 label={PreviewDetails.isActive ? 'Active' : 'Inactive'} 
                 color={PreviewDetails.isActive ? 'success' : 'error'} 
                 size="small"
                 sx={{ mt: 0.5 }}
-              />
+              /> */}
             </Grid>
           </Grid>
-        </Paper>
 
-        <Box sx={{ px: 2, pb: 2 }}>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm={6}>
+          <Grid item xs={12} md={7.5} container component={Paper} sx={{p:2,bgcolor:"#CBBC92",ml:4}}> 
+          <Grid item xs={12} sm={6}>
               <InfoItem icon={<WorkIcon color="primary" />} label="Employee ID" value={PreviewDetails.employeeID} />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -131,21 +121,25 @@ const EmployeePreview: FC<Props> = ({ preview, closePreview, PreviewDetails }) =
             </Grid>
           </Grid>
 
-          <Divider sx={{ my: 1.5 }} />
 
-          <Typography variant="subtitle1" gutterBottom fontWeight="bold">Immediate Manager</Typography>
-          <Grid container spacing={1}>
-            <Grid item xs={12} sm={6}>
-              <InfoItem icon={<EmailIcon color="primary" />} label="Email" value={PreviewDetails.immediateManager.email} />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <InfoItem icon={<PhoneIcon color="primary" />} label="Phone" value={PreviewDetails.immediateManager.phone} />
-            </Grid>
-            <Grid item xs={12}>
-              <InfoItem icon={<WorkIcon color="primary" />} label="Designation" value={PreviewDetails.immediateManager.designation} />
-            </Grid>
-          </Grid>
-        </Box>
+
+<Grid item xs={12} md={12}  container component={Paper} sx={{p:2,bgcolor:"#968A66",mt:2}}>
+
+
+  <Grid item xs={12} sm={12} sx={{py:2}}>
+  <Typography variant="h6"  sx={{fontSize:"18px",fontWeight:"700",color:"#fff"}}>Immediate Manager</Typography>
+  </Grid>
+  <Grid item xs={12} sm={4}>
+    <InfoItem icon={<EmailIcon color="primary" />} label="Email" value={PreviewDetails.immediateManager.email} />
+  </Grid>
+  <Grid item xs={12} sm={4}>
+    <InfoItem icon={<PhoneIcon color="primary" />} label="Phone" value={PreviewDetails.immediateManager.phone} />
+  </Grid>
+  <Grid item xs={12} sm={4}>
+    <InfoItem icon={<WorkIcon color="primary" />} label="Designation" value={PreviewDetails.immediateManager.designation} />
+  </Grid>
+</Grid>
+        </Grid></Card>
       </DialogContent>
     </Dialog>
   );

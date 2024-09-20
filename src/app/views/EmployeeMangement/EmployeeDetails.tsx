@@ -32,11 +32,13 @@ import EmployeeForm from "./EmployeeForm";
 import EmployeePreview from "./EmployeePreview";
 import { EmployeeProfile } from "../../Models/EmployeeModel";
 import { removeEmployee } from "../../Slices/EmployeeSlice";
+import BulkEmployeeUpload from "./BulkImportDetails";
 
 const EmployeeDetails: React.FC = () => {
   const dispatch = useDispatch();
   const { userList } = useSelector((state: any) => state.employee);
 
+  
   const [isFormOpen, setFormOpen] = useState(false);
   const [dataToEdit, setDataToEdit] = useState<EmployeeProfile | null>(null);
   const [isPreviewOpen, setPreviewOpen] = useState(false);
@@ -45,7 +47,11 @@ const EmployeeDetails: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [previewDetails, setPreviewDetails] = useState<EmployeeProfile | null>(null);
 
+  const [bulk, setBulk] = useState(false);
+  const openBulkImport = () => setBulk(true);
+  const closeBulkImport =() => setBulk(false);
   const openForm = () => setFormOpen(true);
+  
   const closeForm = () => {
     setFormOpen(false);
     setDataToEdit(null);
@@ -84,10 +90,20 @@ const EmployeeDetails: React.FC = () => {
     <>
       <Box sx={{ p: 2 }} >
         <Grid container spacing={2} alignItems="center" marginBottom={2}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6} md={8}>
            <Typography fontSize={"24px"} fontWeight={700}>User Management</Typography>
           </Grid>
-          <Grid item xs={12} sm={6} md={8} textAlign="right">
+          <Grid item xs={12} sm={6} md={2} textAlign="right">
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={openBulkImport}
+            >
+              Bulk Upload
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={6} md={2} textAlign="right">
             <Button
               variant="contained"
               color="primary"
@@ -158,12 +174,12 @@ const EmployeeDetails: React.FC = () => {
                     >
                       <EditIcon sx={{color:"orange"}}/>
                     </IconButton>
-                    <IconButton
+                    {/* <IconButton
                       aria-label="Delete"
                       onClick={() => openDeleteConfirm(employee)}
                     >
                       <DeleteIcon sx={{color:"red"}}/>
-                    </IconButton>
+                    </IconButton> */}
                   </TableCell>
                 </TableRow>
               ))}
@@ -177,7 +193,7 @@ const EmployeeDetails: React.FC = () => {
         closeForm={closeForm}
         initialEmployee={dataToEdit}
       />
-
+<BulkEmployeeUpload open={bulk} onClose={closeBulkImport}/>
       <EmployeePreview
         preview={isPreviewOpen}
         closePreview={() => setPreviewOpen(false)}

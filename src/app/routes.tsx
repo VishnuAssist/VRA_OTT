@@ -25,7 +25,7 @@ const ForgotPassword = Loadable(
 const AppEchart = Loadable(
   lazy(() => import("./views/charts/echarts/AppEchart"))
 );
-const Dashboard = Loadable(lazy(() => import("./views/dashboard/Analytics")));
+const Dashboard = Loadable(lazy(() => import("./views/dashboard")));
 // DASHBOARD PAGE
 const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 
@@ -35,6 +35,14 @@ const EmployeeManagements = Loadable(
 const BrandManagements = Loadable(
   lazy(() => import("./views/BrandManagement"))
 );
+const VoucherManagement = Loadable(
+  lazy(() => import("./views/Voucher"))
+);
+const Dictionary = Loadable(
+  lazy(() => import("./views/Dictionary/index"))
+);
+
+
 
 const Profile = Loadable(lazy(() => import("./views/profile")));
 
@@ -69,6 +77,17 @@ const routes = [
       {
         path: "/brand/brandManagement",
         element: <BrandManagements />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/voucher/voucherManagement",
+        element: <VoucherManagement />,
+        auth: authRoles.admin,
+      },
+
+      {
+        path: "/Setting/Dictionary",
+        element: <Dictionary />,
         auth: authRoles.admin,
       },
 

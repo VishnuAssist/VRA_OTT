@@ -78,7 +78,8 @@ const Layout1Sidenav: React.FC<Layout1SidenavProps> = () => {
   };
 
   return (
-    <SidebarNavRoot image={bgImgURL} bg={primaryRGB} width={getSidenavWidth()}>
+    <>
+    {/* <SidebarNavRoot image={bgImgURL} bg={primaryRGB} width={getSidenavWidth()}>
       <NavListBox>
         <Brand>
           <Hidden smDown>
@@ -92,7 +93,8 @@ const Layout1Sidenav: React.FC<Layout1SidenavProps> = () => {
         </Brand>
         <Sidenav children={undefined} />
       </NavListBox>
-    </SidebarNavRoot>
+    </SidebarNavRoot> */}
+    </>
   );
 };
 

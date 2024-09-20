@@ -17,7 +17,19 @@ export const navigations = [
     path: "/brand/brandManagement",
     icon: <BrandingWatermarkIcon />,
   },
+  {
+    name: "Voucher",
+    path: "/voucher/voucherManagement",
+    icon: <BrandingWatermarkIcon />,
+  },
 
+
+  { label: "Setting", type: "Setting" },
+  {
+    name: "Dictionary",
+    path: "/Setting/Dictionary",
+    icon: <PeopleIcon />,
+  },
   {
     name: "Documentation",
     icon: <DocumentScannerIcon />,
