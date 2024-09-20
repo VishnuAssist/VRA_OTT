@@ -142,7 +142,14 @@ const BulkEmployeeImportDialog: React.FC<Props> = ({ open, onClose }) => {
         '&::-webkit-scrollbar': { display: 'none' },
         scrollbarWidth: 'none'
       }}>
-        <Box {...getRootProps()} className="border-2 border-dashed border-gray-300 p-4 mb-4 text-center cursor-pointer">
+        <Box {...getRootProps()}   sx={{
+    border: '8px dashed gray', 
+    padding: 4,              
+    marginBottom: 4,        
+    textAlign: 'center',     
+    cursor: 'pointer',       
+  }}>
+        
           <input {...getInputProps()} />
           <Typography>Drag 'n' drop some files here, or click to select files</Typography>
           <Typography variant="caption">(Only *.xlsx and *.csv files will be accepted)</Typography>
