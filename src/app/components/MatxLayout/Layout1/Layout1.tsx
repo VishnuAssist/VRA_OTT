@@ -13,7 +13,7 @@ import { MatxSuspense } from "../..";
 import { SecondarySidebar } from "../../SecondarySidebar";
 import SidenavTheme from "../../MatxTheme/SidenavTheme/SidenavTheme";
 
-import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
+// import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
 
 // STYLED COMPONENTS
 const Layout1Root = styled(Box)(({ theme }) => ({
@@ -64,18 +64,18 @@ const Layout1 = () => {
     leftSidebar: { mode: sidenavMode, show: showSidenav },
   } = layout1Settings;
 
-  const getSidenavWidth = () => {
-    switch (sidenavMode) {
-      // case "full":
-      //   return sideNavWidth;
+  // const getSidenavWidth = () => {
+  //   switch (sidenavMode) {
+  //     // case "full":
+  //     //   return sideNavWidth;
 
-      // case "compact":
-      //   return sidenavCompactWidth;
+  //     // case "compact":
+  //     //   return sidenavCompactWidth;
 
-      // default:
-      //   return sideNavWidth;
-    }
-  };
+  //     // default:
+  //     //   return sideNavWidth;
+  //   }
+  // };
 
   // const sidenavWidth = getSidenavWidth();
   const theme = useTheme();

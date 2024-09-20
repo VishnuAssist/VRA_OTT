@@ -4,16 +4,16 @@ import {
   Box,
   styled,
   Avatar,
-  useTheme,
+  // useTheme,
   MenuItem,
-  IconButton,
-  useMediaQuery
+  // IconButton,
+  // useMediaQuery
 } from "@mui/material";
 
 import { NotificationProvider } from "../../../contexts/NotificationContext";
 
 import useAuth from "../../../hooks/useAuth";
-import useSettings from "../../../hooks/useSettings";
+// import useSettings from "../../../hooks/useSettings";
 
 import { Span } from "../../Typography";
 // import ShoppingCart from "../../ShoppingCart";
@@ -24,7 +24,7 @@ import { themeShadows } from "../../MatxTheme/themeColors";
 import { topBarHeight } from "../../../utils/constant";
 
 import {
-  Menu,
+  // Menu,
   Person,
   Settings,
   // WebAsset,
@@ -34,9 +34,9 @@ import {
 } from "@mui/icons-material";
 
 // STYLED COMPONENTS
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.text.primary
-}));
+// const StyledIconButton = styled(IconButton)(({ theme }) => ({
+//   color: theme.palette.text.primary
+// }));
 
 const TopbarRoot = styled("div")({
   top: 0,
@@ -87,25 +87,25 @@ const StyledItem = styled(MenuItem)(({ theme }) => ({
 // }));
 
 const Layout1Topbar = (_Fixed:any) => {
-  const theme = useTheme();
-  const { settings, updateSettings } = useSettings();
+  // const theme = useTheme();
+  // const { settings, updateSettings } = useSettings();
   const { logout } = useAuth();
-  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+  // const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const updateSidebarMode = (sidebarSettings:any) => {
-    updateSettings({ layout1Settings: { leftSidebar: { ...sidebarSettings } } });
-  };
+  // const updateSidebarMode = (sidebarSettings:any) => {
+  //   updateSettings({ layout1Settings: { leftSidebar: { ...sidebarSettings } } });
+  // };
 
-  const handleSidebarToggle = () => {
-    let { layout1Settings } = settings;
-    let mode;
-    if (isMdScreen) {
-      mode = layout1Settings.leftSidebar.mode === "close" ? "mobile" : "close";
-    } else {
-      mode = layout1Settings.leftSidebar.mode === "full" ? "close" : "full";
-    }
-    updateSidebarMode({ mode });
-  };
+  // const handleSidebarToggle = () => {
+  //   let { layout1Settings } = settings;
+  //   let mode;
+  //   if (isMdScreen) {
+  //     mode = layout1Settings.leftSidebar.mode === "close" ? "mobile" : "close";
+  //   } else {
+  //     mode = layout1Settings.leftSidebar.mode === "full" ? "close" : "full";
+  //   }
+  //   updateSidebarMode({ mode });
+  // };
 
   return (
     
