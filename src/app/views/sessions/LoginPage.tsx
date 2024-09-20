@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import image from "../../../../public/logo.png";
+import image from "../../components/assest/logo.png";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 

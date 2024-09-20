@@ -102,6 +102,7 @@ const BulkEmployeeImportDialog: React.FC<Props> = ({ open, onClose }) => {
   };
 
   const handleSave = (index: number) => {
+    console.log(index)
     setEditingIndex(null);
   };
 

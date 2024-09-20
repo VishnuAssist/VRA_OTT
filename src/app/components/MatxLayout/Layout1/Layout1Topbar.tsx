@@ -112,9 +112,9 @@ const Layout1Topbar = (_Fixed:any) => {
     <TopbarRoot>
       <TopbarContainer>
         <Box display="flex">
-          <StyledIconButton onClick={handleSidebarToggle}>
+          {/* <StyledIconButton onClick={handleSidebarToggle}>
             <Menu />
-          </StyledIconButton>
+          </StyledIconButton> */}
 
           {/* <IconBox>
             <StyledIconButton>

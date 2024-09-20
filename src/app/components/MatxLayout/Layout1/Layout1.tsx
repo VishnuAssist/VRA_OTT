@@ -66,18 +66,18 @@ const Layout1 = () => {
 
   const getSidenavWidth = () => {
     switch (sidenavMode) {
-      case "full":
-        return sideNavWidth;
+      // case "full":
+      //   return sideNavWidth;
 
-      case "compact":
-        return sidenavCompactWidth;
+      // case "compact":
+      //   return sidenavCompactWidth;
 
-      default:
-        return "0px";
+      // default:
+      //   return sideNavWidth;
     }
   };
 
-  const sidenavWidth = getSidenavWidth();
+  // const sidenavWidth = getSidenavWidth();
   const theme = useTheme();
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -102,7 +102,7 @@ const Layout1 = () => {
         </SidenavTheme>
       )}
 
-      <LayoutContainer width={sidenavWidth} open={secondarySidebar.open}>
+      <LayoutContainer width={0} open={secondarySidebar.open}>
         {layout1Settings.topbar.show && layout1Settings.topbar.fixed && (
           <ThemeProvider theme={topbarTheme}>
             <Layout1Topbar fixed={true} className="elevation-z8" />

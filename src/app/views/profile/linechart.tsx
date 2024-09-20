@@ -1,16 +1,16 @@
 
 import { Box, Card, CardHeader, Divider,  MenuItem, Select, styled } from '@mui/material';
-import { BarChart } from '@mui/x-charts/BarChart';
-const uData = [8.3, 8.30, 8.40, 9.00, 9.10, ];
+// import { BarChart } from '@mui/x-charts/BarChart';
+// const uData = [8.3, 8.30, 8.40, 9.00, 9.10, ];
 
-const xLabels = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
+// const xLabels = [
+//   'Monday',
+//   'Tuesday',
+//   'Wednesday',
+//   'Thursday',
+//   'Friday',
 
-];
+// ];
 const ContentBox = styled("div")(() => ({
     display: "flex",
     flexWrap: "wrap",
@@ -32,7 +32,7 @@ const Line = () => {
          <MenuItem value="last_month">Last week</MenuItem>
        </Select>
        </Box>
- <BarChart
+ {/* <BarChart
      width={500}
      height={300}
      series={[
@@ -41,7 +41,7 @@ const Line = () => {
        
      ]}
      xAxis={[{ data: xLabels, scaleType: 'band' }]}
-   />
+   /> */}
    </Card>
    
    </ContentBox>

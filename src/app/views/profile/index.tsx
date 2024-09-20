@@ -1,7 +1,7 @@
 
 import { Box, Card, CardHeader, Container, Divider, Grid, MenuItem, Select, styled } from "@mui/material"
 import Profile from "./profile"
-import { PieChart } from '@mui/x-charts/PieChart';
+// import { PieChart } from '@mui/x-charts/PieChart';
 import Page from "./attendance"
 
 import Line
@@ -14,24 +14,24 @@ import Line
   alignItems: "center",
  
 }));
-const data = [
-  { value: 35, label: 'Task Assigned' },
-  { value: 25, label: 'Task Completed' },
-  { value: 10, label: 'Pending Task' },
+// const data = [
+//   { value: 35, label: 'Task Assigned' },
+//   { value: 25, label: 'Task Completed' },
+//   { value: 10, label: 'Pending Task' },
  
-];
+// ];
 
-const size = {
-  width: 400,
-  height: 300,
-};
+// const size = {
+//   width: 400,
+//   height: 300,
+// };
 
-const StyledText = styled('text')(({ theme }) => ({
-  fill: theme.palette.text.primary,
-  textAnchor: 'middle',
-  dominantBaseline: 'central',
-  fontSize: 20,
-}));
+// const StyledText = styled('text')(({ theme }) => ({
+//   fill: theme.palette.text.primary,
+//   textAnchor: 'middle',
+//   dominantBaseline: 'central',
+//   fontSize: 20,
+// }));
 
 
 
@@ -70,9 +70,9 @@ const index = () => {
             <MenuItem value="last_month">Last week</MenuItem>
           </Select>
           </Box>
-          <PieChart series={[{ data,outerRadius:80, innerRadius: 50 }]} {...size}>
+          {/* <PieChart series={[{ data,outerRadius:80, innerRadius: 50 }]} {...size}>
       
-    </PieChart>
+    </PieChart> */}
               </Card>
               </ContentBox>
             

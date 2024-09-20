@@ -1,11 +1,7 @@
 import { Fragment, ReactNode } from "react";
 import { styled } from "@mui/material/styles";
 import Scrollbar from "react-perfect-scrollbar";
-import { MatxVerticalNav } from "./MatxVerticalNav";
 import useSettings from "../hooks/useSettings";
-import { navigations } from "../navigations";
-
-// STYLED COMPONENTS
 const StyledScrollBar = styled(Scrollbar)(() => ({
   paddingLeft: "1rem",
   paddingRight: "1rem",
