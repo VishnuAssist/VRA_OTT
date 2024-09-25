@@ -1,11 +1,13 @@
 import StaffTables from './EmployeeDetails';
 import HeaderStats from '../HeaderStatus/HeaderStats';
+import Header from '../HeaderStatus/Header';
 
 
 const index = () => {
   return (
     <div>
-      <HeaderStats/>
+      <Header/>
+      {/* <HeaderStats/> */}
       <StaffTables/>
       
     </div>

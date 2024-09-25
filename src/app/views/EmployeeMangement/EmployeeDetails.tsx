@@ -33,6 +33,8 @@ import EmployeePreview from "./EmployeePreview";
 import { EmployeeProfile } from "../../Models/EmployeeModel";
 import { removeEmployee } from "../../Slices/EmployeeSlice";
 import BulkEmployeeUpload from "./BulkImportDetails";
+import { MenuItem, FormControl, InputLabel, Select } from '@mui/material';
+import { CheckCircle, Cancel } from '@mui/icons-material';
 
 const EmployeeDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -86,14 +88,26 @@ const EmployeeDetails: React.FC = () => {
     employee.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const [status, setStatus] = useState<string>('');
+  const [department, setDepartment] = useState<string>('');
+
+  const handleStatusChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setStatus(event.target.value as string);
+  };
+
+  const handleDepartmentChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setDepartment(event.target.value as string);
+  };
+  
   return (
     <>
       <Box sx={{ p: 2 }} >
         <Grid container spacing={2} alignItems="center" marginBottom={2}>
-          <Grid item xs={12} sm={6} md={8}>
+          <Grid item xs={12} sm={6} md={9}>
            <Typography fontSize={"24px"} fontWeight={700}>User Management</Typography>
           </Grid>
-          <Grid item xs={12} sm={6} md={2} textAlign="right">
+          <Grid item xs={12} sm={6} md={2} textAlign={"right"}>
+          
             <Button
               variant="contained"
               color="primary"
@@ -103,7 +117,7 @@ const EmployeeDetails: React.FC = () => {
               Bulk Upload
             </Button>
           </Grid>
-          <Grid item xs={12} sm={6} md={2} textAlign="right">
+          <Grid item xs={12} sm={6} md={1} >
             <Button
               variant="contained"
               color="primary"
@@ -115,15 +129,17 @@ const EmployeeDetails: React.FC = () => {
           </Grid>
         </Grid>
 
-        <TableContainer component={Paper}>
-          <Grid container spacing={2} sx={{p:2}}>
-          <Grid item xs={12} sm={6} md={3}>
+        <TableContainer component={Paper} sx={{p:1}}>
+          <Box sx={{display:"flex", justifyContent:"flex-end",flexWrap:"wrap",gap:2}}>
+        
             <TextField
               variant="outlined"
               placeholder="Search employees"
-              fullWidth
+              
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              size="small"
+              
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -132,8 +148,49 @@ const EmployeeDetails: React.FC = () => {
                 ),
               }}
             />
-          </Grid>
-          </Grid>
+       
+      <FormControl sx={{width:"200px"}} size="small">
+        <InputLabel id="department-label">Filter by Department</InputLabel>
+        <Select
+          labelId="department-label"
+          value={department}
+          onChange={handleDepartmentChange}
+          label="Filter by Department"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="sales">Sales</MenuItem>
+          <MenuItem value="engineering">Engineering</MenuItem>
+          <MenuItem value="hr">Human Resources</MenuItem>
+          <MenuItem value="marketing">Marketing</MenuItem>
+        </Select>
+      </FormControl>
+     
+           <FormControl sx={{width:"200px"}}   size="small">
+        <InputLabel id="status-label">Filter by Status</InputLabel>
+        <Select
+          labelId="status-label"
+          value={status}
+          onChange={handleStatusChange}
+          label="Filter by Status"
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="active">
+            <CheckCircle style={{ marginRight: 8 }}  />
+            Active Users
+          </MenuItem>
+          <MenuItem value="inactive">
+            <Cancel style={{ marginRight: 8 }} />
+            Inactive Users
+          </MenuItem>
+        </Select>
+      </FormControl>
+
+ 
+          </Box>
         
           <Table >
             
@@ -152,9 +209,20 @@ const EmployeeDetails: React.FC = () => {
               {filteredEmployees.map((employee: EmployeeProfile) => (
                 <TableRow key={employee.employeeID}>
                   <TableCell>
-                    <Avatar src={employee.picture} alt={employee.firstName}>
+                    {/* <Avatar src={employee.picture} alt={employee.firstName}>
                       {employee.firstName.charAt(0)}
-                    </Avatar>
+                    </Avatar> */}
+                    <Avatar
+                src={employee.picture}
+                alt={`${employee.firstName} ${employee.lastName}`}
+                sx={{
+                  width: 60,
+                  height: 60,
+                  border: theme => `3px solid ${employee.isActive ? theme.palette.success.main : theme.palette.error.main}`,
+                  // border: theme => `3px solid ${theme.palette.background.paper}`,
+                  boxShadow: 2
+                }}
+              />
                   </TableCell>
                   <TableCell>{employee.employeeID}</TableCell>
                   <TableCell>{`${employee.firstName} ${employee.lastName}`}</TableCell>

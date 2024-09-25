@@ -1,11 +1,15 @@
-import React from 'react'
+
 import HeaderStats from '../HeaderStatus/HeaderStats'
 import VoucherDetails from './VoucherDetails'
+
+import Header from '../HeaderStatus/Header'
 
 const index = () => {
   return (
     <div>
-      <HeaderStats/>
+      
+      <Header/>
+      {/* <HeaderStats/> */}
       <VoucherDetails/>
     </div>
   )

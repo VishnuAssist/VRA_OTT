@@ -22,6 +22,7 @@ import {
   Close as CloseIcon,
   CloudUpload as CloudUploadIcon,
 } from "@mui/icons-material";
+import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
 import { EmployeeProfile } from "../../Models/EmployeeModel";
 import {
   addEmployee,
@@ -37,7 +38,12 @@ interface Props {
   initialEmployee: EmployeeProfile | null;
 }   
 
-
+const managerOptions = [
+  { email: 'manager1@example.com', phone: '123-456-7890', designation: 'Manager' },
+  { email: 'manager2@example.com', phone: '234-567-8901', designation: 'Senior Manager' },
+  { email: 'manager3@example.com', phone: '345-678-9012', designation: 'Director' },
+  { email: 'manager4@example.com', phone: '456-789-0123', designation: 'VP of Operations' },
+];
 
 const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
   const { control, handleSubmit, reset, setValue } = useForm<EmployeeProfile>();
@@ -102,49 +108,21 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
     closeForm();
   };
 
+  const [selectedManager, setSelectedManager] = useState(null); //immediate manager
+
   return (
     <Dialog open={open} onClose={closeForm} maxWidth="md" fullWidth>
+       <form onSubmit={handleSubmit(submitData)}>
       <DialogTitle>
         <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6">
-            {initialEmployee ? "Update Employee" : "New Employee"}
+          
+          <Box display={"flex"}
+               justifyContent="center"
+              alignItems="center">
+          <Typography variant="h6" sx={{fontSize: "18px", fontWeight: "700", mr:4}}>
+            {initialEmployee ? "Update Employee" : "Add New Employee"}
           </Typography>
-          <IconButton onClick={closeForm}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-      </DialogTitle>
-      <DialogContent>
-        <form onSubmit={handleSubmit(submitData)}>
-          <Grid container spacing={2}>
-            <Grid
-              item
-              xs={10}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-            >
-              <Avatar
-                src={imagePreview || undefined}
-                sx={{ width: 100, height: 100, mb: 2 }}
-              />
-              <Button
-                variant="contained"
-                component="label"
-                startIcon={<CloudUploadIcon />}
-              >
-                Upload Image
-                <input
-                  type="file"
-                  hidden
-                  accept="image/*"
-                  onChange={handleImageUpload}
-                />
-              </Button>
-            </Grid>
-            <Grid item xs={2}>
-              <FormControlLabel
+                <FormControlLabel
                 control={
                   <Switch
                     checked={isActive}
@@ -154,8 +132,46 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 }
                 label="Active"
               />
+              </Box>
+          <IconButton color="error" aria-label="close" onClick={closeForm}>
+            <HighlightOffSharpIcon />
+          </IconButton>
+        </Box>
+      </DialogTitle>
+      <DialogContent>
+       
+          <Grid container spacing={2}>
+            <Grid
+              item
+              xs={4}
+             
+            >
+              <Box display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column" sx={{px:2}}>
+              <Avatar
+                src={imagePreview || undefined}
+                sx={{ width: 100, height: 100, mb: 2 }}
+              />
+              <Button
+                variant="contained"
+                component="label"
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload
+                <input
+                  type="file"
+                  hidden
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                />
+              </Button>
+              </Box>
+             
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={8} sm={8} container spacing={1}>
+            <Grid item xs={6} sm={6}>
               <Controller
                 name="firstName"
                 control={control}
@@ -175,8 +191,9 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                   />
                 )}
               />
+
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={6} sm={6}>
               <Controller
                 name="middleName"
                 control={control}
@@ -186,7 +203,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={6} sm={6}>
               <Controller
                 name="lastName"
                 control={control}
@@ -207,7 +224,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6} sm={6}>
               <Controller
                 name="email"
                 control={control}
@@ -235,6 +252,8 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
+            </Grid>
+           
             <Grid item xs={12} sm={6}>
               <Controller
                 name="mobile"
@@ -256,7 +275,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={4}>
               <Controller
                 name="departmentOrStore"
                 control={control}
@@ -276,7 +295,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                   />
                 )}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12} sm={6}>
               <Controller
                 name="designation"
@@ -320,7 +339,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
               />{" "}
             </Grid> */}
 
-<Grid item xs={12} md={6}>
+<Grid item xs={12} md={4}>
   <Autocomplete
     disablePortal
     id="combo-box-demo"
@@ -348,7 +367,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
   />
 </Grid>
 
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={4}>
               
               <Autocomplete
                 disablePortal
@@ -392,7 +411,24 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid> */}
-            <Grid item xs={12} sm={6}>
+             <Grid item xs={12} sm={4}>
+              <Controller
+                name="company"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Company is required" }}
+                render={({ field, fieldState: { error } }) => (
+                  <TextField
+                    {...field}
+                    label="Company"
+                    fullWidth
+                    error={!!error}
+                    helperText={error?.message}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="employeeType"
                 control={control}
@@ -417,7 +453,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="joinDate"
                 control={control}
@@ -436,7 +472,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
               <Controller
                 name="dateOfBirth"
                 control={control}
@@ -455,7 +491,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Controller
                 name="addressLine1"
                 control={control}
@@ -468,21 +504,24 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                     fullWidth
                     error={!!error}
                     helperText={error?.message}
+                    multiline
+                    rows={2} 
                   />
                 )}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Controller
                 name="addressLine2"
                 control={control}
                 defaultValue=""
                 render={({ field }) => (
-                  <TextField {...field} label="Address Line 2" fullWidth />
+                  <TextField {...field} label="Address Line 2" fullWidth    multiline
+                  rows={2} />
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* <Grid item xs={12} sm={3}>
               <Controller
                 name="city"
                 control={control}
@@ -503,7 +542,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={3}>
               <Controller
                 name="country"
                 control={control}
@@ -523,56 +562,111 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="postalCode"
-                control={control}
-                defaultValue=""
-                rules={{ required: "Postal code is required" }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    label="Postal Code"
-                    fullWidth
-                    error={!!error}
-                    helperText={error?.message}
-                  />
-                )}
+            </Grid>*/}
+            <Grid item xs={12} sm={12}>
+            <Typography variant="h6">
+            Immediate Manager
+          </Typography>
+            </Grid> 
+             
+       
+        {/* Email Autocomplete */}
+        <Grid item xs={12} md={4}>
+          <Autocomplete
+            disablePortal
+            id="email-autocomplete"
+            options={managerOptions}
+            getOptionLabel={(option) => option.email}
+            value={selectedManager}
+            onChange={(_, selectedOption) => {
+              setSelectedManager(selectedOption);
+              // Update form field value using setValue if using React Hook Form
+              // setValue("immediateManager.email", selectedOption?.email || "");
+            }}
+            isOptionEqualToValue={(option, value) => option.email === value.email}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label={
+                  <span>
+                    Email <span style={{ color: 'red', fontSize: 'large' }}>*</span>
+                  </span>
+                }
+                fullWidth
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="company"
-                control={control}
-                defaultValue=""
-                rules={{ required: "Company is required" }}
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    {...field}
-                    label="Company"
-                    fullWidth
-                    error={!!error}
-                    helperText={error?.message}
-                  />
-                )}
+            )}
+          />
+        </Grid>
+
+        {/* Phone Autocomplete */}
+        <Grid item xs={12} md={4}>
+          <Autocomplete
+            disablePortal
+            id="phone-autocomplete"
+            options={managerOptions}
+            getOptionLabel={(option) => option.phone}
+            value={selectedManager}
+            onChange={(_, selectedOption) => {
+              setSelectedManager(selectedOption);
+              // setValue("immediateManager.phone", selectedOption?.phone || "");
+            }}
+            isOptionEqualToValue={(option, value) => option.phone === value.phone}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label={
+                  <span>
+                    Phone <span style={{ color: 'red', fontSize: 'large' }}>*</span>
+                  </span>
+                }
+                fullWidth
               />
-            </Grid>
-          </Grid>
-        </form>
+            )}
+          />
+        </Grid>
+
+        {/* Designation Autocomplete */}
+        <Grid item xs={12} md={4}>
+          <Autocomplete
+            disablePortal
+            id="designation-autocomplete"
+            options={managerOptions}
+            getOptionLabel={(option) => option.designation}
+            value={selectedManager}
+            onChange={(_, selectedOption) => {
+              setSelectedManager(selectedOption);
+              // setValue("immediateManager.designation", selectedOption?.designation || "");
+            }}
+            isOptionEqualToValue={(option, value) => option.designation === value.designation}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label={
+                  <span>
+                    Designation <span style={{ color: 'red', fontSize: 'large' }}>*</span>
+                  </span>
+                }
+                fullWidth
+              />
+            )}
+          />
+        </Grid>
+      </Grid>
+      
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeForm} color="primary">
+        <Button onClick={closeForm} color="primary"   variant="contained">
           Cancel
         </Button>
         <Button
           onClick={handleSubmit(submitData)}
-          color="primary"
+          color="secondary"
           variant="contained"
         >
           {initialEmployee ? "Update" : "Create"}
         </Button>
       </DialogActions>
+      </form>
     </Dialog>
   );
 };

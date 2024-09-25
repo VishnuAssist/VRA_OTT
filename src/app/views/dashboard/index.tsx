@@ -1,11 +1,13 @@
-import React from 'react'
+
 import HeaderStats from '../HeaderStatus/HeaderStats'
 import Analytics from './Analytics'
+import Header from '../HeaderStatus/Header'
 
 const index = () => {
   return (
     <div>
-      <HeaderStats/>
+      <Header/>
+      {/* <HeaderStats/> */}
       <Analytics/>
     </div>
   )

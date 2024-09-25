@@ -38,6 +38,9 @@ const BrandManagements = Loadable(
 const VoucherManagement = Loadable(
   lazy(() => import("./views/Voucher"))
 );
+const VoucherHistory = Loadable(
+  lazy(() => import("./views/VoucherHistory"))
+);
 const Dictionary = Loadable(
   lazy(() => import("./views/Dictionary/index"))
 );
@@ -82,6 +85,11 @@ const routes = [
       {
         path: "/voucher/voucherManagement",
         element: <VoucherManagement />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/voucher/voucherHistory",
+        element: <VoucherHistory />,
         auth: authRoles.admin,
       },
 

@@ -152,7 +152,7 @@ const BulkEmployeeImportDialog: React.FC<Props> = ({ open, onClose }) => {
   }}>
         
           <input {...getInputProps()} />
-          <Typography>Drag 'n' drop some files here, or click to select files</Typography>
+          <Typography>Drag 'n' drop user files here, or click to select files</Typography>
           <Typography variant="caption">(Only *.xlsx and *.csv files will be accepted)</Typography>
         </Box>
 

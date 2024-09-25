@@ -93,44 +93,31 @@ const Form: FC<Props> = ({ openmodel, closestoremodel, initialData }) => {
                   {/* <MenuItem value="flightnumber">Flight Number</MenuItem> */}
                   <MenuItem value="brand">Brand</MenuItem>
                   <MenuItem value="grade">Grade</MenuItem>
+                  <MenuItem value="sale">Sale</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
-            {(category === 'store' || category === 'company' || category === 'flightnumber' || category === 'brand' || category === 'grade') && (
+            {( category === 'company' ||  category === 'brand' || category === 'grade' || category === 'sale' ) && (
               <>
-              <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Country Name</InputLabel>
-                  <TextField type="text" id="country" {...register('countryname')} fullWidth />
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Code</InputLabel>
-                  <TextField type="text" id="code" {...register('code')} fullWidth />
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Brand ID</InputLabel>
-                  <TextField type="text" id="country" {...register('brandID')} fullWidth />
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Brand Name</InputLabel>
-                  <TextField type="text" id="code" {...register('brandName')} fullWidth />
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Grade Name</InputLabel>
-                  <TextField type="text" id="code" {...register('grade')} fullWidth />
-                </Grid>
-                <Grid item xs={12} md={12}>
-                  <InputLabel id="status-select-label">Discount Percentage</InputLabel>
-                  <TextField type="text" id="code" {...register('discountPercentage')} fullWidth />
-                </Grid>
-              </>
-            )}
-
-            <Grid item xs={12} md={12}>
+               <Grid item xs={6} md={6}>
               <InputLabel id="status-select-label">Entry Name</InputLabel>
 
               <TextField type="text" id="entryname" {...register('entryname')} fullWidth />
             </Grid>
-            <Grid item xs={12} md={12} sx={{ mt: 1 }}>
+              <Grid item xs={6} md={6}>
+                  <InputLabel id="status-select-label">Country Name</InputLabel>
+                  <TextField type="text" id="country" {...register('countryname')} fullWidth />
+                </Grid>
+                <Grid item xs={6} md={6}>
+                  <InputLabel id="status-select-label">Code</InputLabel>
+                  <TextField type="text" id="code" {...register('code')} fullWidth />
+                </Grid>
+                <Grid item xs={12} md={12}>
+              <InputLabel id="status-select-label">Description</InputLabel>
+
+              <TextField type="text" id="Description" {...register('description')} fullWidth />
+            </Grid>
+            <Grid item xs={6} md={6} >
               <InputLabel id="status-select-label">Status</InputLabel>
               <FormControl fullWidth>
                 <Select
@@ -145,18 +132,24 @@ const Form: FC<Props> = ({ openmodel, closestoremodel, initialData }) => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} md={12}>
-              <InputLabel id="status-select-label">Description</InputLabel>
+               
+                <Grid item xs={6} md={6}>
+                  <InputLabel id="status-select-label">Discount Percentage</InputLabel>
+                  <TextField type="text" id="code" {...register('discountPercentage')} fullWidth />
+                </Grid>
+              </>
+            )}
 
-              <TextField type="text" id="Description" {...register('description')} fullWidth />
-            </Grid>
+           
+            
+          
           </Grid>
           <DialogActions>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Button onClick={closestoremodel} variant="contained" color="error">
                 Close
               </Button>
-              <Button type="submit" variant="contained" color="primary">
+              <Button type="submit" variant="contained" color="primary"sx={{ml:2}}>
                 {initialData ? 'Update' : 'Save'}
               </Button>
             </Box>

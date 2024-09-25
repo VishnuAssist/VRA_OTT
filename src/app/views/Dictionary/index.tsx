@@ -1,20 +1,16 @@
-
 import AddStore from "./Table";
 import HeaderStats from "../HeaderStatus/HeaderStats";
-
-
+import Header from "../HeaderStatus/Header";
 
 const index = () => {
   return (
     <div>
-      <HeaderStats/>
-      {/* <PageHeader /> */}
+      <Header />
+      {/* <HeaderStats /> */}
 
-
-  <AddStore />
-
+      <AddStore />
     </div>
-  )
-}
+  );
+};
 
-export default index
+export default index;

@@ -9,15 +9,7 @@ DictionaryList: DictionaryType[];
 const initialState: UserState = {
     DictionaryList: [
    
-    {
-      category: "flightnumber",
-      entryname: "ind321",
-      countryname: "ind",
-      code: "Ex232",
-      description: 'testing',
-      status: "Inactive",
-      id: 2,
-    },
+    
     {
       category: "brandName",
       entryname: "Assist360",

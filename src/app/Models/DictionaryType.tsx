@@ -1,18 +1,9 @@
 export interface DictionaryType {
-    "id":number;
-     "category":string;
-
-     
-     "countryname"?: string;
-     
-     "code"?: string;
-     "brandID"?: string;
-     
-     "brandName"?: string;
-     "grade"?: string;
-     "discountPercentage"?: string;
-     
-     "entryname": string;
-     "status": string;
-     "description": string;
+  "id":number;
+  "category":string;
+  "entryname": string;
+  "countryname"?: string;
+  "code"?: string;
+  "status": string;
+  "description": string;
    }
