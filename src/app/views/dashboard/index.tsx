@@ -1,6 +1,6 @@
 
-import HeaderStats from '../HeaderStatus/HeaderStats'
-import Analytics from './Analytics'
+// import HeaderStats from '../HeaderStatus/HeaderStats'
+import Analytics1 from './Analytics1'
 import Header from '../HeaderStatus/Header'
 
 const index = () => {
@@ -8,7 +8,7 @@ const index = () => {
     <div>
       <Header/>
       {/* <HeaderStats/> */}
-      <Analytics/>
+      <Analytics1/>
     </div>
   )
 }
