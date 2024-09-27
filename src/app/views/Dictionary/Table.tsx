@@ -85,7 +85,7 @@ const AddStore = () => {
         <Grid container spacing={2} alignItems="center" marginBottom={2}>
           <Grid item xs={12} sm={6} md={4}>
             <Typography fontSize={"24px"} fontWeight={700}>
-              User Management
+              Dictionary Management
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} md={8} textAlign="right">
