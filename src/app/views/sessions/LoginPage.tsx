@@ -14,9 +14,6 @@ import { useNavigate } from "react-router-dom";
 
 const StyledImage = styled("img")(({ theme }) => ({
   display: "block",
-  // border:"5px solid black",
-  // width: "100%",
-  // height: "100%",
   objectFit: "cover",
   borderRadius: theme.shape.borderRadius,
   filter: `
@@ -41,9 +38,10 @@ const StyledImage = styled("img")(({ theme }) => ({
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const handleClick=()=>{
+  const handleClick = () => {
     navigate("/dashboard/ui");
-  }
+  };
+
   return (
     <Box
       sx={{
@@ -51,52 +49,50 @@ const LoginPage: React.FC = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundColor: "#F0E6CB", // Background color of the entire page
+        backgroundColor: "#F0E6CB",
       }}
     >
-     <Box
-      sx={{
-        width: "900px",
-        height: "500px",
-        display: "flex",
-        backgroundColor: "red",
-        border:"2px solid #50472D",
-        boxShadow:"0 0 5px 7px #50472D",
-        borderRadius: "10px",
-        position: "relative",
-        animation: "colorChange 4s forwards, glowEffect 6s ease-in-out",
-        "@keyframes colorChange": {
-          "from": { backgroundColor: "red" },
-          "to": { backgroundColor: "yellow" }
-        },
-        "@keyframes glowEffect": {
-          "0%": { boxShadow: "0 0 0 rgba(255, 255, 0, 0)" },
-          "100%": { boxShadow: "0 0 0 rgb(75,68,50)" },//i have change the rgb color here
-          "50%": { boxShadow: "0 0 90px rgba(255, 255, 0, 0.7)" },//increase here sheik bro
-          
-        },
-        "&::before": {
-          content: '""',
-          position: "absolute",
-          top: "-5px",
-          left: "-5px",
-          right: "-5px",
-          bottom: "-5px",
-          borderRadius: "55px",
-          background: "linear-gradient(45deg, #ff0000, #ffff00)",
-          zIndex: -1,
-          filter: "blur(15px)",
-          opacity: 0,
-          animation: "glowPulse 2s ease-in-out"
-        },
-        "@keyframes glowPulse": {
-          "0%": { opacity: 0 },
-          "50%": { opacity: 1 },
-          "100%": { opacity: 0 }
-        }
-      }}
-    >
+      <Box
+        sx={{
+          width: "900px",
+          height: "500px",
+          display: "flex",
+          backgroundColor: "red",
         
+          // boxShadow: "0 0 5px 7px #50472D",
+          borderRadius: "10px",
+          position: "relative",
+          // animation: "colorChange 4s forwards, glowEffect 6s ease-in-out",
+          // "@keyframes colorChange": {
+          //   "from": { backgroundColor: "red" },
+          //   "to": { backgroundColor: "yellow" },
+          // },
+          // "@keyframes glowEffect": {
+          //   "0%": { boxShadow: "0 0 0 rgba(255, 255, 0, 0)" },
+          //   "100%": { boxShadow: "0 0 0 rgb(75,68,50)" },
+          //   "50%": { boxShadow: "0 0 90px rgba(255, 255, 0, 0.7)" },
+          // },
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: "-5px",
+            left: "-5px",
+            right: "-5px",
+            bottom: "-5px",
+            borderRadius: "55px",
+            background: "linear-gradient(45deg, #ff0000, #ffff00)",
+            zIndex: -1,
+            filter: "blur(15px)",
+            opacity: 0,
+            animation: "glowPulse 2s ease-in-out",
+          },
+          "@keyframes glowPulse": {
+            "0%": { opacity: 0 },
+            "50%": { opacity: 1 },
+            "100%": { opacity: 0 },
+          },
+        }}
+      >
         {/* Left Side - Welcome Text and Logo */}
         <Box
           sx={{
@@ -106,7 +102,7 @@ const LoginPage: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "#CBBC92",
-            // padding: '20px',
+            padding: "20px", // Added padding for better alignment
           }}
         >
           <Typography
@@ -117,13 +113,12 @@ const LoginPage: React.FC = () => {
               fontSize: "35px",
               fontWeight: "800",
               fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+              textAlign: "center", // Centered text alignment
             }}
           >
             Welcome to IDBadge!
           </Typography>
-          {/* Random image in place of the logo */}
-
-          <StyledImage src={image} alt="Map with filter shadow" />
+          <StyledImage src={image} alt="Logo" style={{ maxWidth: "80%", height: "auto" }} />
         </Box>
 
         {/* Right Side - Login Form */}
@@ -141,14 +136,11 @@ const LoginPage: React.FC = () => {
           <Typography
             variant="h5"
             sx={{
-              // display:"flex",
-              // justifyContent:"start",
-              // alignItems:"start",
-              // textAlign:"start",
               color: "#fff",
               marginBottom: "20px",
               fontSize: "25px",
               fontWeight: "900",
+              textAlign: "center", // Centered text alignment
             }}
           >
             Login
@@ -168,7 +160,7 @@ const LoginPage: React.FC = () => {
             sx={{
               marginBottom: 2,
               "& .MuiOutlinedInput-root": {
-                backgroundColor: "#C0BDB3", // Light gray background for the text field
+                backgroundColor: "#C0BDB3",
                 "& fieldset": {
                   borderColor: "transparent",
                 },
@@ -182,7 +174,7 @@ const LoginPage: React.FC = () => {
                   marginRight: 0,
                   height: "100%",
                   maxHeight: "none",
-                  backgroundColor: "#E8E7E4", // Indigo background for the icon
+                  backgroundColor: "#E8E7E4",
                   borderTopLeftRadius: "4px",
                   borderBottomLeftRadius: "4px",
                   padding: "0 12px",
@@ -197,12 +189,11 @@ const LoginPage: React.FC = () => {
                 opacity: 1,
               },
               "& .MuiSvgIcon-root": {
-                color: "#50472D", // White color for the icon
+                color: "#50472D",
               },
             }}
           />
 
-          
           <TextField
             fullWidth
             placeholder="Password"
@@ -217,7 +208,7 @@ const LoginPage: React.FC = () => {
             }}
             sx={{
               "& .MuiOutlinedInput-root": {
-                backgroundColor: "#C0BDB3", // Very light gray background for the text field
+                backgroundColor: "#C0BDB3",
                 "& fieldset": {
                   borderColor: "transparent",
                 },
@@ -231,9 +222,9 @@ const LoginPage: React.FC = () => {
                   marginRight: 0,
                   height: "100%",
                   maxHeight: "none",
-                  backgroundColor: "#E8E7E4", // Green background for the icon
+                  backgroundColor: "#E8E7E4",
                   borderBottomLeftRadius: "4px",
-                  borderBottomRightRadius:"4px",
+                  borderBottomRightRadius: "4px",
                   padding: "0 12px",
                 },
               },
@@ -246,7 +237,7 @@ const LoginPage: React.FC = () => {
                 opacity: 1,
               },
               "& .MuiSvgIcon-root": {
-                color: "#50472D", // White color for the icon
+                color: "#50472D",
               },
             }}
           />
@@ -279,8 +270,6 @@ const LoginPage: React.FC = () => {
             Login
           </Button>
         </Box>
-
-
       </Box>
     </Box>
   );
