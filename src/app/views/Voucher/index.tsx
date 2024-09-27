@@ -1,8 +1,9 @@
 
-import HeaderStats from '../HeaderStatus/HeaderStats'
+// import HeaderStats from '../HeaderStatus/HeaderStats'
 import VoucherDetails from './VoucherDetails'
 
 import Header from '../HeaderStatus/Header'
+import { Box } from '@mui/material'
 
 const index = () => {
   return (
@@ -10,7 +11,9 @@ const index = () => {
       
       <Header/>
       {/* <HeaderStats/> */}
+      <Box px={5} py={2}>
       <VoucherDetails/>
+      </Box>
     </div>
   )
 }

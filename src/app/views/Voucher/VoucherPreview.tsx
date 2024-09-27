@@ -14,7 +14,7 @@ import {
   styled,
   DialogTitle,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+// import CloseIcon from '@mui/icons-material/Close';
 import DescriptionIcon from '@mui/icons-material/Description';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 import CategoryIcon from '@mui/icons-material/Category';
@@ -32,20 +32,20 @@ const StyledCard = styled(Card)(({ theme }) => ({
   boxShadow: theme.shadows[3],
 }));
 
-const StyledCardMedia = styled(CardMedia)(({ theme }) => ({
-  height: 300,
-  objectFit: 'cover',
-}));
+// const StyledCardMedia = styled(CardMedia)(({  }) => ({
+//   height: 300,
+//   objectFit: 'cover',
+// }));
 
-const StyledIconButton = styled(IconButton)(({ theme }) => ({
-  position: 'absolute',
-  top: theme.spacing(1),
-  right: theme.spacing(1),
-  backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 1)',
-  },
-}));
+// const StyledIconButton = styled(IconButton)(({ theme }) => ({
+//   position: 'absolute',
+//   top: theme.spacing(1),
+//   right: theme.spacing(1),
+//   backgroundColor: 'rgba(255, 255, 255, 0.8)',
+//   '&:hover': {
+//     backgroundColor: 'rgba(255, 255, 255, 1)',
+//   },
+// }));
 
 const StyledChip = styled(Chip)(({ theme }) => ({
   marginLeft: theme.spacing(2),
@@ -80,11 +80,11 @@ export default function VoucherPreview({ open, onClose }: Props) {
       <DialogContent>
         <StyledCard>
           <Box position="relative">
-            <StyledCardMedia
-              component="img"
-              image={selectedVoucher.voucherImage}
-              alt={selectedVoucher.voucherName}
-            />
+          <CardMedia
+      component="img" 
+      image={selectedVoucher.voucherImage}
+      alt={selectedVoucher.voucherName}
+    />
             {/* <StyledIconButton onClick={onClose} color="error" size="small">
               <HighlightOffSharpIcon fontSize="small" />
             </StyledIconButton> */}

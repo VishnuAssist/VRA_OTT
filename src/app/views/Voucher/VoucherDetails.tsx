@@ -29,7 +29,7 @@ import {
   TableRow,
   Avatar,
 } from "@mui/material";
-
+import HistoryIcon from '@mui/icons-material/History';
 import { VoucherType } from "../../Models/VoucherType";
 import {
   removeVoucher,
@@ -48,7 +48,6 @@ import {
   Add as AddIcon,
   MoreVert as MoreVertIcon,
   GridView as GridViewIcon,
-  TableRows as TableRowsIcon,
   Visibility as VisibilityIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
@@ -125,7 +124,7 @@ export default function VoucherDetails() {
 
   const [view, setView] = useState("grid"); // Default view is grid
 
-  const handleViewChange = (event: any, newView: any) => {
+  const handleViewChange = ( newView: any) => {
     if (newView !== null) {
       setView(newView);
     }
@@ -139,11 +138,11 @@ export default function VoucherDetails() {
       <Box sx={{ p: 2 }}>
         <Grid
           container
-          spacing={2}
+          spacing={0}
           alignItems="center"
           marginBottom={4}
           component={Paper}
-          sx={{ p: 1 }}
+          sx={{ p: 2 }}
         >
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <Typography fontSize={"24px"} fontWeight={700}>
@@ -159,6 +158,7 @@ export default function VoucherDetails() {
           >
             <ToggleButtonGroup
               value={view}
+              size="small"
               exclusive
               onChange={handleViewChange}
               aria-label="View toggle"
@@ -174,9 +174,10 @@ export default function VoucherDetails() {
        
           <Grid item xs={12} sm={4} md={2} lg={2}>
             <TextField
-              fullWidth
+              
               label="Search"
               variant="outlined"
+              size="small"
               value={searchTerm}
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             />
@@ -184,6 +185,7 @@ export default function VoucherDetails() {
           <Grid item xs={12} sm={4} md={2} lg={1}>
             <Select
               fullWidth
+              size="small"
               value={filterType}
               onChange={(e) => dispatch(setFilterType(e.target.value))}
             >
@@ -208,21 +210,24 @@ export default function VoucherDetails() {
 
         {/* Conditional Rendering based on the selected view */}
         {view === "grid" ? (
-          <div>
-            <Box sx={{display:"flex", justifyContent:"flex-end",flexWrap:"wrap",gap:2}}>
+         
+            <Card component={Paper} sx={{p:3}}>
+            <Box sx={{display:"flex",mb:2,justifyContent:"flex-end"}}>
               <Button onClick={handleClick} variant="contained" >
                      Voucher History
+                     <HistoryIcon sx={{ml:1}}/>
                    </Button>
             </Box>
-            <Grid container spacing={2} component={Paper} sx={{ p: 1 }}>
-              
+            <Grid container spacing={2}  >
+            
               {filteredVouchers.map((voucher: VoucherType) => (
                   
                 <Grid item xs={12} sm={6} md={3} key={voucher.voucherId}>
+                  
                   <Card
                     sx={{
                       height: "100%",
-                      width: "85%",
+                      width: "100%",
                       boxShadow: "0 0 2px 2px #4B4432",
                     }}
                   >
@@ -375,7 +380,8 @@ export default function VoucherDetails() {
                 </Grid>
               ))}
             </Grid>
-          </div>
+            </Card>
+         
         ) : (
           <div>
             <TableContainer component={Paper}>
@@ -396,7 +402,7 @@ export default function VoucherDetails() {
                     <TableRow key={voucher.voucherId}>
                       <TableCell>
                         <Avatar
-                          src={voucher.voucherImage}
+                          src={voucher.voucherImage ?? ""}
                           alt={voucher.voucherName}
                         />
                       </TableCell>

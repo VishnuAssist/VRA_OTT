@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Card, CardContent, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, useTheme, Grid, Avatar, Divider, Tabs, Tab, Button } from '@mui/material';
+import { Box, Card, CardContent, Typography, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Accordion, AccordionSummary, AccordionDetails, Grid, Avatar, Divider, Tabs, Tab, Button, TextField, Select, MenuItem } from '@mui/material';
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
-import { ExpandMore as ExpandMoreIcon, CheckCircleOutline as CheckCircleOutlineIcon, CancelOutlined as CancelOutlinedIcon, HistoryToggleOff as HistoryToggleOffIcon, LocalOffer as LocalOfferIcon, DateRange as DateRangeIcon, Store as StoreIcon } from '@mui/icons-material';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { ExpandMore as ExpandMoreIcon, CheckCircleOutline as CheckCircleOutlineIcon, CancelOutlined as CancelOutlinedIcon , LocalOffer as LocalOfferIcon, DateRange as DateRangeIcon, Store as StoreIcon } from '@mui/icons-material';
+import {  useNavigate } from 'react-router-dom';
 
 type VoucherType = {
   voucherId: string;
@@ -41,7 +41,7 @@ type VoucherHistoryType = {
 };
 
 export default function Component() {
-  const theme = useTheme();
+
   const [expanded, setExpanded] = useState<string | false>(false);
   const [selectedVoucher, setSelectedVoucher] = useState(0);
 
@@ -138,7 +138,7 @@ export default function Component() {
     ]
   }));
 
-  const handleChange = (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+  const handleChange = (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
     setExpanded(isExpanded ? panel : false);
   };
 
@@ -154,6 +154,7 @@ export default function Component() {
     navigate("/voucher/voucherManagement");
   };
   return (
+    
     <Box sx={{ maxWidth: 800, margin: 'auto', mt: 4 }}>
        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography fontSize={"24px"} fontWeight={700}>Voucher History</Typography>
@@ -169,7 +170,7 @@ export default function Component() {
         scrollButtons="auto"
         color='black'
       >
-        {vouchers.map((voucher, index) => (
+        {vouchers.map((voucher) => (
           <Tab key={voucher.voucherId} label={voucher.voucherName} />
         ))}
       </Tabs>
@@ -229,19 +230,44 @@ export default function Component() {
           </Card>
 
           <Card>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                Voucher History
-              </Typography>
-
+      <CardContent>
+        <Typography variant="h5" gutterBottom>
+          Voucher History
+        </Typography>
+        
+  
               <Accordion expanded={expanded === 'usage'} onChange={handleChange('usage')}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography variant="h6">Usage Details</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <TableContainer component={Paper} elevation={0}>
+                  <Grid  spacing={2} alignItems="center" sx={{ mb: 2,display:"flex",justifyContent:"flex-end" }}>
+              <Grid item xs={12} sm={8} md={10} lg={6} sx={{mr:2}}>
+                <TextField
+                  label="Search"
+                  variant="outlined"
+                  size="small"
+                  
+                 
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}  lg={6} >
+                <Select sx={{px:4}}
+                  
+                  size="small"
+                  fullWidth
+                >
+                  <MenuItem value="All">Filter</MenuItem>
+                  <MenuItem value="Multi-Use">ID 1</MenuItem>
+                  <MenuItem value="Single-Use">ID 2</MenuItem>
+                  <MenuItem value="Expiry Date">ID 3</MenuItem>
+                </Select>
+              </Grid>
+            </Grid>
                     <Table>
                       <TableHead>
+                      
                         <TableRow>
                           <TableCell>Usage Date</TableCell>
                           <TableCell>Used By</TableCell>

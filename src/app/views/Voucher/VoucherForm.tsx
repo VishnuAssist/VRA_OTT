@@ -208,7 +208,12 @@ console.log("data",data)
   <Button
     variant="contained"
     color="primary"
-    onClick={() => document.getElementById('voucherInput').click()}
+    onClick={() => {
+      const inputElement = document.getElementById('voucherInput');
+      if (inputElement) {
+        inputElement.click();
+      }
+    }}
     // style={{ marginTop: '10px' }}
   >
     Upload Voucher
