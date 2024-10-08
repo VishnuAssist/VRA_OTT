@@ -89,11 +89,7 @@ const AddStore = () => {
         >
           <Grid item xs={12} sm={12} md={6} lg={8}>
             <Typography fontSize={"24px"} fontWeight={700}>
-<<<<<<< HEAD
             Dictionary
-=======
-              Dictionary Management
->>>>>>> 15b839f25e0abb301995d5a2d5905a4deea05c33
             </Typography>
           </Grid>
          
