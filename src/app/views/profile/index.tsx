@@ -45,7 +45,9 @@ const index = () => {
           justifyContent="center"
           alignItems="stretch"
           spacing={2}>
-<Profile/>
+<Profile open={false} handleClose={function (): void {
+              throw new Error("Function not implemented.");
+            } }/>
 </Grid>
 
 <Grid item xs={6} 

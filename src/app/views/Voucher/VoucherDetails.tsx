@@ -53,12 +53,27 @@ import {
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import { DictionaryType } from "../../Models/DictionaryType";
 export default function VoucherDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { voucherList, searchTerm, filterType } = useSelector(
-    (state: any) => state.voucher
-  );
+  const { voucherList, searchTerm, filterType } = useSelector((state: any) => state.voucher);
+  const {DictionaryList} = useSelector((state:any)=> state.dictionary)
+
+//   const brandData = voucherList.find((voucher: VoucherType) =>
+//  DictionaryList.some((dictionary: DictionaryType) => dictionary.id === voucher.voucherBrand));
+
+ 
+
+  const brandfunc = (id:number) =>{
+    const brandData:DictionaryType = DictionaryList.find((dictionary: DictionaryType) =>  dictionary.id === id );
+    return brandData?.entryname
+  }
+   
+
+  // console.log("brandData",brandData)
+console.log("voucherList",voucherList)
+console.log("DictionaryList",DictionaryList)
 
   const [isFormOpen, setFormOpen] = useState(false);
   const [dataToEdit, setDataToEdit] = useState<VoucherType | null>(null);
@@ -135,7 +150,7 @@ export default function VoucherDetails() {
   };
   return (
     <>
-      <Box sx={{ p: 2 }}>
+      <Box >
         <Grid
           container
           spacing={0}
@@ -307,7 +322,7 @@ export default function VoucherDetails() {
                             color="text.secondary"
                             sx={{ ml: 2, fontSize: "15px", fontWeight: "600" }}
                           >
-                            {voucher.voucherBrand}
+                            {brandfunc(voucher?.voucherBrand || 0)}
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={4} md={4} lg={4}>

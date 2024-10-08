@@ -1,5 +1,5 @@
-import { memo } from "react";
-import { Link } from "react-router-dom";
+import { memo, useState } from "react";
+// import { Link } from "react-router-dom";
 import {
   Box,
   styled,
@@ -22,7 +22,7 @@ import { NotificationBar } from "../../NotificationBar";
 import { themeShadows } from "../../MatxTheme/themeColors";
 
 import { topBarHeight } from "../../../utils/constant";
-
+import Profile from "../../../views/profile/profile";
 import {
   // Menu,
   Person,
@@ -90,6 +90,15 @@ const Layout1Topbar = (_Fixed:any) => {
   // const theme = useTheme();
   // const { settings, updateSettings } = useSettings();
   const { logout } = useAuth();
+
+  const [open, setOpen] = useState(false);
+
+  const openBox = () =>{
+setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false);
+  };
   // const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   // const updateSidebarMode = (sidebarSettings:any) => {
@@ -108,7 +117,7 @@ const Layout1Topbar = (_Fixed:any) => {
   // };
 
   return (
-    
+    <>
     <TopbarRoot>
       <TopbarContainer>
         <Box display="flex">
@@ -160,11 +169,11 @@ const Layout1Topbar = (_Fixed:any) => {
               </Link>
             </StyledItem> */}
 
-            <StyledItem>
-              <Link to="/About/profile">
+            <StyledItem onClick={openBox}>
+              {/* <Link to="/About/profile"> */}
                 <Person />
                 <Span>Profile</Span>
-              </Link>
+              {/* </Link> */}
             </StyledItem>
 
             <StyledItem>
@@ -180,6 +189,8 @@ const Layout1Topbar = (_Fixed:any) => {
         </Box>
       </TopbarContainer>
     </TopbarRoot>
+    <Profile open ={open} handleClose={handleClose}/>
+    </>
   );
 };
 

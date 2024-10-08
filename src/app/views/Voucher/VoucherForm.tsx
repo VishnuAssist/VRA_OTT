@@ -18,10 +18,13 @@ import {
   IconButton,
   FormControlLabel,
   Switch,
+  Autocomplete,
 } from '@mui/material';
 import { VoucherType } from '../../Models/VoucherType';
 import { addVoucher, updateVoucher } from '../../Slices/VoucherSlice';
 import HighlightOffSharpIcon from "@mui/icons-material/HighlightOffSharp";
+import { useSelector } from 'react-redux';
+import { DictionaryType } from '../../Models/DictionaryType';
 
 interface Props {
   open: boolean;
@@ -30,8 +33,16 @@ interface Props {
 }
 
 export default function VoucherForm({ open, closeForm, initialVoucher }: Props) {
-  const { control, handleSubmit, reset } = useForm<VoucherType>();
+  const { control, handleSubmit, reset,setValue } = useForm<VoucherType>();
   const dispatch = useDispatch();
+const [selectedBrand , setSelectedBrand] = useState<DictionaryType | null>(null)
+
+  const {DictionaryList} = useSelector((state:any)=> state.dictionary)
+const filterBrand = DictionaryList.filter((data:any) => data.category=== "brand")
+
+  console.log("DictionaryList",DictionaryList)
+  console.log("filterStoredata",filterBrand)
+  console.log("selectedBrand",selectedBrand)
 
   const [voucherImage, setvoucherImage] = useState<string | null>(null);
   const [isActive, setIsActive] = useState(true);
@@ -45,7 +56,7 @@ export default function VoucherForm({ open, closeForm, initialVoucher }: Props) 
         voucherDescription: '',
         voucherStartDate: '',
         voucherEndDate: '',
-        voucherBrand: '',
+        voucherBrand: 0,
         voucherType: 'Multi-Use',
         voucherImage: '',
         isActive: true,
@@ -187,21 +198,19 @@ console.log("data",data)
             />
               </Grid>
               <Grid item xs={12} sm={6} md={6} lg={6}>
-              <Controller
-              name="voucherBrand"
-              control={control}
-              defaultValue=""
-              rules={{ required: 'Brand is required' }}
-              render={({ field, fieldState: { error } }) => (
-                <TextField
-                  {...field}
-                  label="Brand"
-                  error={!!error}
-                  helperText={error?.message}
-                  fullWidth
-                />
-              )}
-            />
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={filterBrand}
+                getOptionLabel={(option: DictionaryType) => option?.entryname || ""}
+                value={selectedBrand} 
+                onChange={(_, selectedOption: DictionaryType | null) => {
+                  setSelectedBrand(selectedOption);
+                  setValue("voucherBrand", selectedOption?.id || undefined);
+                }}
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                renderInput={(params) => <TextField {...params} label="" />}
+              />
               </Grid>
               <Grid item xs={12} sm={6} md={6} lg={6}display="flex" flexDirection="column" >
  

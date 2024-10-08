@@ -116,9 +116,13 @@ const Layout1 = () => {
                 <Layout1Topbar />
               </ThemeProvider>
             )}
+
             <Box flexGrow={1} position="relative">
               <MatxSuspense>
-                <Outlet />
+                <Box px={5}>
+
+                  <Outlet />
+                </Box>
               </MatxSuspense>
             </Box>
 
@@ -134,7 +138,10 @@ const Layout1 = () => {
 
             <Box flexGrow={1} position="relative">
               <MatxSuspense>
-                <Outlet />
+                <Box px={5}>
+
+                  <Outlet />
+                </Box>
               </MatxSuspense>
             </Box>
 

@@ -1,8 +1,12 @@
 import { Fab, IconButton, styled } from "@mui/material";
-import { Close, Settings } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import clsx from "clsx";
 
 import useSettings from "../../hooks/useSettings";
+// import { Link } from "react-router-dom";
+// import NavigationIcon from '@mui/icons-material/Navigation';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+
 
 // STYLED COMPONENT
 const Toggle = styled("div")(() => ({
@@ -33,11 +37,23 @@ const SecondarySidebarToggle: React.FC<SecondarySidebarToggleProps> = () => {
         </IconButton>
       )}
 
-      {!settings.secondarySidebar.open && (
-        <Fab color="primary" aria-label="expand" onClick={toggle}>
-          <Settings sx={{ color: "primary.contrastText" }} />
-        </Fab>
-      )}
+     
+{/* <Fab 
+  color="primary" 
+  aria-label="expand" 
+  component={Link} 
+  to="/your-target-url" 
+  sx={{ width: "140px", px: 2 }}
+>
+  Help ?
+</Fab> */}
+<Fab variant="extended" sx={{ backgroundColor: '#171D30', color: 'white' }}>
+  <QuestionMarkIcon sx={{ mr: 1, color: 'white' }} />
+  HELP
+</Fab>
+
+
+    
     </Toggle>
   );
 };

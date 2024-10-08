@@ -4,7 +4,7 @@ export interface VoucherType {
     voucherDescription: string;
     voucherStartDate: string;
     voucherEndDate: string;
-    voucherBrand: string;
+    voucherBrand: number | undefined;
     voucherType: 'Multi-Use' | 'Single-Use' | 'Expiry Date';
     // voucherImage: string;
     isActive: boolean;

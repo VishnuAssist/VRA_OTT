@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 
 // ALL CONTEXTS
 // import { AuthProvider } from "./contexts/JWTAuthContext";
-import SettingsProvider from "./contexts/SettingsContext";
+// import SettingsProvider from "./contexts/SettingsContext";
 // ROUTES
 // import routes from "./routes";
 // FAKE SERVER
@@ -19,13 +19,14 @@ export default function App() {
   const content = useRoutes(routes);
 
   return (
-    <SettingsProvider>
+    // <SettingsProvider>
+    
       <AuthProvider>
         <ThemeProvider>
           <CssBaseline />
           {content}
           </ThemeProvider>      
           </AuthProvider>
-    </SettingsProvider>
+    // </SettingsProvider>
   );
 }

@@ -11,6 +11,7 @@ import {
   IconButton,
   InputAdornment,
   Paper,
+  SelectChangeEvent,
   Table,
   TableBody,
   TableCell,
@@ -24,7 +25,7 @@ import {
   Add as AddIcon,
   Edit as EditIcon,
   Visibility as ViewIcon,
-  Delete as DeleteIcon,
+  // Delete as DeleteIcon,
   Search as SearchIcon,
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
@@ -77,10 +78,10 @@ const EmployeeDetails: React.FC = () => {
     }
   };
 
-  const openDeleteConfirm = (user: EmployeeProfile) => {
-    setUserToDelete(user);
-    setDeleteOpen(true);
-  };
+  // const openDeleteConfirm = (user: EmployeeProfile) => {
+  //   setUserToDelete(user);
+  //   setDeleteOpen(true);
+  // };
 
   const filteredEmployees = userList.filter((employee: EmployeeProfile) =>
     employee.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -91,18 +92,18 @@ const EmployeeDetails: React.FC = () => {
   const [status, setStatus] = useState<string>('');
   const [department, setDepartment] = useState<string>('');
 
-  const handleStatusChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleStatusChange = (event: SelectChangeEvent<string>) => {
     setStatus(event.target.value as string);
   };
 
-  const handleDepartmentChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleDepartmentChange = (event: SelectChangeEvent<string> ) => {
     setDepartment(event.target.value as string);
   };
   
   return (
     <>
-      <Box sx={{ p: 2 }} >
-        <Grid container spacing={2} alignItems="center" marginBottom={2}>
+      <Box  >
+        {/* <Grid container spacing={2} alignItems="center" marginBottom={2}>
           <Grid item xs={12} sm={6} md={9}>
            <Typography fontSize={"24px"} fontWeight={700}>User Management</Typography>
           </Grid>
@@ -127,7 +128,42 @@ const EmployeeDetails: React.FC = () => {
               Add
             </Button>
           </Grid>
+        </Grid> */}
+        <Grid
+          container
+          spacing={0}
+          alignItems="center"
+          marginBottom={4}
+          component={Paper}
+          sx={{ p: 2 }}
+        >
+          <Grid item xs={12} sm={12} md={6} lg={9}>
+            <Typography fontSize={"24px"} fontWeight={700}>
+                User Management
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12} md={8} lg={2} textAlign="right">
+          <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={openBulkImport}
+            >
+              Bulk Upload
+            </Button>
+          </Grid>
+          <Grid item xs={12} sm={12} md={8} lg={1} textAlign="right">
+          <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              onClick={openForm}
+            >
+              Add
+            </Button>
+          </Grid>
         </Grid>
+        
 
         <TableContainer component={Paper} sx={{p:1}}>
           <Box sx={{display:"flex", justifyContent:"flex-end",flexWrap:"wrap",gap:2}}>

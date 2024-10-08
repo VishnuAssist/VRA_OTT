@@ -8,14 +8,14 @@ import {
   Grid,
   Box,
   Avatar,
-  Chip,
-  Divider,
+  // Chip,
+  // Divider,
   Paper,
   Card,
-  Button,
+  // Button,
 } from "@mui/material";
 import {
-  Close as CloseIcon,
+  // Close as CloseIcon,
   Email as EmailIcon,
   Phone as PhoneIcon,
   Work as WorkIcon,

@@ -5,7 +5,7 @@ import BarChart from "./shared1/BarChart";
 import LineChart from "./shared1/LineChart";
 
 const ContentBox = styled("div")(({ theme }) => ({
-  margin: "30px",
+  margin: "20px",
   [theme.breakpoints.down("sm")]: { margin: "16px" }
 }));
 

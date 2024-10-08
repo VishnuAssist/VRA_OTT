@@ -1,9 +1,6 @@
 import {
   Box,
-  Card,
   Chip,
-  Container,
-  Divider,
   IconButton,
   Table,
   TableBody,
@@ -21,7 +18,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import {
-  Add as AddIcon,
+
   Edit as EditIcon,
 
   Delete as DeleteIcon,
@@ -30,13 +27,13 @@ import {
 
 
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 //   import { removeStore } from "../../../Slices/StoreManagement";
 import { DictionaryType } from "../../Models/DictionaryType";
 import Form from "./QualificationForm";
 
 const AddStore = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { DictionaryList } = useSelector((state: any) => state.dictionary);
   console.log(DictionaryList);
 
@@ -61,14 +58,14 @@ const AddStore = () => {
     setUpdate(false);
   };
 
-  const deleteStore = (data: DictionaryType) => {
+  const deleteStore = (_data: DictionaryType) => {
     //   dispatch({ id: data.id });
   };
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
@@ -82,14 +79,29 @@ const AddStore = () => {
   return (
     <>
       <Box sx={{ p: 2 }}>
-        <Grid container spacing={2} alignItems="center" marginBottom={2}>
-          <Grid item xs={12} sm={6} md={4}>
+         <Grid
+          container
+          spacing={0}
+          alignItems="center"
+          marginBottom={4}
+          component={Paper}
+          sx={{ p: 2 }}
+        >
+          <Grid item xs={12} sm={12} md={6} lg={8}>
             <Typography fontSize={"24px"} fontWeight={700}>
-              User Management
+            Dictionary
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6} md={8} textAlign="right">
-            <Button variant="contained" onClick={openstoremodel}>
+         
+      
+          
+          
+          <Grid item xs={12} sm={12} md={8} lg={4} textAlign="right">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={openstoremodel}
+            >
               Add
             </Button>
           </Grid>
