@@ -243,19 +243,20 @@ console.log("DictionaryList",DictionaryList)
                     sx={{
                       height: "100%",
                       width: "100%",
+                      maxWidth:"300px",
                       boxShadow: "0 0 2px 2px #4B4432",
                       
                     }}
                   >
                     <CardMedia
                       component="img"
-                      height="200"
+                      height="280"
                       image={voucher.voucherImage ?? ""}
                       alt={voucher.voucherName}
                     />
                     <CardContent>
                       <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Grid item xs={12} sm={12} md={12} lg={12} sx={{height:"40px"}}>
                           <Typography
                             variant="h6"
                             component="div"
@@ -264,7 +265,7 @@ console.log("DictionaryList",DictionaryList)
                             {voucher.voucherName}
                           </Typography>
                         </Grid>
-                        <Grid item xs={6} sm={4} md={4} lg={4}>
+                        {/* <Grid item xs={6} sm={4} md={4} lg={4}>
                           <Typography
                             variant="body2"
                             color="text.secondary"
@@ -293,9 +294,9 @@ console.log("DictionaryList",DictionaryList)
                             size="small"
                             sx={{ ml: 2 }}
                           />
-                        </Grid>
+                        </Grid> */}
 
-                        <Grid item xs={6} sm={4} md={4} lg={4}>
+                        {/* <Grid item xs={6} sm={4} md={4} lg={4}>
                           <Typography
                             variant="body2"
                             color="text.secondary"
@@ -355,13 +356,13 @@ console.log("DictionaryList",DictionaryList)
                           >
                             {voucher.voucherType}
                           </Typography>
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={6} sm={6} md={6} lg={6}></Grid>
                       </Grid>
 
                       <Box
                         sx={{
-                          mt: 2,
+                          // mt: 2,
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
