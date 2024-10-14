@@ -4,14 +4,15 @@ import '@mui/lab/themeAugmentation';
 // import i18n from 'src/i18n/i18n';
 
 const themeColors = {
-  primary: '#DAD0B2',
+  // primary: '#c9c7c7',
+  primary: '#066FD1',
   secondary: '#6E759F',
   success: '#57CA22',
   warning: '#FFA319',
   error: '#FF1943',
   info: '#33C2FF',
   black: '#223354',
-  white: '#eceff4',
+  white: '#ffff',
   primaryAlt: '#000C57'
 };
 
@@ -52,7 +53,7 @@ const colors = {
   },
   layout: {
     general: {
-      bodyBg: '#DFDBD1'
+      bodyBg: '#F6F8FB'
     },
     sidebar: {
       background: themeColors.white,

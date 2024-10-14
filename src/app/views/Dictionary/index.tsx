@@ -1,20 +1,20 @@
 import AddStore from "./Table";
 // import HeaderStats from "../HeaderStatus/HeaderStats";
-import Header from "../HeaderStatus/Header";
-import { Box } from "@mui/material";
+// import Header from "../HeaderStatus/Header";
+// import { Box } from "@mui/material";
 
 const index = () => {
   return (
     <div>
 
      
-      <Header />
+      {/* <Header /> */}
 
-      <Box sx={{background:"#c64595", m:"2px" , p:"20px",borderRadius: "8px"}}>
+      {/* <Box sx={{background:"#bfb9a8", m:"2px" , p:"20px",borderRadius: "8px"}}> */}
       {/* <HeaderStats /> */}
 
       <AddStore />
-      </Box>
+      {/* </Box> */}
     </div>
   );
 };

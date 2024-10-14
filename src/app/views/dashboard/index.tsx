@@ -1,21 +1,22 @@
 
 // import HeaderStats from '../HeaderStatus/HeaderStats'
 import Analytics1 from './Analytics1'
-import Header from '../HeaderStatus/Header'
+// import Header from '../HeaderStatus/Header'
 import { Box } from '@mui/material'
+// import PageHeader from './PageHeader'
 
 const index = () => {
   return (
     <>
-      <Header/>
+      {/* <Header/> */}
       
-      <Box sx={{ background: "#20b2aa", m: "2px", borderRadius: "8px" }}>
+      {/* <Box sx={{ background: "#bfb9a8", m: "2px", borderRadius: "8px" }}> */}
       {/* <HeaderStats/> */}
-      <Box px={5} py={2}>
-
+      <Box >
+{/* <PageHeader/> */}
       <Analytics1/>
       </Box>
-      </Box>
+      {/* </Box> */}
       </>
   )
 }

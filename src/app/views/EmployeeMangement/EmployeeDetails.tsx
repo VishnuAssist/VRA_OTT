@@ -19,10 +19,10 @@ import {
   TableHead,
   TableRow,
   TextField,
-  Typography,
+  // Typography,
 } from "@mui/material";
 import {
-  Add as AddIcon,
+  // Add as AddIcon,
   Edit as EditIcon,
   Visibility as ViewIcon,
   // Delete as DeleteIcon,
@@ -33,9 +33,10 @@ import EmployeeForm from "./EmployeeForm";
 import EmployeePreview from "./EmployeePreview";
 import { EmployeeProfile } from "../../Models/EmployeeModel";
 import { removeEmployee } from "../../Slices/EmployeeSlice";
-import BulkEmployeeUpload from "./BulkImportDetails";
+// import BulkEmployeeUpload from "./BulkImportDetails";
 import { MenuItem, FormControl, InputLabel, Select } from '@mui/material';
 import { CheckCircle, Cancel } from '@mui/icons-material';
+// import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 const EmployeeDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -50,10 +51,10 @@ const EmployeeDetails: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [previewDetails, setPreviewDetails] = useState<EmployeeProfile | null>(null);
 
-  const [bulk, setBulk] = useState(false);
-  const openBulkImport = () => setBulk(true);
-  const closeBulkImport =() => setBulk(false);
-  const openForm = () => setFormOpen(true);
+  // const [bulk, setBulk] = useState(false);
+  // const openBulkImport = () => setBulk(true);
+  // const closeBulkImport =() => setBulk(false);
+  // const openForm = () => setFormOpen(true);
   
   const closeForm = () => {
     setFormOpen(false);
@@ -129,11 +130,11 @@ const EmployeeDetails: React.FC = () => {
             </Button>
           </Grid>
         </Grid> */}
-        <Grid
+        {/* <Grid
           container
           spacing={0}
           alignItems="center"
-          marginBottom={4}
+          marginBottom={2}
           component={Paper}
           sx={{ p: 2 }}
         >
@@ -142,91 +143,95 @@ const EmployeeDetails: React.FC = () => {
                 User Management
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12} md={8} lg={2} textAlign="right">
+          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
           <Button
               variant="contained"
-              color="primary"
-              startIcon={<AddIcon />}
+              color="info"
+              startIcon={<FileUploadIcon />}
               onClick={openBulkImport}
             >
-              Bulk Upload
+             Upload
             </Button>
           </Grid>
-          <Grid item xs={12} sm={12} md={8} lg={1} textAlign="right">
+          <Grid item xs={6} sm={12} md={8} lg={1} textAlign="right">
           <Button
               variant="contained"
-              color="primary"
+              color="info"
               startIcon={<AddIcon />}
               onClick={openForm}
             >
               Add
             </Button>
           </Grid>
-        </Grid>
+        </Grid> */}
         
 
         <TableContainer component={Paper} sx={{p:1}}>
-          <Box sx={{display:"flex", justifyContent:"flex-end",flexWrap:"wrap",gap:2}}>
-        
-            <TextField
-              variant="outlined"
-              placeholder="Search employees"
-              
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              size="small"
-              
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon color="action" />
-                  </InputAdornment>
-                ),
-              }}
-            />
-       
-      <FormControl sx={{width:"200px"}} size="small">
-        <InputLabel id="department-label">Filter by Department</InputLabel>
-        <Select
-          labelId="department-label"
-          value={department}
-          onChange={handleDepartmentChange}
-          label="Filter by Department"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="sales">Sales</MenuItem>
-          <MenuItem value="engineering">Engineering</MenuItem>
-          <MenuItem value="hr">Human Resources</MenuItem>
-          <MenuItem value="marketing">Marketing</MenuItem>
-        </Select>
-      </FormControl>
-     
-           <FormControl sx={{width:"200px"}}   size="small">
-        <InputLabel id="status-label">Filter by Status</InputLabel>
-        <Select
-          labelId="status-label"
-          value={status}
-          onChange={handleStatusChange}
-          label="Filter by Status"
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="active">
-            <CheckCircle style={{ marginRight: 8 }}  />
-            Active Users
-          </MenuItem>
-          <MenuItem value="inactive">
-            <Cancel style={{ marginRight: 8 }} />
-            Inactive Users
-          </MenuItem>
-        </Select>
-      </FormControl>
+        <Box sx={{ width: "100%", py: 2 }}>
+    <Grid container spacing={2} justifyContent="flex-end">
+      <Grid item xs={12} sm={6} md={3}>
+        <TextField
+          variant="outlined"
+          placeholder="Search employees"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          size="small"
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon color="action" />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Grid>
 
- 
-          </Box>
+      <Grid item xs={6} sm={6} md={3}>
+        <FormControl fullWidth size="small">
+          <InputLabel id="department-label">Filter by Department</InputLabel>
+          <Select
+            labelId="department-label"
+            value={department}
+            onChange={handleDepartmentChange}
+            label="Filter by Department"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="sales">Sales</MenuItem>
+            <MenuItem value="engineering">Engineering</MenuItem>
+            <MenuItem value="hr">Human Resources</MenuItem>
+            <MenuItem value="marketing">Marketing</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+
+      <Grid item xs={6} sm={6} md={3}>
+        <FormControl fullWidth size="small">
+          <InputLabel id="status-label">Filter by Status</InputLabel>
+          <Select
+            labelId="status-label"
+            value={status}
+            onChange={handleStatusChange}
+            label="Filter by Status"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="active">
+              <CheckCircle style={{ marginRight: 8 }} />
+              Active Users
+            </MenuItem>
+            <MenuItem value="inactive">
+              <Cancel style={{ marginRight: 8 }} />
+              Inactive Users
+            </MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
+  </Box>
         
           <Table >
             
@@ -297,7 +302,7 @@ const EmployeeDetails: React.FC = () => {
         closeForm={closeForm}
         initialEmployee={dataToEdit}
       />
-<BulkEmployeeUpload open={bulk} onClose={closeBulkImport}/>
+{/* <BulkEmployeeUpload open={bulk} onClose={closeBulkImport}/> */}
       <EmployeePreview
         preview={isPreviewOpen}
         closePreview={() => setPreviewOpen(false)}

@@ -1,21 +1,22 @@
 import StaffTables from './EmployeeDetails';
 // import HeaderStats from '../HeaderStatus/HeaderStats';
-import Header from '../HeaderStatus/Header';
+// import Header from '../HeaderStatus/Header';
 import { Box } from '@mui/material';
+import PageHeader from './PageHeader';
 
 
 const index = () => {
   return (
     <>
      
-      <Header/>
-      <Box sx={{background:"#ae65ce",m:"2px",borderRadius: "8px"}}>
+      {/* <Header/> */}
+      {/* <Box sx={{background:"#bfb9a8",m:"2px",borderRadius: "8px"}}> */}
       {/* <HeaderStats/> */}
-      <Box px={5} py={2}>
-
+      <Box>
+<PageHeader/>
       <StaffTables/>
       </Box>
-      </Box>
+      {/* </Box> */}
     </>
   )
 }

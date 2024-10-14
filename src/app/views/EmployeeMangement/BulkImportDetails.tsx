@@ -29,38 +29,38 @@ import * as XLSX from 'xlsx';
 import { addEmployee } from '../../Slices/EmployeeSlice';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-
-interface EmployeeProfile {
-  firstName: string;
-  middleName?: string;
-  lastName: string;
-  departmentOrStore: string;
-  designation: string;
-  country: string;
-  city: string;
-  email: string;
-  mobile: string;
-  picture: string;
-  grade: string;
-  brand: string;
-  employeeType: 'Regular' | 'Part-time';
-  joinDate: string;
-  lastWorkingDate?: string;
-  isActive: boolean;
-  firstLogin?: string;
-  lastLogin?: string;
-  company: string;
-  dateOfBirth: string;
-  employeeID: string;
-  addressLine1: string;
-  addressLine2?: string;
-  postalCode: string;
-  immediateManager: {
-    email: string;
-    phone: string;
-    designation: string;
-  };
-}
+import { EmployeeProfile } from '../../Models/EmployeeModel';
+// interface EmployeeProfile {
+//   firstName: string;
+//   middleName?: string;
+//   lastName: string;
+//   departmentOrStore: string;
+//   designation: string;
+//   country: string;
+//   city: string;
+//   email: string;
+//   mobile: string;
+//   picture: string;
+//   grade: number;
+//   brand: number;
+//   employeeType: 'Regular' | 'Part-time';
+//   joinDate: string;
+//   lastWorkingDate?: string;
+//   isActive: boolean;
+//   firstLogin?: string;
+//   lastLogin?: string;
+//   company: string;
+//   dateOfBirth: string;
+//   employeeID: string;
+//   addressLine1: string;
+//   addressLine2?: string;
+//   postalCode: string;
+//   immediateManager: {
+//     email: string;
+//     phone: string;
+//     designation: string;
+//   };
+// }
 
 interface Props {
   open: boolean;
@@ -71,7 +71,7 @@ const BulkEmployeeImportDialog: React.FC<Props> = ({ open, onClose }) => {
   const dispatch = useDispatch();
   const [employees, setEmployees] = useState<EmployeeProfile[]>([]);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const { handleSubmit } = useForm<EmployeeProfile>();
+  const { handleSubmit,reset } = useForm<EmployeeProfile>();
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
@@ -115,12 +115,13 @@ const BulkEmployeeImportDialog: React.FC<Props> = ({ open, onClose }) => {
     updatedEmployees[index] = { ...updatedEmployees[index], [field]: event.target.value };
     setEmployees(updatedEmployees);
   };
-
+console.log("employees",employees)
   const onSubmit = handleSubmit(() => {
     employees.forEach(employee => {
       dispatch(addEmployee(employee));
     });
     onClose();
+    reset()
   });
 
   return (

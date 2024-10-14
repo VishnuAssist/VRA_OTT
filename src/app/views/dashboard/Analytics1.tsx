@@ -3,9 +3,11 @@ import { Card, Grid, styled} from "@mui/material";
 import PieChart from "./shared1/PieChart";
 import BarChart from "./shared1/BarChart";
 import LineChart from "./shared1/LineChart";
+// import StatCards from "./shared/StatCards";
+import StatCards2 from "./shared/StatCards2";
 
 const ContentBox = styled("div")(({ theme }) => ({
-  margin: "20px",
+  // margin: "20px",
   [theme.breakpoints.down("sm")]: { margin: "16px" }
 }));
 
@@ -16,6 +18,10 @@ const ContentBox = styled("div")(({ theme }) => ({
     <Fragment>
       <ContentBox className="analytics">
         <Grid container spacing={3}>
+        <Grid item lg={12} md={8} sm={12} xs={12}>
+        <StatCards2 />
+        {/* <StatCards/> */}
+        </Grid>
           <Grid item lg={6} md={6} sm={12} xs={12}>
           <Card sx={{ px: 3, py: 2, mb: 3 }}>
 

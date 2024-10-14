@@ -35,7 +35,7 @@ import { DictionaryType } from "../../Models/DictionaryType";
 interface Props {
   open: boolean;
   closeForm: () => void;
-  initialEmployee: EmployeeProfile | null;
+  initialEmployee?: EmployeeProfile | null;
 }   
 
 const managerOptions = [
@@ -92,6 +92,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
 
   const submitData = (data: EmployeeProfile) => {
     const updatedData = { ...data, isActive };
+    console.log("updatedData",updatedData)
     if (initialEmployee) {
       dispatch(updateEmployee(updatedData));
       if (imagePreview !== initialEmployee.picture) {
@@ -108,7 +109,11 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
     closeForm();
   };
 
-  const [selectedManager, setSelectedManager] = useState(null); //immediate manager
+  const [selectedManager, setSelectedManager] = useState<{
+  email: string;
+  phone: string;
+  designation: string;
+} | null>(null); 
 
   return (
     <Dialog open={open} onClose={closeForm} maxWidth="md" fullWidth>
@@ -350,7 +355,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
     value={brandNameData}
     onChange={(_, selectedOption: DictionaryType | null) => {
       setBrandNameData(selectedOption);
-      setValue("brandName", selectedOption?.id || undefined);
+      setValue("brand", selectedOption?.id || undefined);
     }}
     isOptionEqualToValue={(option, value) => option.id === value.id}
     renderInput={(params) => (
@@ -634,7 +639,7 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
             getOptionLabel={(option) => option.designation}
             value={selectedManager}
             onChange={(_, selectedOption) => {
-              setSelectedManager(selectedOption);
+              setSelectedManager(selectedOption || null);
               // setValue("immediateManager.designation", selectedOption?.designation || "");
             }}
             isOptionEqualToValue={(option, value) => option.designation === value.designation}
@@ -655,12 +660,12 @@ const EmployeeForm: FC<Props> = ({ open, closeForm, initialEmployee }) => {
       
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeForm} color="primary"   variant="contained">
+        <Button onClick={closeForm} color="error"   variant="contained">
           Cancel
         </Button>
         <Button
           onClick={handleSubmit(submitData)}
-          color="secondary"
+          color="info"
           variant="contained"
         >
           {initialEmployee ? "Update" : "Create"}

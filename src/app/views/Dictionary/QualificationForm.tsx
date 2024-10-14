@@ -34,6 +34,7 @@ const Form: FC<Props> = ({ openmodel, closestoremodel, initialData }) => {
     description: '',
     status: '',
     id: 0,
+    discountPercentage:'',
   };
 
   const { register, handleSubmit, reset, setValue, watch } = useForm<DictionaryType>();
@@ -149,7 +150,7 @@ const Form: FC<Props> = ({ openmodel, closestoremodel, initialData }) => {
               <Button onClick={closestoremodel} variant="contained" color="error">
                 Close
               </Button>
-              <Button type="submit" variant="contained" color="primary"sx={{ml:2}}>
+              <Button type="submit" variant="contained" color="info"sx={{ml:2}}>
                 {initialData ? 'Update' : 'Save'}
               </Button>
             </Box>

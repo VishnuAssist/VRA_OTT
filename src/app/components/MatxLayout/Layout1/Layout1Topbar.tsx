@@ -6,6 +6,8 @@ import {
   Avatar,
   // useTheme,
   MenuItem,
+  Divider,
+  Typography,
   // IconButton,
   // useMediaQuery
 } from "@mui/material";
@@ -19,8 +21,8 @@ import { Span } from "../../Typography";
 // import ShoppingCart from "../../ShoppingCart";
 import { MatxMenu, MatxSearchBox } from "../..";
 import { NotificationBar } from "../../NotificationBar";
-import { themeShadows } from "../../MatxTheme/themeColors";
-
+// import { themeShadows } from "../../MatxTheme/themeColors";
+import logo from "../../../components/assest/logo.png"
 import { topBarHeight } from "../../../utils/constant";
 import Profile from "../../../views/profile/profile";
 import {
@@ -42,7 +44,7 @@ const TopbarRoot = styled("div")({
   top: 0,
   zIndex: 96,
   height: topBarHeight,
-  boxShadow: themeShadows[8],
+  // boxShadow: themeShadows[8],
   transition: "all 0.3s ease"
 });
 
@@ -54,7 +56,7 @@ const TopbarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  background: theme.colors.primary.light,
+  background: "#ffff",
   [theme.breakpoints.down("sm")]: { paddingLeft: 16, paddingRight: 16 },
   [theme.breakpoints.down("xs")]: { paddingLeft: 14, paddingRight: 16 }
 }));
@@ -120,7 +122,28 @@ setOpen(true)
     <>
     <TopbarRoot>
       <TopbarContainer>
-        <Box display="flex">
+      <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
+          {/* Project Logo and Name (Left-Aligned) */}
+          <Box 
+            display="flex" 
+            alignItems="center" 
+            gap={1} 
+            sx={{
+              ml: '10%', 
+              flexGrow: 1,
+              '@media (max-width: 960px)': {
+                ml: '5%',
+              },
+              '@media (max-width: 600px)': {
+                ml: '0', 
+              },
+            }}
+          >
+            <Avatar src={logo} alt="IDBadge Logo" sx={{ width: 60, height: 60 }} />
+            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
+              IDBadge
+            </Typography>
+          </Box>
           {/* <StyledIconButton onClick={handleSidebarToggle}>
             <Menu />
           </StyledIconButton> */}
@@ -189,6 +212,7 @@ setOpen(true)
         </Box>
       </TopbarContainer>
     </TopbarRoot>
+    <Divider/>
     <Profile open ={open} handleClose={handleClose}/>
     </>
   );

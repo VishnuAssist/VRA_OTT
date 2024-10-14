@@ -155,7 +155,7 @@ console.log("DictionaryList",DictionaryList)
           container
           spacing={0}
           alignItems="center"
-          marginBottom={4}
+          marginBottom={2}
           component={Paper}
           sx={{ p: 2 }}
         >
@@ -187,7 +187,7 @@ console.log("DictionaryList",DictionaryList)
             </ToggleButtonGroup>
           </Grid>
        
-          <Grid item xs={12} sm={4} md={2} lg={2}>
+          <Grid item xs={8} sm={4} md={2} lg={2}>
             <TextField
               
               label="Search"
@@ -197,7 +197,7 @@ console.log("DictionaryList",DictionaryList)
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             />
           </Grid>
-          <Grid item xs={12} sm={4} md={2} lg={1}>
+          <Grid item xs={6} sm={4} md={2} lg={1}>
             <Select
               fullWidth
               size="small"
@@ -211,14 +211,14 @@ console.log("DictionaryList",DictionaryList)
             </Select>
           </Grid>
           
-          <Grid item xs={12} sm={12} md={8} lg={2} textAlign="right">
+          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
             <Button
               variant="contained"
-              color="primary"
+              color="info"
               startIcon={<AddIcon />}
               onClick={openForm}
             >
-              Add Voucher
+              Add 
             </Button>
           </Grid>
         </Grid>
@@ -228,7 +228,7 @@ console.log("DictionaryList",DictionaryList)
          
             <Card component={Paper} sx={{p:3}}>
             <Box sx={{display:"flex",mb:2,justifyContent:"flex-end"}}>
-              <Button onClick={handleClick} variant="contained" >
+              <Button onClick={handleClick} variant="contained" color="info" >
                      Voucher History
                      <HistoryIcon sx={{ml:1}}/>
                    </Button>
@@ -244,6 +244,7 @@ console.log("DictionaryList",DictionaryList)
                       height: "100%",
                       width: "100%",
                       boxShadow: "0 0 2px 2px #4B4432",
+                      
                     }}
                   >
                     <CardMedia
@@ -253,7 +254,7 @@ console.log("DictionaryList",DictionaryList)
                       alt={voucher.voucherName}
                     />
                     <CardContent>
-                      <Grid container spacing={2} sx={{ height: "250px" }}>
+                      <Grid container spacing={2}>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                           <Typography
                             variant="h6"

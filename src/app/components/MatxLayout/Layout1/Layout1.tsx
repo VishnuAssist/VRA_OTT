@@ -2,7 +2,7 @@ import { useEffect, useRef, memo } from "react";
 import { ThemeProvider, useMediaQuery, Box, styled, useTheme, BoxProps } from "@mui/material";
 import Scrollbar from "react-perfect-scrollbar";
 import { Outlet } from "react-router-dom";
-
+import Header from "../../../views/HeaderStatus/Header";
 import useSettings from "../../../hooks/useSettings";
 
 import Layout1Topbar from "./Layout1Topbar";
@@ -118,9 +118,9 @@ const Layout1 = () => {
             )}
 
             <Box flexGrow={1} position="relative">
+              <Header/>
               <MatxSuspense>
                 <Box px={5}>
-
                   <Outlet />
                 </Box>
               </MatxSuspense>
@@ -137,9 +137,9 @@ const Layout1 = () => {
             )}
 
             <Box flexGrow={1} position="relative">
+            <Header/>
               <MatxSuspense>
-                <Box px={5}>
-
+                <Box px={5} mt={3}>
                   <Outlet />
                 </Box>
               </MatxSuspense>

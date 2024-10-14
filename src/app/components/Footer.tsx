@@ -47,7 +47,7 @@ export default function Footer() {
 
   return (
     <ThemeProvider theme={footerTheme}>
-      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#CBBC92" }}>
+      <AppBar position="static" sx={{ zIndex: 96, backgroundColor: "#F6F8FB" }}>
         <AppFooter>
           <FooterContent>
             <Grid container spacing={2}>

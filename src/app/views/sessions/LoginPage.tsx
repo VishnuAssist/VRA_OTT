@@ -101,7 +101,7 @@ const LoginPage: React.FC = () => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#CBBC92",
+            backgroundColor: "#ffff",
             padding: "20px", // Added padding for better alignment
           }}
         >

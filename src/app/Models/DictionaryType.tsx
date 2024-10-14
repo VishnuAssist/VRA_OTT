@@ -6,4 +6,5 @@ export interface DictionaryType {
   "code"?: string;
   "status": string;
   "description": string;
+  "discountPercentage":string
    }

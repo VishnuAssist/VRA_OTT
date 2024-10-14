@@ -295,7 +295,7 @@ console.log("data",data)
         </DialogContent>
         <DialogActions>
           <Button onClick={closeForm}>Cancel</Button>
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" color="info">
             {initialVoucher ? 'Update' : 'Add'}
           </Button>
         </DialogActions>

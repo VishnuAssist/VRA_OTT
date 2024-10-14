@@ -9,8 +9,8 @@ export interface EmployeeProfile {
   email: string;
   mobile: string;
   picture: string;
-  grade: string;
-  brand: string;
+  grade: number | undefined;
+  brand: number | undefined;
   employeeType: 'Regular' | 'Part-time';
   joinDate: string;
   lastWorkingDate?: string;

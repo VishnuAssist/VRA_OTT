@@ -78,16 +78,16 @@ const AddStore = () => {
 
   return (
     <>
-      <Box sx={{ p: 2 }}>
+      <Box>
          <Grid
           container
           spacing={0}
           alignItems="center"
-          marginBottom={4}
+          marginBottom={2}
           component={Paper}
           sx={{ p: 2 }}
         >
-          <Grid item xs={12} sm={12} md={6} lg={8}>
+          <Grid item xs={8} sm={12} md={6} lg={8}>
             <Typography fontSize={"24px"} fontWeight={700}>
             Dictionary
             </Typography>
@@ -96,10 +96,10 @@ const AddStore = () => {
       
           
           
-          <Grid item xs={12} sm={12} md={8} lg={4} textAlign="right">
+          <Grid item xs={4} sm={12} md={8} lg={4} textAlign="right">
             <Button
               variant="contained"
-              color="primary"
+              color="info"
               onClick={openstoremodel}
             >
               Add

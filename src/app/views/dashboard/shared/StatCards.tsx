@@ -9,7 +9,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   alignItems: "center",
   justifyContent: "space-between",
   padding: "24px !important",
-  background: theme.palette.background.paper,
+  background: "#FFFFFF",
   [theme.breakpoints.down("sm")]: { padding: "16px !important" }
 }));
 
@@ -40,7 +40,7 @@ export default function StatCards() {
   return (
     <Grid container spacing={3} sx={{ mb: "24px" }}>
       {cardList.map(({ amount, Icon, name }) => (
-        <Grid item xs={12} md={6} key={name}>
+        <Grid item xs={12} md={3} key={name}>
           <StyledCard elevation={6}>
             <ContentBox>
               <Icon className="icon" />
