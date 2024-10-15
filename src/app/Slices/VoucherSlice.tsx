@@ -27,14 +27,14 @@ const initialState: VoucherState = {
         voucherDescription: "Participate in the annual police fitness challenge and get a chance to win prizes.",
         voucherStartDate: "2023-09-15",
         voucherEndDate: "2023-09-17",
-        voucherBrand: "National Police Association",
+        voucherBrand: "National Police ",
         voucherType: "Single-Use",
         voucherImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MG1wkjHJZMzdv6N-LTTx7kI6RQ-yasnWiQ&s",
         isActive: true
       },
       {
         voucherId: "POL003",
-        voucherName: "Cyber Crime Awareness Seminar",
+        voucherName: "Cyber Crime Awareness ",
         voucherDescription: "Learn about the latest cyber crime trends and prevention techniques from expert speakers.",
         voucherStartDate: "2023-08-01",
         voucherEndDate: "2023-08-31",

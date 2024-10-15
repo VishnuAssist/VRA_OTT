@@ -28,6 +28,7 @@ import {
   TableBody,
   TableRow,
   Avatar,
+  Link,
 } from "@mui/material";
 import HistoryIcon from '@mui/icons-material/History';
 import { VoucherType } from "../../Models/VoucherType";
@@ -40,6 +41,7 @@ import {
 import VoucherForm from "./VoucherForm";
 import VoucherPreview from "./VoucherPreview";
 import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+import EventBusyIcon from '@mui/icons-material/EventBusy';
 import HubIcon from "@mui/icons-material/Hub";
 import MergeTypeIcon from "@mui/icons-material/MergeType";
 import TableViewIcon from "@mui/icons-material/TableRows";
@@ -255,8 +257,8 @@ console.log("DictionaryList",DictionaryList)
                       alt={voucher.voucherName}
                     />
                     <CardContent>
-                      <Grid container spacing={2}>
-                        <Grid item xs={12} sm={12} md={12} lg={12} sx={{height:"40px"}}>
+                      <Grid container spacing={1}>
+                        <Grid item xs={12} sm={12} md={12} lg={12} sx={{height:"55px"}}>
                           <Typography
                             variant="h6"
                             component="div"
@@ -264,6 +266,7 @@ console.log("DictionaryList",DictionaryList)
                           >
                             {voucher.voucherName}
                           </Typography>
+                          
                         </Grid>
                         {/* <Grid item xs={6} sm={4} md={4} lg={4}>
                           <Typography
@@ -285,8 +288,8 @@ console.log("DictionaryList",DictionaryList)
                             />
                             Status
                           </Typography>
-                        </Grid>
-                        <Grid item xs={6} sm={8} md={8} lg={8}>
+                        </Grid> */}
+                       {/*  <Grid item xs={6} sm={8} md={8} lg={8}>
                        
                           <Chip
                             label={voucher.isActive ? "Active" : "Inactive"}
@@ -296,7 +299,7 @@ console.log("DictionaryList",DictionaryList)
                           />
                         </Grid> */}
 
-                        {/* <Grid item xs={6} sm={4} md={4} lg={4}>
+                        <Grid item xs={6} sm={6} md={6} lg={6}>
                           <Typography
                             variant="body2"
                             color="text.secondary"
@@ -307,24 +310,24 @@ console.log("DictionaryList",DictionaryList)
                               alignItems: "center",
                             }}
                           >
-                            <HubIcon
+                            <EventBusyIcon
                               sx={{
                                 color: "#4B4432",
                                 fontSize: 20,
                                 marginRight: 1,
                               }}
                             />
-                            Brand
+                            Expire Date
                           </Typography>
                         </Grid>
 
-                        <Grid item xs={6} sm={8} md={8} lg={8}>
+                        <Grid item xs={6} sm={6} md={6} lg={6}>
                           <Typography
                             variant="body2"
                             color="text.secondary"
                             sx={{ ml: 2, fontSize: "15px", fontWeight: "600" }}
                           >
-                            {brandfunc(voucher?.voucherBrand || 0)}
+                           {voucher.voucherEndDate}
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={4} md={4} lg={4}>
@@ -345,7 +348,7 @@ console.log("DictionaryList",DictionaryList)
                                 marginRight: 1,
                               }}
                             />
-                            Type
+                            Brand
                           </Typography>
                         </Grid>
                         <Grid item xs={6} sm={8} md={8} lg={8}>
@@ -354,10 +357,19 @@ console.log("DictionaryList",DictionaryList)
                             color="text.secondary"
                             sx={{ ml: 2, fontSize: "15px", fontWeight: "600" }}
                           >
-                            {voucher.voucherType}
+                            {voucher.voucherBrand}
                           </Typography>
-                        </Grid> */}
-                        <Grid item xs={6} sm={6} md={6} lg={6}></Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Typography
+                            variant="h6"
+                            component="div"
+                            sx={{ fontSize: "15px", fontWeight: "700",color:"orange",pb:1 }}
+                            onClick={(e) => handleMenuOpen(e, voucher.voucherId)}
+                          >
+                           Actions
+                          </Typography>
+                        </Grid>
                       </Grid>
 
                       <Box
@@ -380,7 +392,7 @@ console.log("DictionaryList",DictionaryList)
                         >
                           View Details
                         </Button>
-                        <IconButton
+                        {/* <IconButton
                           size="small"
                           onClick={(e) => handleMenuOpen(e, voucher.voucherId)}
                           sx={{
@@ -390,7 +402,7 @@ console.log("DictionaryList",DictionaryList)
                           }}
                         >
                           <MoreVertIcon />
-                        </IconButton>
+                        </IconButton> */}
                       </Box>
                     </CardContent>
                   </Card>

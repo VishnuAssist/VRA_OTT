@@ -13,6 +13,7 @@ import {
   CardMedia,
   styled,
   DialogTitle,
+  Button,
 } from '@mui/material';
 // import CloseIcon from '@mui/icons-material/Close';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -96,11 +97,12 @@ export default function VoucherPreview({ open, onClose }: Props) {
                   <Typography variant="h4" component="h2" fontWeight="bold">
                     {selectedVoucher.voucherName}
                   </Typography>
-                  <StyledChip
+                  {/* <StyledChip
                     label={selectedVoucher.isActive ? "Active" : "Inactive"}
                     color={selectedVoucher.isActive ? "success" : "error"}
                     size="small"
-                  />
+                  /> */}
+                  <Button variant='contained'>Edit</Button>
                 </Box>
               </Grid>
               <Grid item xs={12} md={6}>
