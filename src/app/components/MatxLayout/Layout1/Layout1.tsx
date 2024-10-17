@@ -118,7 +118,7 @@ const Layout1 = () => {
             )}
 
             <Box flexGrow={1} position="relative">
-              <Header/>
+              {/* <Header/> */}
               <MatxSuspense>
                 <Box px={5}>
                   <Outlet />
@@ -137,7 +137,7 @@ const Layout1 = () => {
             )}
 
             <Box flexGrow={1} position="relative">
-            <Header/>
+            {/* <Header/> */}
               <MatxSuspense>
                 <Box px={5} mt={3}>
                   <Outlet />

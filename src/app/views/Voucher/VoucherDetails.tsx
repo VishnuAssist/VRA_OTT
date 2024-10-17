@@ -28,7 +28,6 @@ import {
   TableBody,
   TableRow,
   Avatar,
-  Link,
 } from "@mui/material";
 import HistoryIcon from '@mui/icons-material/History';
 import { VoucherType } from "../../Models/VoucherType";
@@ -40,22 +39,22 @@ import {
 } from "../../Slices/VoucherSlice";
 import VoucherForm from "./VoucherForm";
 import VoucherPreview from "./VoucherPreview";
-import ToggleOnIcon from "@mui/icons-material/ToggleOn";
+
 import EventBusyIcon from '@mui/icons-material/EventBusy';
-import HubIcon from "@mui/icons-material/Hub";
+
 import MergeTypeIcon from "@mui/icons-material/MergeType";
 import TableViewIcon from "@mui/icons-material/TableRows";
 
 import {
   Add as AddIcon,
-  MoreVert as MoreVertIcon,
+  
   GridView as GridViewIcon,
   Visibility as VisibilityIcon,
   Edit as EditIcon,
   Delete as DeleteIcon,
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { DictionaryType } from "../../Models/DictionaryType";
+// import { DictionaryType } from "../../Models/DictionaryType";
 export default function VoucherDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,10 +66,10 @@ export default function VoucherDetails() {
 
  
 
-  const brandfunc = (id:number) =>{
-    const brandData:DictionaryType = DictionaryList.find((dictionary: DictionaryType) =>  dictionary.id === id );
-    return brandData?.entryname
-  }
+  // const brandfunc = (id:number) =>{
+  //   const brandData:DictionaryType = DictionaryList.find((dictionary: DictionaryType) =>  dictionary.id === id );
+  //   return brandData?.entryname
+  // }
    
 
   // console.log("brandData",brandData)
@@ -161,14 +160,12 @@ console.log("DictionaryList",DictionaryList)
           component={Paper}
           sx={{ p: 2 }}
         >
-          <Grid item xs={12} sm={12} md={6} lg={6}>
+          <Grid item xs={8} sm={6} md={6} lg={4}>
             <Typography fontSize={"24px"} fontWeight={700}>
               Voucher Management
             </Typography>
           </Grid>
-          <Grid
-            item
-            xs={4} sm={2} md={2} lg={1}
+          <Grid item xs={4} sm={2} md={1} lg={2}
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -189,7 +186,7 @@ console.log("DictionaryList",DictionaryList)
             </ToggleButtonGroup>
           </Grid>
        
-          <Grid item xs={8} sm={4} md={2} lg={2}>
+          <Grid item xs={4} sm={4} md={2} lg={2}>
             <TextField
               
               label="Search"
@@ -199,12 +196,13 @@ console.log("DictionaryList",DictionaryList)
               onChange={(e) => dispatch(setSearchTerm(e.target.value))}
             />
           </Grid>
-          <Grid item xs={6} sm={4} md={2} lg={1}>
+          <Grid item xs={4} sm={8} md={1} lg={2}>
             <Select
               fullWidth
               size="small"
               value={filterType}
               onChange={(e) => dispatch(setFilterType(e.target.value))}
+              sx={{width:"120px"}}
             >
               <MenuItem value="All">All Types</MenuItem>
               <MenuItem value="Multi-Use">Multi-Use</MenuItem>
@@ -213,7 +211,7 @@ console.log("DictionaryList",DictionaryList)
             </Select>
           </Grid>
           
-          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
+          <Grid item xs={4} sm={4} md={2} lg={2} textAlign="right">
             <Button
               variant="contained"
               color="info"

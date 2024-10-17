@@ -33,12 +33,12 @@ const closeForm = () =>{
           component={Paper}
           sx={{ p: 2 }}
         >
-          <Grid item xs={12} sm={12} md={6} lg={9}>
+          <Grid item xs={12} sm={7} md={9} lg={9} >
             <Typography fontSize={"24px"} fontWeight={700}>
                 User Management
             </Typography>
           </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
+          <Grid item xs={6} sm={3} md={2} lg={2}  >
           <Button
               variant="contained"
               color="info"
@@ -48,7 +48,7 @@ const closeForm = () =>{
              Upload
             </Button>
           </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={1} textAlign="right">
+          <Grid item xs={6} sm={2} md={1} lg={1} >
           <Button
               variant="contained"
               color="info"

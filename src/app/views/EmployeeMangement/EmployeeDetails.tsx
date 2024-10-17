@@ -168,8 +168,8 @@ const EmployeeDetails: React.FC = () => {
 
         <TableContainer component={Paper} sx={{p:1}}>
         <Box sx={{ width: "100%", py: 2 }}>
-    <Grid container spacing={2} justifyContent="flex-end">
-      <Grid item xs={12} sm={6} md={3}>
+    <Grid container spacing={2} >
+      <Grid item xs={6} sm={6} md={6} lg={6}>
         <TextField
           variant="outlined"
           placeholder="Search employees"
@@ -184,30 +184,10 @@ const EmployeeDetails: React.FC = () => {
               </InputAdornment>
             ),
           }}
+          sx={{width:"250px"}}
         />
       </Grid>
-
-      <Grid item xs={6} sm={6} md={3}>
-        <FormControl fullWidth size="small">
-          <InputLabel id="department-label">Filter by Department</InputLabel>
-          <Select
-            labelId="department-label"
-            value={department}
-            onChange={handleDepartmentChange}
-            label="Filter by Department"
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="sales">Sales</MenuItem>
-            <MenuItem value="engineering">Engineering</MenuItem>
-            <MenuItem value="hr">Human Resources</MenuItem>
-            <MenuItem value="marketing">Marketing</MenuItem>
-          </Select>
-        </FormControl>
-      </Grid>
-
-      <Grid item xs={6} sm={6} md={3}>
+      <Grid item xs={6} sm={3} md={3} lg={3}>
         <FormControl fullWidth size="small">
           <InputLabel id="status-label">Filter by Status</InputLabel>
           <Select
@@ -230,6 +210,27 @@ const EmployeeDetails: React.FC = () => {
           </Select>
         </FormControl>
       </Grid>
+      <Grid item xs={12} sm={3} md={3} lg={3}>
+        <FormControl sx={{width:"200px" }} size="small">
+          <InputLabel id="department-label">Filter by Department</InputLabel>
+          <Select
+            labelId="department-label"
+            value={department}
+            onChange={handleDepartmentChange}
+            label="Filter by Department"
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="sales">Sales</MenuItem>
+            <MenuItem value="engineering">Engineering</MenuItem>
+            <MenuItem value="hr">Human Resources</MenuItem>
+            <MenuItem value="marketing">Marketing</MenuItem>
+          </Select>
+        </FormControl>
+      </Grid>
+
+      
     </Grid>
   </Box>
         

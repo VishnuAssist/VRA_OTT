@@ -34,6 +34,7 @@ import {
   // StarOutline,
   PowerSettingsNew
 } from "@mui/icons-material";
+import Header from "../../../views/HeaderStatus/Header";
 
 // STYLED COMPONENTS
 // const StyledIconButton = styled(IconButton)(({ theme }) => ({
@@ -123,13 +124,13 @@ setOpen(true)
     <TopbarRoot>
       <TopbarContainer>
       <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-          {/* Project Logo and Name (Left-Aligned) */}
+          
           <Box 
             display="flex" 
             alignItems="center" 
             gap={1} 
             sx={{
-              ml: '10%', 
+              // ml: '10%', 
               flexGrow: 1,
               '@media (max-width: 960px)': {
                 ml: '5%',
@@ -144,23 +145,8 @@ setOpen(true)
               IDBadge
             </Typography>
           </Box>
-          {/* <StyledIconButton onClick={handleSidebarToggle}>
-            <Menu />
-          </StyledIconButton> */}
-
-          {/* <IconBox>
-            <StyledIconButton>
-              <MailOutline />
-            </StyledIconButton> */} 
-
-            {/* <StyledIconButton>
-              <WebAsset />
-            </StyledIconButton> */}
-
-            {/* <StyledIconButton>
-              <StarOutline />
-            </StyledIconButton>
-          </IconBox> */}
+       <Header/>
+          
         </Box>
 
         <Box display="flex" alignItems="center" gap={2}>
@@ -212,7 +198,7 @@ setOpen(true)
         </Box>
       </TopbarContainer>
     </TopbarRoot>
-    <Divider/>
+    {/* <Divider/> */}
     <Profile open ={open} handleClose={handleClose}/>
     </>
   );
