@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import AddStore from "./Table";
 // import HeaderStats from "../HeaderStatus/HeaderStats";
 // import Header from "../HeaderStatus/Header";
@@ -12,8 +13,9 @@ const index = () => {
 
       {/* <Box sx={{background:"#bfb9a8", m:"2px" , p:"20px",borderRadius: "8px"}}> */}
       {/* <HeaderStats /> */}
-
+<Box sx={{px:4}}>
       <AddStore />
+      </Box>
       {/* </Box> */}
     </div>
   );

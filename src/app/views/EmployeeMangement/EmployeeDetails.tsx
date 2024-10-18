@@ -104,66 +104,7 @@ const EmployeeDetails: React.FC = () => {
   return (
     <>
       <Box  >
-        {/* <Grid container spacing={2} alignItems="center" marginBottom={2}>
-          <Grid item xs={12} sm={6} md={9}>
-           <Typography fontSize={"24px"} fontWeight={700}>User Management</Typography>
-          </Grid>
-          <Grid item xs={12} sm={6} md={2} textAlign={"right"}>
-          
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AddIcon />}
-              onClick={openBulkImport}
-            >
-              Bulk Upload
-            </Button>
-          </Grid>
-          <Grid item xs={12} sm={6} md={1} >
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<AddIcon />}
-              onClick={openForm}
-            >
-              Add
-            </Button>
-          </Grid>
-        </Grid> */}
-        {/* <Grid
-          container
-          spacing={0}
-          alignItems="center"
-          marginBottom={2}
-          component={Paper}
-          sx={{ p: 2 }}
-        >
-          <Grid item xs={12} sm={12} md={6} lg={9}>
-            <Typography fontSize={"24px"} fontWeight={700}>
-                User Management
-            </Typography>
-          </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
-          <Button
-              variant="contained"
-              color="info"
-              startIcon={<FileUploadIcon />}
-              onClick={openBulkImport}
-            >
-             Upload
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={1} textAlign="right">
-          <Button
-              variant="contained"
-              color="info"
-              startIcon={<AddIcon />}
-              onClick={openForm}
-            >
-              Add
-            </Button>
-          </Grid>
-        </Grid> */}
+        
         
 
         <TableContainer component={Paper} sx={{p:1}}>

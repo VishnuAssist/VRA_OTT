@@ -4,7 +4,8 @@ import EmployeeForm from "./EmployeeForm";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Add as AddIcon,} from "@mui/icons-material";
 import BulkEmployeeUpload from "./BulkImportDetails";
-
+import ApprovalIcon from '@mui/icons-material/Approval';
+import { useNavigate } from "react-router-dom";
 
 export default function PageHeader() {
 
@@ -22,6 +23,11 @@ const openModel = () =>{
 const closeForm = () =>{
     setOpen(false)
 }
+
+const navigate=useNavigate();
+const handleClick = ()=>{
+  navigate('/employee/Approval');
+}
   return (
    <>
    <Box>
@@ -37,6 +43,16 @@ const closeForm = () =>{
             <Typography fontSize={"24px"} fontWeight={700}>
                 User Management
             </Typography>
+          </Grid>
+          <Grid item xs={6} sm={3} md={2} lg={2}  >
+          <Button
+              variant="contained"
+              color="info"
+              startIcon={<ApprovalIcon />}
+              onClick={handleClick}
+            >
+             Approval
+            </Button>
           </Grid>
           <Grid item xs={6} sm={3} md={2} lg={2}  >
           <Button
@@ -59,40 +75,7 @@ const closeForm = () =>{
             </Button>
           </Grid>
         </Grid>
-         {/* <Grid
-          container
-          spacing={0}
-          alignItems="center"
-          marginBottom={2}
-          component={Paper}
-          sx={{ p: 2 }}
-        >
-          <Grid item xs={12} sm={12} md={6} lg={9}>
-            <Typography fontSize={"24px"} fontWeight={700}>
-                User Management
-            </Typography>
-          </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={2} textAlign="right">
-          <Button
-              variant="contained"
-              color="info"
-              startIcon={<FileUploadIcon />}
-              onClick={openBulkImport}
-            >
-             Upload
-            </Button>
-          </Grid>
-          <Grid item xs={6} sm={12} md={8} lg={1} textAlign="right">
-          <Button
-              variant="contained"
-              color="info"
-              startIcon={<AddIcon />}
-              onClick={openModel}
-            >
-              Add
-            </Button>
-          </Grid>
-        </Grid> */}
+         
         </Box>
         <EmployeeForm open={open} closeForm={closeForm}/>
         <BulkEmployeeUpload open={bulk} onClose={closeBulkImport}/>

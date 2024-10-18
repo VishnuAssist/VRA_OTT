@@ -1,7 +1,7 @@
-import { useEffect, useRef, memo } from "react";
-import { ThemeProvider, useMediaQuery, Box, styled, useTheme, BoxProps } from "@mui/material";
+import { useEffect, useRef, memo, useState } from "react";
+import { ThemeProvider, useMediaQuery, Box, styled, useTheme, BoxProps, BottomNavigationAction, BottomNavigation } from "@mui/material";
 import Scrollbar from "react-perfect-scrollbar";
-import { Outlet } from "react-router-dom";
+
 import Header from "../../../views/HeaderStatus/Header";
 import useSettings from "../../../hooks/useSettings";
 
@@ -13,6 +13,12 @@ import { MatxSuspense } from "../..";
 import { SecondarySidebar } from "../../SecondarySidebar";
 import SidenavTheme from "../../MatxTheme/SidenavTheme/SidenavTheme";
 
+
+import SpeedIcon from "@mui/icons-material/Speed";
+import PersonIcon from "@mui/icons-material/Person";
+import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Link, Outlet } from "react-router-dom";
 // import { sidenavCompactWidth, sideNavWidth } from "../../../utils/constant";
 
 // STYLED COMPONENTS
@@ -94,6 +100,12 @@ const Layout1 = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMdScreen]);
 
+
+
+  
+  
+  const [value, setValue] = useState(0);
+  const isMobile = useMediaQuery((theme:any) =>theme.breakpoints.down('md'));
   return (
     <Layout1Root className={layoutClasses}>
       {showSidenav && sidenavMode !== "close" && (
@@ -118,7 +130,7 @@ const Layout1 = () => {
             )}
 
             <Box flexGrow={1} position="relative">
-              {/* <Header/> */}
+              <Header/>
               <MatxSuspense>
                 <Box px={5}>
                   <Outlet />
@@ -136,11 +148,62 @@ const Layout1 = () => {
               </ThemeProvider>
             )}
 
-            <Box flexGrow={1} position="relative">
+            <Box flexGrow={1} position="relative" >
             {/* <Header/> */}
               <MatxSuspense>
-                <Box px={5} mt={3}>
+                <Box mt={3}>
                   <Outlet />
+                  {isMobile && (
+          <BottomNavigation
+            showLabels
+            
+            value={value}
+            onChange={(_event, newValue) => {
+              setValue(newValue);
+            }}
+            sx={{ 
+              width: '100.2%', 
+              position: 'fixed', 
+              bottom: -1,
+         zIndex:20,
+              height: 70, 
+              // borderTop:0.1,
+              borderTopRightRadius:15,
+              borderTopLeftRadius:15,
+              // boxShadow: '0px -2px 10px rgba(0, 0, 0, 1)',
+            // background:theme.colors.gradients.blue4,
+            background: '#4B4432',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              '& .MuiBottomNavigationAction-root': {
+                minWidth: 'auto',
+                color: 'black', 
+                '&.Mui-selected': {
+                  color: 'white', 
+                  p:2
+                },}
+            }}
+          >
+            <BottomNavigationAction label="Dashboard"  icon={<SpeedIcon />} 
+               component={Link}
+               to="/dashboard/ui"/>
+            <BottomNavigationAction 
+              label="Users" 
+              icon={<PersonIcon  />} 
+              component={Link}
+              to="/employee/employeeManagement"
+            />
+            <BottomNavigationAction 
+              label="Vouchers" 
+              icon={<ConfirmationNumberIcon  />} 
+              component={Link}
+              to="/voucher/voucherManagement"
+            />
+            <BottomNavigationAction label="Dictionary" icon={<SettingsIcon  />} 
+            component={Link}
+            to="/Setting/Dictionary"/>
+          </BottomNavigation>
+        )}
                 </Box>
               </MatxSuspense>
             </Box>

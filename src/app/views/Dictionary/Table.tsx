@@ -87,7 +87,7 @@ const AddStore = () => {
           component={Paper}
           sx={{ p: 2 }}
         >
-          <Grid item xs={8} sm={12} md={6} lg={8}>
+          <Grid item xs={8} sm={6} md={6} lg={8}>
             <Typography fontSize={"24px"} fontWeight={700}>
             Dictionary
             </Typography>
@@ -96,7 +96,7 @@ const AddStore = () => {
       
           
           
-          <Grid item xs={4} sm={12} md={8} lg={4} textAlign="right">
+          <Grid item xs={4} sm={6} md={6} lg={4} textAlign="right">
             <Button
               variant="contained"
               color="info"

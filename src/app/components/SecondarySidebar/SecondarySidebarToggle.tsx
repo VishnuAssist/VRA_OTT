@@ -5,7 +5,7 @@ import clsx from "clsx";
 import useSettings from "../../hooks/useSettings";
 // import { Link } from "react-router-dom";
 // import NavigationIcon from '@mui/icons-material/Navigation';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+// import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 
 // STYLED COMPONENT
@@ -47,10 +47,10 @@ const SecondarySidebarToggle: React.FC<SecondarySidebarToggleProps> = () => {
 >
   Help ?
 </Fab> */}
-<Fab variant="extended" sx={{ backgroundColor: '#171D30', color: 'white' }}>
+{/* <Fab variant="extended" sx={{ backgroundColor: '#171D30', color: 'white' }}>
   <QuestionMarkIcon sx={{ mr: 1, color: 'white' }} />
   HELP
-</Fab>
+</Fab> */}
 
 
     

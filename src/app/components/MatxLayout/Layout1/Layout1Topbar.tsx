@@ -6,8 +6,10 @@ import {
   Avatar,
   // useTheme,
   MenuItem,
-  Divider,
   Typography,
+  useMediaQuery,
+  TextField,
+  InputAdornment,
   // IconButton,
   // useMediaQuery
 } from "@mui/material";
@@ -19,12 +21,14 @@ import useAuth from "../../../hooks/useAuth";
 
 import { Span } from "../../Typography";
 // import ShoppingCart from "../../ShoppingCart";
-import { MatxMenu, MatxSearchBox } from "../..";
+import { MatxMenu } from "../..";
 import { NotificationBar } from "../../NotificationBar";
 // import { themeShadows } from "../../MatxTheme/themeColors";
 import logo from "../../../components/assest/logo.png"
 import { topBarHeight } from "../../../utils/constant";
 import Profile from "../../../views/profile/profile";
+import {  Search as SearchIcon,
+} from "@mui/icons-material";
 import {
   // Menu,
   Person,
@@ -35,7 +39,6 @@ import {
   PowerSettingsNew
 } from "@mui/icons-material";
 import Header from "../../../views/HeaderStatus/Header";
-
 // STYLED COMPONENTS
 // const StyledIconButton = styled(IconButton)(({ theme }) => ({
 //   color: theme.palette.text.primary
@@ -118,7 +121,9 @@ setOpen(true)
   //   }
   //   updateSidebarMode({ mode });
   // };
-
+ 
+  const isMobileOrTablet = useMediaQuery((theme:any) => theme.breakpoints.down('md'));
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <>
     <TopbarRoot>
@@ -132,12 +137,12 @@ setOpen(true)
             sx={{
               // ml: '10%', 
               flexGrow: 1,
-              '@media (max-width: 960px)': {
-                ml: '5%',
-              },
-              '@media (max-width: 600px)': {
-                ml: '0', 
-              },
+              // '@media (max-width: 960px)': {
+              //   ml: '5%',
+              // },
+              // '@media (max-width: 600px)': {
+              //   ml: '0', 
+              // },
             }}
           >
             <Avatar src={logo} alt="IDBadge Logo" sx={{ width: 60, height: 60 }} />
@@ -145,12 +150,42 @@ setOpen(true)
               IDBadge
             </Typography>
           </Box>
-       <Header/>
+       
+          {!isMobileOrTablet && <Header />}
+       
           
         </Box>
 
-        <Box display="flex" alignItems="center" gap={2}>
-          <MatxSearchBox />
+        <Box display="flex" alignItems="center" gap={2} sx={{border:"1px solid black",borderRadius:"15px"}}>
+          {/* <MatxSearchBox /> */}
+          <TextField
+  variant="outlined"
+  placeholder="Search"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  size="small"
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <SearchIcon color="action" />
+      </InputAdornment>
+    ),
+  }}
+  sx={{
+    width: "250px",
+    px: 1,
+    mx:1,
+    backgroundColor: "#EEF0F4",
+    // border: "2px solid black",
+    borderRadius: "15px",
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        border: 'none', // remove default outlined border
+      },
+    },
+  }}
+/>
+
 
           <NotificationProvider>
             <NotificationBar />
@@ -198,7 +233,9 @@ setOpen(true)
         </Box>
       </TopbarContainer>
     </TopbarRoot>
-    {/* <Divider/> */}
+
+
+  
     <Profile open ={open} handleClose={handleClose}/>
     </>
   );

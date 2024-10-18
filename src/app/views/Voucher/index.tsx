@@ -13,7 +13,7 @@ const index = () => {
       <Box>
 
       {/* <HeaderStats/> */}
-      <Box >
+      <Box sx={{px:4}}>
       <VoucherDetails/>
       </Box>
       </Box>
