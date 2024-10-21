@@ -60,7 +60,7 @@ const TopbarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  background: "#ffff",
+  background: "#CBBC92",
   [theme.breakpoints.down("sm")]: { paddingLeft: 16, paddingRight: 16 },
   [theme.breakpoints.down("xs")]: { paddingLeft: 14, paddingRight: 16 }
 }));
@@ -146,7 +146,7 @@ setOpen(true)
             }}
           >
             <Avatar src={logo} alt="IDBadge Logo" sx={{ width: 60, height: 60 }} />
-            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold' }}>
+            <Typography variant="h6" component="div" sx={{ fontWeight: 'bold',fontFamily:"sans-serif" }}>
               IDBadge
             </Typography>
           </Box>
@@ -156,7 +156,9 @@ setOpen(true)
           
         </Box>
 
-        <Box display="flex" alignItems="center" gap={2} sx={{border:"1px solid black",borderRadius:"15px"}}>
+        <Box display="flex" alignItems="center" gap={2} sx={{
+          // border:"1px solid black",
+          borderRadius:"15px"}}>
           {/* <MatxSearchBox /> */}
           <TextField
   variant="outlined"
@@ -175,7 +177,7 @@ setOpen(true)
     width: "250px",
     px: 1,
     mx:1,
-    backgroundColor: "#EEF0F4",
+    backgroundColor: "#F8F4E1",
     // border: "2px solid black",
     borderRadius: "15px",
     '& .MuiOutlinedInput-root': {

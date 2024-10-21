@@ -132,7 +132,7 @@ const LoginPage: React.FC = () => {
             padding: "30px",
             backgroundColor: "#4b4432",
           }}
-        >
+        > 
           <Typography
             variant="h5"
             sx={{

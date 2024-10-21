@@ -5,14 +5,14 @@ import '@mui/lab/themeAugmentation';
 
 const themeColors = {
   // primary: '#c9c7c7',
-  primary: '#066FD1',
-  secondary: '#6E759F',
+  primary: '#968A66',
+  secondary: '#CBBC92',
   success: '#57CA22',
   warning: '#FFA319',
   error: '#FF1943',
-  info: '#33C2FF',
+  info: '#968A66',//done
   black: '#223354',
-  white: '#ffff',
+  white: '#F1E5D1',
   primaryAlt: '#000C57'
 };
 
@@ -53,7 +53,7 @@ const colors = {
   },
   layout: {
     general: {
-      bodyBg: '#F6F8FB'
+      bodyBg: '#E5DEC9'
     },
     sidebar: {
       background: themeColors.white,

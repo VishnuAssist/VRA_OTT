@@ -88,7 +88,7 @@ const AddStore = () => {
           sx={{ p: 2 }}
         >
           <Grid item xs={8} sm={6} md={6} lg={8}>
-            <Typography fontSize={"24px"} fontWeight={700}>
+            <Typography fontSize={"24px"} fontWeight={700} fontFamily={"monospace"}>
             Dictionary
             </Typography>
           </Grid>

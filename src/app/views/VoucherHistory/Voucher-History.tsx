@@ -157,7 +157,7 @@ export default function Component() {
     
     <Box sx={{ maxWidth: 800, margin: 'auto', mt: 4 }}>
        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography fontSize={"24px"} fontWeight={700}>Voucher History</Typography>
+          <Typography fontSize={"24px"} fontWeight={700} fontFamily={"monospace"}>Voucher History</Typography>
           <Button onClick={handleClick} variant="contained" color="info">
            Back
             </Button>

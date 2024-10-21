@@ -6,6 +6,7 @@ import { Add as AddIcon,} from "@mui/icons-material";
 import BulkEmployeeUpload from "./BulkImportDetails";
 import ApprovalIcon from '@mui/icons-material/Approval';
 import { useNavigate } from "react-router-dom";
+import ApprovalPage from "./Approval/ApprovalPage";
 
 export default function PageHeader() {
 
@@ -24,9 +25,17 @@ const closeForm = () =>{
     setOpen(false)
 }
 
-const navigate=useNavigate();
-const handleClick = ()=>{
-  navigate('/employee/Approval');
+// const navigate=useNavigate();
+// const handleClick = ()=>{
+//   navigate('/employee/Approval');
+// }
+
+const[approval,setApproval]=useState(false)
+const openApproval=()=>{
+  setApproval(true)
+}
+const closeApproval=()=>{
+  setApproval(false)
 }
   return (
    <>
@@ -39,22 +48,22 @@ const handleClick = ()=>{
           component={Paper}
           sx={{ p: 2 }}
         >
-          <Grid item xs={12} sm={7} md={9} lg={9} >
-            <Typography fontSize={"24px"} fontWeight={700}>
+          <Grid item xs={12} sm={7} md={8} lg={7} >
+            <Typography fontSize={"24px"} fontWeight={700} fontFamily={"monospace"}>
                 User Management
             </Typography>
           </Grid>
-          <Grid item xs={6} sm={3} md={2} lg={2}  >
+          <Grid item xs={6} sm={3} md={1} lg={2}  >
           <Button
               variant="contained"
               color="info"
               startIcon={<ApprovalIcon />}
-              onClick={handleClick}
+              onClick={openApproval}
             >
              Approval
             </Button>
           </Grid>
-          <Grid item xs={6} sm={3} md={2} lg={2}  >
+          <Grid item xs={6} sm={3} md={1} lg={2}  >
           <Button
               variant="contained"
               color="info"
@@ -64,7 +73,7 @@ const handleClick = ()=>{
              Upload
             </Button>
           </Grid>
-          <Grid item xs={6} sm={2} md={1} lg={1} >
+          <Grid item xs={6} sm={2} md={2} lg={1}  textAlign="right">
           <Button
               variant="contained"
               color="info"
@@ -79,7 +88,7 @@ const handleClick = ()=>{
         </Box>
         <EmployeeForm open={open} closeForm={closeForm}/>
         <BulkEmployeeUpload open={bulk} onClose={closeBulkImport}/>
-
+<ApprovalPage open={approval} onClose={closeApproval}/>
    </>
   )
 }

@@ -32,9 +32,6 @@ const Analytics = Loadable(lazy(() => import("./views/dashboard/Analytics")));
 const EmployeeManagements = Loadable(
   lazy(() => import("./views/EmployeeMangement"))
 );
-const Approval = Loadable(
-  lazy(() => import("./views/Approval"))
-);
 const BrandManagements = Loadable(
   lazy(() => import("./views/BrandManagement"))
 );
@@ -78,11 +75,6 @@ const routes = [
       {
         path: "/employee/employeeManagement",
         element: <EmployeeManagements />,
-        auth: authRoles.admin,
-      },
-      {
-        path: "/employee/Approval",
-        element: <Approval />,
         auth: authRoles.admin,
       },
       {

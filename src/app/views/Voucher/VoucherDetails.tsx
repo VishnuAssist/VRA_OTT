@@ -161,7 +161,7 @@ console.log("DictionaryList",DictionaryList)
           sx={{ p: 2 }}
         >
           <Grid item xs={8} sm={6} md={6} lg={4}>
-            <Typography fontSize={"24px"} fontWeight={700}>
+            <Typography fontSize={"24px"} fontWeight={700} fontFamily={"monospace"}>
               Voucher Management
             </Typography>
           </Grid>
@@ -176,8 +176,32 @@ console.log("DictionaryList",DictionaryList)
               exclusive
               onChange={handleViewChange}
               aria-label="View toggle"
+              sx={{
+                '& .MuiToggleButton-root': {
+                  color: 'info.main', // Default color for unselected buttons
+                  '&:hover': {
+                    backgroundColor: 'info.light', // Hover background color for unselected buttons
+                  },
+                  '&.Mui-selected': {
+                    backgroundColor: 'info.main', // Background color when selected
+                    color: 'white', // Text color when selected
+                    '&:hover': {
+                      backgroundColor: 'info.dark', // Darker color when hovered while selected
+                    },
+                  },
+                  '&.Mui-focusVisible': {
+                    backgroundColor: 'info.main', // Set focus color to avoid default blue
+                  },
+                  '&.Mui-selected.Mui-focusVisible': {
+                    backgroundColor: 'info.dark', // Set focus color when selected
+                  },
+                  '&.Mui-selected:active': {
+                    backgroundColor: 'info.dark', // Active state color to override blue
+                  },
+                },
+              }}
             >
-              <ToggleButton value="grid" aria-label="Grid view">
+              <ToggleButton value="grid" aria-label="Grid view"  >
                 <GridViewIcon />
               </ToggleButton>
               <ToggleButton value="table" aria-label="Table view">
@@ -260,6 +284,7 @@ console.log("DictionaryList",DictionaryList)
                           <Typography
                             variant="h6"
                             component="div"
+                            fontFamily={"monospace"}
                             sx={{ fontSize: "18px", fontWeight: "700" }}
                           >
                             {voucher.voucherName}
@@ -304,6 +329,7 @@ console.log("DictionaryList",DictionaryList)
                             sx={{
                               fontSize: "15px",
                               fontWeight: "800",
+                              
                               display: "flex",
                               alignItems: "center",
                             }}

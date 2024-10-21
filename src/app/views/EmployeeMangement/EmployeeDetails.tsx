@@ -28,6 +28,7 @@ import {
   // Delete as DeleteIcon,
   Search as SearchIcon,
 } from "@mui/icons-material";
+import VerifiedIcon from '@mui/icons-material/Verified';
 import { useDispatch, useSelector } from "react-redux";
 import EmployeeForm from "./EmployeeForm";
 import EmployeePreview from "./EmployeePreview";
@@ -104,9 +105,6 @@ const EmployeeDetails: React.FC = () => {
   return (
     <>
       <Box  >
-        
-        
-
         <TableContainer component={Paper} sx={{p:1}}>
         <Box sx={{ width: "100%", py: 2 }}>
     <Grid container spacing={2} >
@@ -208,7 +206,12 @@ const EmployeeDetails: React.FC = () => {
               />
                   </TableCell>
                   <TableCell>{employee.employeeID}</TableCell>
-                  <TableCell>{`${employee.firstName} ${employee.lastName}`}</TableCell>
+                  {/* <TableCell>{`${employee.firstName} ${employee.lastName}`}</TableCell> */}
+                  <TableCell>
+  
+  {`${employee.firstName} ${employee.lastName}`}
+  <VerifiedIcon style={{ verticalAlign: 'middle', marginLeft: '5px' ,color:"#1DA1F2"}} />
+</TableCell>
                   <TableCell>{employee.email}</TableCell>
                   <TableCell>{employee.departmentOrStore}</TableCell>
                   <TableCell>{employee.grade}</TableCell>

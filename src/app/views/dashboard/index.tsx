@@ -12,7 +12,7 @@ const index = () => {
       
       {/* <Box sx={{ background: "#bfb9a8", m: "2px", borderRadius: "8px" }}> */}
       {/* <HeaderStats/> */}
-      <Box >
+      <Box sx={{px:4}}>
 {/* <PageHeader/> */}
       <Analytics1/>
       </Box>

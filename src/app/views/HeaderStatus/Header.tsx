@@ -31,10 +31,17 @@ const Header: React.FC = () => {
             value="/dashboard/ui"
             label={
               <Tooltip title="Dashboard" arrow>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: "flex", alignItems: "center" 
+                , ":hover": {
+            backgroundColor: "#F8F4E1", // Apply hover effect
+            borderRadius: "5px",
+            px:3,
+            py:1}
+          
+          }} >
                   <SpeedIcon sx={{ marginRight: 1 ,color:"#4B4432"}} />
                   {/* <Box sx={{ display: { xs: "none", sm: "block" ,color:"#4B4432"} }}>Dashboard</Box> */}
-                  <Typography sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Dashboard</Typography>
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Dashboard</Typography>
                 </Box>
               </Tooltip>
             }
@@ -43,10 +50,16 @@ const Header: React.FC = () => {
             value="/employee/employeeManagement"
             label={
               <Tooltip title="Users" arrow>
-                <Box sx={{ display: "flex", alignItems: "center"}}>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                }}>
                   <PersonIcon sx={{ marginRight: 1,color:"#4B4432" }} />
                   {/* <Box sx={{ display: { xs: "none", sm: "block" ,color:"#4B4432"} }}>Users</Box> */}
-                  <Typography sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Users</Typography>
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Users</Typography>
                 </Box>
               </Tooltip>
             }
@@ -55,10 +68,16 @@ const Header: React.FC = () => {
             value="/voucher/voucherManagement"
             label={
               <Tooltip title="Vouchers" arrow>
-                <Box sx={{ display: "flex", alignItems: "center"}}>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                }}>
                   <ConfirmationNumberIcon sx={{ marginRight: 1 ,color:"#4B4432"}} />
                   {/* <Box sx={{ display: { xs: "none", sm: "block" ,color:"#4B4432"} }}>Vouchers</Box> */}
-                  <Typography sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Vouchers</Typography>
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Vouchers</Typography>
                 </Box>
               </Tooltip>
             }
@@ -67,10 +86,16 @@ const Header: React.FC = () => {
             value="/Setting/Dictionary"
             label={
               <Tooltip title="Dictionary" arrow>
-                <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                 }}>
                   <SettingsIcon sx={{ marginRight: 1 , color:"#4B4432"}} />
                   {/* <Box sx={{ display: { xs: "none", sm: "block" } }}>Dictionary</Box> */}
-                  <Typography sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Dictionary</Typography>
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Dictionary</Typography>
                 </Box>
               </Tooltip>
             }
