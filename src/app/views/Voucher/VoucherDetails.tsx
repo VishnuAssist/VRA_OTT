@@ -149,6 +149,14 @@ console.log("DictionaryList",DictionaryList)
   const handleClick = () => {
     navigate("/voucher/voucherHistory");
   };
+
+  const [num,setNum]=useState(1);
+
+  const handleAdd =()=>{
+    setNum((currValue)=>{
+      return currValue +1;
+    });
+  };
   return (
     <>
       <Box >
@@ -162,8 +170,11 @@ console.log("DictionaryList",DictionaryList)
         >
           <Grid item xs={8} sm={6} md={6} lg={4}>
             <Typography fontSize={"24px"} fontWeight={700} fontFamily={"monospace"}>
-              Voucher Management
+              Voucher Management{num}
             </Typography>
+          </Grid>
+          <Grid item xs={8} sm={6} md={6} lg={4}>
+          <Button onClick={handleAdd}>Add</Button>
           </Grid>
           <Grid item xs={4} sm={2} md={1} lg={2}
             display="flex"

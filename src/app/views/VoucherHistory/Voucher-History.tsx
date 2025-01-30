@@ -31,7 +31,7 @@ type VoucherStatusLog = {
 };
 
 type VoucherHistoryType = {
-  voucherId: string;
+  voucherId: string
   voucherName: string;
   voucherStartDate: string;
   voucherEndDate: string;
@@ -295,29 +295,29 @@ export default function Component() {
                   <Typography variant="h6">Status Change Logs</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-  <Timeline>
-    {voucherHistories[index].voucherStatusChangeLogs.map((log, logIndex) => (
-      <TimelineItem key={logIndex}>
-        <TimelineSeparator>
-          <TimelineDot color="primary">
-            {/* <HistoryToggleOffIcon /> */}
-          </TimelineDot>
-          {logIndex < voucherHistories[index].voucherStatusChangeLogs.length - 1 && <TimelineConnector />}
-        </TimelineSeparator>
-        <TimelineContent sx={{ py: '12px', px: 2 }}>
-          <Typography variant="subtitle2" component="span">
-            {formatDate(log.changeDate)}
-          </Typography>
-          <Typography variant="body2">
-            Status changed from <strong>{log.previousStatus}</strong> to <strong>{log.newStatus}</strong>
-          </Typography>
-          <Typography variant="caption" color="text.secondary" display="block">
-            Changed by: {log.changedBy}
-          </Typography>
-        </TimelineContent>
-      </TimelineItem>
-    ))}
-  </Timeline>
+                <Timeline>
+                  {voucherHistories[index].voucherStatusChangeLogs.map((log, logIndex) => (
+                    <TimelineItem key={logIndex}>
+                      <TimelineSeparator>
+                        <TimelineDot color="primary">
+                          {/* <HistoryToggleOffIcon /> */}
+                        </TimelineDot>
+                        {logIndex < voucherHistories[index].voucherStatusChangeLogs.length - 1 && <TimelineConnector />}
+                      </TimelineSeparator>
+                      <TimelineContent sx={{ py: '12px', px: 2 }}>
+                        <Typography variant="subtitle2" component="span">
+                          {formatDate(log.changeDate)}
+                        </Typography>
+                        <Typography variant="body2">
+                          Status changed from <strong>{log.previousStatus}</strong> to <strong>{log.newStatus}</strong>
+                        </Typography>
+                        <Typography variant="caption" color="text.secondary" display="block">
+                          Changed by: {log.changedBy}
+                        </Typography>
+                      </TimelineContent>
+                    </TimelineItem>
+                  ))}
+                </Timeline>
 </AccordionDetails>
               </Accordion>
             </CardContent>
