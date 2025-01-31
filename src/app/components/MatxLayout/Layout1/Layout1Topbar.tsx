@@ -60,7 +60,7 @@ const TopbarContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  background: "#CBBC92",
+  background: theme.colors.primary.dark,
   [theme.breakpoints.down("sm")]: { paddingLeft: 16, paddingRight: 16 },
   [theme.breakpoints.down("xs")]: { paddingLeft: 14, paddingRight: 16 }
 }));
@@ -147,7 +147,7 @@ setOpen(true)
           >
             <Avatar src={logo} alt="IDBadge Logo" sx={{ width: 60, height: 60 }} />
             <Typography variant="h6" component="div" sx={{ fontWeight: 'bold',fontFamily:"sans-serif" }}>
-              IDBadge
+              netflix
             </Typography>
           </Box>
        

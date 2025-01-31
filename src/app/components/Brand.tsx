@@ -31,7 +31,7 @@ export default function Brand({ children }:any) {
         {/* <MatxLogo /> */}
         <img src={image} alt="LOGO File" height={"35px"} width={"45px"} />
         <StyledSpan  >
-          ID Badge!
+          Netflix
         </StyledSpan>
       </Box>
 

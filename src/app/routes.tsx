@@ -47,6 +47,21 @@ const Dictionary = Loadable(
 
 
 
+const Home = Loadable(
+  lazy(() => import("./views/Home"))
+);
+const Movies = Loadable(
+  lazy(() => import("./views/Movies"))
+);
+const TvShows = Loadable(
+  lazy(() => import("./views/TvShows"))
+);
+const Actors = Loadable(
+  lazy(() => import("./views/Actors"))
+);
+
+
+
 const Profile = Loadable(lazy(() => import("./views/profile")));
 
 const routes = [
@@ -96,6 +111,27 @@ const routes = [
       {
         path: "/Setting/Dictionary",
         element: <Dictionary />,
+        auth: authRoles.admin,
+      },
+     
+      {
+        path: "/Home",
+        element: <Home />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/Movies",
+        element: <Movies />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/TvShows",
+        element: <TvShows />,
+        auth: authRoles.admin,
+      },
+      {
+        path: "/Actors",
+        element: <Actors />,
         auth: authRoles.admin,
       },
 

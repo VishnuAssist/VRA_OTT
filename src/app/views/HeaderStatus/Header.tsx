@@ -100,6 +100,82 @@ const Header: React.FC = () => {
               </Tooltip>
             }
           />
+
+
+
+
+          <Tab
+            value="/Home"
+            label={
+              <Tooltip title="Home" arrow>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", 
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                 }}>
+                  <SettingsIcon sx={{ marginRight: 1 , color:"#4B4432"}} />
+                  
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Home</Typography>
+                </Box>
+              </Tooltip>
+            }
+          />
+          <Tab
+            value="/Movies"
+            label={
+              <Tooltip title="Movies" arrow>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                 }}>
+                  <SettingsIcon sx={{ marginRight: 1 , color:"#4B4432"}} />
+                  
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Movies</Typography>
+                </Box>
+              </Tooltip>
+            }
+          />
+          <Tab
+            value="/TvShows"
+            label={
+              <Tooltip title="Movies" arrow>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                 }}>
+                  <SettingsIcon sx={{ marginRight: 1 , color:"#4B4432"}} />
+                  
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>TV Shows</Typography>
+                </Box>
+              </Tooltip>
+            }
+          />
+          <Tab
+            value="/Actors"
+            label={
+              <Tooltip title="Movies" arrow>
+                <Box sx={{ display: "flex", alignItems: "center"
+                   , ":hover": {
+                    backgroundColor: "#F8F4E1", // Apply hover effect
+                    borderRadius: "5px",
+                    px:3,
+                    py:1}
+                 }}>
+                  <SettingsIcon sx={{ marginRight: 1 , color:"#4B4432"}} />
+                  
+                  <Typography fontFamily={"monospace"} sx={{fontSize:"15px",fontWeight:"600", color:"#4B4432" }}>Actors</Typography>
+                </Box>
+              </Tooltip>
+            }
+          />
         </Tabs>
       </Box>
     </Box>
